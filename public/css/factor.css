@@ -1,0 +1,62 @@
+@font-face{font-family:Vazir;src:url(/build/assets/Vazir-D68lBpnb.eot);src:url(/build/assets/Vazir-D68lBpnb.eot?#iefix) format("embedded-opentype"),url(/build/assets/Vazir-CPH5iFNS.woff2) format("woff2"),url(/build/assets/Vazir-C8HGTyG4.woff) format("woff"),url(/build/assets/Vazir-Bojp988u.ttf) format("truetype");font-weight:"normal";font-style:"normal"}
+
+body {
+    font-family: Vazir;
+    background: #f5f5f5;
+}
+
+.invoice {
+    width: 900px;
+    margin: 40px auto;
+    background: #f5f5f5;
+    padding: 30px;
+    position: relative;
+}
+
+.invoice-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.title {
+    font-weight: bold;
+}
+
+.box {
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.box-title {
+    background: #eee;
+    padding: 8px;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+}
+
+.box-body {
+    padding: 8px;
+}
+
+.invoice-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.invoice-table th,
+.invoice-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.invoice-table th {
+    background: #f0f0f0;
+}
+
+.total {
+    font-weight: bold;
+    background: #000;
+    color: #fff;
+}

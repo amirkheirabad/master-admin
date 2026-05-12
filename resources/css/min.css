@@ -1,0 +1,1060 @@
+
+/*body {*/
+/*    background: #f7f7f7;*/
+/*    font-size: 14px;*/
+/*    !*color: black;*!*/
+/*}*/
+
+/*!* کلاس‌های سفارشی برای نمایش/مخفی کردن در سایزهای مختلف *!*/
+
+/*!* همیشه مخفی *!*/
+
+/*.d-none {*/
+/*    display: none !important;*/
+/*}*/
+
+/*!* نمایش به عنوان table-cell (برای تی‌دی‌های جدول) *!*/
+/*.d-table-cell {*/
+/*    display: table-cell !important;*/
+/*}*/
+
+/*!* سایز موبایل (کمتر از 768px) *!*/
+/*@media (max-width: 767.98px) {*/
+/*    .d-none-mobile {*/
+/*        display: none !important;*/
+/*    }*/
+/*}*/
+
+/*!* سایز تبلت (768px تا 991px) *!*/
+/*@media (min-width: 768px) and (max-width: 991.98px) {*/
+/*    .d-none-tablet {*/
+/*        display: none !important;*/
+/*    }*/
+/*}*/
+
+/*!* سایز دسکتاپ (992px به بالا) *!*/
+/*@media (min-width: 992px) {*/
+/*    .d-block-desktop {*/
+/*        display: block !important;*/
+/*    }*/
+/*}*/
+
+/*!* فقط در موبایل مخفی، در بقیه نمایش داده شود *!*/
+/*@media (max-width: 767.98px) {*/
+/*    .hide-on-mobile {*/
+/*        display: none !important;*/
+/*    }*/
+/*}*/
+
+/*!* فقط در تبلت مخفی *!*/
+/*@media (min-width: 768px) and (max-width: 991.98px) {*/
+/*    .hide-on-tablet {*/
+/*        display: none !important;*/
+/*    }*/
+/*}*/
+
+/*!* فقط در دسکتاپ مخفی *!*/
+/*@media (min-width: 992px) {*/
+/*    .hide-on-desktop {*/
+/*        display: none !important;*/
+/*    }*/
+/*}*/
+
+/*!* نمایش از md به بالا (768px به بالا) *!*/
+/*@media (min-width: 768px) {*/
+/*    .show-from-md {*/
+/*        display: table-cell !important;*/
+/*    }*/
+/*}*/
+
+/*!* نمایش از lg به بالا (992px به بالا) *!*/
+/*@media (min-width: 992px) {*/
+/*    .show-from-lg {*/
+/*        display: table-cell !important;*/
+/*    }*/
+/*}*/
+
+/*!* مخفی از md به بالا (یعنی فقط توی موبایل نشون بده) *!*/
+/*@media (min-width: 768px) {*/
+/*    .hide-from-md {*/
+/*        display: none !important;*/
+/*    }*/
+/*}*/
+/*.toggle {*/
+/*    width: auto;*/
+/*    padding: 8px;*/
+/*}*/
+/*.hidden {*/
+/*    visibility: hidden;*/
+/*}*/
+/*.text-bold {*/
+/*    font-weight: bold;*/
+/*}*/
+
+/*.btn {*/
+/*    margin-bottom: 0px;*/
+/*}*/
+
+/*.top_nav .navbar-right {*/
+/*    width: auto;*/
+/*}*/
+
+/*.btn {*/
+/*    border-radius: 7px;*/
+/*    display: inline-flex;*/
+/*    justify-content: center !important;*/
+/*    align-items: center !important;*/
+/*    text-align: center !important;*/
+/*}*/
+/*.text-beta {*/
+/*    color: #133c6d;*/
+/*}*/
+
+/*.bg-zeta {*/
+/*    background-color: #F8F7FA;*/
+/*}*/
+
+/*label {*/
+/*    font-weight: normal;*/
+/*}*/
+
+/*!* برای دسکتاپ *!*/
+/*.search-container {*/
+/*    flex: 1;*/
+/*    min-width: 330px;*/
+/*}*/
+
+/*!* برای موبایل *!*/
+/*@media (max-width: 768px) {*/
+/*    .search-container {*/
+/*        flex: 1;*/
+/*        min-width: auto;*/
+/*        width: 100%;*/
+/*    }*/
+
+/*    !* برای اینکه سرچ باکس کل عرض رو بگیره *!*/
+/*    .d-flex.flex-wrap.align-items-center {*/
+/*        width: 100%;*/
+/*    }*/
+
+/*    .search-container .search-input {*/
+/*        width: 100%;*/
+/*        min-width: 180px;*/
+/*    }*/
+/*}*/
+
+
+/*.btn-white-new {*/
+/*    background-color: #ffffff;*/
+/*    color: #000000;*/
+/*    border: 2px solid #e0e0e0;*/
+/*    padding: 8px 20px;*/
+/*    border-radius: 8px;*/
+/*    font-size: 14px;*/
+/*    font-weight: 500;*/
+/*    cursor: pointer;*/
+/*    transition: all 0.3s ease;*/
+/*    display: inline-flex;*/
+/*    align-items: center;*/
+/*    gap: 8px;*/
+/*}*/
+
+/*.btn-white-new:hover {*/
+/*    background-color: #f5f5f5;*/
+/*    color: #000000;*/
+/*    border-color: #cccccc;*/
+/*}*/
+
+/*.btn-white-new:focus {*/
+/*    outline: none;*/
+/*}*/
+
+
+/*.btn-green-light {*/
+/*    background-color: #ffffff;*/
+/*    color: #000000;*/
+/*}*/
+
+/*.btn-green-light:hover {*/
+/*    background-color: #e8ffee;*/
+/*    color: #000000;*/
+/*}*/
+
+/*.btn-green-light:focus {*/
+/*    outline: none;*/
+
+/*}*/
+
+
+/*.btn-beta-solid {*/
+/*    background-color: #133c6d;*/
+/*    color: #ffffff;*/
+/*    border: 2px solid #133c6d;*/
+/*    padding: 8px 20px;*/
+/*    border-radius: 8px;*/
+/*    font-size: 14px;*/
+/*    font-weight: 500;*/
+/*    cursor: pointer;*/
+/*    transition: all 0.3s ease;*/
+/*    align-items: center;*/
+/*    gap: 8px;*/
+/*}*/
+
+/*.btn-beta-solid:hover {*/
+/*    background-color: #0e2d55;*/
+/*    color: #ffffff;*/
+/*    border-color: #133c6d;*/
+
+/*}*/
+
+/*.btn-beta-solid:focus {*/
+/*    outline: none;*/
+/*    color: #ffffff;*/
+
+/*}*/
+
+
+/*.btn-beta-outline {*/
+/*    background-color: #ffffff;*/
+/*    color: #133c6d;*/
+/*    border: 2px solid #133c6d;*/
+/*    padding: 8px 20px;*/
+/*    border-radius: 8px;*/
+/*    font-size: 14px;*/
+/*    font-weight: 500;*/
+/*    cursor: pointer;*/
+/*    transition: all 0.3s ease;*/
+/*    align-items: center;*/
+/*    gap: 8px;*/
+/*}*/
+
+/*.btn-beta-outline:hover {*/
+/*    background-color: #133c6d;*/
+/*    color: #ffffff;*/
+/*    border-color: #133c6d;*/
+/*}*/
+
+/*.btn-beta-outline:focus {*/
+/*    outline: none;*/
+/*}*/
+/*.rounded {*/
+/*    border-radius: 0.375rem !important;*/
+/*}*/
+
+/*.rounded-0 {*/
+/*    border-radius: 0 !important;*/
+/*}*/
+
+/*.rounded-1 {*/
+/*    border-radius: 0.25rem !important;*/
+/*}*/
+
+/*.rounded-2 {*/
+/*    border-radius: 0.375rem !important;*/
+/*}*/
+
+/*.rounded-3 {*/
+/*    border-radius: 0.5rem !important;*/
+/*}*/
+
+/*.rounded-4 {*/
+/*    border-radius: 0.625rem !important;*/
+/*}*/
+
+/*.rounded-5 {*/
+/*    border-radius: 0.75rem !important;*/
+/*}*/
+
+/*.rounded-circle {*/
+/*    border-radius: 50% !important;*/
+/*}*/
+
+/*.rounded-pill {*/
+/*    border-radius: 50rem !important;*/
+/*}*/
+
+/*.rounded-top {*/
+/*    border-top-left-radius: 0.375rem !important;*/
+/*    border-top-right-radius: 0.375rem !important;*/
+/*}*/
+
+/*.rounded-bottom {*/
+/*    border-bottom-right-radius: 0.375rem !important;*/
+/*    border-bottom-left-radius: 0.375rem !important;*/
+/*}*/
+/*.custom-radius {*/
+/*    border-radius: 8px;*/
+/*}*/
+/*.select-radius {*/
+/*    border-radius: 10px;*/
+/*}*/
+/*.pointer {*/
+/*    cursor: pointer;*/
+/*}*/
+/*.h-500 {*/
+/*    height: 500px;*/
+/*}*/
+/*.min-h-500 {*/
+/*    min-height: 500px;*/
+/*}*/
+/*.max-h-500 {*/
+/*    max-height: 500px;*/
+/*}*/
+
+/*.bg-light {*/
+/*    background: #f7f7f7;*/
+/*}*/
+/*.mt-8 {*/
+/*    margin-top: 20px;*/
+/*}*/
+/*.mt-auto {*/
+/*    margin-top: auto;*/
+/*}*/
+/*.mb-8 {*/
+/*    margin-bottom: 20px;*/
+/*}*/
+/*.mb-2 {*/
+/*    margin-bottom: 10px;*/
+/*}*/
+/*.mb-3 {*/
+/*    margin-bottom: 1.5rem;*/
+/*}*/
+/*.mt-1 {*/
+/*    margin-top: 0.25rem;*/
+/*}*/
+/*.mt-2b {*/
+/*    margin-top: 0.5rem;*/
+/*}*/
+/*.mt-2 {*/
+/*    margin-top: 8px;*/
+/*}*/
+/*.mt-3 {*/
+/*    margin-top: 15px;*/
+/*}*/
+/*.mt-4 {*/
+/*    margin-top: 20px;*/
+/*}*/
+/*.mr-6 {*/
+/*    margin-right: 65px;*/
+/*}*/
+/*.mr-5 {*/
+/*    margin-right: 50px;*/
+/*}*/
+/*.mr-3 {*/
+/*    margin-right: 30px;*/
+/*}*/
+/*.mr-2 {*/
+/*    margin-right: 20px;*/
+/*}*/
+/*.mr-1 {*/
+/*    margin-right: 10px;*/
+/*}*/
+/*.ml-1 {*/
+/*    margin-left: 10px;*/
+/*}*/
+/*.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {*/
+/*    !*    padding: 10px;*!*/
+/*    !*    line-height: 1.42857143;*!*/
+/*    !*    vertical-align: top;*!*/
+/*    !*    border-top: 1px solid #ddd;*!*/
+/*    font-size: 14px;*/
+/*}*/
+/*.table > thead:first-child > tr:first-child > th {*/
+/*    border-bottom: 0;*/
+/*}*/
+/*.table > tbody > tr > th, .table > tbody > tr > td {*/
+/*    padding: 15px;*/
+/*}*/
+/*th {*/
+/*    display: table-cell;*/
+/*    vertical-align: inherit;*/
+/*    font-weight: normal;*/
+/*    font-size: medium;*/
+/*    unicode-bidi: isolate;*/
+/*}*/
+/*.p-0 {*/
+/*    padding: 0px;*/
+/*}*/
+/*.p-1 {*/
+/*    padding: 2px;*/
+/*}*/
+/*.p-2 {*/
+/*    padding: 4px;*/
+/*}*/
+/*.p-3 {*/
+/*    padding: 6px;*/
+/*}*/
+/*.p-5 {*/
+/*    padding: 10px;*/
+/*}*/
+/*.p-10 {*/
+/*    padding: 20px;*/
+/*}*/
+/*.fa-x {*/
+/*    font-size: 2rem;*/
+/*}*/
+/*.text-muted {*/
+/*    color: #777;*/
+/*}*/
+/*.text-primary {*/
+/*    color: #337ab7;*/
+/*}*/
+/*a.text-primary:hover {*/
+/*    color: #286090;*/
+/*}*/
+/*.text-success {*/
+/*    color: #3c763d;*/
+/*}*/
+/*a.text-success:hover {*/
+/*    color: #2b542c;*/
+/*}*/
+/*.text-info {*/
+/*    color: #31708f;*/
+/*}*/
+/*a.text-info:hover {*/
+/*    color: #245269;*/
+/*}*/
+/*.text-warning {*/
+/*    color: #8a6d3b;*/
+/*}*/
+/*a.text-warning:hover {*/
+/*    color: #66512c;*/
+/*}*/
+/*.text-danger {*/
+/*    color: #a94442;*/
+/*}*/
+/*a.text-danger:hover {*/
+/*    color: #843534;*/
+/*}*/
+/*.bg-primary {*/
+/*    color: #fff;*/
+/*    background-color: #337ab7;*/
+/*}*/
+/*a.bg-primary:hover {*/
+/*    background-color: #286090;*/
+/*}*/
+/*.bg-success {*/
+/*    background-color: #dff0d8;*/
+/*}*/
+/*a.bg-success:hover {*/
+/*    background-color: #c1e2b3;*/
+/*}*/
+/*.bg-jade {*/
+/*    background-color: #e8ffee;*/
+/*    color: #0d7525;*/
+/*}*/
+/*.bg-info {*/
+/*    background-color: #d9edf7;*/
+/*}*/
+/*a.bg-info:hover {*/
+/*    background-color: #afd9ee;*/
+/*}*/
+/*.bg-warning {*/
+/*    background-color: #fdffe8;*/
+/*    color: #acac3e;*/
+/*}*/
+/*a.bg-warning:hover {*/
+/*    background-color: #f7ecb5;*/
+/*}*/
+/*.bg-danger {*/
+/*    background-color: #f2dede;*/
+/*}*/
+/*a.bg-danger:hover {*/
+/*    background-color: #e4b9b9;*/
+/*}*/
+/*.bg-file {*/
+/*    background-color: #f2f2f2;*/
+/*}*/
+/*.text-file {*/
+/*    color: #f2f2f2;*/
+/*}*/
+/*.bg-chatbox {*/
+/*    background: #f5f9ff;*/
+/*}*/
+/*.bg-default {*/
+/*    background-color: #f7f7f7;*/
+/*}*/
+/*.text-default {*/
+/*    color: #73879c;*/
+/*}*/
+/*.bg-new {*/
+/*    background-color: #e6eaff;*/
+/*    color: #1c00dc;*/
+/*}*/
+/*.bg-alpha {*/
+/*    background-color: #99eae4;*/
+/*}*/
+/*.bg-beta {*/
+/*    background-color: #133c6d;*/
+/*}*/
+/*.text-beta {*/
+/*    color: #133c6d;*/
+/*}*/
+/*.d-flex {*/
+/*    display: flex;*/
+/*}*/
+/*.flex-column {*/
+/*    flex-direction: column;*/
+/*}*/
+/*.justify-content-end {*/
+/*    justify-content: flex-end;*/
+/*}*/
+
+/*.w-25 { width: 25%; }*/
+/*.w-50 { width: 48%; }*/
+/*.w-75 { width: 75%; }*/
+/*.w-100 { width: 100%; }*/
+/*.w-auto { width: auto; }*/
+
+
+/*.justify-content-center {*/
+/*    justify-content: center;*/
+/*}*/
+
+/*.justify-content-between {*/
+/*    justify-content: space-between;*/
+/*}*/
+
+/*.align-items-center {*/
+/*    align-items: center;*/
+/*}*/
+/*.align-items-start {*/
+/*    align-items: start;*/
+/*}*/
+
+/*.fs-1 { font-size: 2.5rem; }   !* خیلی بزرگ *!*/
+/*.fs-2 { font-size: 2rem; }*/
+/*.fs-3 { font-size: 1.75rem; }*/
+/*.fs-4 { font-size: 1.5rem; }*/
+/*.fs-5 { font-size: 1.25rem; }*/
+/*.fs-6 { font-size: 1rem; }     !* معمولی *!*/
+
+
+/*.small { font-size: 0.875rem; }*/
+/*.lead  { font-size: 1.25rem; font-weight: 300; }*/
+
+/*.radio-lg {*/
+/*    font-size: 15px;*/
+/*}*/
+
+/*.radio-lg input[type="radio"] {*/
+/*    transform: scale(1.4);*/
+/*    margin-left: 8px;*/
+/*}*/
+
+/*.gap {*/
+/*    display: flex;*/
+/*    gap: 10px;*/
+/*    flex-wrap: wrap;*/
+/*}*/
+
+/*.border-1 { border-width: 1px; }*/
+/*.border-2 { border-width: 2px; }*/
+/*.border-3 { border-width: 3px; }*/
+/*.border-4 { border-width: 4px; }*/
+/*.border-5 { border-width: 5px; }*/
+
+/*!* فقط برای فرم فیلتر فاکتورها *!*/
+/*.invoice-filter-form {*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*    justify-content: start; !* وسط چین محتوا *!*/
+/*    gap: 20px;*/
+/*    max-width: 800px; !* حداکثر عرض فرم *!*/
+/*    margin: 0 auto;   !* وسط فرم در صفحه *!*/
+/*}*/
+
+/*!* کنترل عرض input و select *!*/
+/*.invoice-filter-form .input-wrapper input,*/
+/*.invoice-filter-form .input-wrapper select,*/
+/*.invoice-filter-form .input-wrapper textarea{*/
+/*    width: 100%;       !* پر کردن کل والد *!*/
+/*    min-width: 200px;  !* حداکثر عرض دلخواه *!*/
+/*}*/
+
+/*.invoice-filter-form .input-wrapper > div.form-control {*/
+/*    width: 100%;*/
+/*    min-width: 200px;  !* حداکثر عرض دلخواه *!*/
+/*}*/
+
+/*!* اگر بخوای داخل فرم المان جدید اضافه کنی *!*/
+/*.invoice-filter-form > .w-100 {*/
+/*    width: 100%; !* المان هایی مثل h3، p یا div پر عرض والد *!*/
+/*    text-align: center;*/
+/*}*/
+
+/*.calendar-icon {*/
+/*    position: absolute;*/
+/*    right: 15px;          !* چون RTL هستیم *!*/
+/*    top: 50%;*/
+/*    transform: translateY(-50%);*/
+/*    cursor: pointer;*/
+/*    color: #337ab7;*/
+/*}*/
+
+/*.input-wrapper {*/
+/*    position: relative;*/
+/*}*/
+
+/*.has-icon input {*/
+/*    padding-right: 50px !important;*/
+/*}*/
+
+/*.icon-box {*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    right: 0;*/
+/*    height: 100%;*/
+/*    width: 45px;*/
+/*    color: white;*/
+/*    background: #286090;*/
+/*    border-bottom-right-radius: 5px;*/
+/*    border-top-right-radius: 5px;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.form-wrapper {*/
+/*    display: flex;*/
+/*    gap: 20px;*/
+/*    align-items: center;*/
+/*    flex-wrap: wrap;*/
+/*}*/
+
+/*.form-wrapper .form-control,*/
+/*.form-wrapper select {*/
+/*    width: 260px;*/
+/*}*/
+
+/*.form-wrapper button {*/
+/*    height: 32px;*/
+/*    margin-top: 5px;*/
+/*}*/
+
+/*.border-top {*/
+/*    border-top: 2px solid #e6e9ed; !* رنگ استاندارد بوت‌استرپ *!*/
+/*}*/
+
+/*.my-4 {*/
+/*    margin-top: 1.5rem;*/
+/*    margin-bottom: 1.5rem;*/
+/*}*/
+
+/*.pr-5 {*/
+/*    padding-right: 40px !important;*/
+/*}*/
+
+/*.pr-2 {*/
+/*    padding-right: 10px !important;*/
+/*}*/
+/*.m-0 {*/
+/*    margin: 0;*/
+/*}*/
+
+/*!* غیرفعال کردن هاور برای لینک‌های داخل attachments-wrapper *!*/
+/*.attachments-wrapper a,*/
+/*.attachments-wrapper a:hover,*/
+/*.attachments-wrapper a:focus,*/
+/*.attachments-wrapper a:active {*/
+/*    color: #5a738e !important;*/
+/*    text-decoration: none !important;*/
+/*}*/
+
+/*.min-h-50 {*/
+/*    min-height: 50px;*/
+/*}*/
+
+/*.min-h-75 {*/
+/*    min-height: 75px;*/
+/*}*/
+
+/*.min-h-100 {*/
+/*    min-height: 100px;*/
+/*}*/
+
+/*.w-200 {*/
+/*    width: 200px;*/
+/*}*/
+/*.w-250 {*/
+/*    width: 250px;*/
+/*}*/
+/*.w-300 {*/
+/*    width: 300px;*/
+/*}*/
+
+/*.w-450 {*/
+/*    width: 450px;*/
+/*}*/
+/*.w-550 {*/
+/*    width: 550px;*/
+/*}*/
+/*p {*/
+/*    margin: 0px;*/
+/*}*/
+/*!*.x_panel {*!*/
+/*!*    padding: 0px;*!*/
+/*!*}*!*/
+
+/*@media screen and (max-width: 576px) {*/
+/*    .responsive-table-row {*/
+/*        display: block !important;*/
+/*        border-color: #cecece;*/
+/*        border-width: 1px;*/
+/*    }*/
+/*}*/
+
+/*@media screen and (max-width: 576px) {*/
+/*    .responsive-table-row {*/
+/*        margin-bottom: 0.5rem;*/
+/*        overflow: hidden;*/
+/*        border-radius: 0.75rem;*/
+/*        --tw-bg-opacity: 1 !important;*/
+/*        !* background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1)) !important; *!*/
+/*    }*/
+
+/*}*/
+
+/*@media not all and (min-width: 576px) {*/
+/*    .responsive-table-head {*/
+/*        display: none;*/
+/*    }*/
+
+/*    .responsive-table-head th:first-child {*/
+/*        display: table-cell !important;*/
+/*    }*/
+/*}*/
+
+/*@media screen and (max-width: 576px) {*/
+/*    .responsive-table-row {*/
+/*        display: block !important;*/
+/*    }*/
+/*}*/
+
+/*@media screen and (max-width: 576px) {*/
+/*    .responsive-table-row {*/
+/*        margin-bottom: 1rem;*/
+/*        overflow: hidden;*/
+/*        border-radius: 1rem;*/
+/*        border: 1.5px solid #bfbfbf;*/
+/*        --tw-bg-opacity: 1 !important;*/
+/*        !* background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1)) !important; *!*/
+/*    }*/
+
+/*    .responsive-table-td::before {*/
+/*        content: attr(data-title);*/
+/*        margin-left: 1rem;*/
+/*        display: block;*/
+/*        -ms-flex-negative: 0;*/
+/*        flex-shrink: 0;*/
+/*        --tw-text-opacity: 1;*/
+/*        color: #73879c;*/
+/*    }*/
+
+/*    .responsive-table-td {*/
+/*        display: -ms-flexbox !important;*/
+/*        display: flex !important;*/
+/*        -ms-flex-align: start;*/
+/*        align-items: flex-start;*/
+/*        -ms-flex-pack: justify;*/
+/*        justify-content: space-between;*/
+/*        border-bottom-width: 2px;*/
+/*        border-style: solid;*/
+/*        --tw-border-opacity: 1;*/
+/*        border-color: rgb(247 247 247 / var(--tw-border-opacity, 1));*/
+/*        padding-left: 1rem;*/
+/*        padding-right: 1rem;*/
+/*        padding-top: 0.75rem;*/
+/*        padding-bottom: 0.75rem;*/
+/*        line-height: 1.5 !important;*/
+/*    }*/
+/*}*/
+
+/*th, td {*/
+/*    text-align: center;*/
+/*    vertical-align: middle;*/
+/*}*/
+
+/*.font-size-order {*/
+/*    font-size: 11px !important;*/
+/*    font-weight: bold !important;*/
+/*}*/
+
+/*@media screen and (min-width: 576px) {*/
+
+/*    th.sticky-actions,*/
+/*    td.sticky-actions {*/
+/*        position: sticky !important;*/
+/*        left: -4px;*/
+/*        background-color: white !important;*/
+/*        box-shadow: 4px 0 32px -2px rgba(0, 0, 0, 0.1) !important;*/
+/*    }*/
+/*}*/
+
+/*.truncate-words {*/
+/*    display: inline-block;*/
+/*    max-width: 150px;*/
+
+/*    white-space: nowrap;*/
+/*    overflow: hidden;*/
+/*    text-overflow: ellipsis;*/
+/*}*/
+
+/*.square-img {*/
+/*    width: 70px;*/
+/*    height: 70px;*/
+/*    object-fit: cover;*/
+/*    border-radius: 5px;*/
+/*}*/
+
+/*!**/
+/*Loading button: button with icon & spinner*/
+/*switch icon/spinner visibility when disabled/enabled*/
+/* *!*/
+/*.loading-btn > [role="status"] {*/
+/*    display: none;*/
+/*}*/
+
+/*.loading-btn.disabled > i.fa {*/
+/*    display: none;*/
+/*}*/
+
+/*.loading-btn.disabled > [role="status"] {*/
+/*    display: inline-block !important;*/
+/*}*/
+/*!*.form-control:focus,*!*/
+/*!*.form-select:focus {*!*/
+/*!*    border: 2px solid #337ab7 !important;*!*/
+
+/*!*}*!*/
+
+/*!* در app.css *!*/
+
+/*input:focus, textarea:focus, select:focus {*/
+/*    border-color: #99eae4;*/
+/*    outline: none;*/
+/*}*/
+
+/*.invoice-filter-form label{*/
+/*    text-align: right !important; !* یا left بسته به نیازت *!*/
+/*    width: 100%;*/
+/*}*/
+
+/*!* استایل دکمه‌های رادیویی به صورت کارت *!*/
+/*.card-option input[type="radio"] {*/
+/*    display: none; !* مخفی کردن خود radio button *!*/
+/*}*/
+
+/*.card-option .card {*/
+/*    cursor: pointer; !* نشون دادن که قابل کلیک هست *!*/
+/*    border: 1px solid #e0e0e0; !* رنگ مرز پیش‌فرض *!*/
+/*    background-color: #ffffff; !* پس‌زمینه سفید *!*/
+/*    transition: border-color .05s ease-in-out, box-shadow .05s ease-in-out, background-color .05s ease-in-out;*/
+/*    color: #333; !* رنگ متن تیره *!*/
+/*    text-align: center;*/
+/*    border-radius: 5px;*/
+/*}*/
+
+/*!* استایل زمانی که کارت انتخاب شده یا فعال هست *!*/
+/*.card-option.active .card,*/
+/*.card-option input[type="radio"]:checked + .card {*/
+/*    border-color: #0d6efd; !* رنگ آبی بوترپ برای مرز *!*/
+/*    background-color: #e7f3ff; !* پس‌زمینه کمی آبی روشن *!*/
+/*    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25); !* سایه ملایم *!*/
+/*    color: #0a58ca; !* رنگ متن کمی تیره‌تر *!*/
+/*}*/
+
+/*.card-option .card:hover {*/
+/*    border-color: #adb5bd; !* رنگ مرز موقع هاور *!*/
+/*    background-color: #cce5ff; !* تیره‌تر از حالت فعال، برای وقتی که هاور میشه *!*/
+/*}*/
+
+/*.card-option.active .card:hover,*/
+/*.card-option input[type="radio"]:checked + .card:hover {*/
+/*    border-color: #0d6efd; !* رنگ مرز موقع هاور در حالت فعال *!*/
+/*}*/
+
+/*!* استایل برای دکمه‌های گروهی تا بهتر کنار هم قرار بگیرند *!*/
+/*.btn-group-toggle > .card-option {*/
+/*    flex: 1; !* باعث میشه کارت ها عرض مساوی داشته باشن *!*/
+/*    margin: 0 5px; !* فاصله بین کارت ها *!*/
+/*}*/
+
+/*.btn-group-toggle {*/
+/*    display: flex; !* اطمینان از اینکه دکمه ها در یک خط هستند *!*/
+/*    justify-content: center;*/
+/*}*/
+
+/*.btn-group-toggle .card-option:first-child {*/
+/*    margin-left: 5px;*/
+/*}*/
+/*.btn-group-toggle .card-option:last-child {*/
+/*    margin-right: 0;*/
+/*}*/
+
+/*!* شاید لازم باشه اینو برای وقتی که کنار هم چیدیم اضافه کنی *!*/
+/*.d-flex.justify-content-between.bg-green.custom-radius.mt-2.p-3 .btn-group.btn-group-toggle {*/
+/*    flex-wrap: wrap; !* اگر صفحه کوچیک بود بیان پایین *!*/
+/*    justify-content: center;*/
+/*    width: 100%;*/
+/*}*/
+/*.d-flex.justify-content-between.bg-green.custom-radius.mt-2.p-3 .btn-group.btn-group-toggle .card-option {*/
+/*    flex: unset; !* override flex: 1 *!*/
+/*    width: 45%; !* دو تا کارت در هر ردیف *!*/
+/*    margin-top: 10px;*/
+/*}*/
+
+/*.card-option:focus-within .card {*/
+/*    outline: 2px solid #0d6efd; !* رنگ آبی برای فوکوس *!*/
+/*    outline-offset: 2px; !* کمی فاصله بین حاشیه و outline *!*/
+/*    border-color: #0d6efd; !* هماهنگ کردن رنگ border با outline *!*/
+/*}*/
+
+/*.card-option {*/
+/*    !* ... بقیه استایل های card-option ... *!*/
+/*    outline: none; !* حذف outline پیش فرض مرورگر اگر هست *!*/
+/*}*/
+
+/*.input-shadow {*/
+/*    box-shadow: 0 1px 4px rgba(0,0,0,0.06);*/
+/*}*/
+
+/*.input-shadow:focus {*/
+/*    box-shadow: 0 2px 8px rgba(0,0,0,0.12);*/
+/*}*/
+
+/*.d-block {*/
+/*    display: block;*/
+/*}*/
+
+
+/*!* اگر بخوایم به صورت دستی tabindex بدیم *!*/
+/*!* .card-option[tabindex]:focus-within .card { ... } *!*/
+
+
+
+/*.form-control {*/
+/*    height: 40px;*/
+/*}*/
+
+/*.input-border-focus {*/
+/*    border: 2px solid #ddd !important;*/
+/*    outline: none !important;*/
+/*    transition: all 0.3s ease;*/
+/*}*/
+
+/*.input-border-focus:focus {*/
+/*    border: 2px solid #133c6d !important;*/
+/*    outline: none !important;*/
+/*}*/
+
+/*.form-control {*/
+/*    transition: all 0.3s ease !important;*/
+/*    outline: none !important;*/
+/*}*/
+
+/*.flex-grow-1 {*/
+/*    flex: 1 1 auto !important;*/
+/*}*/
+
+/*.btn {*/
+/*    padding: 9px 18px;*/
+/*}*/
+
+/*.dropdown-menu {*/
+/*    right: auto;*/
+/*}*/
+
+/*.search-container {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    border: 1px solid #ccc;*/
+/*    transition: border-color 0.3s ease;*/
+/*}*/
+
+/*!* وقتی داخل کانتینر جستجو روی هر عنصری کلیک یا فوکوس بشه *!*/
+/*.search-container:focus-within {*/
+/*    border-color: #133c6d; !* رنگ آبی - میتونی عوض کنی *!*/
+/*}*/
+
+/*.search-input {*/
+/*    flex-grow: 1;*/
+/*    border: none;*/
+/*    background-color: #fff;*/
+/*    outline: none; !* حذف border پیش‌فرض مرورگر *!*/
+/*}*/
+
+/*.search-input:focus {*/
+/*    outline: none; !* مطمئن بشیم border اضافی نمیاد *!*/
+/*}*/
+
+/*.search-button {*/
+/*    border: none;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.3s ease;*/
+/*    margin-left: 8px;*/
+/*    margin-top: 6px;*/
+/*    background: transparent;*/
+/*}*/
+
+/*.search-button:focus {*/
+/*    outline: none;*/
+/*}*/
+
+/*.search-icon {*/
+/*    font-weight: 900;*/
+/*    content: "\f002";*/
+/*    margin-left: 5px;*/
+/*    color: #888;*/
+/*}*/
+
+
+/*.custom-select-wrapper {*/
+/*    position: relative;*/
+/*    width: 200px;*/
+/*}*/
+/*.custom-select-trigger {*/
+/*    background: #f8f9fa;*/
+/*    border-radius: 30px;*/
+/*    padding: 10px 15px;*/
+/*    cursor: pointer;*/
+/*    border: 1px solid #ccc;*/
+/*}*/
+/*.custom-options {*/
+/*    position: absolute;*/
+/*    top: 100%;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    background: white;*/
+/*    border-radius: 20px;*/
+/*    margin-top: 5px;*/
+/*    box-shadow: 0 5px 15px rgba(0,0,0,0.1);*/
+/*    display: none;*/
+/*}*/
+/*.custom-option {*/
+/*    padding: 10px 15px;*/
+/*    cursor: pointer;*/
+/*    border-radius: 20px;*/
+/*    margin: 4px 8px;*/
+/*}*/
+/*.custom-option:hover {*/
+/*    background: #007bff;*/
+/*    color: white;*/
+/*}*/
+
+/*.search-container {*/
+/*    position: relative;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    border: 2px solid #e0e0e0;*/
+/*    height: 40px;*/
+/*    border-radius: 7px;*/
+/*    background: #fff;*/
+/*    transition: all 0.3s ease;*/
+/*    overflow: hidden;*/
+/*}*/
+
+/*.dropdown-menu {*/
+/*    z-index: 100;*/
+/*}*/

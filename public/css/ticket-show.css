@@ -1,0 +1,459 @@
+/* استایل برای بخش preview فایل‌ها */
+.file-preview-wrapper {
+    position: relative;
+    background: #f8f9fa;
+    border: 2px solid #99eae4;
+    border-bottom: none;
+    border-radius: 7px 7px 0 0;
+    padding: 8px 15px;
+    transition: all 0.3s ease;
+    margin-bottom: 0;
+}
+
+/* خط جداکننده بین preview و اینپوت */
+.file-preview-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #99eae4;
+    opacity: 0.6;
+}
+
+/* هدر preview برای جایگذاری ضربدر */
+.file-preview-header {
+    position: absolute;
+    top: 15px;
+    left: 6px;
+    z-index: 10;
+    transform: translateY(-50%);
+}
+
+/* دکمه حذف همه فایل‌ها - استایل ساده */
+.remove-all-files-btn {
+    width: 22px;
+    height: 22px;
+    background: transparent;  /* حذف بک‌گراند سفید */
+    color: #dc3545;
+    border: none;  /* حذف border */
+    border-radius: 0;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    padding: 0;
+    opacity: 0.7;
+    box-shadow: none;  /* حذف سایه */
+}
+
+/* فقط هاور تغییر کنه */
+.remove-all-files-btn:hover {
+    background: transparent;
+    color: #dc3545;
+    opacity: 1;
+    border-color: transparent;
+}
+
+.remove-all-files-btn i {
+    font-size: 11px;
+}
+
+/* وقتی فایل وجود داره */
+.file-preview-wrapper:has(.file-preview-item) {
+    border-color: #99eae4;
+    background: #ffffff;
+}
+
+/* محتوای preview - حذف بک‌گراند از عکس‌ها */
+.file-preview-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* آیتم تکی فایل - بدون بک‌گراند */
+.file-preview-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0;  /* حذف پدینگ */
+    background: transparent;  /* حذف بک‌گراند */
+    border-radius: 0;
+    font-size: 13px;
+    transition: all 0.2s ease;
+}
+
+.file-preview-item:hover {
+    background: transparent;  /* حتی در هاور هم بدون بک‌گراند */
+}
+
+/* استایل برای آیکون‌ها */
+.file-preview-item i {
+    font-size: 20px;
+    color: #6c757d;
+}
+
+.file-preview-item span {
+    color: #495057;
+}
+
+/* استایل برای حالت چند فایل (آیکون دوبل) */
+.double-icon {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: #0f0f0f;
+}
+
+.double-icon .fa-file:first-child {
+    font-size: 28px;
+    color: #6c757d;
+}
+
+.double-icon {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 8px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* آیکون SVG */
+.double-icon img.svg-icon {
+    width: 28px;
+    height: 28px;
+    display: block;
+}
+
+.file-info {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.file-size-text {
+    font-size: 11px;
+    color: #6c757d;
+}
+
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 2px solid #e0e0e0;
+    border-radius: 7px;
+    background: #fff;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+/* وقتی preview وجود داره */
+.file-preview-wrapper:not([style*="display: none"]) + .search-container {
+    border-radius: 0 0 12px 12px;
+}
+
+
+.search-input {
+    flex: 1;
+    border: none;
+    padding: 12px 15px;
+    outline: none;
+    font-size: 14px;
+    background: transparent;
+}
+
+.search-input:focus {
+    box-shadow: none;
+}
+
+.search-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #6c757d;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-button:hover {
+    color: #4a90e2;
+    transform: scale(1.05);
+}
+
+.search-button img {
+    width: 20px;
+    height: 20px;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.search-button:hover img {
+    opacity: 1;
+}
+
+/* استایل برای موبایل */
+@media (max-width: 768px) {
+    .file-preview-wrapper {
+        padding: 10px 12px;
+    }
+
+    .file-preview-item {
+        font-size: 12px;
+    }
+
+    .search-input {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    .search-button {
+        padding: 6px 10px;
+    }
+}
+
+/* استایل برای حجم فایل در حالت تک فایل */
+.file-size-detail {
+    font-size: 11px;
+    color: #6c757d;
+    display: block;
+    margin-top: 3px;
+}
+
+/* آیتم تکی فایل - با بک‌گراند سفید و بوردر */
+
+/* برای حالت چند فایل هم همینطور */
+
+
+.file-size-detail {
+    font-size: 11px;
+    color: #6c757d;
+}
+
+.file-preview-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    transition: all 0.2s ease;
+}
+
+/* فضای سفید دور آیکون */
+.file-icon-box {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* آیکون داخل فضای سفید */
+.file-icon-box i {
+    font-size: 20px;
+    color: #6c757d;
+    margin: 0;
+}
+
+/* اطلاعات فایل */
+.file-info-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.file-name {
+    font-weight: 500;
+    color: #2c3e50;
+    font-size: 13px;
+}
+
+/* ریسپانسیو کردن عرض حباب‌ها */
+@media (max-width: 767.98px) {
+    .message-bubble {
+        max-width: 90vw !important;
+        width: auto !important;
+    }
+
+    .attachments-wrapper {
+        max-width: 90vw !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .message-bubble {
+        max-width: 450px !important;
+    }
+
+    .attachments-wrapper {
+        max-width: 450px !important;
+    }
+}
+
+@media (min-width: 1025px) {
+    .message-bubble {
+        max-width: 550px !important;
+    }
+
+    .attachments-wrapper {
+        max-width: 550px !important;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* مودال شیت تغییر وضعیت */
+.mobile-status-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.3s, opacity 0.3s;
+}
+
+.mobile-status-modal.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.mobile-status-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+}
+
+.mobile-status-sheet {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    border-radius: 20px 20px 0 0;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-out;
+    max-height: 80%;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+}
+
+.mobile-status-modal.active .mobile-status-sheet {
+    transform: translateY(0);
+}
+
+.mobile-status-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.mobile-status-title {
+    font-size: 18px;
+    margin: 0;
+    text-align: center;
+}
+
+.mobile-status-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    color: #999;
+}
+
+.mobile-status-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px 0;
+}
+
+.status-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.status-option:active {
+    background: #f8f9fa;
+}
+
+.status-option span {
+    font-size: 16px;
+    color: #333;
+}
+
+.status-option .check-icon {
+    color: #007bff;
+    font-size: 18px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+
+.status-option.selected span {
+    font-weight: 500;
+}
+
+.status-option.selected .check-icon {
+    opacity: 1;
+}
+
+.mobile-status-footer {
+    display: flex;
+    gap: 12px;
+    padding: 15px 20px;
+    border-top: 1px solid #e5e5e5;
+    background: white;
+}
+
+.mobile-status-footer button {
+    flex: 1;
+    padding: 12px;
+}

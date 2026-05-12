@@ -1,0 +1,125 @@
+.cs-wrapper {
+    position: relative;
+    width: 100%;
+    user-select: none;
+}
+
+.cs-trigger {
+    background: #fff;
+    border: 2px solid #ddd;
+    height: 40px;
+    border-radius: 8px;
+    padding: 7px 14px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+/*.cs-trigger:hover {*/
+/*    border-color: #aaa;*/
+/*}*/
+
+.cs-trigger.cs-open {
+    border-color: #99eae4;
+}
+
+/* محتوای تریگر - کنار هم افقی */
+.cs-trigger-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    flex: 1;
+}
+
+.cs-trigger-label {
+    font-size: 14px;
+    color: #333;
+    font-weight: normal;
+}
+
+.cs-trigger-text {
+    font-size: 14px;
+    color: #333;
+}
+
+.cs-trigger-text.cs-placeholder {
+    color: #999;
+}
+
+/* آیکون chevron-down - بولدتر و پررنگ‌تر */
+.cs-chevron {
+    width: 20px;
+    height: 20px;
+    stroke: #555;
+    stroke-width: 2.5;
+    transition: transform 0.2s;
+}
+
+.cs-trigger.cs-open .cs-chevron {
+    transform: rotate(180deg);
+}
+
+/* لیست آپشن‌ها - بدون انیمیشن */
+.cs-options {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 12px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+}
+
+.cs-options.cs-show {
+    display: block;
+}
+
+/* استایل آپشن‌ها - تیک در سمت چپ */
+.cs-option {
+    padding: 7px 30px;
+    cursor: pointer;
+    transition: background 0.15s;
+    font-size: 14px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    direction: ltr; /* برای چپ‌چین شدن تیک */
+}
+
+/* اطمینان از اینکه تیک در سمت چپ باشه */
+.cs-option-check {
+    width: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    order: 0; /* اولین عنصر */
+}
+
+.cs-option-text {
+    order: 1; /* متن بعد از تیک */
+    flex: 1;
+    text-align: right; /* برای متن فارسی */
+}
+
+/* تیک ساده برای گزینه انتخاب شده */
+
+
+/* آپشن‌هایی که انتخاب نشدن تیک ندارن */
+.cs-option:not(.cs-selected) .cs-option-check::after {
+    content: "";
+}
+
+.cs-option:hover {
+    background: #f0f0f0;
+}
+
+.cs-option.cs-selected {
+    background: #e0f7f5;
+    color: #1a7f76;
+}
