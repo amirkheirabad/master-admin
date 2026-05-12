@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\User\Controllers\Web\UserController;
+use Modules\User\Controllers\Web\AuthController;
 
+//user routes
 Route::get('/user-list', [UserController::class, 'index'])->name('user-list');
 Route::get('/user-insert', [UserController::class, 'insert'])->name('user-insert');
 Route::get('/user-edit/{id}', [UserController::class, 'edit'])->name('user-edit');
@@ -14,3 +16,9 @@ Route::put('/role-update/{id}', [UserController::class, 'role_update'])->name('r
 Route::get('/role-list', [UserController::class, 'role_list'])->name('role-list');
 Route::post('/role-create', [UserController::class, 'role_create'])->name('role-create');
 Route::delete('/role-delete/{id}', [UserController::class, 'role_delete'])->name('role-delete');
+
+
+//auth routh
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
