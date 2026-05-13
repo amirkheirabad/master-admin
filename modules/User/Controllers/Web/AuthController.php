@@ -18,10 +18,10 @@ class AuthController extends Controller
     public function showLoginForm()
     {
         if ($this->authRepo->getAuthenticatedUser()) {
-            return redirect($this->authRepo->getRedirectByRole());
+            return redirect($this->authRepo->getRedirectUrlByRole());
         }
         
-        return view('user::auth.login');
+        return view('templates.auth.login');
     }
 
     public function login(Request $request)
@@ -38,7 +38,7 @@ class AuthController extends Controller
 
         if ($this->authRepo->attemptLogin($credentials, $request->has('remember'))) {
             $request->session()->regenerate();
-            return redirect()->intended($this->authRepo->getRedirectByRole());
+            return redirect()->intended($this->authRepo->getRedirectUrlByRole());
         }
 
         return back()->withErrors([

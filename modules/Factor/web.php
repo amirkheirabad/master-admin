@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Factor\Controllers\Web\FactorController;
 
-Route::get('/factor-list', [FactorController::class, 'index'])->name('factor-list');
+
+Route::middleware('check.login')->group(function(){
+    Route::get('/factor-list', [FactorController::class, 'index'])->name('factor-list');
 Route::get('/factor-insert', [FactorController::class, 'insert'])->name('factor-insert');
 Route::get('/category-list', [FactorController::class, 'index_category'])->name('category-list');
 Route::post('/insert-category', [FactorController::class, 'insert_category'])->name('insert-category');
@@ -22,3 +24,4 @@ Route::get('/factor/hash/{id}', [FactorController::class, 'getHash']);
 
 
 Route::get('/pay/{hash}', [FactorController::class, 'pay']);
+    });

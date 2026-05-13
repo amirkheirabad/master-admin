@@ -36,11 +36,11 @@
                         <tbody>
                         @foreach($users as $user)
                             <tr class="item-record{{$user->id}}">
-                                <th scope="row">#</th>
+                                <th scope="row">{{ $loop->iteration }}</th>
                                 <td>{{ $user->name }}</td>
                                 <td>
                                     @foreach($user->getRoleNames() as $roleName)
-                                        {{ __($roleName) }}
+                                        <span class="badge badge-info">{{ $roleName }}</span>
                                     @endforeach
                                 </td>
                                 <td data-title="عملیات" class="responsive-table-td">
