@@ -67,16 +67,29 @@ class UserRepo implements InterfaceUser
         }
     }
 
+     //user create
     public function user_create(array $data)
     {
         DB::beginTransaction();
         try {
-            $user = User::create(['name' => $data['name']]);
+        
+
+            $user = User::create([
+                'name' => $data['name'],
+                'mobile' => $data['mobile'],
+                'password' => bcrypt($data['password']),
+            ]);
+
             $user->assignRole($data['role']);
+
             DB::commit();
-            return response()->json(['status' => true, 'message' => 'User created successfully.']);
+
+            return true;
+
         } catch (\Exception $e) {
+
             DB::rollBack();
+
             return $e->getMessage();
         }
 

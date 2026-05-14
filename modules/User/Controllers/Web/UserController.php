@@ -2,7 +2,6 @@
 
 namespace Modules\User\Controllers\Web;
 
-use Illuminate\Http\Request;
 use Modules\User\Repositories\InterfaceUser;
 use Modules\User\Requests\InsertRoleRequest;
 use Modules\User\Requests\InsertUserRequest;
@@ -68,11 +67,19 @@ class UserController
 
     public function user_create(InsertUserRequest $request)
     {
-        $this->user->user_create($request->validated());
-        return response()->json([
-            'success' => true,
-            'redirect' => route('user-list'),
-        ]);
+        $result = $this->user->user_create($request->validated());
+        if ($result === true) {
+
+            return response()->json([
+                'success' => true,
+                'redirect' => route('user-list'),
+            ]);
+        }
+
+       return response()->json([
+        'success' => false,
+        'errors' => ['general' => [$result]] 
+    ], 422);
     }
 
     public function role_edit($id)

@@ -5,6 +5,7 @@ const csrf = document.querySelector('meta[name="csrf-token"]').content;
 
 $('#userForm').on('submit', function (e) {
     e.preventDefault()
+    
 
     // گرفتن دکمه سابمیت
     const submitBtn = this.querySelector('button[type="submit"]');
@@ -22,6 +23,8 @@ $('#userForm').on('submit', function (e) {
         },
         body: JSON.stringify({
             name: $('#name').val(),
+            mobile: $('#mobile').val(),
+            password: $('#password').val(),
             role: $('#role').val(),
 
         }),
