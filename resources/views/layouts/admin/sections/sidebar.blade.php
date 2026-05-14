@@ -572,6 +572,26 @@
             </li>
             @endif
 {{--            @endcanany--}}
+{{--            @canany(['list_message','insert_message'])--}}
+            @if(auth()->user()->hasRole('admin'))
+
+            <li>
+                <a>
+                    <i class="fa fa-file-text text-beta"></i>
+                    <span>پیام ها</span>
+                    <span class="fa fa-chevron-down"></span>
+                </a>
+                <ul class="nav child_menu">
+{{--                    @can('list_tickets')--}}
+                    <li><a href="{{ route('message.list') }}">همه پیام ها</a></li>
+{{--                    @endcan--}}
+{{--                    @can('insert_tickets')--}}
+                    <li><a href="{{ route('message.insert') }}">پیام جدید</a></li>
+{{--                    @endcan--}}
+                </ul>
+            </li>
+            @endif
+{{--            @endcanany--}}
         </ul>
     </div>
 </div>

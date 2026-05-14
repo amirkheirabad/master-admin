@@ -7,4 +7,5 @@ return [
     Modules\Factor\FactorServiceProvider::class,
     Modules\Ticket\TicketServiceProvider::class,
     Modules\User\UserServiceProvider::class,
+    Modules\message\MessageServiceProvider::class,
 ];
