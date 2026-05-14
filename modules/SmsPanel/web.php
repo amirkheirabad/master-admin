@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\SmsPanel\Controllers\Web\SmsPanelController;
 
-Route::middleware('check.login')->group(function () {
+Route::middleware(['check.login', 'check.role:admin'])->group(function () {
     Route::get('/sms-panel', [SmsPanelController::class, 'index'])->name('sms-panel');
     Route::post('/sms-store/{id}', [SmsPanelController::class, 'store'])->name('sms-store');
     Route::get('/getSms/{id}', [SmsPanelController::class, 'getSms']);

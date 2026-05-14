@@ -480,6 +480,9 @@
             </li>
 
 {{--            @canany(['user-list', 'user-insert', 'role-insert', 'role-list'])--}}
+
+            @if(auth()->user()->hasRole('admin'))
+
             <li>
                 <a>
                     <i class="fa fa-file-text text-beta"></i>
@@ -501,8 +504,11 @@
 {{--                    @endcan--}}
                 </ul>
             </li>
+            @endif
 {{--            @endcanany--}}
 {{--            @can('sms-panel')--}}
+            @if(auth()->user()->hasRole('admin'))
+
             <li>
                 <a>
                     <i class="fa fa-home text-beta"></i>
@@ -513,8 +519,11 @@
                     <li><a href="{{ route('sms-panel') }}">پنل پیامکی</a></li>
                 </ul>
             </li>
+            @endif
 {{--            @endcan--}}
 {{--            @canany(['factor-list', 'factor-insert', 'category-list'])--}}
+            @if(auth()->user()->hasAnyRole(['admin', 'seller']))
+
             <li>
                 <a>
                     <i class="fa fa-file-text text-beta"></i>
@@ -530,16 +539,22 @@
 {{--                    @endcan--}}
                 </ul>
             </li>
+            @endif
 {{--            @endcanany--}}
 {{--            @canany('list_stores')--}}
+            @if(auth()->user()->hasRole('admin'))
+
             <li>
                 <a href="{{ route('list_stores') }}">
                     <i class="fa fa-shopping-cart text-beta"></i>
                     <span>فروشگاه ها</span>
                 </a>
             </li>
+            @endif
 {{--            @endcanany--}}
 {{--            @canany(['list_tickets','insert_ticket'])--}}
+            @if(auth()->user()->hasRole('admin'))
+
             <li>
                 <a>
                     <i class="fa fa-file-text text-beta"></i>
@@ -555,6 +570,7 @@
 {{--                    @endcan--}}
                 </ul>
             </li>
+            @endif
 {{--            @endcanany--}}
         </ul>
     </div>

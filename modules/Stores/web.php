@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Stores\Controllers\Web\StoresController;
 
-Route::middleware('check.login')->group(function () {
+Route::middleware(['check.login', 'check.role:admin'])->group(function () {
     Route::get('/stores', [StoresController::class, 'list'])->name('list_stores');
     Route::get('/insert', [StoresController::class, 'index'])->name('insert_store');
     Route::get('/edit/{id}', [StoresController::class, 'edit'])->name('edit_store');

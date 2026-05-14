@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\Factor\Controllers\Web\FactorController;
 
 
-Route::middleware('check.login')->group(function(){
+Route::middleware(['check.login', 'check.role:admin,seller'])->group(function(){
     Route::get('/factor-list', [FactorController::class, 'index'])->name('factor-list');
 Route::get('/factor-insert', [FactorController::class, 'insert'])->name('factor-insert');
 Route::get('/category-list', [FactorController::class, 'index_category'])->name('category-list');

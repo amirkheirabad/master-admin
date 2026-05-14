@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Ticket\Controllers\Web\TicketController;
 
-Route::middleware('check.login')->group(function () {
+Route::middleware(['check.login', 'check.role:admin'])->group(function () {
     Route::get('/tickets', [TicketController::class, 'index'])->name('list_tickets');
     Route::get('/ticket/{id}', [TicketController::class, 'show'])->name('show_ticket');
     Route::get('/insert_ticket', [TicketController::class, 'insert'])->name('insert_ticket');

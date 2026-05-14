@@ -106,10 +106,10 @@
             @csrf
             
             <label>شماره موبایل</label>
-            <input type="text" name="mobile" placeholder="09123456789" value="{{ old('mobile') }}" required autofocus>
+            <input type="text" name="mobile"  value="{{ old('mobile') }}" required autofocus>
             
             <label>رمز عبور</label> 
-            <input type="password" name="password" placeholder="********" required>
+            <input type="password" name="password"  required>
             
             <button type="submit">ورود</button>
         </form>

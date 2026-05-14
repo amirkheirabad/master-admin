@@ -5,7 +5,7 @@ use Modules\User\Controllers\Web\UserController;
 use Modules\User\Controllers\Web\AuthController;
 
 //user routes
-Route::middleware('check.login')->group(function(){
+Route::middleware(['check.login', 'check.role:admin'])->group(function(){
 Route::get('/user-list', [UserController::class, 'index'])->name('user-list');
 Route::get('/user-insert', [UserController::class, 'insert'])->name('user-insert');
 Route::get('/user-edit/{id}', [UserController::class, 'edit'])->name('user-edit');
