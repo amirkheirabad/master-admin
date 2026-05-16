@@ -17,7 +17,7 @@
                     <div class="row">
                         <div class="col-md-12 mb-3">
                             <label class="fw-bold">عنوان</label>
-                            <input type="text" name="title" id="title" class="form-control">
+                            <input type="text" name="title" id="title" class="form-control custom-radius input-border-focus" style="background: #f9fafb;">
                             <div class="mt-1">
                                 <span class="text-danger error-message" id="title_error"></span>
                             </div>
@@ -25,7 +25,7 @@
 
                         <div class="col-md-12 mb-3">
                             <label class="fw-bold">متن پیام</label>
-                            <textarea name="content" id="content" class="form-control" rows="5"></textarea>
+                            <textarea name="content" id="content" class="form-control custom-radius input-border-focus" style="background: #f9fafb;" rows="5"></textarea>
                             <div class="mt-1">
                                 <span class="text-danger error-message" id="content_error"></span>
                             </div>
@@ -33,7 +33,7 @@
 
                         <div class="col-md-6 mb-3">
                             <label class="fw-bold">وضعیت</label>
-                            <select name="is_active" id="is_active" class="form-control">
+                            <select name="is_active" id="is_active" class="form-control custom-radius input-border-focus" style="background: #f9fafb;">
                                 <option value="1">فعال</option>
                                 <option value="0">غیرفعال</option>
                             </select>
@@ -41,7 +41,7 @@
 
                         <div class="col-md-6 mb-3">
                             <label class="fw-bold">ترتیب نمایش</label>
-                            <input type="number" name="order" id="order" class="form-control" value="0">
+                            <input type="number" name="order" id="order" class="form-control custom-radius input-border-focus" style="background: #f9fafb;" value="0">
                         </div>
 
                         <div class="d-flex justify-content-end col-md-12 mt-8">
