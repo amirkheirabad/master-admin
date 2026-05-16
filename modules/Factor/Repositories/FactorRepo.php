@@ -1,13 +1,12 @@
 <?php
 
 namespace Modules\Factor\Repositories;
+
+use Hekmatinasser\Verta\Verta;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Modules\Factor\Models\Category;
 use Modules\Factor\Models\Factor;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use Hekmatinasser\Verta\Verta;
-
-
 
 class FactorRepo implements InterfaceFactor
 {
@@ -51,7 +50,7 @@ class FactorRepo implements InterfaceFactor
         return Factor::query()
             ->when($request->filled('search_query'), function ($q) use ($searchQuery) {
                 $q->where(function ($query) use ($searchQuery) {
-                    $query->where('id', 'LIKE', '%' . $searchQuery . '%');
+                    $query->where('id', 'LIKE', '%'.$searchQuery.'%');
                 });
             })
 
@@ -110,13 +109,12 @@ class FactorRepo implements InterfaceFactor
         $factor = Factor::find($id);
 
         $data = [
-            'show_status'      => $request['show_status'],
-            'price_status'     => $request['price_status'],
-            'category_id'      => $request['category_id'],
-            'price'            => $request['price'],
-            'description'      => $request['description'],
-            'paid_factor_date' => Verta::parse($request['paid_factor_date'])->toCarbon() ?? null,
-            'factor_date' => Verta::parse($request['factor_date'])->toCarbon(),
+            'show_status' => $request['show_status'],
+            'price_status' => $request['price_status'],
+            'category_id' => $request['category_id'],
+            'price' => $request['price'],
+            'description' => $request['description'],
+            'paid_factor_date' => ! empty($request['paid_factor_date']) ? Verta::parse($request['paid_factor_date'])->toCarbon() : null,            'factor_date' => Verta::parse($request['factor_date'])->toCarbon(),
         ];
 
         if (isset($request['image']) && $request['image']) {
@@ -140,6 +138,4 @@ class FactorRepo implements InterfaceFactor
     {
         return Factor::where('id', $id)->value('hash');
     }
-
-
 }
