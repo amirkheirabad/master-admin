@@ -33,7 +33,7 @@
 
                         <div class="col-md-6 mb-3">
                             <label class="fw-bold">وضعیت</label>
-                            <select name="is_active" id="is_active" class="form-control custom-radius input-border-focus" style="background: #f9fafb;">
+                            <select name="is_active" id="is_active" class="form-control custom-radius custom-select-input input-border-focus" style="background: #f9fafb;">
                                 <option value="1">فعال</option>
                                 <option value="0">غیرفعال</option>
                             </select>
