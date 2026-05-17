@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Factor\Controllers\Web\FactorController;
+use Modules\Factor\Controllers\Web\PaymentController;
+
 
 // مسیرهایی که هم ادمین و هم فروشنده می‌تونند ببینند 
 Route::middleware(['check.login', 'check.role:admin,seller'])->group(function(){
@@ -26,3 +28,11 @@ Route::middleware(['check.login', 'check.role:admin'])->group(function(){
     Route::delete('/delete-category/{id}', [FactorController::class, 'category_delete'])->name('delete-category');
     Route::get('/factor/hash/{id}', [FactorController::class, 'getHash']);
 });
+
+
+
+// درخواست پرداخت
+Route::get('/factor/pay/{id}', [PaymentController::class, 'pay'])->name('factor.pay');
+
+// برگشت از بانک
+Route::get('/factor/payment/verify', [PaymentController::class, 'verify'])->name('factor.payment.verify');
