@@ -2,7 +2,6 @@
 @section('css')
     <link rel="stylesheet" href="{{ asset('/css/select2.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/sweetalert2.css') }}">
-    {{--    <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">--}}
 @endsection
 
 @section('js')
@@ -12,6 +11,7 @@
         jalaliDatepicker.startWatch();
     </script>
     <script src="{{ asset('/js/ticket-insert.js') }}"></script>
+    
     <style>
         #fileList ul {
             list-style: none;
@@ -42,6 +42,43 @@
         .remove-btn:hover {
             background: #c82333;
         }
+        
+        /* استایل کپچا */
+        .captcha-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .captcha-question {
+            background: #f4f6f9;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #2c3e50;
+            min-width: 120px;
+            text-align: center;
+        }
+        .captcha-input {
+            width: 100px !important;
+            text-align: center;
+            border-radius: 8px !important;
+        }
+        .refresh-captcha-btn {
+            background: none;
+            border: 1px solid #d0d7de;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #57606a;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .refresh-captcha-btn:hover {
+            background: #f0f2f4;
+            border-color: #b9c1ca;
+        }
     </style>
 @endsection
 
@@ -62,17 +99,18 @@
 
                             <div class="col-md-6 mb-3">
                                 <label>نام فروشگاه</label>
-                                <select id="store_id" class="form-control custom-radius custom-select-input input-border-focus">
-                                    @foreach($stores as $store)
+                                <select id="store_id"
+                                    class="form-control custom-radius custom-select-input input-border-focus">
+                                    @foreach ($stores as $store)
                                         <option value="{{ $store->id }}"> {{ $store->store_name }} </option>
                                     @endforeach
                                 </select>
                             </div>
 
-
                             <div class="col-md-6 mb-3">
                                 <label>تیم ارسال کننده </label>
-                                <select id="contact_name" class="form-control custom-radius custom-select-input input-border-focus">
+                                <select id="contact_name"
+                                    class="form-control custom-radius custom-select-input input-border-focus">
                                     <option value="0">درخواست ماژول با فیچر جدید</option>
                                     <option value="1">تیم فنی و عملیات</option>
                                     <option value="2">تیم پشتیبانی و سفارشات</option>
@@ -82,17 +120,37 @@
 
                             <div class="col-md-6 mb-3">
                                 <label>عنوان تیکت</label>
-                                <input type="text" name="national_kod" id="title" class="form-control custom-radius input-border-focus" placeholder="عنوان تیکت">
+                                <input type="text" name="title" id="title"
+                                    class="form-control custom-radius input-border-focus" placeholder="عنوان تیکت">
                             </div>
 
                             <div class="col-md-12 mb-3">
                                 <label>متن تیکت</label>
-                                <textarea id="description" name="description" rows="5" class="form-control custom-radius input-border-focus" placeholder="متن خود را وارد کنید"></textarea>
+                                <textarea id="description" name="description" rows="5" class="form-control custom-radius input-border-focus"
+                                    placeholder="متن خود را وارد کنید"></textarea>
+                            </div>
+
+                            {{-- بخش کپچا --}}
+                            <div class="col-md-12 mb-3">
+                                <label>کد امنیتی</label>
+                                <div class="captcha-row">
+                                    <span class="captcha-question" id="captchaLabel">
+                                        {{ $captcha_question ?? '5 + 3 = ?' }}
+                                    </span>
+                                    <input type="text" name="captcha" class="form-control captcha-input" placeholder="حاصل" required>
+                                    <button type="button" class="refresh-captcha-btn" id="refreshCaptchaBtn">
+                                        <i class="fa fa-refresh"></i> جدید
+                                    </button>
+                                </div>
+                                <div class="mt-1">
+                                    <span class="text-danger error-message" id="captcha_error"></span>
+                                </div>
                             </div>
 
                             <div class="col-md-6 mt-2">
                                 <p>پیوست فایل ها (اختیاری)</p>
-                                <button type="button" id="attachButton" class="btn btn-beta-outline mt-2 ml-1">افزودن فایل</button>
+                                <button type="button" id="attachButton" class="btn btn-beta-outline mt-2 ml-1">افزودن
+                                    فایل</button>
                                 <span>پسوند های مجاز : png / jpg / pdf</span>
 
                                 <div id="fileList"></div>
@@ -100,21 +158,15 @@
                                 <input type="file" id="fileInput" style="display: none;" multiple>
                             </div>
 
-
                             <div class="d-flex justify-content-end col-md-12 mt-8">
-                                <button type="submit" class="btn btn-beta-solid ">تایید</button>
-                                <button type="submit" class="btn btn-beta-outline ">انصراف</button>
+                                <button type="submit" class="btn btn-beta-solid">تایید</button>
+                                <a href="{{ route('list_tickets') }}" class="btn btn-beta-outline">انصراف</a>
                             </div>
 
                         </div>
-
-
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
-
-
 @endsection
