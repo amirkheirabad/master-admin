@@ -2,7 +2,6 @@
 @section('css')
     <link rel="stylesheet" href="{{ asset('/css/select2.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/sweetalert2.css') }}">
-    {{--    <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">--}}
 @endsection
 
 @section('js')
@@ -24,10 +23,10 @@
                     </div>
                 </div>
 
-                <form id="editUserForm" method="post" action="" class="x_panel rounded-4">
+                <form id="editUserForm" method="post" action="{{ route('user-update', $user->id) }}" class="x_panel rounded-4">
                     @csrf
-                    <input type="hidden" id="user_id" value="{{ $user->id }}">
-
+                    @method('PUT')
+                        <input type="hidden" name="user_id" id="user_id" value="{{ $user->id }}">
                     <div class="form-group mt-8">
                         <div class="row">
 
@@ -40,8 +39,24 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
+                                <label>شماره تماس</label>
+                                <input type="text" value="{{ $user->mobile }}" name="mobile" id="mobile" class="form-control custom-radius input-border-focus">
+                                <div class="mt-1">
+                                    <span class="text-danger error-message" id="mobile_error"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label>رمز عبور جدید</label>
+                                <input type="password" name="password" id="password" class="form-control custom-radius input-border-focus" placeholder="برای عدم تغییر، خالی بگذارید">
+                                <div class="mt-1">
+                                    <span class="text-danger error-message" id="password_error"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
                                 <label>نقش ها</label>
-                                <select id="role" class="form-control custom-radius custom-select-input input-border-focus">
+                                <select id="role" name="role" class="form-control custom-radius custom-select-input input-border-focus">
                                     @foreach($roles as $role)
                                         <option value="{{$role->name}}" {{ $user->hasRole($role->name) ? 'selected' : '' }}>{{ __($role->name) }}</option>
                                     @endforeach
@@ -51,18 +66,15 @@
                                 </div>
                             </div>
 
-
-
                             <div class="d-flex justify-content-end col-md-12 mt-8">
-                                <button type="submit" class="btn btn-beta-solid ">تایید</button>
-                                <a href="{{ route('user-list') }}" class="btn btn-beta-outline ">انصراف</a>
+                                <button type="submit" class="btn btn-beta-solid">تایید</button>
+                                <a href="{{ route('user-list') }}" class="btn btn-beta-outline">انصراف</a>
                             </div>
 
                         </div>
-
-
                     </div>
                 </form>
             </div>
         </div>
+    </div>
 @endsection

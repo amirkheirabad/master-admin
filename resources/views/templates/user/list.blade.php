@@ -11,6 +11,7 @@
     <script>
         jalaliDatepicker.startWatch();
     </script>
+            <script src="{{ asset('/js/app-user.js') }}"></script>
 @endsection
 
 @section('content')
@@ -29,6 +30,7 @@
                         <tr>
                             <th>#</th>
                             <th>نام و نام خانوادگی</th>
+                            <th>شماره همراه</th>
                             <th>نقش</th>
                             <th>عملیات</th>
                         </tr>
@@ -38,6 +40,7 @@
                             <tr class="item-record{{$user->id}}">
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>{{ $user->name }}</td>
+                                <td>{{ $user->mobile }}</td>
                                 <td>
                                     @foreach($user->getRoleNames() as $roleName)
                                         <span class="badge badge-info">{{ $roleName }}</span>
@@ -48,7 +51,7 @@
                                         <a href="{{ route('user-edit', $user->id) }}" class="text-success" data-id="{{ $user->id }}">
                                             <i class="fa fa-pencil fa-x"></i>
                                         </a>
-                                        <a href="javascript:;" class="text-danger delete-factor" data-id="{{ $user->id }}">
+                                        <a href="javascript:;" class="text-danger delete-message mr-1" data-id="{{ $user->id }}">
                                             <i class="fa fa-trash fa-x"></i>
                                         </a>
                                     </div>
@@ -58,6 +61,7 @@
                         </tbody>
                     </table>
                 </div>
+                
 
                 <div class="d-flex justify-content-center">
                 </div>
