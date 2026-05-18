@@ -11,6 +11,7 @@ Route::get('/user-insert', [UserController::class, 'insert'])->name('user-insert
 Route::get('/user-edit/{id}', [UserController::class, 'edit'])->name('user-edit');
 Route::put('/user-update/{id}', [UserController::class, 'update'])->name('user-update');
 Route::post('/user-create', [UserController::class, 'user_create'])->name('user-create');
+Route::delete('/user-delete/{id}', [UserController::class, 'destroy'])->name('user-delete');
 Route::get('/role-insert', [UserController::class, 'role_insert'])->name('role-insert');
 Route::get('/role-edit/{id}', [UserController::class, 'role_edit'])->name('role-edit');
 Route::put('/role-update/{id}', [UserController::class, 'role_update'])->name('role-update');

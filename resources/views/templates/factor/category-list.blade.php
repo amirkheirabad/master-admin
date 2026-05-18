@@ -52,7 +52,7 @@
                                 <td>{{ $category->name }}</td>
                                 <td>
                                     @if($category->active == 0)
-                                        <span class="bg-red p-2 custom-radius">
+                                        <span class="bg-red-new p-2 custom-radius">
                                             غیرفعال
                                         </span>
                                     @elseif($category->active == 1)

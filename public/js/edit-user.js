@@ -27,6 +27,8 @@ $('#editUserForm').on('submit', function (e) {
         body: JSON.stringify({
             name: $('#name').val(),
             role: $('#role').val(),
+            mobile: $('#mobile').val(),
+            password: $('#password').val(),
 
         }),
     })

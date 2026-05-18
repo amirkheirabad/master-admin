@@ -137,22 +137,46 @@ $(document).on('click','.delete-factor', function (e) {
 
 
 document.querySelectorAll('#copyHash').forEach(item => {
+
     item.addEventListener('click', function () {
-        const factorId = this.getAttribute('data-id')
+
+        const factorId = this.getAttribute('data-id');
 
         fetch(`/factor/hash/${factorId}`)
+
             .then(res => res.json())
+
             .then(data => {
+
                 navigator.clipboard.writeText(data.hash).then(() => {
-                    console.log("موفقیت")
-                })
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'کپی شد',
+                        text: 'هش فاکتور با موفقیت کپی شد',
+                        timer: 1500,
+                        showConfirmButton: false
+                    });
+
+                });
+
             })
+
             .catch(err => {
+
                 console.error(err);
-                console.log('مشکلی در کپی هش رخ داد');
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'خطا',
+                    text: 'مشکلی در کپی هش رخ داد'
+                });
+
             });
-    })
-})
+
+    });
+
+});
 
 
 const accountType = document.getElementById('account_type');

@@ -45,7 +45,7 @@ class StoresController
         return view('templates.stores.edit', compact('store'));
     }
 
-    public function update($id, indexRequest $request)
+    public function update($id, IndexRequest $request)
     {
         $this->store->update($id, $request);
         return response()->json([

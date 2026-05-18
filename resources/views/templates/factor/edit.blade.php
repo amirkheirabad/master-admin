@@ -144,10 +144,12 @@
                                     <select id="category_id" name="category_id" class="form-control custom-radius select2">
                                         <option value="">همه</option>
                                         @foreach($categories as $category)
+                                         @if($category->active == 1)
                                             <option value="{{ $category->id }}"
                                                 {{ $factor->category_id == $category->id ? 'selected' : '' }}>
                                                 {{ $category->name }}
                                             </option>
+                                         @endif
                                         @endforeach
                                     </select>
                                     <div class="mt-1 error-space">
