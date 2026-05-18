@@ -2,7 +2,6 @@
 @section('css')
     <link rel="stylesheet" href="{{ asset('/css/select2.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/sweetalert2.css') }}">
-{{--    <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">--}}
 @endsection
 
 @section('js')
@@ -25,48 +24,50 @@
                 </div>
                 <a href="{{ route('insert_store') }}" class="btn btn-beta-solid mt-2">اضافه کردن فروشگاه</a>
                 <div class="x_panel rounded-top mt-2 p-0">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>نام فروشگاه</th>
-                            <th>نام مدیر</th>
-                            <th>آدرس وبسایت</th>
-                            <th>شعار فروشگاه</th>
-                            <th>شماره تماس</th>
-                            <th>استان</th>
-                            <th>شهر</th>
-                            <th>آدرس فروشگاه</th>
-                            <th>کد پستی</th>
-                            <th>عرض جغرافیایی</th>
-                            <th>طول جفرافیایی</th>
-                            <th>درباره فروشگاه</th>
-                            <th>عملیات</th>
-                        </tr>
+                    <table class="table" style="margin-bottom: 0px">
+                        <thead class="responsive-table-head">
+                            <tr>
+                                <th>#</th>
+                                <th>نام فروشگاه</th>
+                                <th>نام مدیر</th>
+                                <th>آدرس وبسایت</th>
+                                <th>شعار فروشگاه</th>
+                                <th>شماره تماس</th>
+                                <th>استان</th>
+                                <th>شهر</th>
+                                <th>آدرس فروشگاه</th>
+                                <th>کد پستی</th>
+                                <th>عرض جغرافیایی</th>
+                                <th>طول جغرافیایی</th>
+                                <th>درباره فروشگاه</th>
+                                <th>عملیات</th>
+                            </tr>
                         </thead>
                         <tbody>
                         @foreach($stores as $store)
-                            <tr class="item-record{{$store->id}}">
-                                <th scope="row">#</th>
-                                <td>{{ $store->store_name }}</td>
-                                <td>{{ $store->manager_name }}</td>
-                                <td>{{ $store->link }}</td>
-                                <td>{{ $store->slogan }}</td>
-                                <td>{{ $store->phone }}</td>
-                                <td>{{ $store->province }}</td>
-                                <td>{{ $store->city }}</td>
-                                <td>{{ $store->location }}</td>
-                                <td>{{ $store->code_posty }}</td>
-                                <td>{{ $store->latitude }}</td>
-                                <td>{{ $store->longitude }}</td>
-                                <td>{{ $store->about }}</td>
-                                <td class="">
-                                    <a href="{{ route('edit_store', $store->id) }}" class="text-success">
-                                        <i class="fa fa-pencil fa-x"></i>
-                                    </a>
-                                    <a href="javascript:;" class="text-danger delete-message mr-1" data-id="{{ $store->id }}">
-                                        <i class="fa fa-trash fa-x"></i>
-                                    </a>
+                            <tr class="responsive-table-row item-record{{$store->id}}">
+                                <th scope="row" class="responsive-table-td">{{ $loop->iteration }}</th>
+                                <td data-title="نام فروشگاه" class="responsive-table-td">{{ $store->store_name }}</td>
+                                <td data-title="نام مدیر" class="responsive-table-td">{{ $store->manager_name }}</td>
+                                <td data-title="آدرس وبسایت" class="responsive-table-td">{{ $store->link }}</td>
+                                <td data-title="شعار فروشگاه" class="responsive-table-td">{{ $store->slogan }}</td>
+                                <td data-title="شماره تماس" class="responsive-table-td">{{ $store->phone }}</td>
+                                <td data-title="استان" class="responsive-table-td">{{ $store->province }}</td>
+                                <td data-title="شهر" class="responsive-table-td">{{ $store->city }}</td>
+                                <td data-title="آدرس فروشگاه" class="responsive-table-td">{{ $store->location }}</td>
+                                <td data-title="کد پستی" class="responsive-table-td">{{ $store->code_posty }}</td>
+                                <td data-title="عرض جغرافیایی" class="responsive-table-td">{{ $store->latitude }}</td>
+                                <td data-title="طول جغرافیایی" class="responsive-table-td">{{ $store->longitude }}</td>
+                                <td data-title="درباره فروشگاه" class="responsive-table-td">{{ Str::limit($store->about, 50) }}</td>
+                                <td data-title="عملیات" class="responsive-table-td">
+                                    <div class="action-buttons" style="display: flex; gap: 10px;">
+                                        <a href="{{ route('edit_store', $store->id) }}" class="text-success" title="ویرایش">
+                                            <i class="fa fa-pencil fa-x"></i>
+                                        </a>
+                                        <a href="javascript:;" class="text-danger delete-message" data-id="{{ $store->id }}" title="حذف">
+                                            <i class="fa fa-trash fa-x"></i>
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
@@ -75,8 +76,9 @@
                 </div>
 
                 <div class="d-flex justify-content-center">
-                    {{$stores->withQueryString()->links('vendor.pagination.bootstrap-5')}}
+                    {{ $stores->withQueryString()->links('vendor.pagination.bootstrap-5') }}
                 </div>
+            </div>
         </div>
     </div>
 @endsection

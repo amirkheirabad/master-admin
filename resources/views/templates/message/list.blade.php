@@ -35,9 +35,9 @@
                             <td>{{ Str::limit($message->content, 50) }}</td>
                             <td>
                                 @if($message->is_active)
-                                    <span class="badge badge-success">فعال</span>
+                                    <span class="bg-jade p-2 custom-radius">فعال</span>
                                 @else
-                                    <span class="badge badge-danger">غیرفعال</span>
+                                    <span class="bg-red-new p-2 custom-radius">غیرفعال</span>
                                 @endif
                             </td>
                             <td>{{ $message->order ?? '-' }}</td>
