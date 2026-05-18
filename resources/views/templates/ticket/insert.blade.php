@@ -60,17 +60,20 @@
                     <div class="form-group mt-8">
                         <div class="row">
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-6 col-xs-12 mb-3">
                                 <label>نام فروشگاه</label>
                                 <select id="store_id" class="form-control custom-radius custom-select-input input-border-focus">
                                     @foreach($stores as $store)
                                         <option value="{{ $store->id }}"> {{ $store->store_name }} </option>
                                     @endforeach
                                 </select>
+                                <div class="mt-1">
+                                    <span class="text-danger error-message" id="store_id"></span>
+                                </div>
                             </div>
 
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-6 col-xs-12 mb-3">
                                 <label>تیم ارسال کننده </label>
                                 <select id="contact_name" class="form-control custom-radius custom-select-input input-border-focus">
                                     <option value="0">درخواست ماژول با فیچر جدید</option>
@@ -78,16 +81,25 @@
                                     <option value="2">تیم پشتیبانی و سفارشات</option>
                                     <option value="3">گزارش خطا</option>
                                 </select>
+                                <div class="mt-1">
+                                    <span class="text-danger error-message" id="contact_name_error"></span>
+                                </div>
                             </div>
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-6 col-xs-12 mb-3">
                                 <label>عنوان تیکت</label>
                                 <input type="text" name="national_kod" id="title" class="form-control custom-radius input-border-focus" placeholder="عنوان تیکت">
+                                <div class="mt-1">
+                                    <span class="text-danger error-message" id="title_error"></span>
+                                </div>
                             </div>
 
-                            <div class="col-md-12 mb-3">
-                                <label>متن تیکت</label>
+                            <div class="col-md-12 col-xs-12 mb-3">
+                                <label class="mt-2">متن تیکت</label>
                                 <textarea id="description" name="description" rows="5" class="form-control custom-radius input-border-focus" placeholder="متن خود را وارد کنید"></textarea>
+                                <div class="mt-1">
+                                    <span class="text-danger error-message" id="message_error"></span>
+                                </div>
                             </div>
 
                             <div class="col-md-6 mt-2">
@@ -98,6 +110,10 @@
                                 <div id="fileList"></div>
 
                                 <input type="file" id="fileInput" style="display: none;" multiple>
+                                <div class="mt-2">
+                                    <span class="text-danger error-message" id="attachments_error"></span>
+                                </div>
+
                             </div>
 
 

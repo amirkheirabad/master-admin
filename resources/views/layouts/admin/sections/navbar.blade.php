@@ -2,6 +2,11 @@
 <div class="top_nav hidden-print">
     <div class="nav_menu bg-white">
         <nav>
+            <!-- تو بخش navbar، قبل از بقیه المان‌ها یا بعدش -->
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" style="display: none;">
+                <i class="fa fa-bars"></i>
+            </button>
+
             @yield('nav')
 
             <ul class="nav navbar-nav navbar-right hide-on-mobile">

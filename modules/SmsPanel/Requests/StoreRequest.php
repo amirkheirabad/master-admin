@@ -24,7 +24,6 @@ class StoreRequest extends FormRequest
         return [
             'store_message' => 'required|string',
             'campaign_name' => 'required|string|max:255',
-            'token' => 'required|string'
         ];
     }
 }

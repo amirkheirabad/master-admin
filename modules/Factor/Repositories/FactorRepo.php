@@ -45,10 +45,9 @@ class FactorRepo implements InterfaceFactor
 
     public function filterFactor(Request $request)
     {
-        \Log::info($request);
         $searchQuery = $request->input('search_query');
 
-        return Factor::query()
+        return Factor::query()->with('store', 'category')
             ->when($request->filled('search_query'), function ($q) use ($searchQuery) {
                 $q->where(function ($query) use ($searchQuery) {
                     $query->where('id', 'LIKE', '%' . $searchQuery . '%');
@@ -128,7 +127,7 @@ class FactorRepo implements InterfaceFactor
 
     public function factorById($id)
     {
-        return Factor::findOrFail($id);
+        return Factor::with('store', 'category')->findOrFail($id);
     }
 
     public function deleteFactor(int $id)

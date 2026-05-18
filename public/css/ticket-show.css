@@ -279,36 +279,35 @@
     font-size: 13px;
 }
 
-/* ریسپانسیو کردن عرض حباب‌ها */
 @media (max-width: 767.98px) {
     .message-bubble {
-        max-width: 90vw !important;
-        width: auto !important;
+        width: 270px !important;
     }
 
     .attachments-wrapper {
-        max-width: 90vw !important;
+        width: 270px !important;
     }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
     .message-bubble {
-        max-width: 450px !important;
+        width: 300px !important;
     }
 
     .attachments-wrapper {
-        max-width: 450px !important;
+        width: 270px !important;
     }
 }
 
 @media (min-width: 1025px) {
     .message-bubble {
-        max-width: 550px !important;
+        width: 450px !important;
     }
 
     .attachments-wrapper {
-        max-width: 550px !important;
+        width: 270px !important;
     }
+
 }
 
 

@@ -72,8 +72,12 @@ $('#ticketForm').on('submit', function (e) {
             return res.json();
         })
         .then(data => {
+
+            if (data.errors) {
+                showBackendErrors(data.errors);
+            }
+
             if (data && data.success) {
-                alert('تیکت با موفقیت ایجاد شد');
                 $('#ticketForm')[0].reset();
                 selectedFiles = [];
                 displayFileNames();
@@ -90,15 +94,13 @@ $('#ticketForm').on('submit', function (e) {
                     for (let key in data.errors) {
                         errorMsg += data.errors[key] + '\n';
                     }
-                    alert(errorMsg);
                 } else {
-                    alert(data?.message || 'خطا در ایجاد تیکت');
+
                 }
             }
         })
         .catch(err => {
             console.log(err);
-            alert('خطا در ارتباط با سرور');
             // خطا رخ داده - برگردوندن دکمه به حالت عادی
             setButtonLoading(submitBtn, false);
         });

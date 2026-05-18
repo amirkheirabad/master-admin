@@ -120,7 +120,7 @@
                                     </select>
                                 </div>
 
-                                <div class="col-md-12 mt-4">
+                                <div class="col-md-12 col-xs-12 mt-4">
                                     <label>توضیحات</label>
                                     <textarea id="description" name="description" rows="5" class="form-control custom-radius input-border-focus"></textarea>
                                 </div>

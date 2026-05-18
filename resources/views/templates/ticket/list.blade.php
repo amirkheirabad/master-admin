@@ -42,7 +42,7 @@
                 </div>
 
                 <div class="d-flex flex-wrap align-items-center" style="gap: 10px;">
-                    <form method="get" action="{{ route('list_tickets') }}" class="d-flex flex-wrap align-items-center">
+                    <form method="get" id="filterForm" action="{{ route('list_tickets') }}" class="d-flex flex-wrap align-items-center">
                         <div class="search-container">
                             <button class="search-button">
                                 <i class="fa fa-search"></i>

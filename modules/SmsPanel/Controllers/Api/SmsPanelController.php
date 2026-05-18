@@ -14,9 +14,14 @@ class SmsPanelController
 
     public function createFromToken(StoreRequest $request)
     {
-        $this->SmsPanel->createFromToken($request->validated());
+        $store = $request->get('authenticated_store');
+        $validated = $request->validated();
+        $validated['store_id'] = $store->id;
+
+        $this->SmsPanel->createFromToken($validated);
         return response()->json([
             'success' => true,
+            'message' => 'درخواست با موفقیت ثبت شد'
         ]);
     }
 }

@@ -75,15 +75,17 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="">
                 <div class="row">
-                    <div class="col-md-12 d-flex justify-content-start">
-                        <div>
-                            <h3>فاکتور</h3>
-                        </div>
-                        <div class="hide-from-md mr-auto">
-                            <a href="{{ route('factor-insert') }}" class="btn btn-beta-solid">
-                                <i class="fa fa-plus"></i>
-                                افزودن فاکتور
-                            </a>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="d-flex justify-content-between align-items-center flex-wrap">
+                            <div>
+                                <h3 class="mb-2 mb-md-0">فاکتور</h3>
+                            </div>
+                            <div class="hide-from-md">
+                                <a href="{{ route('factor-insert') }}" class="btn btn-beta-solid">
+                                    <i class="fa fa-plus"></i>
+                                    افزودن فاکتور
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

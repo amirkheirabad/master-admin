@@ -54,10 +54,10 @@ class SmsPanelRepo implements InterfaceSmsPanel
     }
     public function createFromToken(array $data)
     {
-        $store = Stores::where('token', $data['token'])->firstOrFail();
-
         SmsPanel::create([
-            'store_id' => $store->id,
+            'store_id' => $data['store_id'],
+            'status' => 0,
+            'campaign_name' => $data['campaign_name'],
             'store_message' => $data['store_message'] ?? null,
         ]);
     }

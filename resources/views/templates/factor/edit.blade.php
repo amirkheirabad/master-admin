@@ -171,7 +171,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12 mt-4">
+                                <div class="col-md-12 col-xs-12 mt-4">
                                     <label>توضیحات</label>
                                     <textarea name="description" id="description" rows="4" class="form-control custom-radius">{{ $factor->description }}</textarea>
                                 </div>
@@ -186,10 +186,6 @@
                                     <button class="btn btn-beta-outline custom-file-button">انتخاب عکس</button>
                                     <input type="file" id="imageInput" class="file-input" accept="image/*">
                                 </div>
-
-                                <!-- (اختیاری) اگر دکمه حذف هم دارید -->
-                                <!-- <button id="removeImageButton" style="display: none;">حذف عکس</button> -->
-
 
 
                                 <div class="col-md-3 mt-2">

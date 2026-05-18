@@ -30,7 +30,7 @@
                     <div class="form-group mt-8">
                         <div class="row">
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-6 col-xs-12 mb-3">
                                 <label>نام نقش</label>
                                 <input type="text" name="name" id="name" class="form-control custom-radius input-border-focus">
                                 <div class="mt-1">
@@ -38,7 +38,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-6 col-xs-12 mb-3">
                                 <label>دسترسی ها</label>
                                 <select id="permission" class="form-control custom-radius select2 input-border-focus" multiple>
                                     @foreach($permissions as $permission)

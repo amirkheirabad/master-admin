@@ -1,4 +1,4 @@
-/* مودال شیت موبایل */
+/* ====== استایل کلی مودال ====== */
 .mobile-filter-modal {
     position: fixed;
     top: 0;
@@ -45,6 +45,7 @@
     transform: translateY(0);
 }
 
+/* ====== هدر مودال ====== */
 .mobile-filter-header {
     display: flex;
     justify-content: space-between;
@@ -52,38 +53,69 @@
     padding: 16px 20px;
     border-bottom: 1px solid #e5e5e5;
     position: relative;
+    min-height: 56px;
 }
 
+/* دکمه برگشت - سمت راست */
 .mobile-filter-back {
     background: none;
     border: none;
     font-size: 20px;
     cursor: pointer;
-    padding: 0;
-    width: 30px;
+    padding: 8px;
+    width: 36px;
+    height: 36px;
     color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    order: 1;
+    z-index: 2;
 }
 
+/* عنوان - وسط */
 .mobile-filter-title {
     margin: 0;
-    /* حذف flex:1 و text-align:center */
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    order: 2;
+    flex: 1;
+    text-align: center;
     position: absolute;
-    right: 20px; /* به راست چسبید */
-    left: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
 }
 
+/* دکمه ضربدر بستن - سمت چپ */
 .mobile-filter-close {
     background: none;
     border: none;
-    font-size: 20px;
+    font-size: 22px;
     cursor: pointer;
-    padding: 0;
-    width: 30px;
+    padding: 8px;
+    width: 36px;
+    height: 36px;
     color: #999;
-    margin-right: auto; /* چپ چین */
-    margin-left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    order: 3;
+    margin-left: auto;
+    z-index: 2;
+    transition: color 0.2s;
 }
 
+.mobile-filter-close:hover {
+    color: #333;
+}
+
+.mobile-filter-close i {
+    font-size: 20px;
+}
+
+/* ====== محتوای مودال ====== */
 .mobile-filter-content {
     flex: 1;
     overflow-y: auto;
@@ -113,6 +145,42 @@
     font-size: 14px;
 }
 
+.filter-option-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #999;
+}
+
+/* ====== استایل badge های انتخاب شده ====== */
+.filter-selected-values {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    max-width: 180px;
+}
+
+.filter-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.filter-badge-default {
+    background: #e9ecef !important;
+    color: #6c757d !important;
+}
+
+.filter-badge-active {
+    background: #e6fffd !important;
+    color: black !important;
+}
+
+/* ====== استایل Sub Page ها ====== */
 .filter-sub-page {
     height: 100%;
     overflow-y: auto;
@@ -124,32 +192,46 @@
     transition: background 0.2s;
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: space-between;
+    background: white !important;
 }
 
-.filter-sub-item:hover {
-    background: #f8f9fa;
-}
-
-.filter-sub-item input {
-    margin: 0;
-    width: 18px;
-    height: 18px;
-}
-
-.filter-sub-item label {
-    margin: 0;
+.filter-sub-item span {
     font-size: 15px;
-    color: #333;
+    color: #333 !important;
     flex: 1;
-    cursor: pointer;
+    font-weight: normal !important;
+}
+
+.filter-sub-item .check-icon {
+    color: #007bff;
+    font-size: 18px;
+    opacity: 0;
+    transition: opacity 0.2s;
 }
 
 .filter-sub-item.active {
-    background: #e7f3ff;
-    color: #007bff;
+    background: #f0f0f0 !important;
 }
 
+.filter-sub-item.active span {
+    color: #333 !important;
+    font-weight: normal !important;
+}
+
+.filter-sub-item.active .check-icon {
+    opacity: 1 !important;
+}
+
+.filter-sub-item:hover {
+    background: #f8f9fa !important;
+}
+
+.filter-sub-item input {
+    display: none;
+}
+
+/* ====== فوتر مودال ====== */
 .mobile-filter-footer {
     display: flex;
     gap: 12px;
@@ -163,131 +245,12 @@
     margin: 0;
 }
 
-/* مخفی کردن منوی دسکتاپ در موبایل */
-@media (max-width: 767.98px) {
-    .desktop-filter-menu {
-        display: none !important;
-    }
-}
-
-@media (min-width: 768px) {
-    .mobile-filter-modal {
-        display: none;
-    }
-}
-
-.filter-option-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    border-bottom: 1px solid #f0f0f0;
-    cursor: pointer;
-}
-
-.filter-option-right {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: #999;
-}
-
-.filter-selected-value {
-    font-size: 14px;
-    color: #007bff;
-    max-width: 150px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.filter-option-right i {
-    color: #ccc;
-    font-size: 14px;
-}
-
-/* استایل برای صفحه داخلی با عنوان در هدر */
-.filter-sub-header {
-    padding: 15px 20px;
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.filter-sub-header h4 {
-    margin: 0;
-    font-size: 16px;
-    color: #333;
-}
-
-/* استایل جدید برای آیتم‌های انتخاب مثل سلکت */
-.filter-sub-item {
-    padding: 12px 20px;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.filter-sub-item span {
-    font-size: 15px;
-    color: #333;
-    flex: 1;
-}
-
-.filter-sub-item .check-icon {
-    color: #007bff;
-    font-size: 18px;
-    opacity: 0;
-    transition: opacity 0.2s;
-}
-
-.filter-sub-item.active {
-    background: #e7f3ff;
-}
-
-.filter-sub-item.active span {
-    color: #007bff;
-    font-weight: 500;
-}
-
-.filter-sub-item.active .check-icon {
-    opacity: 1;
-}
-
-.filter-sub-item:active {
-    background: #e0e0e0;
-}
-
-/* حذف نمایش رادیو */
-.filter-sub-item input {
-    display: none;
-}
-
-/* دکمه برگشت */
-.mobile-filter-back {
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    padding: 0;
-    width: 30px;
-    color: #333;
-}
-
-.mobile-filter-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 20px;
-    border-bottom: 1px solid #e5e5e5;
-    position: relative;
-}
-
+/* ====== دکمه برگشت در حالت visible ====== */
 .mobile-filter-back.visible {
-    display: block !important;
+    display: flex !important;
 }
 
-/* تیک برای انتخاب */
+/* ====== تیک برای انتخاب ====== */
 .filter-option-item .check-icon {
     display: none;
 }
@@ -300,117 +263,120 @@
     font-weight: 500;
 }
 
-/* استایل برای badge های انتخاب شده */
-.filter-selected-badge {
-    display: inline-block;
-    background: #e9ecef; /* خاکستری پیشفرض */
-    color: #6c757d;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 500;
-    margin: 2px 4px;
-}
-
-.filter-selected-badge.active {
-    background: #007bff; /* آبی برای انتخاب شده غیرپیشفرض */
-    color: white;
-}
-
-.filter-selected-badge.default {
-    background: #e9ecef;
-    color: #6c757d;
-}
-
-/* جمع شدن چندتا badge در کنار هم */
-.filter-selected-values {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    max-width: 180px;
-}
-
-/* حذف نوشته "همه" از روی badge پیشفرض */
-.filter-option-right {
+/* ====== استایل مخصوص مودال سورت ====== */
+#mobileSortModal .mobile-filter-header {
     display: flex;
     align-items: center;
-    gap: 8px;
-    color: #999;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e5e5e5;
+    position: relative;
+    min-height: 56px;
 }
 
-/* ====== استایل جدید برای جایگزینی کامل ====== */
-
-/* حذف استایل‌های قبلی filter-selected-value و اضافه کردن اینها */
-.filter-selected-values {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    max-width: 180px;
-}
-
-/* استایل badge ها */
-.filter-badge {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 1.2;
-    white-space: nowrap;
-}
-
-/* بادج پیشفرض (همه) - خاکستری */
-.filter-badge-default {
-    background: #e9ecef !important;
-    color: #6c757d !important;
-}
-
-/* بادج انتخاب شده غیر پیشفرض - آبی */
-.filter-badge-active {
-    background: #e6fffd !important;
-    color: black !important;
-}
-
-/* استایل آیتم‌های داخل صفحه sub */
-.filter-sub-item {
-    padding: 12px 20px;
+/* دکمه برگشت سورت - سمت راست */
+#mobileSortModal .mobile-sort-back {
+    background: none;
+    border: none;
+    font-size: 20px;
     cursor: pointer;
-    transition: background 0.2s;
+    padding: 8px;
+    width: 36px;
+    height: 36px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    order: 1;
+    z-index: 2;
+}
+
+/* عنوان سورت - وسط */
+#mobileSortModal .mobile-filter-title {
+    order: 2;
+    flex: 1;
+    text-align: center;
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* دکمه ضربدر سورت - سمت چپ */
+#mobileSortModal .mobile-sort-close {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 8px;
+    width: 36px;
+    height: 36px;
+    color: #999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    order: 3;
+    margin-left: auto;
+    z-index: 2;
+    transition: color 0.2s;
+}
+
+#mobileSortModal .mobile-sort-close:hover {
+    color: #333;
+}
+
+#mobileSortModal .mobile-sort-close i {
+    font-size: 20px;
+}
+
+/* محتوای سورت */
+#mobileSortModal .filter-sort-main-page {
+    padding: 0;
+}
+
+#mobileSortModal .filter-option-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: white !important; /* حذف هرگونه رنگ پس‌زمینه */
+    padding: 15px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border-bottom: 1px solid #f5f5f5;
 }
 
-.filter-sub-item span {
-    font-size: 15px;
-    color: #333 !important; /* رنگ متن پیشفرض */
-    flex: 1;
-    font-weight: normal !important;
+#mobileSortModal .filter-option-item:hover {
+    background-color: #f8f9fa;
 }
 
-.filter-sub-item .check-icon {
+#mobileSortModal .filter-option-item.active {
+    background-color: #f0f7ff;
+}
+
+#mobileSortModal .filter-option-item span {
+    font-size: 14px;
+    color: #333;
+}
+
+#mobileSortModal .filter-option-right {
+    display: flex;
+    align-items: center;
+}
+
+#mobileSortModal .check-icon {
     color: #007bff;
     font-size: 18px;
-    opacity: 0;
-    transition: opacity 0.2s;
 }
 
-/* فقط تیک نمایش داده بشه، هیچ رنگ زمینه‌ای */
-.filter-sub-item.active {
-    background: #f0f0f0  !important; /* سفید بمونه، آبی نشه */
+/* ====== Responsive ====== */
+@media (max-width: 767.98px) {
+    .desktop-filter-menu {
+        display: none !important;
+    }
 }
 
-.filter-sub-item.active span {
-    color: #333 !important; /* رنگ متن عادی بمونه، آبی نشه */
-    font-weight: normal !important;
-}
-
-.filter-sub-item.active .check-icon {
-    opacity: 1 !important; /* فقط تیک نمایش داده بشه */
-}
-
-/* hover اثر خفیف */
-.filter-sub-item:hover {
-    background: #f8f9fa !important;
+@media (min-width: 768px) {
+    .mobile-filter-modal {
+        display: none !important;
+    }
 }

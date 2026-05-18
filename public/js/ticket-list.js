@@ -5,12 +5,6 @@ document.querySelector('.search-input')?.addEventListener('keypress', function(e
     }
 });
 
-// auto-submit برای dropdownها (اختیاری)
-document.querySelectorAll('select[name="status"], select[name="store_id"], select[name="sort"]').forEach(select => {
-    select.addEventListener('change', function() {
-        document.getElementById('filterForm').submit();
-    });
-});
 
 
 
@@ -657,17 +651,24 @@ document.addEventListener('DOMContentLoaded', function() {
         updateSelectedValuesDisplay();
     }
 
+    // ===================== تابع applyFiltersAndSubmit اصلاح شده =====================
     function applyFiltersAndSubmit() {
-        const form = document.querySelector('form');
+        const form = document.getElementById('filterForm');
         if (!form) {
-            console.error('فرم پیدا نشد!');
+            console.error('فرم filterForm پیدا نشد!');
             return;
         }
 
+        // ===== حذف همه hidden input های قبلی =====
         const oldHidden = form.querySelectorAll('input[name="store_id"], input[name="status"], input[name="contact_name"], input[name="sort"]');
         oldHidden.forEach(input => input.remove());
 
-        if (selectedFilters.store && selectedFilters.store !== null) {
+        // ===== هماهنگ کردن select های داخل فرم با مقادیر جدید =====
+        // برای store_id
+        const storeSelect = form.querySelector('select[name="store_id"]');
+        if (storeSelect) {
+            storeSelect.value = selectedFilters.store || '';
+        } else if (selectedFilters.store && selectedFilters.store !== null) {
             const input = document.createElement('input');
             input.type = 'hidden';
             input.name = 'store_id';
@@ -675,7 +676,11 @@ document.addEventListener('DOMContentLoaded', function() {
             form.appendChild(input);
         }
 
-        if (selectedFilters.status && selectedFilters.status !== null) {
+        // برای status
+        const statusSelect = form.querySelector('select[name="status"]');
+        if (statusSelect) {
+            statusSelect.value = selectedFilters.status || '';
+        } else if (selectedFilters.status && selectedFilters.status !== null) {
             const input = document.createElement('input');
             input.type = 'hidden';
             input.name = 'status';
@@ -683,7 +688,11 @@ document.addEventListener('DOMContentLoaded', function() {
             form.appendChild(input);
         }
 
-        if (selectedFilters.contact_name && selectedFilters.contact_name !== null) {
+        // برای contact_name
+        const contactSelect = form.querySelector('select[name="contact_name"]');
+        if (contactSelect) {
+            contactSelect.value = selectedFilters.contact_name || '';
+        } else if (selectedFilters.contact_name && selectedFilters.contact_name !== null) {
             const input = document.createElement('input');
             input.type = 'hidden';
             input.name = 'contact_name';
@@ -691,7 +700,11 @@ document.addEventListener('DOMContentLoaded', function() {
             form.appendChild(input);
         }
 
-        if (selectedFilters.sort) {
+        // برای sort
+        const sortSelect = form.querySelector('select[name="sort"]');
+        if (sortSelect) {
+            sortSelect.value = selectedFilters.sort || 'latest';
+        } else if (selectedFilters.sort) {
             const input = document.createElement('input');
             input.type = 'hidden';
             input.name = 'sort';
@@ -701,6 +714,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         form.submit();
     }
+    // ===================== پایان اصلاح =====================
 
     // ================ رویدادها ================
     if (filterBtn && desktopMenu) {
@@ -731,7 +745,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (overlay) overlay.addEventListener('click', closeMobileModal);
     if (closeBtn) closeBtn.addEventListener('click', closeMobileModal);
-    if (clearBtn) clearBtn.addEventListener('click', clearFilters);
+
+    // اصلاح دکمه حذف فیلترها در مودال
+    if (clearBtn) {
+        clearBtn.addEventListener('click', function() {
+            clearFilters();
+            const form = document.getElementById('filterForm');
+            if (form) {
+                // ریست کردن select های فرم
+                const selects = form.querySelectorAll('select');
+                selects.forEach(select => {
+                    select.selectedIndex = 0;
+                });
+
+                // حذف hidden input ها
+                const paramsToRemove = ['store_id', 'status', 'contact_name', 'sort'];
+                paramsToRemove.forEach(param => {
+                    const inputs = form.querySelectorAll(`input[name="${param}"]`);
+                    inputs.forEach(input => input.remove());
+                });
+
+                form.submit();
+            }
+            closeMobileModal();
+        });
+    }
+
     if (applyBtn) applyBtn.addEventListener('click', function() {
         applyFiltersAndSubmit();
         closeMobileModal();
@@ -796,25 +835,35 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.style.overflow = '';
         }
 
+        // ===================== تابع applySortAndClose اصلاح شده =====================
         function applySortAndClose(sortType) {
             selectedSort = sortType;
             tempSelectedSort = sortType;
             selectedFilters.sort = selectedSort;
 
-            const form = document.querySelector('form');
+            const form = document.getElementById('filterForm');
             if (form) {
-                const oldSortInput = form.querySelector('input[name="sort"]');
-                if (oldSortInput) oldSortInput.remove();
+                // حذف hidden input های قبلی sort
+                const oldSortInputs = form.querySelectorAll('input[name="sort"]');
+                oldSortInputs.forEach(input => input.remove());
 
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = 'sort';
-                input.value = selectedSort;
-                form.appendChild(input);
+                // آپدیت select sort اگر وجود داره
+                const sortSelect = form.querySelector('select[name="sort"]');
+                if (sortSelect) {
+                    sortSelect.value = selectedSort;
+                } else {
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = 'sort';
+                    input.value = selectedSort;
+                    form.appendChild(input);
+                }
+
                 form.submit();
             }
             closeSortModal();
         }
+        // ===================== پایان اصلاح =====================
 
         if (sortBtn) {
             sortBtn.addEventListener('click', function(e) {

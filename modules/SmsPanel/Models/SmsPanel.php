@@ -17,5 +17,5 @@ class SmsPanel extends Model
         return $this->belongsTo(Stores::class , 'store_id');
     }
 
-    protected $fillable = ['store_id','store_message','status', 'admin_message',];
+    protected $fillable = ['store_id','store_message','status', 'admin_message','campaign_name'];
 }

@@ -29,7 +29,7 @@
                     <div class="form-group mt-8">
                         <div class="row">
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-6 col-xs-12 mb-3">
                                 <label class="fw-bold">نام و نام خانوادگی</label>
                                 <input type="text" name="name" id="name"
                                     class="form-control custom-radius input-border-focus" style="background: #f9fafb;">
@@ -38,7 +38,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-6 col-xs-12 mb-3">
                                 <label class="fw-bold">شماره تماس</label>
                                 <input type="text" name="mobile" id="mobile"
                                     class="form-control custom-radius input-border-focus" style="background: #f9fafb;">
@@ -47,7 +47,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-6 col-xs-12 mb-3">
                                 <label class="fw-bold">رمز عبور</label>
                                 <input type="password" name="password" id="password"
                                     class="form-control custom-radius input-border-focus" style="background: #f9fafb;">
@@ -56,7 +56,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-6 col-xs-12 mb-3">
                                 <label class="fw-bold">نقش ها</label>
                                 <select name="role" id="role"
                                     class="form-control custom-radius custom-select-input input-border-focus"

@@ -43,10 +43,10 @@
                             <td>{{ $message->order ?? '-' }}</td>
                             <td>
                                 <a href="{{ route('message.edit', $message->id) }}" class="text-success">
-                                    <i class="fa fa-pencil"></i>
+                                    <i class="fa fa-pencil fa-x"></i>
                                 </a>
                                 <a href="javascript:;" class="text-danger delete-message" data-id="{{ $message->id }}">
-                                    <i class="fa fa-trash"></i>
+                                    <i class="fa fa-trash fa-x"></i>
                                 </a>
                              </td>
                         </tr>

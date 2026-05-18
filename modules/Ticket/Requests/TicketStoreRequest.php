@@ -22,10 +22,11 @@ class TicketStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'subject' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
             'message' => 'required|string',
-            'priority' => 'required|in:low,medium,high,urgent',
-            'category_id' => 'nullable|exists:ticket_categories,id',
+            'contact_name' => 'required',
+            'attachments' => 'nullable|array|max:5',
+            'attachments.*' => 'file|mimes:jpg,png,pdf|max:2048',
         ];
     }
 }

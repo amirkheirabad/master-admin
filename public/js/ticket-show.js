@@ -108,27 +108,57 @@ if (fileInput) {
     });
 }
 
-// جلوگیری از submit خالی - فقط اگر فرم وجود داشته باشد
-if (replyForm) {
-    replyForm.addEventListener('submit', function(e) {
-        const messageInput = this.querySelector('input[name="message"]');
-        const message = messageInput ? messageInput.value.trim() : '';
-        const errorSpan = document.getElementById('message_error');
+$('#replyForm').on('submit', function (e) {
+    e.preventDefault()
 
-        if (!message) {
-            e.preventDefault();
-            if (errorSpan) {
-                errorSpan.textContent = 'لطفاً پیام خود را وارد کنید';
-            }
-            return false;
+    const csrf = document.querySelector('meta[name="csrf-token"]').content;
+
+    const id = document.getElementById('ticket_id').value;
+    const messageInput = document.getElementById('messageInput');
+    const message = messageInput ? messageInput.value.trim() : '';
+
+
+    let formData = new FormData()
+
+    formData.append('message', messageInput.value);
+
+    const fileInput = document.getElementById('fileInput');
+    if (fileInput.files && fileInput.files.length > 0) {
+        for (let i = 0; i < fileInput.files.length; i++) {
+            formData.append('attachments[]', fileInput.files[i]);
         }
+    }
 
-        // اجازه بده فرم به صورت عادی submit بشه و صفحه رفرش بشه
-        return true;
-    });
-}
+    fetch(this.action, {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': csrf,
+            'Accept': 'application/json',
+        },
+        body: formData
+    })
+        .then(response => {
+            return response.json().then(data => ({
+                status: response.status,
+                body: data
+            })).catch(() => ({
+                status: response.status,
+                body: null
+            }));
+        })
+        .then(({status, body}) => {
+            if (status === 200 || status === 201) {
+                location.reload();
+            } else if (status === 422 && body && body.errors) {
+                showBackendErrors(body.errors);
+            } else {
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
 
-// اسکرول به انتهای چت
 document.addEventListener('DOMContentLoaded', function() {
     const chatContainer = document.querySelector('.chat-container');
     if (chatContainer) {

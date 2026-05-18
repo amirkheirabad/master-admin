@@ -17,14 +17,27 @@ class TicketController
 
     public function store(TicketStoreRequest $request)
     {
-        $ticket = $this->ticket->createTicketStore($request->validated());
-        return response()->json(['data' => $ticket], 201);
-    }
+        $store = $request->get('authenticated_store');
+        $validated = $request->validated();
+        $validated['store_id'] = $store->id;
+        $ticket = $this->ticket->createTicketStore($validated);
+        return response()->json([
+            'success' => true,
+            'message' => 'تیکت با موفقیت ایجاد شد',
+            'data' => $ticket
+        ], 201);    }
 
     public function reply(TicketReplyRequest $request, $id)
     {
-        $message = $this->ticket->replyAsStore($id, $request->validated());
-        return response()->json(['message' => 'Reply added', 'data' => $message], 201);
-    }
+        $store = $request->get('authenticated_store');
+        $validated = $request->validated();
+        $validated['sender_id'] = $store->id;
+
+        $message = $this->ticket->replyAsStore($id, $validated);
+        return response()->json([
+            'success' => true,
+            'message' => 'پاسخ با موفقیت ثبت شد',
+            'data' => $message
+        ], 201);    }
 
 }

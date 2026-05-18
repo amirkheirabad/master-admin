@@ -1,0 +1,430 @@
+@media (max-width: 767px) {
+    /* غیرفعال کردن استایل‌های پیشفرض قالب در موبایل */
+    body.nav-md .main_container .left_col {
+        width: 0 !important;
+        display: none !important;
+    }
+
+    body.nav-md .main_container .right_col {
+        margin-right: 0 !important;
+        width: 100% !important;
+    }
+
+    /* سایدبار سفارشی موبایل */
+    .mobile-sidebar {
+        position: fixed !important;
+        top: 0 !important;
+        right: -300px !important;
+        width: 280px !important;
+        height: 100vh !important;
+        background: #ffffff !important;
+        z-index: 9999 !important;
+        transition: right 0.3s ease-in-out !important;
+        overflow-y: auto !important;
+        box-shadow: none !important;
+        display: block !important;
+    }
+
+    .mobile-sidebar.mobile-open {
+        right: 0 !important;
+        box-shadow: -2px 0 15px rgba(0,0,0,0.1) !important;
+    }
+
+    /* اوورلی */
+    .mobile-menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 9998;
+        display: none;
+    }
+
+    .mobile-menu-overlay.active {
+        display: block;
+    }
+
+    /* دکمه هامبورگر */
+    .mobile-menu-toggle {
+        display: inline-block !important;
+        background: transparent;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        padding: 13px 15px;
+        color: #5a5c69;
+        float: right;
+    }
+
+    .mobile-menu-toggle i {
+        font-size: 24px;
+        color: #5a5c69;
+    }
+
+    /* استایل منوی داخل سایدبار موبایل - سفید و مشکی مثل حالت اول */
+    .mobile-sidebar .menu_section {
+        padding: 20px 0;
+        background: #ffffff;
+    }
+
+    /* آیتم‌های اصلی منو */
+    .mobile-sidebar .nav.side-menu > li {
+        position: relative;
+        display: block;
+        cursor: pointer;
+    }
+
+    .mobile-sidebar .nav.side-menu > li > a {
+        margin-bottom: 6px;
+        color: #5a5c69 !important;
+        font-weight: 500;
+        position: relative;
+        display: flex !important;
+        align-items: center !important;
+        gap: 12px !important;
+        padding: 13px 20px 12px !important;
+        font-size: 14px !important;
+        background: transparent !important;
+    }
+
+    .mobile-sidebar .nav.side-menu > li > a:hover {
+        color: #2c3e50 !important;
+        text-decoration: none;
+        background: #f8f7fa !important;
+    }
+
+    .mobile-sidebar .nav.side-menu > li > a i {
+        font-size: 18px !important;
+        width: 25px !important;
+        color: #5a5c69;
+    }
+
+    .mobile-sidebar .nav.side-menu > li > a .fa-chevron-down {
+        margin-right: auto !important;
+        font-size: 12px !important;
+        color: #5a5c69;
+    }
+
+    /* آیتم فعال */
+    .mobile-sidebar .nav.side-menu > li.active {
+        border-left: none !important;
+    }
+
+    .mobile-sidebar .nav.side-menu > li.active > a {
+        background: #f8f7fa !important;
+        color: #2c3e50 !important;
+        text-shadow: none !important;
+        box-shadow: none !important;
+    }
+
+    /* زیرمنوها */
+    .mobile-sidebar .child_menu {
+        background: #ffffff !important;
+        padding-right: 35px !important;
+        display: none;
+        position: relative !important;
+        width: 100% !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+    }
+
+    .mobile-sidebar .child_menu li {
+        padding: 0 10px;
+        position: relative;
+        list-style: none;
+    }
+
+    .mobile-sidebar .child_menu li a {
+        text-align: right !important;
+        color: #5a5c69 !important;
+        font-weight: 500;
+        font-size: 12px;
+        padding: 9px 15px !important;
+        display: block;
+        position: relative;
+        background: transparent !important;
+    }
+
+    .mobile-sidebar .child_menu li a:hover {
+        color: #2c3e50 !important;
+        background: #f8f7fa !important;
+    }
+
+    /* خط سمت راست برای زیرمنو */
+    .mobile-sidebar .child_menu li:after {
+        content: "" !important;
+        position: absolute !important;
+        right: 15px !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        width: 1px !important;
+        height: auto !important;
+        background: #e0e0e0 !important;
+        border: none !important;
+    }
+
+    /* آیتم فعال در زیرمنو */
+    .mobile-sidebar .child_menu li.active {
+        background: #f8f7fa !important;
+    }
+
+    .mobile-sidebar .child_menu li.active a {
+        color: #2c3e50 !important;
+    }
+
+    /* current-page استایل */
+    .mobile-sidebar .nav li.current-page {
+        background: #f8f7fa !important;
+    }
+
+    .mobile-sidebar .nav li.current-page a {
+        color: #2c3e50 !important;
+    }
+
+    /* مخفی کردن سایدبار اصلی */
+    .main_menu_side {
+        display: none !important;
+    }
+
+    /* مخفی کردن دکمه toggle قدیمی */
+    #menu_toggle {
+        display: none !important;
+    }
+
+    /* تنظیم نوبار برای دکمه جدید */
+    .nav_menu {
+        position: relative;
+    }
+
+    .nav_menu .toggle {
+        display: none !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+    .mobile-sidebar {
+        display: none !important;
+    }
+    .mobile-menu-overlay {
+        display: none !important;
+    }
+}
+
+
+/* استایل‌های دسکتاپ برای سایدبار سفید با هاور F8F7FA */
+@media (min-width: 768px) {
+    /* پس‌زمینه سفید برای سایدبار اصلی */
+    .main_menu_side,
+    .menu_section,
+    .nav.side-menu {
+        background: #ffffff !important;
+    }
+
+    /* حذفborder و سایه‌های اضافی */
+    .main_menu {
+        box-shadow: none !important;
+        border-left: none !important;
+    }
+
+    /* آیتم‌های اصلی منو */
+    .nav.side-menu > li > a {
+        color: #5a5c69 !important;
+        background: transparent !important;
+        transition: all 0.2s ease;
+    }
+
+    /* هاور و فوکوس آیتم اصلی */
+    .nav.side-menu > li > a:hover,
+    .nav.side-menu > li > a:focus {
+        background: #F8F7FA !important;
+        color: #2c3e50 !important;
+    }
+
+    /* آیتم فعال */
+    .nav.side-menu > li.active > a {
+        background: #F8F7FA !important;
+        color: #2c3e50 !important;
+        box-shadow: none !important;
+        border-left: none !important;
+    }
+
+    /* زیرمنوها */
+    .child_menu {
+        background: #ffffff !important;
+    }
+
+    .child_menu li a {
+        color: #5a5c69 !important;
+        background: transparent !important;
+    }
+
+    /* هاور زیرمنو */
+    .child_menu li a:hover,
+    .child_menu li a:focus {
+        background: #F8F7FA !important;
+        color: #2c3e50 !important;
+    }
+
+    /* آیتم فعال در زیرمنو */
+    .child_menu li.active a {
+        background: #F8F7FA !important;
+        color: #2c3e50 !important;
+    }
+
+    /* current-page استایل */
+    .nav li.current-page {
+        background: transparent !important;
+    }
+    .nav li.current-page a {
+        background: #F8F7FA !important;
+        color: #2c3e50 !important;
+    }
+
+    /* آیکون‌ها */
+    .nav.side-menu > li > a i {
+        color: #5a5c69 !important;
+    }
+}
+
+/* استایل‌های دسکتاپ برای سایدبار سفید با هاور F8F7FA */
+@media (min-width: 768px) {
+    /* پس‌زمینه سفید برای سایدبار اصلی */
+    .main_menu_side,
+    .menu_section,
+    .nav.side-menu {
+        background: #ffffff !important;
+    }
+
+    /* حذفborder و سایه‌های اضافی */
+    .main_menu {
+        box-shadow: none !important;
+        border-left: none !important;
+    }
+
+    /* حذف رنگ سبز کنار آیتم فعال */
+    .nav.side-menu > li.active {
+        border-left: none !important;
+    }
+
+    .nav.side-menu > li.active > a {
+        background: #F8F7FA !important;
+        color: #2c3e50 !important;
+        box-shadow: none !important;
+        border-left: none !important;
+    }
+
+    /* حذف هرگونه border سمت راست */
+    .nav.side-menu li a {
+        border-right: none !important;
+    }
+
+    /* آیتم‌های اصلی منو */
+    .nav.side-menu > li > a {
+        color: #5a5c69 !important;
+        background: transparent !important;
+        transition: all 0.2s ease;
+        border-right: none !important;
+    }
+
+    /* هاور و فوکوس آیتم اصلی */
+    .nav.side-menu > li > a:hover,
+    .nav.side-menu > li > a:focus {
+        background: #F8F7FA !important;
+        color: #2c3e50 !important;
+    }
+
+    /* زیرمنوها */
+    .child_menu {
+        background: #ffffff !important;
+    }
+
+    /* حذف نقطه‌های کنار گزینه‌های لیست */
+    .child_menu li {
+        list-style: none !important;
+        position: relative;
+    }
+
+    .child_menu li:before {
+        display: none !important;
+    }
+
+    .child_menu li a {
+        color: #5a5c69 !important;
+        background: transparent !important;
+    }
+
+    /* هاور زیرمنو */
+    .child_menu li a:hover,
+    .child_menu li a:focus {
+        background: #F8F7FA !important;
+        color: #2c3e50 !important;
+    }
+
+    /* آیتم فعال در زیرمنو */
+    .child_menu li.active a {
+        background: #F8F7FA !important;
+        color: #2c3e50 !important;
+    }
+
+    /* current-page استایل */
+    .nav li.current-page {
+        background: transparent !important;
+        border-left: none !important;
+    }
+
+    .nav li.current-page a {
+        background: #F8F7FA !important;
+        color: #2c3e50 !important;
+        border-right: none !important;
+    }
+
+    /* آیکون‌ها */
+    .nav.side-menu > li > a i {
+        color: #5a5c69 !important;
+    }
+
+    /* حذف هرگونه marker یا bullet از تمام لیست‌ها */
+    .nav.side-menu ul,
+    .nav.side-menu li,
+    .child_menu ul,
+    .child_menu li {
+        list-style-type: none !important;
+        list-style: none !important;
+    }
+}
+
+@media (max-width: 767px) {
+    /* استایل‌های قبلی شما اینجا هستند ... */
+
+    /* حذف نقطه‌های کنار گزینه‌ها در موبایل */
+    .mobile-sidebar .child_menu li {
+        list-style: none !important;
+        list-style-type: none !important;
+    }
+
+    .mobile-sidebar .child_menu li:before,
+    .mobile-sidebar .child_menu li:after {
+        display: none !important;
+        content: none !important;
+    }
+
+    /* حذف خط سمت راست اگر نیاز نیست */
+    .mobile-sidebar .child_menu li:after {
+        display: none !important;
+    }
+
+    /* حذف هرگونه bullet از تمام لیست‌ها در موبایل */
+    .mobile-sidebar ul,
+    .mobile-sidebar li,
+    .mobile-sidebar .nav.side-menu li,
+    .mobile-sidebar .child_menu ul,
+    .mobile-sidebar .child_menu li {
+        list-style: none !important;
+        list-style-type: none !important;
+    }
+}

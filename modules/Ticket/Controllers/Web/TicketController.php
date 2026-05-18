@@ -45,7 +45,9 @@ class TicketController
     public function replyAsAdmin(TicketReplyRequest $request, $id)
     {
         $this->ticket->replyAsAdmin($id, $request->validated());
-        return redirect()->back();
+        return response()->json([
+            'success' => true,
+        ]);
     }
 
     public function insert()

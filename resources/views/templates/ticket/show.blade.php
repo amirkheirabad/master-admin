@@ -114,17 +114,17 @@
                 <div class="chat-container p-1" style="overflow-y: auto; margin: 15px 0;">
                     @forelse($ticket->messages->sortBy('created_at') as $message)
                         @if($message->sender_type == 0)
-                            {{-- پیام فروشگاه (مشتری) - سمت راست --}}
-                            <div class="message-wrapper message-store d-flex justify-content-start">
+                            {{-- پیام فروشگاه (مشتری) - سمت راست با استایل مشابه ادمین --}}
+                            <div class="message-wrapper message-store mt-4 d-flex justify-content-start">
                                 <div style="max-width: 100%;">
                                     {{-- حباب پیام --}}
-                                    <div class="message-bubble bg-white p-3 rounded shadow-sm custom-radius" style="display: flex; flex-direction: column; min-height: 100px; max-width: 550px; width: auto;">
+                                    <div class="message-bubble bg-white border p-3 rounded shadow-sm custom-radius" style="display: flex; flex-direction: column; min-height: 100px; max-width: 550px; width: auto;">
                                         <div class="d-flex justify-content-between align-items-center">
-                                            <p>
+                                            <p class="">
                                                 <img src="{{ asset('/images/men.png') }}" style="width: 22px">
                                                 <i class="fa fa-store"></i> {{ $ticket->store->store_name ?? 'فروشگاه' }}
                                             </p>
-                                            <small class="text-white-50 mr-2">
+                                            <small class="text-muted mr-2">
                                                 {{ Verta($message->created_at)->format('H:i - Y/m/d') }}
                                             </small>
                                         </div>
@@ -135,7 +135,7 @@
 
                                     {{-- بخش پیوست‌ها - جدا از حباب پیام --}}
                                     @if($message->attachments)
-                                        <div class="attachments-wrapper mt-2 p-2 rounded" style="background-color: #f8f9fa; max-width: 550px;">
+                                        <div class="attachments-wrapper p-2 rounded custom-radius" style="max-width: 550px; margin-left: 0; margin-right: auto;">
                                             @php
                                                 $attachments = is_string($message->attachments) ? json_decode($message->attachments, true) : $message->attachments;
                                             @endphp
@@ -144,10 +144,44 @@
                                                     @php
                                                         $url = asset('storage/' . $attachment);
                                                         $fileName = basename($attachment);
+                                                        $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
+                                                        $filePath = storage_path('app/public/' . $attachment);
+                                                        $fileSize = file_exists($filePath) ? filesize($filePath) : 0;
+                                                        $fileSizeFormatted = $fileSize ? number_format($fileSize / 1024, 1) . ' KB' : '';
+                                                        if ($fileSize > 1048576) {
+                                                            $fileSizeFormatted = number_format($fileSize / 1048576, 1) . ' MB';
+                                                        }
                                                     @endphp
-                                                    <div class="attachment-item mb-1">
-                                                        <a href="{{ $url }}" download class="btn p-0 d-inline-block min-h-50">{{ $fileName }}</a>
-                                                    </div>
+                                                    <a href="{{ $url }}" download class="attachment-item bg-file mt-2 p-2 rounded custom-radius text-decoration-none" style="display: block; cursor: pointer;">
+                                                        <div class="d-flex align-items-center" style="gap: 8px;">
+                                                            {{-- آیکون --}}
+                                                            <div class="file-icon d-flex justify-content-center align-items-center flex-shrink-0" style="width: 40px; height: 40px; background: white; border-radius: 6px;">
+                                                                @if(in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif', 'webp']))
+                                                                    <i class="fa fa-image" style="font-size: 20px;"></i>
+                                                                @elseif(in_array($fileExtension, ['pdf']))
+                                                                    <i class="fa fa-file-pdf-o" style="font-size: 20px;"></i>
+                                                                @elseif(in_array($fileExtension, ['doc', 'docx']))
+                                                                    <i class="fa fa-file-word-o" style="font-size: 20px;"></i>
+                                                                @elseif(in_array($fileExtension, ['xls', 'xlsx']))
+                                                                    <i class="fa fa-file-excel-o" style="font-size: 20px;"></i>
+                                                                @elseif(in_array($fileExtension, ['zip', 'rar', '7z']))
+                                                                    <i class="fa fa-file-archive-o" style="font-size: 20px;"></i>
+                                                                @else
+                                                                    <i class="fa fa-file-o" style="font-size: 20px;"></i>
+                                                                @endif
+                                                            </div>
+
+                                                            {{-- اطلاعات فایل --}}
+                                                            <div class="flex-grow-1" style="min-width: 0;">
+                                                                <div class="text-secondary" style="text-align: right; word-wrap: break-word; word-break: break-all; font-size: 10px; line-height: 1.3;">
+                                                                    {{ $fileName }}
+                                                                </div>
+                                                                @if($fileSizeFormatted)
+                                                                    <div class="text-muted" style="font-size: 9px; margin-top: 2px; text-align: right;"> {{ $fileSizeFormatted }}</div>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    </a>
                                                 @endforeach
                                             @endif
                                         </div>
@@ -237,6 +271,7 @@
                     <div class="mt-auto">
                         <form id="replyForm" action="{{ route('ticket_reply', $ticket->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            <input type="hidden" id="ticket_id" value="{{ $ticket->id }}">
                             <div class="file-preview-wrapper" id="filePreviewWrapper" style="display: none;">
                                 <div class="file-preview-header">
                                     <button type="button" class="remove-all-files-btn" id="removeAllFilesBtn" title="حذف همه فایل‌ها">
@@ -249,7 +284,7 @@
                             </div>
 
                             <div class="search-container custom-radius" id="searchContainer">
-                                <input type="text" name="message" class="search-input " placeholder="پیام خود را وارد کنید...">
+                                <input type="text" name="message" id="messageInput" class="search-input " placeholder="پیام خود را وارد کنید...">
                                 <button type="button" class="search-button" id="attachButton">
                                     <img src="{{ asset('/icons/Attachment.svg') }}" style="width: 22px">
                                 </button>
@@ -260,7 +295,8 @@
                             </div>
                         </form>
                     </div>
-                    <span id="message_error" class="text-danger mt-2"></span>
+                    <span id="message_error" class="text-danger"></span>
+                    <span id="attachments_error" class="text-danger"></span>
                 @endif
             </div>
         </div>

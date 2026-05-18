@@ -14,7 +14,7 @@ class TicketRepo implements InterfaceTicket
 {
     public function findById($id)
     {
-        return Ticket::with(['store', 'messages.sender'])->findOrFail($id);
+        return Ticket::with(['store', 'messages'])->findOrFail($id);
     }
 
     public function getAllTickets()
@@ -26,7 +26,7 @@ class TicketRepo implements InterfaceTicket
     {
         $searchQuery = $request->input('search_query');
 
-        return Ticket::query()
+        return Ticket::query()->with('store')
             ->when($request->filled('search_query'), function ($q) use ($searchQuery) {
                 $q->where(function ($query) use ($searchQuery) {
                     $query->where('id', 'LIKE', '%' . $searchQuery . '%')
@@ -60,20 +60,23 @@ class TicketRepo implements InterfaceTicket
 
     public function createTicketStore(array $data)
     {
+        $attachmentPaths = array_map(fn($file) => $file?->store("ticket-attachments", 'public'), (array)($data['attachments'] ?? []));
+
         try {
             DB::beginTransaction();
 
             $ticket = Ticket::create([
             'store_id' => $data['store_id'],
             'title' => $data['title'],
+            'contact_name' => $data['contact_name'],
+            'status' => 0
         ]);
 
             TicketMessage::create([
             'ticket_id' => $ticket->id,
             'messages' => $data['message'],
             'sender_type' => 0,
-            'sender_id' => $data['store_id'],
-            'attachments' => $data['attachments'] ?? null,
+            'attachments' => !empty($attachmentPaths) ? json_encode($attachmentPaths) : null,
         ]);
             DB::commit();
 
@@ -103,7 +106,6 @@ class TicketRepo implements InterfaceTicket
                 'ticket_id' => $ticket->id,
                 'messages' => $data['message'],
                 'sender_type' => 1,
-                'sender_id' => $data['store_id'],
                 'attachments' => !empty($attachmentPaths) ? json_encode($attachmentPaths) : null,
             ]);
             DB::commit();
@@ -118,12 +120,13 @@ class TicketRepo implements InterfaceTicket
 
     public function replyAsStore($id, array $data)
     {
+        $attachmentPaths = array_map(fn($file) => $file?->store("ticket-attachments/{$id}", 'public'), (array)($data['attachments'] ?? []));
+
         $message = TicketMessage::create([
             'ticket_id' => $id,
             'messages' => $data['message'],
             'sender_type' => 0,
-            'sender_id' => $data['sender_id'],
-            'attachments' => $data['attachments'] ?? null,
+            'attachments' => !empty($attachmentPaths) ? json_encode($attachmentPaths) : null,
         ]);
 
 
@@ -142,7 +145,6 @@ class TicketRepo implements InterfaceTicket
             'ticket_id' => $id,
             'messages' => $data['message'],
             'sender_type' => 1,
-            'sender_id' => $data['sender_id'] ?? auth()->id(),
             'attachments' => !empty($attachmentPaths) ? json_encode($attachmentPaths) : null,
         ]);
 

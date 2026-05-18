@@ -23,7 +23,21 @@ class TicketReplyRequest extends FormRequest
     {
         return [
             'message' => 'required|string',
-            'attachments.*' => 'nullable|file|mimes:jpg,jpeg,png,pdf,doc,docx|max:2000',
+            'attachments' => 'nullable|array|max:5',
+            'attachments.*' => 'nullable|file|mimes:jpg,png,pdf|max:2048',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'message.required' => 'فیلد پیام الزامی است',
+
+
+            'attachments.max' => 'حداکثر می‌توانید ۵ فایل پیوست کنید',
+            'attachments.*.file' => 'فایل پیوست شده معتبر نیست',
+            'attachments.*.mimes' => 'فرمت فایل باید :values باشد',
+            'attachments.*.max' => 'حجم هر فایل نباید بیشتر از ۲ مگابایت باشد',
         ];
     }
 }
