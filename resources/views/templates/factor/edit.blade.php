@@ -95,7 +95,8 @@
 
 
                 <div class="d-flex mt-5 x_panel rounded-4">
-                    <form id="editFactor" class="" enctype="multipart/form-data" method="POST" action="">
+                    <form id="editFactor" class="" enctype="multipart/form-data" method="POST" action="{{ route('factor-update', $factor->id) }}">
+                        @csrf
                         <input type="hidden" id="factor_id" value="{{ $factor->id }}">
                         <div class="form-group mb-8">
                             <div class="row">
