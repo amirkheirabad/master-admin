@@ -194,12 +194,12 @@
                                     <div class="mb-2">
                                         <div class="input-wrapper has-icon">
                                             <input type="text"
-                                                   class="form-control custom-radius"
-                                                   id="created_at_filter"
-                                                   name="created_at"
-                                                   data-jdp
-                                                   value="{{ request()->get('created_at') }}"
-                                                   placeholder="تاریخ ثبت">
+                                                class="form-control custom-radius"
+                                                id="created_at_filter"
+                                                name="created_at"
+                                                data-jdp
+                                                value="{{ request()->get('created_at') }}"
+                                                placeholder="تاریخ ثبت">
                                             <div class="icon-box" onclick="document.getElementById('created_at_filter').focus()">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
@@ -208,7 +208,7 @@
 
                                     <!-- فروشگاه -->
                                     <div class="mb-2">
-                                        <select class="form-control custom-radius select2" name="store_name" id="store_name_filter">
+                                        <select class="form-control custom-radius select2" name="store_name" id="store_name_filter" data-placeholder=" فروشگاه">
                                             <option value="">انتخاب فروشگاه</option>
                                             @foreach($stores as $store)
                                                 <option value="{{ $store->store_name }}" {{ request()->get('store_name') == $store->store_name ? 'selected' : '' }}>
@@ -220,8 +220,8 @@
 
                                     <!-- وضعیت -->
                                     <div class="mb-2">
-                                        <select name="status" class="form-control custom-radius custom-select-input" id="status_filter">
-                                            <option value="" {{ request()->get('status') == '' ? 'selected' : ''}}>همه</option>
+                                        <select name="status" class="form-control custom-radius custom-select-input" id="status_filter" >
+                                            <option value="" {{ request()->get('status') == '' ? 'selected' : ''}}>وضعیت</option>
                                             <option value="0" {{ request()->get('status') == '0' ? 'selected' : ''}}>در حال بررسی</option>
                                             <option value="1" {{ request()->get('status') == '1' ? 'selected' : ''}}>رد شده</option>
                                             <option value="2" {{ request()->get('status') == '2' ? 'selected' : ''}}>تایید شده</option>
@@ -265,7 +265,7 @@
                                         در حال برسی
                                     </span>
                                     @elseif($sms->status == 1)
-                                        <span class="text-danger">
+                                        <span class="bg-red-new p-2 custom-radius">
                                         رد شده
                                     </span>
                                     @elseif($sms->status == 2)

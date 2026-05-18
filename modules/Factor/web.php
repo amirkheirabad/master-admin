@@ -2,27 +2,39 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Factor\Controllers\Web\FactorController;
+use Modules\Factor\Controllers\Web\PaymentController;
+
 
 // مسیرهایی که هم ادمین و هم فروشنده می‌تونند ببینند 
 Route::middleware(['check.login', 'check.role:admin,seller'])->group(function(){
     Route::get('/factor-list', [FactorController::class, 'index'])->name('factor-list');
     Route::get('/factor/{id}', [FactorController::class, 'showFactor'])->name('factor-show');
-    Route::get('/category-list', [FactorController::class, 'index_category'])->name('category-list');
-    Route::get('/category/{id}', [FactorController::class, 'show']);
+
     Route::get('/factor', [FactorController::class, 'factor_index'])->name('factor');
     Route::get('/pay/{hash}', [FactorController::class, 'pay']);
 });
 
 // مسیرهایی که فقط ادمین می‌تونه 
 Route::middleware(['check.login', 'check.role:admin'])->group(function(){
+    
     Route::get('/factor-insert', [FactorController::class, 'insert'])->name('factor-insert');
     Route::post('/factor-create', [FactorController::class, 'storeFactor'])->name('factor-create');
     Route::get('/factor-edit/{id}', [FactorController::class, 'factor_edit'])->name('factor-edit');
     Route::post('/factor-update/{id}', [FactorController::class, 'updateFactor'])->name('factor-update');
     Route::delete('/delete-factor/{id}', [FactorController::class, 'deleteFactor'])->name('delete-factor');
+    Route::get('/category-list', [FactorController::class, 'index_category'])->name('category-list');
+    Route::get('/category/{id}', [FactorController::class, 'show']);
     
     Route::post('/insert-category', [FactorController::class, 'insert_category'])->name('insert-category');
     Route::put('/update-category/{id}', [FactorController::class, 'update_category'])->name('update-category');
     Route::delete('/delete-category/{id}', [FactorController::class, 'category_delete'])->name('delete-category');
     Route::get('/factor/hash/{id}', [FactorController::class, 'getHash']);
 });
+
+
+
+// درخواست پرداخت
+Route::get('/factor/pay/{id}', [PaymentController::class, 'pay'])->name('factor.pay');
+
+// برگشت از بانک
+Route::get('/factor/payment/verify', [PaymentController::class, 'verify'])->name('factor.payment.verify');

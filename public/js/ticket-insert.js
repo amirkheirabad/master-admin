@@ -29,6 +29,14 @@ function setButtonLoading(button, isLoading, originalText = null) {
     }
 }
 
+// دکمه تغییر سوال کپچا
+$('#refreshCaptchaBtn').on('click', function() {
+    $.get('/refresh-captcha', function(data) {
+        $('#captchaLabel').text(data.question);
+        $('input[name="captcha"]').val('');
+    });
+});
+
 // سابمیت فرم با Ajax
 $('#ticketForm').on('submit', function (e) {
     e.preventDefault();
@@ -47,6 +55,7 @@ $('#ticketForm').on('submit', function (e) {
     formData.append('contact_name', $('#contact_name').val());
     formData.append('title', $('#title').val());
     formData.append('message', $('#description').val());
+    formData.append('captcha', $('input[name="captcha"]').val()); // اضافه شد
 
     // اضافه کردن فایل‌ها به FormData
     if (selectedFiles.length > 0) {

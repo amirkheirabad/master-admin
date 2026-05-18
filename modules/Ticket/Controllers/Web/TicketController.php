@@ -12,7 +12,9 @@ use Modules\Ticket\Requests\TicketStoreRequest;
 class TicketController
 {
     private InterfaceTicket $ticket;
+
     private InterfaceStores $store;
+
     public function __construct(InterfaceTicket $ticket, InterfaceStores $store)
     {
         $this->ticket = $ticket;
@@ -37,6 +39,7 @@ class TicketController
     public function updateStatus(Request $request, $id)
     {
         $this->ticket->updateTicketStatus($id, $request);
+
         return response()->json([
             'success' => true,
         ]);
@@ -53,16 +56,40 @@ class TicketController
     public function insert()
     {
         $stores = $this->store->getAll();
-        return view('templates.ticket.insert', compact('stores'));
+        // تولید سوال کپچا
+        $num1 = rand(1, 20);
+        $num2 = rand(1, 20);
+        session(['captcha_result' => $num1 + $num2]);
+        $captcha_question = "{$num1} + {$num2} = ?";
+
+        return view('templates.ticket.insert', compact('stores', 'captcha_question'));
     }
 
     public function store(TicketAdminRequest $request)
     {
+        // بررسی کپچا
+        if ($request->captcha != session('captcha_result')) {
+            return response()->json([
+                'success' => false,
+                'errors' => ['captcha' => ['کد امنیتی اشتباه است']],
+            ], 422);
+        }
+
         $this->ticket->createTicketAdmin($request->validated());
+
         return response()->json([
             'success' => true,
             'redirect' => route('list_tickets'),
-            'message' => __('factor created successfully!')
-        ]);    }
+            'message' => __('factor created successfully!'),
+        ]);
+    }
 
+    public function refreshCaptcha()
+    {
+        $num1 = rand(1, 20);
+        $num2 = rand(1, 20);
+        session(['captcha_result' => $num1 + $num2]);
+
+        return response()->json(['question' => "{$num1} + {$num2} = ?"]);
+    }
 }
