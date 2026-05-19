@@ -44,9 +44,20 @@ class FactorRepo implements InterfaceFactor
 
     public function filterFactor(Request $request)
     {
+        $user = auth()->user();
+
+        if ($user->hasRole('admin')) {
+            $factors = Factor::query()->with('store', 'category');
+        } elseif ($user->hasRole('seller')) {
+            $storeIds = $user->stores()->pluck('id');
+            $factors = Factor::whereIn('store_id', $storeIds)->with('store', 'category');
+        } else {
+            return collect();
+        }
+
         $searchQuery = $request->input('search_query');
 
-        return Factor::query()->with('store', 'category')
+        return $factors
             ->when($request->filled('search_query'), function ($q) use ($searchQuery) {
                 $q->where(function ($query) use ($searchQuery) {
                     $query->where('id', 'LIKE', '%'.$searchQuery.'%');
@@ -62,7 +73,9 @@ class FactorRepo implements InterfaceFactor
             })
 
             ->when($request->filled('store_id'), function ($q) use ($request) {
-                $q->where('store_id', $request->store_id);
+                if (auth()->user()->hasRole('admin')) {
+                    $q->where('store_id', $request->store_id);
+                }
             })
 
             ->when($request->filled('category_id'), function ($q) use ($request) {

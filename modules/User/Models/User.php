@@ -5,6 +5,7 @@ namespace Modules\User\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use Modules\Stores\Models\Stores;
 
 class User extends Authenticatable
 {
@@ -29,4 +30,9 @@ class User extends Authenticatable
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    public function stores()
+    {
+        return $this->hasOne(Stores::class);
+    }
 }

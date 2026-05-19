@@ -39,9 +39,14 @@
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
                                 <label>نام مدیر</label>
-                                <input type="text" class="form-control custom-radius input-border-focus" id="manager_name" name="manager_name">
+                                <select id="user_id" class="form-control custom-radius select2" name="user_id">
+                                    <option value="">همه</option>
+                                    @foreach($users as $user)
+                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                    @endforeach
+                                </select>
                                 <div class="mt-1">
-                                    <span class="text-danger" id="manager_name_error"></span>
+                                    <span class="text-danger" id="user_id_error"></span>
                                 </div>
                             </div>
 

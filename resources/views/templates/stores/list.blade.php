@@ -39,7 +39,6 @@
                                 <th>کد پستی</th>
                                 <th>عرض جغرافیایی</th>
                                 <th>طول جغرافیایی</th>
-                                <th>درباره فروشگاه</th>
                                 <th>عملیات</th>
                             </tr>
                         </thead>
@@ -48,7 +47,7 @@
                             <tr class="responsive-table-row item-record{{$store->id}}">
                                 <th scope="row" class="responsive-table-td">{{ $loop->iteration }}</th>
                                 <td data-title="نام فروشگاه" class="responsive-table-td">{{ $store->store_name }}</td>
-                                <td data-title="نام مدیر" class="responsive-table-td">{{ $store->manager_name }}</td>
+                                <td data-title="نام مدیر" class="responsive-table-td">{{ $store->user->name }}</td>
                                 <td data-title="آدرس وبسایت" class="responsive-table-td">{{ $store->link }}</td>
                                 <td data-title="شعار فروشگاه" class="responsive-table-td">{{ $store->slogan }}</td>
                                 <td data-title="شماره تماس" class="responsive-table-td">{{ $store->phone }}</td>
@@ -58,7 +57,6 @@
                                 <td data-title="کد پستی" class="responsive-table-td">{{ $store->code_posty }}</td>
                                 <td data-title="عرض جغرافیایی" class="responsive-table-td">{{ $store->latitude }}</td>
                                 <td data-title="طول جغرافیایی" class="responsive-table-td">{{ $store->longitude }}</td>
-                                <td data-title="درباره فروشگاه" class="responsive-table-td">{{ Str::limit($store->about, 50) }}</td>
                                 <td data-title="عملیات" class="responsive-table-td">
                                     <div class="action-buttons" style="display: flex; gap: 10px;">
                                         <a href="{{ route('edit_store', $store->id) }}" class="text-success" title="ویرایش">

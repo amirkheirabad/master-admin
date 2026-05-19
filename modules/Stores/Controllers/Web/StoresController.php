@@ -4,13 +4,16 @@ namespace Modules\Stores\Controllers\Web;
 use Illuminate\Http\Request;
 use Modules\Stores\Models\Stores;
 use Modules\Stores\Repositories\InterfaceStores;
+use Modules\User\Repositories\InterfaceUser;
 use Modules\Stores\Requests\IndexRequest;
 class StoresController
 {
     private InterfaceStores $store;
-    public function __construct(InterfaceStores $store)
+    private InterfaceUser $user;
+    public function __construct(InterfaceStores $store, InterfaceUser $user)
     {
         $this->store = $store;
+        $this->user = $user;
     }
 
     public function list()
@@ -21,7 +24,8 @@ class StoresController
 
     public function index()
     {
-        return view('templates.stores.insert');
+        $users = $this->user->getUsers();
+        return view('templates.stores.insert', compact('users'));
     }
 
     public function store(IndexRequest $request)
@@ -41,8 +45,9 @@ class StoresController
 
     public function edit($id)
     {
+        $users = $this->user->getUsers();
         $store = $this->store->getById($id);
-        return view('templates.stores.edit', compact('store'));
+        return view('templates.stores.edit', compact('store', 'users'));
     }
 
     public function update($id, IndexRequest $request)

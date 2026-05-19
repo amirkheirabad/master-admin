@@ -17,6 +17,23 @@ if ($('#token').length > 0) {
 
 const csrf = document.querySelector('meta[name="csrf-token"]').content;
 
+$(document).ready(function() {
+    $('.select2').select2();
+});
+$('.select2').select2({
+    placeholder: "انتخاب کنید",
+    allowClear: true,
+    width: '100%',
+    language: {
+        noResults: function () {
+            return "نتیجه‌ای یافت نشد";
+        }
+    }
+});
+$(document).ready(function() {
+    $('#user_id').select2();
+});
+
 
 $('#storeForm').on('submit', function (e) {
     e.preventDefault()
@@ -30,7 +47,7 @@ $('#storeForm').on('submit', function (e) {
         },
         body: JSON.stringify({
             store_name: $('#store_name').val(),
-            manager_name: $('#manager_name').val(),
+            user_id: $('#user_id').val(),
             link: $('#link').val(),
             phone: $('#phone').val(),
             province: $('#province').val(),

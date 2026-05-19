@@ -25,8 +25,8 @@
         <li></li>
         <li>
             <div class="dropdown-custom position-relative hide-from-md">
-                <div class="pointer mt-8 ml-1" onclick="toggleCustomDropdown(this)">
-                    <i class="fa fa-bars"></i>
+                <div class="pointer mt-2 ml-1 mr-1 p-5" onclick="toggleCustomDropdown(this)">
+                    <img src="{{ asset('/icons/Menu_kebab.svg') }}">
                 </div>
                 <div class="dropdown-options" style="display: none; position: absolute; background: white; border: 1px solid #ddd; border-radius: 4px; min-width: 200px; z-index: 1000; margin-top: 8px; left: 1%;">
                     <div class="dropdown-option pointer p-5 btn-green-light" data-ticket-id="{{ $ticket->id }}">

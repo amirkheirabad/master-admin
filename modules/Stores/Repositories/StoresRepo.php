@@ -12,14 +12,14 @@ class StoresRepo implements InterfaceStores
 
     public function index()
     {
-        return Stores::paginate(10);
+        return Stores::with('user')->paginate(10);
     }
 
     public function create(array $data)
     {
         return Stores::create([
             'store_name' => $data['store_name'],
-            'manager_name' => $data['manager_name'],
+            'user_id' => $data['user_id'],
             'link' => $data['link'],
             'slogan' => $data['slogan'] ?? null,
             'phone' => $data['phone'],
@@ -43,7 +43,7 @@ class StoresRepo implements InterfaceStores
     {
         Stores::find($id)->update([
             'store_name' => $request->store_name,
-            'manager_name' => $request->manager_name,
+            'user_id' => $request->user_id,
             'link' => $request->link,
             'slogan' => $request->slogan,
             'phone' => $request->phone,
@@ -60,6 +60,6 @@ class StoresRepo implements InterfaceStores
 
     public function getById($id)
     {
-       return Stores::findOrfail($id);
+       return Stores::with('user')->findOrfail($id);
     }
 }

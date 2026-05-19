@@ -9,7 +9,7 @@
 
             @yield('nav')
 
-            <ul class="nav navbar-nav navbar-right hide-on-mobile">
+            <ul class="nav navbar-nav navbar-right">
                 <li class="">
                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
                         aria-expanded="false">

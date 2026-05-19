@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('stores', function (Blueprint $table) {
             $table->id();
             $table->string('store_name');
-            $table->string('manager_name');
             $table->string('link');
             $table->string('slogan')->nullable();
             $table->string('phone');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('province');
             $table->string('city');
             $table->string('location');

@@ -17,7 +17,7 @@ class SmsPanelRepo implements InterfaceSmsPanel
     {
         $searchQuery = $request->input('search_query');
 
-        return SmsPanel::query()
+        return SmsPanel::query()->with('store')
             ->when($request->filled('search_query'), function ($q) use ($searchQuery) {
                 $q->where(function ($query) use ($searchQuery) {
                     $query->where('id', 'LIKE', '%' . $searchQuery . '%');
