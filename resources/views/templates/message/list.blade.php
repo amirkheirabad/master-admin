@@ -16,8 +16,8 @@
             </div>
 
             <div class="x_panel rounded-top mt-2 p-0">
-                <table class="table">
-                    <thead>
+                <table class="table" style="margin-bottom: 0px">
+                    <thead class="responsive-table-head">
                         <tr>
                             <th>#</th>
                             <th>عنوان</th>
@@ -29,27 +29,29 @@
                     </thead>
                     <tbody>
                         @foreach($messages as $message)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $message->title }}</td>
-                            <td>{{ Str::limit($message->content, 50) }}</td>
-                            <td>
-                                @if($message->is_active)
-                                    <span class="bg-jade p-2 custom-radius">فعال</span>
-                                @else
-                                    <span class="bg-red-new p-2 custom-radius">غیرفعال</span>
-                                @endif
-                            </td>
-                            <td>{{ $message->order ?? '-' }}</td>
-                            <td>
-                                <a href="{{ route('message.edit', $message->id) }}" class="text-success">
-                                    <i class="fa fa-pencil fa-x"></i>
-                                </a>
-                                <a href="javascript:;" class="text-danger delete-message" data-id="{{ $message->id }}">
-                                    <i class="fa fa-trash fa-x"></i>
-                                </a>
-                             </td>
-                        </tr>
+                            <tr class="responsive-table-row">
+                                <td data-title="#" class="responsive-table-td">{{ $loop->iteration }}</td>
+                                <td data-title="عنوان" class="responsive-table-td">{{ $message->title }}</td>
+                                <td data-title="متن" class="responsive-table-td">{{ Str::limit($message->content, 50) }}</td>
+                                <td data-title="وضعیت" class="responsive-table-td">
+                                    @if($message->is_active)
+                                        <span class="bg-jade p-2 custom-radius">فعال</span>
+                                    @else
+                                        <span class="bg-red-new p-2 custom-radius">غیرفعال</span>
+                                    @endif
+                                </td>
+                                <td data-title="ترتیب" class="responsive-table-td">{{ $message->order ?? '-' }}</td>
+                                <td data-title="عملیات" class="responsive-table-td">
+                                    <div class="action-buttons" style="display: flex; gap: 10px;">
+                                        <a href="{{ route('message.edit', $message->id) }}" class="text-success" title="ویرایش">
+                                            <i class="fa fa-pencil fa-x"></i>
+                                        </a>
+                                        <a href="javascript:;" class="text-danger delete-message" data-id="{{ $message->id }}" title="حذف">
+                                            <i class="fa fa-trash fa-x"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>

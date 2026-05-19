@@ -18,7 +18,7 @@
                         <div class="col-md-6 col-xs-12 mb-3">
                             <label class="fw-bold">عنوان</label>
                             <input type="text" name="title" id="title" class="form-control custom-radius input-border-focus">
-                            <div class="mt-1">
+                            <div class="mt-1 mb-2" >
                                 <span class="text-danger error-message" id="title_error"></span>
                             </div>
                         </div>
@@ -39,7 +39,7 @@
                         <div class="col-md-12 col-xs-12 mb-3">
                             <label class="fw-bold">متن پیام</label>
                             <textarea name="content" id="content" class="form-control custom-radius input-border-focus" rows="5"></textarea>
-                            <div class="mt-1">
+                            <div class="mt-1 mb-2">
                                 <span class="text-danger error-message" id="content_error"></span>
                             </div>
                         </div>

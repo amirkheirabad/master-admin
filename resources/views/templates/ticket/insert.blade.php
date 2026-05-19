@@ -28,7 +28,7 @@
             justify-content: space-between;
             align-items: center;
         }
-
+        
         .remove-btn {
             background: #dc3545;
             color: white;
@@ -136,7 +136,7 @@
 
                             <div class="col-md-12 col-xs-12 mb-3">
                                 <label>متن تیکت</label>
-                                <textarea id="description" name="description" rows="5" class="form-control custom-radius input-border-focus"
+                                <textarea id="message" name="message" rows="5" class="form-control custom-radius input-border-focus"
                                     placeholder="متن خود را وارد کنید"></textarea>
                             </div>
 
@@ -147,20 +147,21 @@
                                     <span class="captcha-question" id="captchaLabel">
                                         {{ $captcha_question ?? '5 + 3 = ?' }}
                                     </span>
-                                    <input type="text" name="captcha" class="form-control captcha-input" placeholder="حاصل" required>
+                                    <input type="text" name="captcha" class="form-control captcha-input" placeholder="حاصل" >
                                     <button type="button" class="refresh-captcha-btn" id="refreshCaptchaBtn">
                                         <i class="fa fa-refresh"></i> جدید
                                     </button>
                                 </div>
-                                <div class="mt-1">
-                                    <span class="text-danger error-message" id="captcha_error"></span>
-                                </div>
+                                <div class=" mb-3 mt-1">
+                                <span class=" text-danger error-message" id="captcha_error"></span>                                
+                            </div>
 
-                            <div class="col-md-6 mt-2">
+                            <div class="col-md-6 mt-4">
                                 <p>پیوست فایل ها (اختیاری)</p>
-                                <button type="button" id="attachButton" class="btn btn-beta-outline mt-2 ml-1">افزودن
+                                <button type="button" id="attachButton" class="btn btn-beta-outline mb-2 mt-2 ml-1">افزودن
                                     فایل</button>
-                                <span>پسوند های مجاز : png / jpg / pdf</span>
+                                    <br>
+                                <span >پسوند های مجاز : png / jpg / pdf</span>
 
                                 <div id="fileList"></div>
 
