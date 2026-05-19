@@ -116,7 +116,6 @@ class FactorRepo implements InterfaceFactor
 
     public function updateFactor($id, $request)
     {
-        \Log::info($request);
 
         $factor = Factor::find($id);
 

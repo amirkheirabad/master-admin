@@ -26,8 +26,8 @@
 
                 <div class="x_panel rounded-top mt-2 p-0">
                     <table class="table">
-                        <thead>
-                        <tr>
+                        <thead class="responsive-table-head" >
+                        <tr class="responsive-table-row">
                             <th>#</th>
                             <th>نام و نام خانوادگی</th>
                             <th>شماره همراه</th>
@@ -37,15 +37,15 @@
                         </thead>
                         <tbody>
                         @foreach($users as $user)
-                            <tr class="item-record{{$user->id}}">
-                                <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->mobile }}</td>
-                                <td>
+                            <tr class="responsive-table-row item-record{{$user->id}}">
+                                <th scope="row"  class="responsive-table-td">{{ $loop->iteration }}</th>
+                                <td data-title="نام و نام خانوادگی" class="responsive-table-td">{{ $user->name }}</td>
+                                <td data-title="شماره همراه" class="responsive-table-td">{{ $user->mobile }}</td>
+                                <td data-title="نقش" class="responsive-table-td">
                                     @foreach($user->getRoleNames() as $roleName)
                                         <span class="badge badge-info">{{ $roleName }}</span>
                                     @endforeach
-                                </td>
+                                </td class="responsive-table-td">
                                 <td data-title="عملیات" class="responsive-table-td">
                                     <div class="">
                                         <a href="{{ route('user-edit', $user->id) }}" class="text-success" data-id="{{ $user->id }}">
