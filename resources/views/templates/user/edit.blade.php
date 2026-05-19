@@ -30,7 +30,7 @@
                     <div class="form-group mt-8">
                         <div class="row">
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-6 col-xs-12 mb-3">
                                 <label>نام و نام خانوادگی</label>
                                 <input type="text" value="{{ $user->name }}" name="name" id="name" class="form-control custom-radius input-border-focus">
                                 <div class="mt-1">
@@ -38,7 +38,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-6 col-xs-12 mb-3">
                                 <label>شماره تماس</label>
                                 <input type="text" value="{{ $user->mobile }}" name="mobile" id="mobile" class="form-control custom-radius input-border-focus">
                                 <div class="mt-1">
@@ -46,7 +46,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-6 col-xs-12 mb-3">
                                 <label>رمز عبور جدید</label>
                                 <input type="password" name="password" id="password" class="form-control custom-radius input-border-focus" placeholder="برای عدم تغییر، خالی بگذارید">
                                 <div class="mt-1">
@@ -54,7 +54,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-6 col-xs-12 mb-3">
                                 <label>نقش ها</label>
                                 <select id="role" name="role" class="form-control custom-radius custom-select-input input-border-focus">
                                     @foreach($roles as $role)
