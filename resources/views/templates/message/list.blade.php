@@ -1,9 +1,8 @@
 @extends('layouts.admin.master')
 
 @section('content')
-<div class="">
-    <div class="col-md-12">
-        <div class="">
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="row">
                 <div class="col-md-6">
                     <h3>مدیریت پیام‌ها</h3>
@@ -56,7 +55,6 @@
                     </tbody>
                 </table>
             </div>
-        </div>
     </div>
 </div>
 @endsection
