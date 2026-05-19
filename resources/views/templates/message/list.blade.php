@@ -1,7 +1,7 @@
 @extends('layouts.admin.master')
 
 @section('content')
-<div class="row">
+<div class="">
     <div class="col-md-12">
         <div class="">
             <div class="row">
@@ -42,7 +42,7 @@
                                 </td>
                                 <td data-title="ترتیب" class="responsive-table-td">{{ $message->order ?? '-' }}</td>
                                 <td data-title="عملیات" class="responsive-table-td">
-                                    <div class="action-buttons" style="display: flex; gap: 10px;">
+                                    <div class="action-buttons">
                                         <a href="{{ route('message.edit', $message->id) }}" class="text-success" title="ویرایش">
                                             <i class="fa fa-pencil fa-x"></i>
                                         </a>
