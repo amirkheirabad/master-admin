@@ -38,7 +38,7 @@ class Parsian
         }
 
         $Amount = $this->factor->price;
-        $OrderId = $this->factor->id;
+        $OrderId = $this->factor->hash;  //   ارسال هش به بانک
         $CallBackUrl = route('factor.payment.verify');
 
         $params = [
@@ -61,7 +61,6 @@ class Parsian
                 'payment_token' => $token,
                 'price_status' => 0
             ]);
-            // هدایت به درگاه
             return Redirect::to("https://pec.shaparak.ir/NewIPG/?Token=" . $token);
         } else {
             $message = $result->SalePaymentRequestResult->Message ?? 'خطای ناشناخته';
@@ -74,11 +73,13 @@ class Parsian
     {
         $token = $request->Token;
         $status = $request->status;
-        $orderId = $request->OrderId;
+        $orderHash = $request->OrderId;  // هش
         $RRN = $request->RRN;
         $pin = $this->pin;
 
-        $factor = Factor::where('id', $orderId)->first();
+        // ← پیدا کزدن فاکتور با هش
+        $factor = Factor::where('hash', $orderHash)->first();
+        
         if (!$factor) {
             return Redirect::route('factor-list')->with('error', 'فاکتور یافت نشد');
         }
