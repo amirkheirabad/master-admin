@@ -110,7 +110,6 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6 mb-3">
 
                             <div class="col-md-6 col-xs-12 mb-3">
                                 <label>تیم ارسال کننده </label>
@@ -130,13 +129,12 @@
                                 <label>عنوان تیکت</label>
                                 <input type="text" name="title" id="title"
                                     class="form-control custom-radius input-border-focus" placeholder="عنوان تیکت">
-                                <input type="text" name="national_kod" id="title" class="form-control custom-radius input-border-focus" placeholder="عنوان تیکت">
                                 <div class="mt-1">
                                     <span class="text-danger error-message" id="title_error"></span>
                                 </div>
                             </div>
 
-                            <div class="col-md-12 mb-3">
+                            <div class="col-md-12 col-xs-12 mb-3">
                                 <label>متن تیکت</label>
                                 <textarea id="description" name="description" rows="5" class="form-control custom-radius input-border-focus"
                                     placeholder="متن خود را وارد کنید"></textarea>
@@ -157,13 +155,6 @@
                                 <div class="mt-1">
                                     <span class="text-danger error-message" id="captcha_error"></span>
                                 </div>
-                            <div class="col-md-12 col-xs-12 mb-3">
-                                <label class="mt-2">متن تیکت</label>
-                                <textarea id="description" name="description" rows="5" class="form-control custom-radius input-border-focus" placeholder="متن خود را وارد کنید"></textarea>
-                                <div class="mt-1">
-                                    <span class="text-danger error-message" id="message_error"></span>
-                                </div>
-                            </div>
 
                             <div class="col-md-6 mt-2">
                                 <p>پیوست فایل ها (اختیاری)</p>

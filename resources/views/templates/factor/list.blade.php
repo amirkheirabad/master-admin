@@ -369,13 +369,11 @@
                                 </td>
                                 <td data-title="عملیات" class="responsive-table-td">
                                     <div class="gap">
-                                        {{-- دکمه مشاهده (برای همه) --}}
                                         <a href="{{ route('factor-show', $factor->id) }}" target="_blank"
                                             class="text-primary">
                                             <i class="fa fa-eye fa-x"></i>
                                         </a>
 
-                                        {{-- برای admin: دکمه‌های ویرایش، کپی، حذف --}}
                                         @if (auth()->user()->hasRole('admin'))
                                             <a href="{{ route('factor-edit', $factor->id) }}" class="text-success"
                                                 data-id="{{ $factor->id }}">
@@ -390,7 +388,6 @@
                                                 <i class="fa fa-trash fa-x"></i>
                                             </a>
 
-                                            {{-- برای seller: فقط دکمه پرداخت --}}
                                         @elseif(auth()->user()->hasRole('seller'))
                                             <a href="#" class="text-success"
                                                 style="display: inline-block; padding: 6px 18px; background: #e8f5e9; border-radius: 8px; font-size: 14px;margin: 0px;"
@@ -399,7 +396,6 @@
                                                 <i class="fa fa-credit-card"></i> پرداخت
                                             </a>
                                             @endif
-                                        @endif
                                     </div>
                                 </td>
                             </tr>
