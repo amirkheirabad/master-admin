@@ -50,7 +50,7 @@
 </head>
 <!-- /header content -->
 <body class="nav-md" style="background-color: #F8F7FA">
-<div class="container body" style="background: #34495e">
+<div class="container body">
     <div class="main_container">
         <div class="col-md-3 left_col hidden-print menu_fixed">
             <div class=" scroll-view bg-white" style="width: 230px">

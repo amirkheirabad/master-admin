@@ -47,7 +47,6 @@ function setPaymentData(id, title, amount) {
 
     let html = `
         <div style="direction: rtl; text-align: right;">
-            {{-- اطلاعات فاکتور --}}
             <div style="background: white; border-radius: 12px; padding: 15px; margin-bottom: 25px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border-right: 3px solid #0e2d55;">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid #e9ecef;">
                     <span style="color: #64748b; font-size: 13px;">شماره فاکتور</span>
@@ -63,7 +62,6 @@ function setPaymentData(id, title, amount) {
                 </div>
             </div>
 
-            {{-- انتخاب بانک --}}
             <p style="margin-bottom: 15px; color: #334155; font-weight: 500; font-size: 14px;">بانک خود را انتخاب کنید:</p>
             <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
                 <div class="bank-option" data-bank="mellat" style="cursor: pointer; text-align: center; width: 100px; padding: 12px 8px; background: white; border-radius: 12px; transition: all 0.2s; border: 2px solid #e2e8f0;">
@@ -86,7 +84,6 @@ function setPaymentData(id, title, amount) {
 
     document.getElementById('paymentModalBody').innerHTML = html;
 
-    // انتخاب بانک (با استایل یکدست)
     document.querySelectorAll('.bank-option').forEach(el => {
         el.onclick = function() {
             document.querySelectorAll('.bank-option').forEach(opt => {
@@ -100,7 +97,6 @@ function setPaymentData(id, title, amount) {
     });
 }
 
-// دکمه پرداخت نهایی
 document.getElementById('confirmPaymentBtn')?.addEventListener('click', function() {
     let bank = document.getElementById('selectedBank').value;
     let factorId = document.getElementById('factorId').value;
