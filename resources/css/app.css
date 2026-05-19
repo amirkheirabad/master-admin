@@ -361,6 +361,9 @@ label {
 .mt-auto {
     margin-top: auto;
 }
+.ml-auto {
+    margin-left: auto;
+}
 .mb-8 {
     margin-bottom: 20px;
 }
