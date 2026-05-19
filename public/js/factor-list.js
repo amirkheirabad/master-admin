@@ -64,18 +64,18 @@ function setPaymentData(id, title, amount) {
 
             <p style="margin-bottom: 15px; color: #334155; font-weight: 500; font-size: 14px;">بانک خود را انتخاب کنید:</p>
             <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                <div class="bank-option" data-bank="mellat" style="cursor: pointer; text-align: center; width: 100px; padding: 12px 8px; background: white; border-radius: 12px; transition: all 0.2s; border: 2px solid #e2e8f0;">
-                    <img src="{{ asset('icons/mellat.svg') }}" width="50" style="margin-bottom: 8px;">
-                    <div style="font-size: 12px; color: #475569;">بانک ملت</div>
-                </div>
+<!--                <div class="bank-option" data-bank="mellat" style="cursor: pointer; text-align: center; width: 100px; padding: 12px 8px; background: white; border-radius: 12px; transition: all 0.2s; border: 2px solid #e2e8f0;">-->
+<!--                    <img src="/icons/mellat.svg" width="50" style="margin-bottom: 8px;">-->
+<!--                    <div style="font-size: 12px; color: #475569;">بانک ملت</div>-->
+<!--                </div>-->
                 <div class="bank-option" data-bank="saman" style="cursor: pointer; text-align: center; width: 100px; padding: 12px 8px; background: white; border-radius: 12px; transition: all 0.2s; border: 2px solid #e2e8f0;">
-                    <img src="{{ asset('icons/saman.svg') }}" width="50" style="margin-bottom: 8px;">
+                    <img src="/icons/saman.svg" width="50" style="margin-bottom: 8px;">
                     <div style="font-size: 12px; color: #475569;">بانک سامان</div>
                 </div>
-                <div class="bank-option" data-bank="iranzamin" style="cursor: pointer; text-align: center; width: 100px; padding: 12px 8px; background: white; border-radius: 12px; transition: all 0.2s; border: 2px solid #e2e8f0;">
-                    <img src="{{ asset('icons/iran-zamin.svg') }}" width="50" style="margin-bottom: 8px;">
-                    <div style="font-size: 12px; color: #475569;">بانک ایران زمین</div>
-                </div>
+<!--                <div class="bank-option" data-bank="iranzamin" style="cursor: pointer; text-align: center; width: 100px; padding: 12px 8px; background: white; border-radius: 12px; transition: all 0.2s; border: 2px solid #e2e8f0;">-->
+<!--                    <img src="/icons/iran-zamin.svg" width="50" style="margin-bottom: 8px;">-->
+<!--                    <div style="font-size: 12px; color: #475569;">بانک ایران زمین</div>-->
+<!--                </div>-->
             </div>
             <input type="hidden" id="selectedBank" value="">
             <input type="hidden" id="factorId" value="${id}">
