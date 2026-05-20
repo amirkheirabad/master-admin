@@ -31,7 +31,7 @@
                         <div class="row">
 
                             <div class="col-md-6 mb-3">
-                                <label>نام و نام خانوادگی</label>
+                                <label>نام و نام خانوادگی<span class="text-danger">*</span></label>
                                 <input type="text" value="{{ $user->name }}" name="name" id="name" class="form-control custom-radius input-border-focus">
                                 <div class="mt-1">
                                     <span class="text-danger error-message" id="name_error"></span>
@@ -39,7 +39,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label>شماره تماس</label>
+                                <label>شماره تماس<span class="text-danger">*</span></label>
                                 <input type="text" value="{{ $user->mobile }}" name="mobile" id="mobile" class="form-control custom-radius input-border-focus">
                                 <div class="mt-1">
                                     <span class="text-danger error-message" id="mobile_error"></span>

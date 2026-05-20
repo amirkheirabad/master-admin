@@ -22,7 +22,7 @@
 /*}*/
 
 .cs-trigger.cs-open {
-    border-color: #99eae4;
+    border-color: #133c6d;
 }
 
 /* محتوای تریگر - کنار هم افقی */
@@ -73,6 +73,7 @@
     overflow-y: auto;
     z-index: 1000;
     display: none;
+    border: 1px solid #ddd;
 }
 
 .cs-options.cs-show {
@@ -120,6 +121,11 @@
 }
 
 .cs-option.cs-selected {
-    background: #e0f7f5;
-    color: #1a7f76;
+      background: #e8edf5;
+    color: #133c6d;
+    font-weight: 500;
+}
+
+h3{
+    color:#133c6d ;
 }

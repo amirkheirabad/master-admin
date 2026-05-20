@@ -27,8 +27,6 @@ class StoresRepo implements InterfaceStores
             'city' => $data['city'],
             'location' => $data['location'],
             'code_posty' => $data['code_posty'],
-            'latitude' => $data['latitude'],
-            'longitude' => $data['longitude'],
             'about' => $data['about'] ?? null,
             'token' => $data['token'],
         ]);
@@ -51,8 +49,6 @@ class StoresRepo implements InterfaceStores
             'city' => $request->city,
             'location' => $request->location,
             'code_posty' => $request->code_posty,
-            'latitude' => $request->latitude,
-            'longitude' => $request->longitude,
             'about' => $request->about,
             'token' => $request->token
         ]);

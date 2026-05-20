@@ -28,7 +28,7 @@
 
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                <label>نام فروشگاه</label>
+                                <label>نام فروشگاه<span class="text-danger">*</span></label>
                                 <input type="text" value="{{ $store->store_name }}" class="form-control custom-radius input-border-focus" id="store_name" name="store_name" placeholder="نام فروشگاه">
                                 <div class="mt-1">
                                     <span class="text-danger" id="store_name_error"></span>
@@ -37,7 +37,7 @@
 
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                <label>نام مدیر</label>
+                                <label>نام مدیر<span class="text-danger">*</span></label>
                                 <select id="user_id" class="form-control custom-radius select2" name="user_id">
                                     <option value="">همه</option>
                                     @foreach($users as $user)
@@ -52,7 +52,7 @@
                             </div>
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                <label>آدرس وبسایت</label>
+                                <label>آدرس وبسایت<span class="text-danger">*</span></label>
                                 <input type="text" value="{{ $store->link }}" class="form-control custom-radius input-border-focus" id="link" name="link" placeholder="آدرس وبسایت">
                                 <div class="mt-1">
                                     <span class="text-danger" id="link_error"></span>
@@ -68,7 +68,7 @@
                             </div>
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                <label>شماره تماس</label>
+                                <label>شماره تماس<span class="text-danger">*</span></label>
                                 <input type="text" value="{{ $store->phone }}" class="form-control custom-radius input-border-focus" id="phone" name="phone" placeholder="شماره تماس">
                                 <div class="mt-1">
                                     <span class="text-danger" id="phone_error"></span>
@@ -76,7 +76,7 @@
                             </div>
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                <label>استان</label>
+                                <label>استان<span class="text-danger">*</span></label>
                                 <input type="text" value="{{ $store->province }}" class="form-control custom-radius input-border-focus" id="province" name="province" placeholder="استان">
                                 <div class="mt-1">
                                     <span class="text-danger" id="province_error"></span>
@@ -84,7 +84,7 @@
                             </div>
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                <label>شهر</label>
+                                <label>شهر<span class="text-danger">*</span></label>
                                 <input type="text" value="{{ $store->city }}" class="form-control custom-radius input-border-focus" id="city" name="city" placeholder="شهر">
                                 <div class="mt-1">
                                     <span class="text-danger" id="city_error"></span>
@@ -92,7 +92,7 @@
                             </div>
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                <label>آدرس فروشگاه</label>
+                                <label>آدرس فروشگاه<span class="text-danger">*</span></label>
                                 <input type="text" value="{{ $store->location }}" class="form-control custom-radius input-border-focus" id="location" name="location" placeholder="آدرس فروشگاه">
                                 <div class="mt-1">
                                     <span class="text-danger" id="location_error"></span>
@@ -100,31 +100,17 @@
                             </div>
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                <label>کد پستی</label>
+                                <label>کد پستی<span class="text-danger">*</span></label>
                                 <input type="text" value="{{ $store->code_posty }}" class="form-control custom-radius input-border-focus" id="code_posty" name="code_posty" placeholder="کد پستی">
                                 <div class="mt-1">
                                     <span class="text-danger" id="code_posty_error"></span>
                                 </div>
                             </div>
 
-                            <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                <label> عرض جغرافیایی (latitude)</label>
-                                <input type="text" value="{{ $store->latitude }}" class="form-control custom-radius input-border-focus" id="latitude" name="latitude" placeholder="عرض جغرافیایی">
-                                <div class="mt-1">
-                                    <span class="text-danger error-message" id="latitude_error"></span>
-                                </div>
-                            </div>
+                           
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                <label>طول جغرافیایی (longitude)</label>
-                                <input type="text" value="{{ $store->longitude }}" class="form-control custom-radius input-border-focus" id="longitude" name="longitude" placeholder="طول جغرافیایی">
-                                <div class="mt-1">
-                                    <span class="text-danger error-message" id="longitude_error"></span>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                <label>توکن فروشگاه</label>
+                                <label>توکن فروشگاه<span class="text-danger">*</span></label>
                                 <div class="search-container">
                                     <input type="text" value="{{ $store->token }}" name="token" id="token" class="search-input" placeholder="توکن فروشگاه">
                                     <button type="button" class="btn btn-beta-solid" id="btn-generate-token">

@@ -13,6 +13,32 @@ class StoreFactor extends FormRequest
     {
         return true;
     }
+    /**
+
+ * تبدیل اعداد فارسی به انگلیسی قبل از اعتبارسنجی
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'phone' => $this->convertToEnglishNumber($this->phone),
+            'national_kod' => $this->convertToEnglishNumber($this->national_kod),
+        ]);
+    }
+
+    /**
+     * تبدیل اعداد فارسی به انگلیسی
+     */
+    private function convertToEnglishNumber($number)
+    {
+        if (!$number) return $number;
+        
+        $persianNumbers = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+        $englishNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        
+        return str_replace($persianNumbers, $englishNumbers, $number);
+    }
+
+
 
     /**
      * Get the validation rules that apply to the request.
@@ -37,14 +63,14 @@ class StoreFactor extends FormRequest
     public function messages(): array
     {
         return [
-            'store_id.required_without_all' => 'فیلد فروشگاه یا شماره تماس و نام و نام خانوادگی باید حداقل یکی پر شود.',
+            'store_id.required_without_all' => 'انتخاب فیلد فروشگاه الزامی است',
 
-            'phone.required_without'        => 'در صورت عدم انتخاب فروشگاه، وارد کردن شماره تماس الزامی است.',
+            'phone.required_without'        => ' وارد کردن شماره تماس الزامی است.',
             'phone.string'                  => 'شماره تماس باید رشته باشد.',
             'phone.regex' => 'شماره تماس باید با 09 شروع شود و 11 رقم باشد .',
             'phone.digits' => 'شماره تماس باید دقیقاً 11 رقم باشد.',
 
-            'name.required_without'         => 'در صورت عدم انتخاب فروشگاه، وارد کردن نام الزامی است.',
+            'name.required_without'         => ' وارد کردن نام الزامی است.',
             'name.string'                   => 'نام باید رشته باشد.',
             'name.max'                      => 'نام نباید بیش از 255 کاراکتر باشد.',
 

@@ -3,7 +3,7 @@
         <ul class="nav side-menu">
             <li>
                 <a href="/">
-                    <i class="fa fa-home text-beta"></i>
+                    <i class="fa fa-tachometer text-beta"></i>
                     <span>داشبورد</span>
                 </a>
             </li>
@@ -13,7 +13,7 @@
 
             <li>
                 <a>
-                    <i class="fa fa-file-text text-beta"></i>
+                    <i class="fa fa-user-circle-o text-beta"></i>
                     <span>کاربران</span>
                     <span class="fa fa-chevron-down"></span>
                 </a>
@@ -29,7 +29,7 @@
 
             <li>
                 <a>
-                    <i class="fa fa-home text-beta"></i>
+                    <i class="fa fa-diamond text-beta"></i>
                     <span>باشگاه مشتریان</span>
                     <span class="fa fa-chevron-down"></span>
                 </a>
@@ -71,7 +71,7 @@
 
             <li>
                 <a>
-                    <i class="fa fa-file-text text-beta"></i>
+                    <i class="fa fa-life-ring text-beta"></i>
                     <span>تیکت</span>
                     <span class="fa fa-chevron-down"></span>
                 </a>
@@ -85,7 +85,7 @@
 
             <li>
                 <a>
-                    <i class="fa fa-file-text text-beta"></i>
+                    <i class="fa fa-bell-o text-beta"></i>
                     <span>پیام ها</span>
                     <span class="fa fa-chevron-down"></span>
                 </a>
@@ -99,3 +99,4 @@
     </div>
 </div>
 <!-- /sidebar menu -->
+    

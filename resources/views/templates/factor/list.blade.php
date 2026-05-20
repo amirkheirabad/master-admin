@@ -102,8 +102,12 @@
                                 <div class="mb-2">
                                     <select name="category_id" class="form-control custom-radius select2" data-placeholder=" دسته بندی">
                                         <option value=""> دسته بندی</option>
-                                        @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}" {{ request()->get('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                        @foreach($categories as $category)
+                                            @if($category->active == 1)
+                                                <option value="{{ $category->id }}" @selected(request('category_id') == $category->id)>
+                                                    {{ $category->name }}
+                                                </option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
