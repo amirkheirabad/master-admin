@@ -17,7 +17,7 @@
                 <div class="form-group mt-8">
                     <div class="row">
                         <div class="col-md-6 col-xs-12 mb-3">
-                            <label class="fw-bold">عنوان</label>
+                            <label class="fw-bold">عنوان<span class="text-danger">*</span></label>
                             <input type="text" name="title" id="title" class="form-control custom-radius input-border-focus" value="{{ $message->title }}">
                             <div class="mt-1">
                                 <span class="text-danger error-message" id="title_error"></span>
@@ -38,7 +38,7 @@
                         </div>
 
                         <div class="col-md-12 col-xs-12 mb-3">
-                            <label class="fw-bold">متن پیام</label>
+                            <label class="fw-bold">متن پیام<span class="text-danger">*</span></label>
                             <textarea name="content" id="content" class="form-control custom-radius input-border-focus" rows="5">{{ $message->content }}</textarea>
                             <div class="mt-1">
                                 <span class="text-danger error-message" id="content_error"></span>

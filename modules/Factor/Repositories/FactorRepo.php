@@ -142,7 +142,11 @@ class FactorRepo implements InterfaceFactor
 
     public function deleteFactor(int $id)
     {
-        Factor::find($id)->delete();
+        $factor=Factor::find($id);
+        if($factor){
+            return $factor->delete();
+        }
+        return false;
     }
 
     public function getHashById(int $id)

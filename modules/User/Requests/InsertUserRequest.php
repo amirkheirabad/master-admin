@@ -41,7 +41,7 @@ class InsertUserRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'mobile' => ['required', 'regex:/^09[0-9]{9}$/', 'unique:users,mobile,' . ($userId ?? 'NULL')],
-            'password' => 'nullable|min:6',
+            'password' => $userId ? 'nullable|min:6' : 'required|min:6',
             'role' => 'required|exists:roles,name'
         ];
     }
@@ -58,6 +58,7 @@ class InsertUserRequest extends FormRequest
             'mobile.unique' => 'این شماره تماس قبلاً ثبت شده است',
 
             'password.min' => 'رمز عبور باید حداقل ۶ کاراکتر باشد',
+            'password.required' => 'پسورد الزامیست',
 
             'role.required' => 'انتخاب نقش الزامی است',
             'role.exists' => 'نقش انتخاب شده معتبر نیست',

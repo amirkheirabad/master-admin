@@ -37,8 +37,7 @@
                                 <th>شهر</th>
                                 <th>آدرس فروشگاه</th>
                                 <th>کد پستی</th>
-                                <th>عرض جغرافیایی</th>
-                                <th>طول جغرافیایی</th>
+                                
                                 <th>عملیات</th>
                             </tr>
                         </thead>
@@ -55,8 +54,6 @@
                                 <td data-title="شهر" class="responsive-table-td">{{ $store->city }}</td>
                                 <td data-title="آدرس فروشگاه" class="responsive-table-td">{{ $store->location }}</td>
                                 <td data-title="کد پستی" class="responsive-table-td">{{ $store->code_posty }}</td>
-                                <td data-title="عرض جغرافیایی" class="responsive-table-td">{{ $store->latitude }}</td>
-                                <td data-title="طول جغرافیایی" class="responsive-table-td">{{ $store->longitude }}</td>
                                 <td data-title="عملیات" class="responsive-table-td">
                                     <div class="action-buttons" style="display: flex; gap: 10px;">
                                         <a href="{{ route('edit_store', $store->id) }}" class="text-success" title="ویرایش">

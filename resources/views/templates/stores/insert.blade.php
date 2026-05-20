@@ -28,8 +28,8 @@
                         <div class="row">
 
 
-                            <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                <label>نام فروشگاه</label>
+                            <div class="col-md-4 col-sm-4 col-xs-12 mt-4 agency-field">
+                                <label>نام فروشگاه <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control custom-radius input-border-focus" id="store_name" name="store_name">
                                 <div class="mt-1">
                                     <span class="text-danger" id="store_name_error"></span>
@@ -38,7 +38,7 @@
 
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                <label>نام مدیر</label>
+                                <label>نام مدیر <span class="text-danger">*</span></label>
                                 <select id="user_id" class="form-control custom-radius select2" name="user_id">
                                     <option value="">همه</option>
                                     @foreach($users as $user)
@@ -51,7 +51,7 @@
                             </div>
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                <label>آدرس وبسایت</label>
+                                <label>آدرس وبسایت<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control custom-radius input-border-focus" id="link" name="link">
                                 <div class="mt-1">
                                     <span class="text-danger" id="link_error"></span>
@@ -67,7 +67,7 @@
                             </div>
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                <label>شماره تماس</label>
+                                <label>شماره تماس<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control custom-radius input-border-focus" id="phone" name="phone">
                                 <div class="mt-1">
                                     <span class="text-danger" id="phone_error"></span>
@@ -75,7 +75,7 @@
                             </div>
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                <label>استان</label>
+                                <label>استان<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control custom-radius input-border-focus" id="province" name="province">
                                 <div class="mt-1">
                                     <span class="text-danger" id="province_error"></span>
@@ -83,7 +83,7 @@
                             </div>
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                <label>شهر</label>
+                                <label>شهر<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control custom-radius input-border-focus" id="city" name="city">
                                 <div class="mt-1">
                                     <span class="text-danger" id="city_error"></span>
@@ -91,7 +91,7 @@
                             </div>
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                <label>آدرس فروشگاه</label>
+                                <label>آدرس فروشگاه <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control custom-radius input-border-focus" id="location" name="location">
                                 <div class="mt-1">
                                     <span class="text-danger" id="location_error"></span>
@@ -99,31 +99,17 @@
                             </div>
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                <label>کد پستی</label>
+                                <label>کد پستی <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control custom-radius input-border-focus" id="code_posty" name="code_posty">
                                 <div class="mt-1">
                                     <span class="text-danger" id="code_posty_error"></span>
                                 </div>
                             </div>
 
-                            <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                <label> عرض جغرافیایی (latitude)</label>
-                                <input type="text" class="form-control custom-radius input-border-focus" id="latitude" name="latitude">
-                                <div class="mt-1">
-                                    <span class="text-danger error-message" id="latitude_error"></span>
-                                </div>
-                            </div>
+                            
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                <label>طول جغرافیایی (longitude)</label>
-                                <input type="text" class="form-control custom-radius input-border-focus" id="longitude" name="longitude">
-                                <div class="mt-1">
-                                    <span class="text-danger error-message" id="longitude_error"></span>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                <label>توکن فروشگاه</label>
+                                <label>توکن فروشگاه <span class="text-danger">*</span></label>
                                 <div class="search-container">
                                     <input type="text" name="token" id="token" value="" class="search-input">
                                     <button type="button" class="btn btn-beta-solid" id="btn-generate-token">

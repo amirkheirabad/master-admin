@@ -77,15 +77,7 @@
                                     <input type="text" class="form-control custom-radius input-border-focus" id="city" name="city" placeholder="کد پستی">
                                 </div>
 
-                                <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                    <label> عرض جغرافیایی (latitude)</label>
-                                    <input type="text" class="form-control custom-radius input-border-focus" id="latitude" name="latitude" placeholder="عرض جغرافیایی">
-                                </div>
 
-                                <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                    <label>طول جغرافیایی (longitude)</label>
-                                    <input type="text" class="form-control custom-radius input-border-focus" id="longitude" name="longitude" placeholder="طول جغرافیایی">
-                                </div>
 
                                 <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
                                     <label>توکن فروشگاه</label>

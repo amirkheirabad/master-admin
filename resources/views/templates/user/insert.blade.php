@@ -30,16 +30,16 @@
                         <div class="row">
 
                             <div class="col-md-6 col-xs-12 mb-3">
-                                <label class="fw-bold">نام و نام خانوادگی</label>
+                                <label class="fw-bold">نام و نام خانوادگی<span class="text-danger">*</span></label>
                                 <input type="text" name="name" id="name"
                                     class="form-control custom-radius input-border-focus" style="background: #f9fafb;">
-                                <div class="mt-1">
-                                    <span class="text-danger error-message" id="name_error"></span>
+                                <div class="mt-1 mb-3">
+                                    <span class="text-danger error-message " id="name_error"></span>
                                 </div>
                             </div>
 
                             <div class="col-md-6 col-xs-12 mb-3">
-                                <label class="fw-bold">شماره تماس</label>
+                                <label class="fw-bold">شماره تماس<span class="text-danger">*</span></label>
                                 <input type="text" name="mobile" id="mobile"
                                     class="form-control custom-radius input-border-focus" style="background: #f9fafb;">
                                 <div class="mt-1">
@@ -48,11 +48,11 @@
                             </div>
 
                             <div class="col-md-6 col-xs-12 mb-3">
-                                <label class="fw-bold">رمز عبور</label>
-                                <input type="password" name="password" id="password"
+                                <label class="fw-bold">رمز عبور<span class="text-danger">*</span></label>
+                                <input type="password" name="password" id="password" 
                                     class="form-control custom-radius input-border-focus" style="background: #f9fafb;">
                                 <div class="mt-1">
-                                    <span class="text-danger error-message" id="password_error"></span>
+                                    <span class="text-danger error-message mb-4" id="password_error"></span>
                                 </div>
                             </div>
 

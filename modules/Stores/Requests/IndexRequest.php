@@ -17,8 +17,6 @@ class IndexRequest extends FormRequest
         $this->merge([
             'phone' => $this->convertToEnglishNumber($this->phone),
             'code_posty' => $this->convertToEnglishNumber($this->code_posty),
-            'latitude' => $this->convertToEnglishNumber($this->latitude),
-            'longitude' => $this->convertToEnglishNumber($this->longitude),
         ]);
     }
 
@@ -44,8 +42,6 @@ class IndexRequest extends FormRequest
             'city' => 'required|string|max:255',
             'location' => 'required|string|max:255',
             'code_posty' => 'required|numeric',
-            'latitude' => 'required|numeric',
-            'longitude' => 'required|numeric',
             'about' => 'nullable|string|max:1000',
             'token' => 'required',
         ];
@@ -64,10 +60,6 @@ class IndexRequest extends FormRequest
             'location.required' => 'آدرس الزامی است.',
             'code_posty.required' => 'کد پستی الزامی است.',
             'code_posty.numeric' => 'کد پستی باید عدد باشد.',
-            'latitude.required' => 'عرض جغرافیایی الزامی است.',
-            'latitude.numeric' => 'عرض جغرافیایی باید عدد باشد.',
-            'longitude.required' => 'طول جغرافیایی الزامی است.',
-            'longitude.numeric' => 'طول جغرافیایی باید عدد باشد.',
             'token.required' => 'توکن الزامی است.',
         ];
     }
