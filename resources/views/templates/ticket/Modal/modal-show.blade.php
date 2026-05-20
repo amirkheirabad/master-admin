@@ -20,6 +20,7 @@
                 <span>منتظر پاسخ فروشگاه</span>
                 <i class="fa fa-check check-icon"></i>
             </div>
+            @if(auth()->user()->hasanyRole('admin'))
             <div class="status-option" data-status="2">
                 <span>بسته شده</span>
                 <i class="fa fa-check check-icon"></i>
@@ -28,6 +29,7 @@
                 <span>ارجاع به واحد فنی</span>
                 <i class="fa fa-check check-icon"></i>
             </div>
+            @endif
         </div>
 
         <div class="mobile-status-footer">

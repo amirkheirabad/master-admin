@@ -32,11 +32,13 @@
                     <div class="dropdown-option pointer p-5 btn-green-light" data-ticket-id="{{ $ticket->id }}">
                         تغییر وضعیت
                     </div>
+                    @if(auth()->user()->hasanyRole('admin'))
                     <div class="dropdown-option pointer p-5 btn-green-light">
                         <a href="{{ route('edit_store' , $ticket->store->id) }}" style="color: black">
                             <i class="fa fa-info-circle fa-x"></i> اطلاعات فروشگاه
                         </a>
                     </div>
+                    @endif
                 </div>
             </div>
         </li>
@@ -56,9 +58,9 @@
                          @if(auth()->user()->hasanyRole('admin'))
                             <a href="{{ route('edit_store' , $ticket->store->id) }}" class="btn btn-beta-outline hide-on-mobile">
                                 <i class="fa fa-info-circle fa-x"></i> اطلاعات فروشگاه
-                            </a> 
+                            </a>
                         @endif
-                        
+
 
                         <div class="dropdown-custom position-relative hide-on-mobile">
                             <div class="pointer btn btn-beta-solid" onclick="toggleCustomDropdown(this)">
@@ -71,12 +73,14 @@
                                 <div class="dropdown-option pointer p-5 btn-green-light" onclick="openModalAndClose(this, {{ $ticket->id }}, 'فروشگاه نمونه', 1, 'منتظر پاسخ فروشگاه')" data-value="pending">
                                     منتظر پاسخ فروشگاه
                                 </div>
+                                @if(auth()->user()->hasanyRole('admin'))
                                 <div class="dropdown-option pointer p-5 btn-green-light" onclick="openModalAndClose(this, {{ $ticket->id }}, 'فروشگاه نمونه', 2, 'بسته شده')" data-value="closed">
                                     بسته شده
                                 </div>
                                 <div class="dropdown-option pointer p-5 btn-green-light" onclick="openModalAndClose(this, {{ $ticket->id }}, 'فروشگاه نمونه', 3, 'ارجاع به واحد فنی')" data-value="closed">
                                     ارجاع به واحد فنی
                                 </div>
+                                @endif
                             </div>
                         </div>
                     </div>
