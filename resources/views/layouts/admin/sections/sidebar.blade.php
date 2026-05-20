@@ -48,13 +48,11 @@
                 </a>
                 <ul class="nav child_menu">
                     <li><a href="{{ route('factor-list') }}">لیست فاکتور</a></li>
-{{--                    @endcan--}}
-{{--                    @can('category-list')--}}
+
             @if(auth()->user()->hasRole('admin'))
 
                     <li><a href="{{ route('category-list') }}">دسته بندی</a></li>
             @endif
-{{--                    @endcan--}}
                 </ul>
             </li>
             @endif
@@ -67,7 +65,7 @@
                 </a>
             </li>
             @endif
-            @if(auth()->user()->hasRole('admin'))
+            @if(auth()->user()->hasanyRole('admin', 'seller'))
 
             <li>
                 <a>
@@ -99,4 +97,3 @@
     </div>
 </div>
 <!-- /sidebar menu -->
-    
