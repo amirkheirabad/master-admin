@@ -134,9 +134,9 @@
                                     <span class="text-danger error-message" id="title_error"></span>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-xs-12 mb-3">
+                            <div class="col-md-6 col-xs-12 mb-3 mt-2">
                                     <label>اولویت <span class="text-danger">*</span></label>
-                                    <select name="priority" class="form-control custom-radius input-border-focus">
+                                    <select name="priority" class="form-control custom-select-input custom-radius input-border-focus">
                                         <option value="1">کم</option>
                                         <option value="2" selected>معمولی</option>
                                         <option value="3">بالا</option>

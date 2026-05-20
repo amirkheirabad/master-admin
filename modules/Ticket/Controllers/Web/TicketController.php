@@ -67,13 +67,6 @@ class TicketController
 
     public function store(TicketAdminRequest $request)
     {
-        if ($request->captcha != session('captcha_result')) {
-            return response()->json([
-                'success' => false,
-                'errors' => ['captcha' => ['کد امنیتی اشتباه است']],
-            ], 422);
-        }
-
         $this->ticket->createTicketAdmin($request->validated());
 
         return response()->json([
@@ -95,13 +88,6 @@ class TicketController
 
     public function storeUser(TicketStoreRequest $request)
     {
-        if ($request->captcha != session('captcha_result')) {
-            return response()->json([
-                'success' => false,
-                'errors' => ['captcha' => ['کد امنیتی اشتباه است']],
-            ], 422);
-        }
-
         $user = auth()->user();
 
         if ($user->hasRole('seller')) {
