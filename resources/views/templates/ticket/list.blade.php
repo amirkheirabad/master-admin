@@ -97,6 +97,15 @@
                                     </select>
                                 </div>
                                 <div class="mb-2">
+                                    <select name="priority" class="form-control custom-radius custom-select-input" data-title="اولویت:">
+                                        <option value="">همه</option>
+                                        <option value="1" {{ request('priority') == '1' ? 'selected' : '' }}>کم</option>
+                                        <option value="2" {{ request('priority') == '2' ? 'selected' : '' }}>معمولی</option>
+                                        <option value="3" {{ request('priority') == '3' ? 'selected' : '' }}>بالا</option>
+                                        <option value="4" {{ request('priority') == '4' ? 'selected' : '' }}>فوری</option>
+                                    </select>
+                                </div>
+                                <div class="mb-2">
                                     <select name="contact_name" class="form-control custom-radius custom-select-input" data-title="تیم مخاطب:">
                                         <option value="">همه</option>
                                         <option value="0" {{ request()->get('contact_name') == '0' ? 'selected' : ''}}>درخواست ماژول با فیچر جدید</option>
@@ -137,6 +146,7 @@
                         </th>
                         <th>نام فروشگاه</th>
                         <th>عنوان تیکت</th>
+                        <th>اولویت</th>
                         <th>تیم مخاطب</th>
                         <th>تاریخ ثبت</th>
                         <th>وضعیت</th>
@@ -163,6 +173,25 @@
                             <td data-title="نام فروشگاه:" class="hide-on-mobile">{{ $ticket->id }}</td>
                             <td data-title="نام فروشگاه:" class="hide-on-mobile">{{ $ticket->store->store_name }}</td>
                             <td data-title="عنوان:" class="responsive-table-td">{{ $ticket->title }}</td>
+                             <td data-title="اولویت" class="responsive-table-td">
+                                @if($ticket->priority == 1)
+                                    <span class="bg-jade p-2 custom-radius">
+                                   کم
+                                </span>
+                                @elseif($ticket->priority == 2)
+                                    <span class="bg-new p-2 custom-radius">
+                                   متوسط
+                                </span>
+                                @elseif($ticket->priority == 3)
+                                    <span class="bg-warning p-2 custom-radius">
+                                   زیاد
+                                </span>
+                                @elseif($ticket->priority == 4)
+                                    <span class="bg-red-new p-2 custom-radius">
+                                   فوری
+                                </span>
+                                @endif
+                            </td>
                             <td data-title=" تیم مخاطب:" class="responsive-table-td">
                                 @if($ticket->contact_name == 0)
                                     <span>

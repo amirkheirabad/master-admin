@@ -53,9 +53,12 @@
                         <h3>تیکت شماره {{ $ticket->id }}</h3>
                     </div>
                     <div class="d-flex gap-2 hide-on-mobile" style="gap: 10px;">
-                        <a href="{{ route('edit_store' , $ticket->store->id) }}" class="btn btn-beta-outline hide-on-mobile">
-                            <i class="fa fa-info-circle fa-x"></i> اطلاعات فروشگاه
-                        </a>
+                         @if(auth()->user()->hasanyRole('admin'))
+                            <a href="{{ route('edit_store' , $ticket->store->id) }}" class="btn btn-beta-outline hide-on-mobile">
+                                <i class="fa fa-info-circle fa-x"></i> اطلاعات فروشگاه
+                            </a> 
+                        @endif
+                        
 
                         <div class="dropdown-custom position-relative hide-on-mobile">
                             <div class="pointer btn btn-beta-solid" onclick="toggleCustomDropdown(this)">

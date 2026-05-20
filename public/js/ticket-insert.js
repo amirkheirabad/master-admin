@@ -55,6 +55,7 @@ $('#ticketForm').on('submit', function (e) {
     formData.append('contact_name', $('#contact_name').val());
     formData.append('title', $('#title').val());
     formData.append('message', $('#message').val());
+    formData.append('priority', $('select[name="priority"]').val());
     formData.append('captcha', $('input[name="captcha"]').val()); // اضافه شد
 
     // اضافه کردن فایل‌ها به FormData
@@ -174,6 +175,7 @@ $('#ticketFormUser').on('submit', function (e) {
     formData.append('contact_name', $('#contact_name').val());
     formData.append('title', $('#title').val());
     formData.append('message', $('#message').val());
+    formData.append('priority', $('select[name="priority"]').val());
     formData.append('captcha', $('input[name="captcha"]').val()); // اضافه شد
 
     // اضافه کردن فایل‌ها به FormData

@@ -59,6 +59,10 @@ class TicketRepo implements InterfaceTicket
                 $q->where('contact_name', $request->contact_name);
             })
 
+            ->when($request->filled('priority'), function ($q) use ($request) {
+                $q->where('priority', $request->priority);
+            })
+
             ->when($request->filled('sort'), function ($q) use ($request) {
                 if ($request->sort === 'latest') {
                     $q->orderBy('created_at', 'desc');
@@ -82,6 +86,7 @@ class TicketRepo implements InterfaceTicket
             'store_id' => $data['store_id'],
             'title' => $data['title'],
             'contact_name' => $data['contact_name'],
+            'priority' => $data['priority'],
             'status' => 0
         ]);
 
@@ -112,6 +117,7 @@ class TicketRepo implements InterfaceTicket
                 'store_id' => $data['store_id'],
                 'title' => $data['title'],
                 'contact_name' => $data['contact_name'],
+                'priority' => $data['priority'],
                 'status' => 1,
             ]);
 

@@ -18,9 +18,13 @@ class Ticket extends Model
     protected $fillable = [
         'title',
         'status',
+        'priority',
         'contact_name',
         'is_seen',
         'store_id',
+    ];
+    protected $casts = [
+    'priority' => 'integer',   // اضافه کن
     ];
 
 //    public function sender()

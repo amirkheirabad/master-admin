@@ -134,6 +134,18 @@
                                     <span class="text-danger error-message" id="title_error"></span>
                                 </div>
                             </div>
+                            <div class="col-md-6 col-xs-12 mb-3">
+                                    <label>اولویت <span class="text-danger">*</span></label>
+                                    <select name="priority" class="form-control custom-radius input-border-focus">
+                                        <option value="1">کم</option>
+                                        <option value="2" selected>معمولی</option>
+                                        <option value="3">بالا</option>
+                                        <option value="4">فوری</option>
+                                    </select>
+                                    <div class="mt-1">
+                                        <span class="text-danger error-message" id="priority_error"></span>
+                                    </div>
+                                </div>
 
                             <div class="col-md-12 col-xs-12 mb-3 mt-2">
                                 <label>متن تیکت</label>
@@ -191,7 +203,18 @@
 
                     <div class="form-group mt-8">
                         <div class="row">
-
+                              <div class="col-md-6 col-xs-12 mb-3">
+                                    <label>اولویت <span class="text-danger">*</span></label>
+                                    <select name="priority" class="form-control custom-radius custom-select-input input-border-focus">
+                                        <option value="1">کم</option>
+                                        <option value="2" selected>معمولی</option>
+                                        <option value="3">بالا</option>
+                                        <option value="4">فوری</option>
+                                    </select>
+                                    <div class="mt-1">
+                                        <span class="text-danger error-message" id="priority_error"></span>
+                                    </div>
+                                </div>
                             <input type="hidden" name="store_id" id="store_id" value="{{ auth()->user()->stores()->first()->id ?? '' }}">
                             <div class="col-md-6 col-xs-12 mb-3">
                                 <label>تیم  گیرنده </label>
