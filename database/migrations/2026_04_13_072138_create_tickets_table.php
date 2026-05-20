@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->tinyInteger('contact_name');
             $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('priority')->default(2);
             $table->timestamps();
         });
     }
