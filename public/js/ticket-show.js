@@ -60,7 +60,7 @@ function updateFilePreview(files) {
         filePreviewContent.innerHTML = `
             <div class="file-preview-item">
                 <div class="double-icon">
-                    <img src="/icons/copy.svg" alt="file icon" class="svg-icon" style="width: 24px; height: 24px;">
+                    <img src="/icons/files.svg" alt="file icon" class="svg-icon" style="width: 20px; height: 20px;">
                 </div>
                 <div class="file-info">
                     <span class="file-count-text">${files.length} فایل</span>
@@ -485,3 +485,70 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // اجرا در رسیز
 window.addEventListener('resize', handleMobileClasses);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// seller
+
+$('#replyFormUser').on('submit', function (e) {
+    e.preventDefault()
+
+    const csrf = document.querySelector('meta[name="csrf-token"]').content;
+
+    const id = document.getElementById('ticket_id').value;
+    const messageInput = document.getElementById('messageInput');
+    const message = messageInput ? messageInput.value.trim() : '';
+
+
+    let formData = new FormData()
+
+    formData.append('message', messageInput.value);
+
+    const fileInput = document.getElementById('fileInput');
+    if (fileInput.files && fileInput.files.length > 0) {
+        for (let i = 0; i < fileInput.files.length; i++) {
+            formData.append('attachments[]', fileInput.files[i]);
+        }
+    }
+
+    fetch(this.action, {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': csrf,
+            'Accept': 'application/json',
+        },
+        body: formData
+    })
+        .then(response => {
+            return response.json().then(data => ({
+                status: response.status,
+                body: data
+            })).catch(() => ({
+                status: response.status,
+                body: null
+            }));
+        })
+        .then(({status, body}) => {
+            if (status === 200 || status === 201) {
+                location.reload();
+            } else if (status === 422 && body && body.errors) {
+                showBackendErrors(body.errors);
+            } else {
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});

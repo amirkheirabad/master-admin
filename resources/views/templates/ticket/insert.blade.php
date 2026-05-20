@@ -28,7 +28,7 @@
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .remove-btn {
             background: #dc3545;
             color: white;
@@ -91,6 +91,7 @@
                         <h3>تیکت جدید</h3>
                     </div>
                 </div>
+                @if(auth()->user()->hasRole('admin'))
                 <form id="ticketForm" method="post" action="" class="x_panel rounded-4">
                     @csrf
 
@@ -125,7 +126,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6 col-xs-12 mb-3">
+                            <div class="col-md-6 col-xs-12 mb-3 mt-2">
                                 <label>عنوان تیکت</label>
                                 <input type="text" name="title" id="title"
                                     class="form-control custom-radius input-border-focus" placeholder="عنوان تیکت">
@@ -134,14 +135,16 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-12 col-xs-12 mb-3">
+                            <div class="col-md-12 col-xs-12 mb-3 mt-2">
                                 <label>متن تیکت</label>
                                 <textarea id="message" name="message" rows="5" class="form-control custom-radius input-border-focus"
                                     placeholder="متن خود را وارد کنید"></textarea>
+                                <div class="mt-1">
+                                    <span class="text-danger error-message" id="message_error"></span>
+                                </div>
                             </div>
 
-                            {{-- بخش کپچا --}}
-                            <div class="col-md-12 mb-3">
+                            <div class="col-md-12 mb-3 mt-2">
                                 <label>کد امنیتی</label>
                                 <div class="captcha-row">
                                     <span class="captcha-question" id="captchaLabel">
@@ -153,7 +156,7 @@
                                     </button>
                                 </div>
                                 <div class=" mb-3 mt-1">
-                                <span class=" text-danger error-message" id="captcha_error"></span>                                
+                                <span class=" text-danger error-message" id="captcha_error"></span>
                             </div>
 
                             <div class="col-md-6 mt-4">
@@ -179,7 +182,90 @@
 
                         </div>
                     </div>
+                    </div>
                 </form>
+                @endif
+                @if(auth()->user()->hasRole('seller'))
+                <form id="ticketFormUser" method="post" action="" class="x_panel rounded-4">
+                    @csrf
+
+                    <div class="form-group mt-8">
+                        <div class="row">
+
+                            <input type="hidden" name="store_id" id="store_id" value="{{ auth()->user()->stores()->first()->id ?? '' }}">
+                            <div class="col-md-6 col-xs-12 mb-3">
+                                <label>تیم  گیرنده </label>
+                                <select id="contact_name"
+                                        class="form-control custom-radius custom-select-input input-border-focus">
+                                    <option value="0">درخواست ماژول با فیچر جدید</option>
+                                    <option value="1">تیم فنی و عملیات</option>
+                                    <option value="2">تیم پشتیبانی و سفارشات</option>
+                                    <option value="3">گزارش خطا</option>
+                                </select>
+                                <div class="mt-1">
+                                    <span class="text-danger error-message" id="contact_name_error"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-xs-12 mb-3">
+                                <label>عنوان تیکت</label>
+                                <input type="text" name="title" id="title"
+                                       class="form-control custom-radius input-border-focus" placeholder="عنوان تیکت">
+                                <div class="mt-1">
+                                    <span class="text-danger error-message" id="title_error"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-xs-12 mb-3 mt-2">
+                                <label>متن تیکت</label>
+                                <textarea id="message" name="message" rows="5" class="form-control custom-radius input-border-focus"
+                                          placeholder="متن خود را وارد کنید"></textarea>
+                                <div class="mt-1">
+                                    <span class="text-danger error-message" id="message_error"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 mb-3 mt-2">
+                                <label>کد امنیتی</label>
+                                <div class="captcha-row">
+                                    <span class="captcha-question" id="captchaLabel">
+                                        {{ $captcha_question ?? '5 + 3 = ?' }}
+                                    </span>
+                                    <input type="text" name="captcha" class="form-control captcha-input" placeholder="حاصل" >
+                                    <button type="button" class="refresh-captcha-btn" id="refreshCaptchaBtn">
+                                        <i class="fa fa-refresh"></i> جدید
+                                    </button>
+                                </div>
+                                <div class=" mb-3 mt-1">
+                                    <span class=" text-danger error-message" id="captcha_error"></span>
+                                </div>
+
+                                <div class="col-md-6 mt-4">
+                                    <p>پیوست فایل ها (اختیاری)</p>
+                                    <button type="button" id="attachButton" class="btn btn-beta-outline mb-2 mt-2 ml-1">افزودن
+                                        فایل</button>
+                                    <br>
+                                    <span >پسوند های مجاز : png / jpg / pdf</span>
+
+                                    <div id="fileList"></div>
+
+                                    <input type="file" id="fileInput" style="display: none;" multiple>
+                                    <div class="mt-2">
+                                        <span class="text-danger error-message" id="attachments_error"></span>
+                                    </div>
+
+                                </div>
+
+                                <div class="d-flex justify-content-end col-md-12 mt-8">
+                                    <button type="submit" class="btn btn-beta-solid">تایید</button>
+                                    <a href="{{ route('list_tickets') }}" class="btn btn-beta-outline">انصراف</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                @endif
             </div>
         </div>
     </div>

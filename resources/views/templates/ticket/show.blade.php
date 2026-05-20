@@ -268,6 +268,7 @@
                     @endforelse
                 </div>
                 @if($ticket->status != 2)
+                    @if(auth()->user()->hasRole('admin'))
                     <div class="mt-auto">
                         <form id="replyForm" action="{{ route('ticket_reply', $ticket->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
@@ -297,6 +298,38 @@
                     </div>
                     <span id="message_error" class="text-danger"></span>
                     <span id="attachments_error" class="text-danger"></span>
+                    @endif
+                        @if(auth()->user()->hasRole('seller'))
+                        <div class="mt-auto">
+                        <form id="replyFormUser" action="{{ route('ticket_store_reply', $ticket->id) }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" id="ticket_id" value="{{ $ticket->id }}">
+                            <div class="file-preview-wrapper" id="filePreviewWrapper" style="display: none;">
+                                <div class="file-preview-header">
+                                    <button type="button" class="remove-all-files-btn" id="removeAllFilesBtn" title="حذف همه فایل‌ها">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="file-preview-content" id="filePreviewContent">
+                                    <!-- فایل‌های انتخاب شده اینجا نمایش داده می‌شه -->
+                                </div>
+                            </div>
+
+                            <div class="search-container custom-radius" id="searchContainer">
+                                <input type="text" name="message" id="messageInput" class="search-input " placeholder="پیام خود را وارد کنید...">
+                                <button type="button" class="search-button" id="attachButton">
+                                    <img src="{{ asset('/icons/Attachment.svg') }}" style="width: 22px">
+                                </button>
+                                <input type="file" name="attachments[]" id="fileInput" style="display: none;" multiple>
+                                <button type="submit" class="search-button">
+                                    <img src="{{ asset('/icons/send 1.svg') }}" style="width: 22px">
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <span id="message_error" class="text-danger"></span>
+                    <span id="attachments_error" class="text-danger"></span>
+                    @endif
                 @endif
             </div>
         </div>

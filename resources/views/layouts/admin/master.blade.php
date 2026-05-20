@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="fontiran.com:license" content="Y68A9">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Gentelella Alela! | قالب مدیریت رایگان </title>
+    <title>پنل master-admin </title>
     {{--    <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">--}}
     @yield('css')
     @vite(['resources/css/app.css', 'resources/js/app.js'])

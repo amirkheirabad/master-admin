@@ -67,7 +67,6 @@ class TicketController
 
     public function store(TicketAdminRequest $request)
     {
-        // بررسی کپچا
         if ($request->captcha != session('captcha_result')) {
             return response()->json([
                 'success' => false,
@@ -92,4 +91,45 @@ class TicketController
 
         return response()->json(['question' => "{$num1} + {$num2} = ?"]);
     }
+
+
+    public function storeUser(TicketStoreRequest $request)
+    {
+        if ($request->captcha != session('captcha_result')) {
+            return response()->json([
+                'success' => false,
+                'errors' => ['captcha' => ['کد امنیتی اشتباه است']],
+            ], 422);
+        }
+
+        $user = auth()->user();
+
+        if ($user->hasRole('seller')) {
+            $storeIds = $user->stores()->pluck('id')->toArray();
+
+            if (!in_array($request->store_id, $storeIds)) {
+                return response()->json([
+                    'success' => false,
+                    'error' => 'شما به این فروشگاه دسترسی ندارید'
+                ], 403);
+            }
+        }
+
+        $this->ticket->createTicketStore($request->validated());
+
+        return response()->json([
+            'success' => true,
+            'redirect' => route('list_tickets'),
+            'message' => __('factor created successfully!'),
+        ]);
+    }
+
+    public function replyUser(TicketReplyRequest $request, $id)
+    {
+        $this->ticket->replyAsStore($id, $request->validated());
+        return response()->json([
+            'success' => true,
+        ]);
+    }
+
 }

@@ -24,9 +24,20 @@ class TicketRepo implements InterfaceTicket
 
     public function searchTicket(Request $request)
     {
+        $user = auth()->user();
+
+        if ($user->hasRole('admin')) {
+            $tickets = Ticket::query()->with('store');
+        } elseif ($user->hasRole('seller')) {
+            $storeIds = $user->stores()->pluck('id');
+            $tickets = Ticket::whereIn('store_id', $storeIds)->with('store');
+        } else {
+            return collect();
+        }
+
         $searchQuery = $request->input('search_query');
 
-        return Ticket::query()->with('store')
+        return $tickets
             ->when($request->filled('search_query'), function ($q) use ($searchQuery) {
                 $q->where(function ($query) use ($searchQuery) {
                     $query->where('id', 'LIKE', '%' . $searchQuery . '%')
@@ -39,7 +50,9 @@ class TicketRepo implements InterfaceTicket
             })
 
             ->when($request->filled('store_id'), function ($q) use ($request) {
-                $q->where('store_id', $request->store_id);
+                if (auth()->user()->hasRole('admin')) {
+                    $q->where('store_id', $request->store_id);
+                }
             })
 
             ->when($request->filled('contact_name'), function ($q) use ($request) {

@@ -34,12 +34,14 @@
                 </div>
             </div>
             <div class="d-flex justify-content-between align-items-center mt-8 flex-wrap">
+                @if(auth()->user()->hasRole('admin'))
                 <div class="hide-on-mobile">
                     <button id="operations-button" class="btn btn-white-new" disabled>
                         <span class="hide-on-mobile">عملیات</span>
                         <i class="fa fa-chevron-down mr-1"></i>
                     </button>
                 </div>
+                @endif
 
                 <div class="d-flex flex-wrap align-items-center" style="gap: 10px;">
                     <form method="get" id="filterForm" action="{{ route('list_tickets') }}" class="d-flex flex-wrap align-items-center">

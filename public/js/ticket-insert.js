@@ -54,7 +54,7 @@ $('#ticketForm').on('submit', function (e) {
     formData.append('store_id', $('#store_id').val());
     formData.append('contact_name', $('#contact_name').val());
     formData.append('title', $('#title').val());
-    formData.append('message', $('#description').val());
+    formData.append('message', $('#message').val());
     formData.append('captcha', $('input[name="captcha"]').val()); // اضافه شد
 
     // اضافه کردن فایل‌ها به FormData
@@ -155,5 +155,89 @@ function removeFile(index) {
     displayFileNames();
 }
 
-// حذف event listener قبلی که اضافه کردی (اگه وجود داره)
-// اگه قبلاً کد querySelectorAll رو اضافه کردی، باید حذفش کنی یا کامنت کنی
+//seller
+
+$('#ticketFormUser').on('submit', function (e) {
+    e.preventDefault();
+
+    // گرفتن دکمه سابمیت
+    const submitBtn = this.querySelector('button[type="submit"]');
+
+    // فعال کردن حالت لودینگ
+    setButtonLoading(submitBtn, true);
+
+    // ساخت FormData برای ارسال فایل و دیتا
+    const formData = new FormData();
+
+    // اضافه کردن فیلدهای فرم به FormData
+    formData.append('store_id', $('#store_id').val());
+    formData.append('contact_name', $('#contact_name').val());
+    formData.append('title', $('#title').val());
+    formData.append('message', $('#message').val());
+    formData.append('captcha', $('input[name="captcha"]').val()); // اضافه شد
+
+    // اضافه کردن فایل‌ها به FormData
+    if (selectedFiles.length > 0) {
+        for(let i = 0; i < selectedFiles.length; i++) {
+            formData.append('attachments[]', selectedFiles[i]);
+        }
+    }
+
+    // ارسال درخواست
+    fetch('/tickets_store_admin', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': csrf,
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+        .then(res => {
+            if (res.redirected) {
+                window.location.href = res.url;
+                return;
+            }
+            return res.json();
+        })
+        .then(data => {
+            console.log('Response data:', data);
+
+            if (data.errors) {
+                showBackendErrors(data.errors);
+            }
+
+            if (data && data.success) {
+                console.log('Success block entered');
+                console.log('Redirect URL:', data.redirect);
+
+                try {
+                    $('#ticketFormUser')[0].reset();
+                    selectedFiles = [];
+                    displayFileNames();
+
+
+                    if (data.redirect) {
+                        window.location.href = data.redirect;
+                    }
+                } catch (error) {
+                }
+            } else {
+                // خطا رخ داده - برگردوندن دکمه به حالت عادی
+                setButtonLoading(submitBtn, false);
+
+                if (data && data.errors) {
+                    let errorMsg = '';
+                    for (let key in data.errors) {
+                        errorMsg += data.errors[key] + '\n';
+                    }
+                } else {
+
+                }
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            // خطا رخ داده - برگردوندن دکمه به حالت عادی
+            setButtonLoading(submitBtn, false);
+        });
+});
