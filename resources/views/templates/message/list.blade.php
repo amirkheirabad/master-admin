@@ -55,6 +55,9 @@
                     </tbody>
                 </table>
             </div>
+        <div class="d-flex justify-content-center">
+            {{$messages->withQueryString()->links('vendor.pagination.bootstrap-5')}}
+        </div>
     </div>
 </div>
 @endsection

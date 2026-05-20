@@ -13,6 +13,37 @@
         jalaliDatepicker.startWatch();
     </script>
     <script src="{{ asset('js/create-factor.js') }}"></script>
+    <script>
+        function formatPrice(price) {
+            let numericPrice = String(price).replace(/[^0-9]/g, '');
+            if (numericPrice === '') return '';
+            return numericPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
+        function formatPriceOnInput(event) {
+            let input = event.target;
+            input.value = formatPrice(input.value);
+        }
+
+        function formatDisplayPriceByClass(className) {
+            let elements = document.getElementsByClassName(className);
+            for (let i = 0; i < elements.length; i++) {
+                elements[i].textContent = formatPrice(elements[i].textContent);
+            }
+        }
+
+        let priceInputs = document.getElementsByClassName('price-input-class');
+        if (priceInputs.length > 0) {
+            for (let i = 0; i < priceInputs.length; i++) {
+                priceInputs[i].addEventListener('input', formatPriceOnInput);
+                formatPriceOnInput({ target: priceInputs[i] });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            formatDisplayPriceByClass('price-display-class');
+        });
+    </script>
     <script src="{{ asset('js/factor-list.js') }}"></script>
 @endsection
 
@@ -232,38 +263,9 @@
                     </tbody>
                 </table>
             </div>
-
-            <script>
-                function formatPrice(price) {
-                    let numericPrice = String(price).replace(/[^0-9]/g, '');
-                    if (numericPrice === '') return '';
-                    return numericPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-                }
-
-                function formatPriceOnInput(event) {
-                    let input = event.target;
-                    input.value = formatPrice(input.value);
-                }
-
-                function formatDisplayPriceByClass(className) {
-                    let elements = document.getElementsByClassName(className);
-                    for (let i = 0; i < elements.length; i++) {
-                        elements[i].textContent = formatPrice(elements[i].textContent);
-                    }
-                }
-
-                let priceInputs = document.getElementsByClassName('price-input-class');
-                if (priceInputs.length > 0) {
-                    for (let i = 0; i < priceInputs.length; i++) {
-                        priceInputs[i].addEventListener('input', formatPriceOnInput);
-                        formatPriceOnInput({ target: priceInputs[i] });
-                    }
-                }
-
-                document.addEventListener('DOMContentLoaded', function() {
-                    formatDisplayPriceByClass('price-display-class');
-                });
-            </script>
+            <div class="d-flex justify-content-center">
+                {{$factors->withQueryString()->links('vendor.pagination.bootstrap-5')}}
+            </div>
         </div>
     </div>
     @include('templates.factor.Modal.payment-modal')

@@ -9,19 +9,19 @@ class MessageRepo implements InterfaceMessage
 {
     public function getAll()
     {
-        return Message::orderBy('order', 'asc')->get();
+        return Message::orderBy('order', 'asc')->paginate(10);
     }
-    
+
     public function getActive()
     {
         return Message::where('is_active', true)->orderBy('order', 'asc')->get();
     }
-    
+
     public function findById($id)
     {
         return Message::findOrFail($id);
     }
-    
+
     public function create(array $data)
     {
         DB::beginTransaction();
@@ -34,7 +34,7 @@ class MessageRepo implements InterfaceMessage
             return $e->getMessage();
         }
     }
-    
+
     public function update($id, array $data)
     {
         DB::beginTransaction();
@@ -48,7 +48,7 @@ class MessageRepo implements InterfaceMessage
             return $e->getMessage();
         }
     }
-    
+
     public function delete($id)
     {
         $message = $this->findById($id);

@@ -61,7 +61,9 @@
                         </tbody>
                     </table>
                 </div>
-                
+                <div class="d-flex justify-content-center">
+                    {{$users->withQueryString()->links('vendor.pagination.bootstrap-5')}}
+                </div>
 
                 <div class="d-flex justify-content-center">
                 </div>

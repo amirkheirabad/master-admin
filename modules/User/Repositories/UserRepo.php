@@ -21,7 +21,7 @@ class UserRepo implements InterfaceUser
 
     public function getUsers()
     {
-        return User::all();
+        return User::paginate(10);
     }
 
     public function getPermissions()
