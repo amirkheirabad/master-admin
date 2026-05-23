@@ -21,7 +21,8 @@ class UserRepo implements InterfaceUser
 
     public function getUsers()
     {
-        return User::paginate(10);
+        return User::orderBy('created_at', 'desc')->paginate(10);
+
     }
 
     public function getPermissions()

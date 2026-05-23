@@ -21,19 +21,34 @@ function setContentHeight() {
 
 // تابع باز کردن آیتم فعال در سایدبار
 function openActiveMenuItem() {
+    var currentPath = window.location.pathname; // مثلاً "/user-list"
+    if (currentPath === '') currentPath = '/';
+
     $SIDEBAR_MENU.find('a').each(function() {
-        var href = $(this).attr('href');
-        if (href && href !== '#' && href !== 'javascript:;' && CURRENT_URL.indexOf(href) !== -1) {
-            var $parentLi = $(this).parent('li');
+        var $this = $(this);
+        var href = $this.attr('href');
+        if (!href || href === '#' || href === 'javascript:;') return;
+
+        // تبدیل href به مسیر نسبی (بدون پروتکل و دامنه)
+        var linkPath = href.split('?')[0].split('#')[0];
+        // اگر href مطلق بود (مثل http://...) فقط قسمت path را می‌گیریم
+        if (linkPath.indexOf('http') === 0) {
+            var a = document.createElement('a');
+            a.href = href;
+            linkPath = a.pathname;
+        }
+
+        // مقایسه دقیق مسیرها
+        if (linkPath === currentPath) {
+            var $parentLi = $this.parent('li');
             var $parentUl = $parentLi.parents('ul.child_menu');
 
             if ($parentUl.length) {
                 $parentUl.show();
                 $parentUl.parent('li').addClass('active');
             }
-
             $parentLi.addClass('active current-page');
-            return false;
+            return false; // فقط اولین تطابق را فعال کن
         }
     });
 }
