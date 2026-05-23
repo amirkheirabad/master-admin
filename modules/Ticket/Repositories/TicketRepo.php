@@ -65,13 +65,13 @@ class TicketRepo implements InterfaceTicket
 
             ->when($request->filled('sort'), function ($q) use ($request) {
                 if ($request->sort === 'latest') {
-                    $q->orderBy('created_at', 'desc');
+                    $q->orderBy('updated_at', 'desc');
                 } elseif ($request->sort === 'oldest') {
-                    $q->orderBy('created_at', 'asc');
+                    $q->orderBy('updated_at', 'asc');
                 }
+            }, function ($q) {
+                $q->orderBy('updated_at', 'desc');
             })
-
-            ->latest()
             ->paginate(10);
     }
 

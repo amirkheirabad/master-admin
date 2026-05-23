@@ -78,7 +78,7 @@ $('#ticketForm').on('submit', function (e) {
     formData.append('title', $('#title').val());
     formData.append('message', $('#message').val());
     formData.append('priority', $('select[name="priority"]').val());
-    formData.append('captcha', $('input[name="captcha"]').val());
+    formData.append('captcha', $('#captcha').val());
 
     // اضافه کردن فایل‌ها به FormData
     if (selectedFiles.length > 0) {
@@ -122,14 +122,12 @@ $('#ticketForm').on('submit', function (e) {
             } else {
                 setButtonLoading(submitBtn, false);
                 if (data && data.error) {
-                    alert(data.error);
                 }
             }
         })
         .catch(err => {
             console.log(err);
             setButtonLoading(submitBtn, false);
-            alert('خطایی در ارتباط با سرور رخ داده است');
         });
 });
 
@@ -205,14 +203,12 @@ $('#ticketFormUser').on('submit', function (e) {
             } else {
                 setButtonLoading(submitBtn, false);
                 if (data && data.error) {
-                    alert(data.error);
                 }
             }
         })
         .catch(err => {
             console.log(err);
             setButtonLoading(submitBtn, false);
-            alert('خطایی در ارتباط با سرور رخ داده است');
         });
 });
 

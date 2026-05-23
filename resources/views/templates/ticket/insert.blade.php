@@ -156,16 +156,16 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-12 mb-3 mt-2">
+                            <div class="col-md-6 col-xs-12 mb-3 mt-2">
                                 <label>کد امنیتی</label>
                                 <div class="captcha-row">
                                     <span class="captcha-question" id="captchaLabel">
                                         {{ $captcha_question ?? '5 + 3 = ?' }}
                                     </span>
-                                    <input type="text" name="captcha" class="form-control captcha-input" placeholder="حاصل" >
                                     <button type="button" class="refresh-captcha-btn" id="refreshCaptchaBtn">
                                         <i class="fa fa-refresh"></i> جدید
                                     </button>
+                                    <input type="text" name="captcha" id="captcha" class="form-control custom-radius input-border-focus" placeholder="حاصل" >
                                 </div>
                                 <div class=" mb-3 mt-1">
                                 <span class=" text-danger error-message" id="captcha_error"></span>
@@ -187,12 +187,13 @@
 
                             </div>
 
+
+
+                        </div>
                             <div class="d-flex justify-content-end col-md-12 mt-8">
                                 <button type="submit" class="btn btn-beta-solid">تایید</button>
                                 <a href="{{ route('list_tickets') }}" class="btn btn-beta-outline">انصراف</a>
                             </div>
-
-                        </div>
                     </div>
                     </div>
                 </form>
@@ -248,16 +249,16 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-12 mb-3 mt-2">
+                            <div class="col-md-6 col-xs-12 mb-3 mt-2">
                                 <label>کد امنیتی</label>
                                 <div class="captcha-row">
                                     <span class="captcha-question" id="captchaLabel">
                                         {{ $captcha_question ?? '5 + 3 = ?' }}
                                     </span>
-                                    <input type="text" name="captcha" class="form-control captcha-input" placeholder="حاصل" >
                                     <button type="button" class="refresh-captcha-btn" id="refreshCaptchaBtn">
                                         <i class="fa fa-refresh"></i> جدید
                                     </button>
+                                    <input type="text" name="captcha" id="captcha" class="form-control custom-radius input-border-focus" placeholder="حاصل" >
                                 </div>
                                 <div class=" mb-3 mt-1">
                                     <span class=" text-danger error-message" id="captcha_error"></span>
@@ -279,11 +280,10 @@
 
                                 </div>
 
-                                <div class="d-flex justify-content-end col-md-12 mt-8">
-                                    <button type="submit" class="btn btn-beta-solid">تایید</button>
-                                    <a href="{{ route('list_tickets') }}" class="btn btn-beta-outline">انصراف</a>
-                                </div>
-
+                            </div>
+                            <div class="d-flex justify-content-end col-md-12 mt-8">
+                                <button type="submit" class="btn btn-beta-solid">تایید</button>
+                                <a href="{{ route('list_tickets') }}" class="btn btn-beta-outline">انصراف</a>
                             </div>
                         </div>
                     </div>

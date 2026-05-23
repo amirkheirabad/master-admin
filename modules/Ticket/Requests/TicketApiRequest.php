@@ -4,29 +4,11 @@ namespace Modules\Ticket\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TicketAdminRequest extends FormRequest
+class TicketApiRequest extends FormRequest
 {
     public function authorize(): bool
     {
         return true;
-    }
-
-    protected function prepareForValidation()
-    {
-        $persianNumbers = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
-        $englishNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-
-        $captcha = str_replace($persianNumbers, $englishNumbers, $this->captcha);
-
-        $this->merge([
-            'captcha' => $captcha,
-        ]);
-
-        if ($captcha != session('captcha_result')) {
-            $this->getValidatorInstance()->after(function ($validator) {
-                $validator->errors()->add('captcha', 'کد امنیتی اشتباه است');
-            });
-        }
     }
 
     public function rules()
@@ -38,7 +20,6 @@ class TicketAdminRequest extends FormRequest
             'message' => 'required|string|min:3',
             'attachments' => 'nullable|array|max:5',
             'attachments.*' => 'file|mimes:jpg,png,pdf|max:2048',
-            'captcha' => 'required|numeric',
             'priority' => 'required|in:1,2,3,4',
         ];
     }
