@@ -113,7 +113,7 @@
     }
 
     .mobile-sidebar .nav.side-menu > li.active > a {
-        background: #f8f7fa !important;
+        background: #e8edf5 !important;
         color: #2c3e50 !important;
         text-shadow: none !important;
         box-shadow: none !important;
@@ -272,7 +272,7 @@
 
     /* آیتم فعال در زیرمنو */
     .child_menu li.active a {
-        background: #F8F7FA !important;
+        background: #e8edf5 !important;
         color: #2c3e50 !important;
     }
 
