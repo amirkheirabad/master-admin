@@ -18,6 +18,7 @@ class LoginRequest extends FormRequest
     {
         $this->merge([
             'mobile' => $this->convertToEnglishNumber($this->mobile),
+            'password' => $this->convertToEnglishNumber($this->password),
         ]);
     }
 
