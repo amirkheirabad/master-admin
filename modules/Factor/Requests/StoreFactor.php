@@ -49,6 +49,7 @@ class StoreFactor extends FormRequest
     {
         return [
             'store_id' => 'required_without_all:phone,name|nullable|exists:stores,id',
+            'user_id' => 'nullable|exists:users,id',
             'factor_date' => 'required|string',
             'phone' => 'required_without:store_id|nullable|regex:/(09)[0-9]{9}/|digits:11',
             'name' => 'required_without:store_id|nullable|string|max:255',

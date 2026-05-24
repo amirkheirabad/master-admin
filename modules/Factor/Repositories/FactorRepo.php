@@ -49,8 +49,15 @@ class FactorRepo implements InterfaceFactor
         if ($user->hasRole('admin')) {
             $factors = Factor::query()->with('store', 'category');
         } elseif ($user->hasRole('seller')) {
+
             $storeIds = $user->stores()->pluck('id');
-            $factors = Factor::whereIn('store_id', $storeIds)->with('store', 'category');
+
+            $factors = Factor::where(function ($query) use ($storeIds, $user) {
+
+                $query->whereIn('store_id', $storeIds)
+                    ->orWhere('user_id', $user->id);
+
+        })->with('store', 'category');
         } else {
             return collect();
         }
@@ -102,6 +109,7 @@ class FactorRepo implements InterfaceFactor
     {
         return Factor::create([
             'store_id' => $data['store_id'],
+            'user_id' => $data['user_id'] ?? null,
             'factor_date' => Verta::parse($data['factor_date'])->toCarbon(),
             'category_id' => $data['category_id'],
             'show_status' => $data['show_status'],

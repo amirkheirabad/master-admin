@@ -7,6 +7,8 @@ use Modules\Factor\Repositories\InterfaceFactor;
 use Modules\Stores\Repositories\InterfaceStores;
 use Modules\Factor\Requests\StoreFactor;
 use Modules\Factor\Requests\UpdateFactorRequest;
+use Modules\User\Models\User;
+
 
 class FactorController
 {
@@ -25,12 +27,23 @@ class FactorController
         $factors = $this->factor->filterFactor($request);
         return view('templates.factor.list', compact('stores', 'categories', 'factors'));
     }
+    public function customerInfo($id)
+    {
+        $user = User::findOrFail($id);
+
+        return response()->json([
+            'name' => $user->name,
+            'mobile' => $user->mobile,
+            'national_kod' => $user->national_kod,
+        ]);
+    }
 
     public function insert()
     {
         $stores = $this->store->getAll();
         $categories = $this->factor->getAllCategories();
-        return view('templates.factor.insert', compact('stores' , 'categories'));
+        $customers = User::role('seller')->get();
+        return view('templates.factor.insert', compact('stores' , 'categories' , 'customers'));
     }
 
     public function index_category()

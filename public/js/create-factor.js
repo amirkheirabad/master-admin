@@ -57,6 +57,7 @@ $('#createFactor').on('submit', function (e) {
             name: $('#name').val(),
             phone: $('#phone').val(),
             national_kod: $('#national_kod').val(),
+            user_id: $('#customer_id').val(), 
         }),
     })
         .then(res => res.json())
@@ -180,11 +181,12 @@ document.querySelectorAll('#copyHash').forEach(item => {
 
 
 const accountType = document.getElementById('account_type');
-const agencyInputs = document.querySelectorAll('.agency-field');
+const agencyInputs = document.querySelectorAll('.agency-field, .customer-field');
 const storeField = document.getElementById('store_id').closest('.col-md-4');
 
 accountType.addEventListener('change', function () {
     if (this.value === 'agency') {
+        console.log('dsd');
         agencyInputs.forEach(el => el.style.display = 'block');
         if (storeField) storeField.style.display = 'none';
     } else {
@@ -265,6 +267,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
     updatePriceDisplay();
 });
+ 
 
+$('#customer_id').on('change', function () {
 
+    let userId = $(this).val();
 
+    if (userId === '') {
+        $('#name').val('');
+        $('#phone').val('');
+        $('#national_kod').val('');
+        return;
+    }
+
+    fetch(`/customer-info/${userId}`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'X-CSRF-TOKEN': csrf
+        }
+    })
+        .then(res => res.json())
+        .then(data => {
+
+            $('#name').val(data.name ?? '');
+            $('#phone').val(data.mobile ?? '');
+            $('#national_kod').val(data.national_kod ?? '');
+
+        })
+        .catch(err => {
+            console.log(err);
+        });
+
+});
