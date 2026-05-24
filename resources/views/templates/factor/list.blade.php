@@ -120,8 +120,8 @@
                                         <option value="4" {{ request()->get('price_status') == '4' ? 'selected' : '' }}>معلق شده</option>
                                     </select>
                                 </div>
-
-                                <div class="mb-2">
+                                @if (auth()->user()->hasRole('admin'))
+                                  <div class="mb-2">
                                     <select class="form-control custom-radius  select2" name="store_id" data-placeholder=" فروشگاه">
                                         <option value="">همه </option>
                                         @foreach ($stores as $store)
@@ -141,7 +141,9 @@
                                             @endif
                                         @endforeach
                                     </select>
-                                </div>
+                                </div>   
+                                @endif
+                               
 
                                 <div class="d-flex justify-content-between mt-3">
                                     <button type="button" id="clearFiltersBtn" class="btn btn-link text-default text-bold" style="padding: 0;">حذف فیلترها</button>

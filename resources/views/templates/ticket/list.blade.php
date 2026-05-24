@@ -77,7 +77,8 @@
                             <!-- منوی دسکتاپ - همین که داری -->
                             <div class="dropdown-menu rounded-5 desktop-filter-menu" aria-labelledby="filterDropdown" style="padding: 15px; min-width: 320px;">
                                 <!-- محتوای فیلترها همینطوری که هست -->
-                                <div class="mb-2">
+                                @if (auth()->user()->hasRole('admin'))
+                                 <div class="mb-2">
                                     <select class="form-control custom-radius custom-select-input" name="store_id" data-title="نام فروشگاه:">
                                         <option value="">همه</option>
                                         @foreach($stores as $store)
@@ -86,7 +87,9 @@
                                             </option>
                                         @endforeach
                                     </select>
-                                </div>
+                                </div>    
+                                @endif
+                               
                                 <div class="mb-2">
                                     <select name="status" class="form-control custom-radius custom-select-input" data-title="وضعیت:">
                                         <option value="">همه</option>
