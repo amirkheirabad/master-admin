@@ -34,7 +34,9 @@
                         تغییر وضعیت
                     </div>
                     <div class="dropdown-option pointer p-5 btn-green-light">
+                    @if($ticket->recipient_type === 'store' && $ticket->store)
                         <a href="{{ route('edit_store' , $ticket->store->id) }}" style="color: black">
+                        @endif
                             <i class="fa fa-info-circle fa-x"></i> اطلاعات فروشگاه
                         </a>
                     </div>
@@ -56,9 +58,11 @@
                     </div>
                     <div class="d-flex gap-2 hide-on-mobile" style="gap: 10px;">
                          @if(auth()->user()->hasanyRole('admin'))
-                            <a href="{{ route('edit_store' , $ticket->store->id) }}" class="btn btn-beta-outline hide-on-mobile">
-                                <i class="fa fa-info-circle fa-x"></i> اطلاعات فروشگاه
-                            </a>
+                         @if($ticket->recipient_type === 'store' && $ticket->store)
+                        <a href="{{ route('edit_store' , $ticket->store->id) }}" class="btn btn-beta-outline hide-on-mobile">
+                            <i class="fa fa-info-circle fa-x"></i> اطلاعات فروشگاه
+                        </a>
+                        @endif
                         @endif
 
                          @if(auth()->user()->hasanyRole('admin'))
@@ -90,8 +94,9 @@
                     <div class="d-flex justify-content-between">
                         <div>
                             <h3>{{ $ticket->title }}</h3>
-                            <h5>فروشگاه {{ $ticket->store->store_name }}</h5>
-                        </div>
+                            <h5>
+                                {{ $ticket->recipient_type === 'store' ? 'فروشگاه ' . $ticket->store?->store_name : 'کاربر ' . $ticket->user?->name }}
+                            </h5>                        </div>
                         <div>
                             <h5 class="mb-8">
                                 @if($ticket->status == 0)

@@ -6,4 +6,4 @@ use App\Http\Middleware\StoreTokenMiddleware;
 
 
 Route::middleware(['throttle:ticket_ratelimit'])->post('/ticketApi', [TicketController::class, 'store'])->middleware(StoreTokenMiddleware::class);
-Route::middleware(['throttle:ticket_ratelimit'])->post('/{id}/replyApi', [TicketController::class, 'reply'])->name('ticket_store_reply')->middleware(StoreTokenMiddleware::class);
+Route::middleware(['throttle:ticket_ratelimit'])->post('/{id}/replyApi', [TicketController::class, 'reply'])->middleware(StoreTokenMiddleware::class);

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Stores\Models\Stores;
 use Modules\Factor\Models\Category;
+use Modules\User\Models\User;
 
 class Factor extends Model
 {
@@ -18,6 +19,7 @@ class Factor extends Model
     protected $fillable = [
         'store_id',
         'category_id',
+        'user_id', 
         'price',
         'description',
         'show_status',
@@ -39,5 +41,9 @@ class Factor extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+    public function customer()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

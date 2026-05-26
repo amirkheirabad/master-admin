@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('factors', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('store_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('store_id')->references('id')->on('stores');
             $table->integer('price');
             $table->timestamp('factor_date')->nullable();

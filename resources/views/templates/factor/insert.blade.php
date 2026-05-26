@@ -53,6 +53,20 @@
                                         <option value="agency">مشتری</option>
                                     </select>
                                 </div>
+                                <div class="col-md-4 col-xs-12 mt-4 customer-field" style="display:none;">
+                                    <label>انتخاب مشتری (اختیاری)</label>
+                                    <select id="customer_id" class="form-control custom-radius select2" style="height: 40px">
+                                        <option value="">انتخاب مشتری</option>
+                                        @foreach($customers as $customer)
+                                            <option value="{{ $customer->id }}" data-name="{{ $customer->name }}" data-phone="{{ $customer->mobile }}">
+                                                {{ $customer->name }} - {{ $customer->mobile }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <div class="mt-1">
+                                        <span class="text-danger error-message" id="customer_id_error"></span>
+                                    </div>
+                                </div>
 
                                 <div class="col-md-4 col-xs-12 mt-4">
                                     <label>فروشگاه</label> <span class="text-danger">*</span>

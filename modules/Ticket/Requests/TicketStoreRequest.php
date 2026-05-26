@@ -35,7 +35,9 @@ class TicketStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'store_id' => 'required|exists:stores,id',
+            'recipient_type'  => 'required|in:store,user',
+            'store_id'        => 'required_if:recipient_type,store|nullable|exists:stores,id',
+            'user_id'         => 'required_if:recipient_type,user|nullable|exists:users,id',
             'contact_name' => 'required|string|max:50',
             'title' => 'required|string|max:255',
             'message' => 'required|string|min:3',

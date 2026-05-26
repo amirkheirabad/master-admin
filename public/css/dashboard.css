@@ -1,0 +1,296 @@
+.dashboard-wrap {
+    padding: 20px 24px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.dashboard-hero {
+    background: linear-gradient(135deg, #133c6d 0%, #1e5a9e 55%, #2a7bc4 100%);
+    border-radius: 16px;
+    padding: 28px 32px;
+    color: #fff;
+    margin-bottom: 24px;
+    box-shadow: 0 12px 32px rgba(19, 60, 109, 0.22);
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-hero::after {
+    content: '';
+    position: absolute;
+    left: -40px;
+    top: -40px;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 50%;
+}
+
+.dashboard-hero::before {
+    content: '';
+    position: absolute;
+    right: -20px;
+    bottom: -60px;
+    width: 280px;
+    height: 280px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 50%;
+}
+
+.dashboard-hero h2 {
+    margin: 0 0 8px;
+    font-size: 24px;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+}
+
+.dashboard-hero p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 14px;
+    position: relative;
+    z-index: 1;
+}
+
+.dashboard-hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 18px;
+    position: relative;
+    z-index: 1;
+}
+
+.dashboard-hero-badge {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(4px);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.dashboard-stat-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    border: 1px solid #edf2f7;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.dashboard-stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(19, 60, 109, 0.1);
+}
+
+.dashboard-stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.dashboard-stat-icon.blue { background: rgba(19, 60, 109, 0.1); color: #133c6d; }
+.dashboard-stat-icon.green { background: rgba(72, 187, 120, 0.12); color: #38a169; }
+.dashboard-stat-icon.orange { background: rgba(237, 137, 54, 0.12); color: #dd6b20; }
+.dashboard-stat-icon.purple { background: rgba(128, 90, 213, 0.12); color: #805ad5; }
+.dashboard-stat-icon.red { background: rgba(229, 62, 62, 0.1); color: #e53e3e; }
+
+.dashboard-stat-value {
+    font-size: 26px;
+    font-weight: 700;
+    color: #1a202c;
+    line-height: 1.2;
+}
+
+.dashboard-stat-label {
+    font-size: 13px;
+    color: #718096;
+    margin-top: 4px;
+}
+
+.dashboard-alert {
+    background-color: #fef3c7c2;
+    border-right: 4px solid #f6ad55;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    border: 1px solid #fef3c7;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.dashboard-alert i {
+    color: #dd6b20;
+    font-size: 18px;
+    margin-top: 5px;
+}
+
+.dashboard-alert-title {
+    font-weight: 600;
+    color: #744210;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.dashboard-alert-text {
+    color: #000000;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 20px;
+}
+
+@media (max-width: 991px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.dashboard-panel {
+    background: #fff;
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    border: 1px solid #edf2f7;
+    margin-bottom: 20px;
+}
+
+.dashboard-panel-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #133c6d;
+    margin: 0 0 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.dashboard-panel-title a {
+    font-size: 12px;
+    font-weight: 500;
+    color: #718096;
+}
+
+.dashboard-panel-title a:hover {
+    color: #133c6d;
+    text-decoration: none;
+}
+
+.dashboard-quick-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    color: #4a5568;
+    text-decoration: none;
+    transition: background 0.15s;
+    margin-bottom: 6px;
+}
+
+.dashboard-quick-link:hover {
+    background: #f7fafc;
+    color: #133c6d;
+    text-decoration: none;
+}
+
+.dashboard-quick-link i {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba(19, 60, 109, 0.08);
+    color: #133c6d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+}
+
+.dashboard-ticket-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #edf2f7;
+}
+
+.dashboard-ticket-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.dashboard-ticket-item:first-child {
+    padding-top: 0;
+}
+
+.dashboard-ticket-title {
+    font-weight: 500;
+    color: #2d3748;
+    font-size: 14px;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 220px;
+}
+
+.dashboard-ticket-meta {
+    font-size: 12px;
+    color: #a0aec0;
+}
+
+.dashboard-badge {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+.dashboard-badge.open { background: #ebf8ff; color: #2b6cb0; }
+.dashboard-badge.waiting { background: #fef3c7; color: #975a16; }
+.dashboard-badge.closed { background: #f0fff4; color: #276749; }
+
+.dashboard-empty {
+    text-align: center;
+    padding: 28px 16px;
+    color: #a0aec0;
+    font-size: 14px;
+}
+
+.dashboard-empty i {
+    font-size: 32px;
+    margin-bottom: 10px;
+    display: block;
+    opacity: 0.5;
+}
+
+.dashboard-chart-wrap {
+    position: relative;
+    height: 260px;
+}

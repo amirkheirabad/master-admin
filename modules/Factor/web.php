@@ -16,6 +16,7 @@ Route::middleware(['check.login', 'check.role:admin,seller'])->group(function(){
 Route::middleware(['check.login', 'check.role:admin'])->group(function(){
 
     Route::get('/factor-insert', [FactorController::class, 'insert'])->name('factor-insert');
+    Route::get('/customer-info/{id}', [FactorController::class, 'customerInfo']);
     Route::post('/factor-create', [FactorController::class, 'storeFactor'])->name('factor-create');
     Route::get('/factor-edit/{id}', [FactorController::class, 'factor_edit'])->name('factor-edit');
     Route::post('/factor-update/{id}', [FactorController::class, 'updateFactor'])->name('factor-update');

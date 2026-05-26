@@ -5,8 +5,10 @@ namespace Modules\User\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Modules\Factor\Models\Factor as ModelsFactor;
 use Spatie\Permission\Traits\HasRoles;
 use Modules\Stores\Models\Stores;
+use Modules\Factor\Models\Factor;
 
 class User extends Authenticatable
 {
@@ -36,5 +38,9 @@ class User extends Authenticatable
     public function stores()
     {
         return $this->hasOne(Stores::class);
+    }
+    public function factors()
+    {
+        return $this->hasMany(Factor::class, 'user_id');
     }
 }
