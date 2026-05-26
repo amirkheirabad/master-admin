@@ -73,12 +73,18 @@ $('#ticketForm').on('submit', function (e) {
     const formData = new FormData();
 
     // اضافه کردن فیلدهای فرم به FormData
-    formData.append('store_id', $('#store_id').val());
+    formData.append('recipient_type', $('#recipient_type').val());
     formData.append('contact_name', $('#contact_name').val());
     formData.append('title', $('#title').val());
     formData.append('message', $('#message').val());
     formData.append('priority', $('select[name="priority"]').val());
     formData.append('captcha', $('#captcha').val());
+    
+    if ($('#recipient_type').val() === 'store') {
+        formData.append('store_id', $('#store_id').val());
+    } else {
+        formData.append('user_id', $('#user_id').val());
+    }
 
     // اضافه کردن فایل‌ها به FormData
     if (selectedFiles.length > 0) {
@@ -145,8 +151,18 @@ $('#ticketFormUser').on('submit', function (e) {
     const formData = new FormData();
 
     // اضافه کردن فیلدهای فرم به FormData
-    formData.append('store_id', $('#store_id').val());
+    formData.append('recipient_type', $('input[name="recipient_type"]').val());
     formData.append('contact_name', $('#contact_name').val());
+
+    const storeId = $('input[name="store_id"]').val();
+    const userId = $('input[name="user_id"]').val();
+
+    if (storeId) {
+        formData.append('store_id', storeId);
+    }
+    if (userId) {
+        formData.append('user_id', userId);
+    }
     formData.append('title', $('#title').val());
     formData.append('message', $('#message').val());
     formData.append('priority', $('select[name="priority"]').val());
@@ -251,3 +267,13 @@ function removeFile(index) {
     selectedFiles.splice(index, 1);
     displayFileNames();
 }
+
+$('#recipient_type').on('change', function() {
+    if ($(this).val() === 'store') {
+        $('#store_wrapper').show();
+        $('#user_wrapper').hide();
+    } else {
+        $('#store_wrapper').hide();
+        $('#user_wrapper').show();
+    }
+});

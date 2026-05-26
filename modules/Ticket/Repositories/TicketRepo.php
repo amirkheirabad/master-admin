@@ -30,7 +30,13 @@ class TicketRepo implements InterfaceTicket
             $tickets = Ticket::query()->with('store');
         } elseif ($user->hasRole('seller')) {
             $storeIds = $user->stores()->pluck('id');
-            $tickets = Ticket::whereIn('store_id', $storeIds)->with('store');
+            $tickets = Ticket::where(function($q) use ($storeIds, $user) {
+                $q->whereIn('store_id', $storeIds)
+                  ->orWhere(function($q2) use ($user) {
+                      $q2->where('recipient_type', 'user')
+                         ->where('user_id', $user->id);
+                  });
+            })->with(['store', 'user']);
         } else {
             return collect();
         }
@@ -77,64 +83,94 @@ class TicketRepo implements InterfaceTicket
 
     public function createTicketStore(array $data)
     {
-        $attachmentPaths = array_map(fn($file) => $file?->store("ticket-attachments", 'public'), (array)($data['attachments'] ?? []));
+    $attachmentPaths = array_map(
+        fn($file) => $file?->store("ticket-attachments", 'public'),
+        (array)($data['attachments'] ?? [])
+    );
 
-        try {
-            DB::beginTransaction();
+    try {
+        DB::beginTransaction();
 
-            $ticket = Ticket::create([
-            'store_id' => $data['store_id'],
-            'title' => $data['title'],
-            'contact_name' => $data['contact_name'],
-            'priority' => $data['priority'],
-            'status' => 0
-        ]);
+        $ticketData = [
+            'title'          => $data['title'],
+            'contact_name'   => $data['contact_name'],
+            'priority'       => $data['priority'],
+            'recipient_type' => $data['recipient_type'],
+            'status'         => 0,
+            'store_id'       => null,
+            'user_id'        => null,
+        ];
 
-            TicketMessage::create([
-            'ticket_id' => $ticket->id,
-            'messages' => $data['message'],
+        if ($data['recipient_type'] === 'store') {
+            $ticketData['store_id'] = $data['store_id'];
+        } else {
+            $ticketData['user_id'] = $data['user_id'];
+        }
+
+        $ticket = Ticket::create($ticketData);
+
+        TicketMessage::create([
+            'ticket_id'   => $ticket->id,
+            'messages'    => $data['message'],
             'sender_type' => 0,
             'attachments' => !empty($attachmentPaths) ? json_encode($attachmentPaths) : null,
         ]);
-            DB::commit();
 
-            return $ticket->load('messages');
-        } catch (\Exception $e) {
-            DB::rollBack();
-            Log::error($e->getMessage());
-            throw new \Exception($e->getMessage());
-        }
+        DB::commit();
+
+        return $ticket->load('messages');
+
+    } catch (\Exception $e) {
+        DB::rollBack();
+        Log::error($e->getMessage());
+        throw new \Exception($e->getMessage());
+    }
     }
 
     public function createTicketAdmin(array $data)
     {
-        $attachmentPaths = array_map(fn($file) => $file?->store("ticket-attachments", 'public'), (array)($data['attachments'] ?? []));
+    $attachmentPaths = array_map(
+        fn($file) => $file?->store("ticket-attachments", 'public'),
+        (array)($data['attachments'] ?? [])
+    );
 
+    try {
+        DB::beginTransaction();
 
-        try {
-            DB::beginTransaction();
-            $ticket = Ticket::create([
-                'store_id' => $data['store_id'],
-                'title' => $data['title'],
-                'contact_name' => $data['contact_name'],
-                'priority' => $data['priority'],
-                'status' => 1,
-            ]);
+        $ticketData = [
+            'title'          => $data['title'],
+            'contact_name'   => $data['contact_name'],
+            'priority'       => $data['priority'],
+            'recipient_type' => $data['recipient_type'],
+            'status'         => 1,
+            'store_id'       => null,
+            'user_id'        => null,
+        ];
 
-            TicketMessage::create([
-                'ticket_id' => $ticket->id,
-                'messages' => $data['message'],
-                'sender_type' => 1,
-                'attachments' => !empty($attachmentPaths) ? json_encode($attachmentPaths) : null,
-            ]);
-            DB::commit();
-
-            return $ticket->load('messages');
-        } catch (\Exception $e) {
-            DB::rollBack();
-            Log::error($e->getMessage());
-            throw new \Exception($e->getMessage());
+        if ($data['recipient_type'] === 'store') {
+            $ticketData['store_id'] = $data['store_id'];
+        } else {
+            $ticketData['user_id'] = $data['user_id'];
         }
+
+        $ticket = Ticket::create($ticketData);
+
+        TicketMessage::create([
+            'ticket_id'   => $ticket->id,
+            'messages'    => $data['message'],
+            'sender_type' => 1,
+            'attachments' => !empty($attachmentPaths) ? json_encode($attachmentPaths) : null,
+        ]);
+
+        DB::commit();
+
+        return $ticket->load('messages');
+
+    } catch (\Exception $e) {
+        DB::rollBack();
+        Log::error($e->getMessage());
+        throw new \Exception($e->getMessage());
+    }
     }
 
     public function replyAsStore($id, array $data)

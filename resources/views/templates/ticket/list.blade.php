@@ -161,7 +161,7 @@
                                 <input type="checkbox" class="form-check-input hide-on-mobile" data-id="{{$ticket->id}}">
                                 <div class="hide-from-md" style="display: flex; justify-content: space-between; align-items: center; width: 100%; flex-direction: row;">
                                     <div class="text-bold">
-                                        تیکت {{$ticket->id}} - {{ $ticket->store->store_name }}
+                                    تیکت {{$ticket->id}} - {{ $ticket->recipient_type === 'store' ? $ticket->store?->store_name : $ticket->user?->name }}
                                     </div>
                                     <div>
                                         <a href="{{ route('show_ticket', $ticket->id) }}" target="_blank">
@@ -171,7 +171,7 @@
                                 </div>
                             </th>
                             <td data-title="نام فروشگاه:" class="hide-on-mobile">{{ $ticket->id }}</td>
-                            <td data-title="نام فروشگاه:" class="hide-on-mobile">{{ $ticket->store->store_name }}</td>
+                            <td data-title="نام فروشگاه:" class="hide-on-mobile">{{ $ticket->recipient_type === 'store' ? $ticket->store?->store_name : $ticket->user?->name }}</td>
                             <td data-title="عنوان:" class="responsive-table-td">{{ $ticket->title }}</td>
                              <td data-title="اولویت" class="responsive-table-td">
                                 @if($ticket->priority == 1)

@@ -55,14 +55,15 @@ class TicketController
 
     public function insert()
     {
-        $stores = $this->store->getAll();
-        // تولید سوال کپچا
-        $num1 = rand(1, 20);
-        $num2 = rand(1, 20);
-        session(['captcha_result' => $num1 + $num2]);
-        $captcha_question = "{$num1} + {$num2} = ?";
+    $stores = $this->store->getAll();
+    $users = \Modules\User\Models\User::select('id', 'name', 'mobile')->get();
 
-        return view('templates.ticket.insert', compact('stores', 'captcha_question'));
+    $num1 = rand(1, 20);
+    $num2 = rand(1, 20);
+    session(['captcha_result' => $num1 + $num2]);
+    $captcha_question = "{$num1} + {$num2} = ?";
+
+    return view('templates.ticket.insert', compact('stores', 'users', 'captcha_question'));
     }
 
     public function store(TicketAdminRequest $request)
@@ -88,26 +89,32 @@ class TicketController
 
     public function storeUser(TicketStoreRequest $request)
     {
-        $user = auth()->user();
+    $user = auth()->user();
+    $store = $user->stores()->first();
 
-        if ($user->hasRole('seller')) {
-            $storeIds = $user->stores()->pluck('id')->toArray();
-
-            if (!in_array($request->store_id, $storeIds)) {
-                return response()->json([
-                    'success' => false,
-                    'error' => 'شما به این فروشگاه دسترسی ندارید'
-                ], 403);
-            }
-        }
-
-        $this->ticket->createTicketStore($request->validated());
-
-        return response()->json([
-            'success' => true,
-            'redirect' => route('list_tickets'),
-            'message' => __('factor created successfully!'),
+    // اگه فروشگاه داره، recipient_type رو force میکنیم به store
+    if ($store) {
+        $request->merge([
+            'recipient_type' => 'store',
+            'store_id'       => $store->id,
+            'user_id'        => null,
         ]);
+    } else {
+        // فروشگاه نداره، تیکت به اسم خودش
+        $request->merge([
+            'recipient_type' => 'user',
+            'user_id'        => $user->id,
+            'store_id'       => null,
+        ]);
+    }
+
+    $this->ticket->createTicketStore($request->validated());
+
+    return response()->json([
+        'success'  => true,
+        'redirect' => route('list_tickets'),
+        'message'  => __('ticket created successfully!'),
+    ]);
     }
 
     public function replyUser(TicketReplyRequest $request, $id)

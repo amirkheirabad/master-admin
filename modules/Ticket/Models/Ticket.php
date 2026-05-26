@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Modules\SmsPanel\Models\SmsPanel;
 use Modules\Stores\Models\Stores;
 use Modules\Ticket\Models\TicketMessage;
-
+use Modules\User\Models\User;
 class Ticket extends Model
 {
     use HasFactory;
@@ -17,6 +17,8 @@ class Ticket extends Model
 
     protected $fillable = [
         'title',
+        'user_id',           // جدید
+        'recipient_type',
         'status',
         'priority',
         'contact_name',
@@ -35,6 +37,10 @@ class Ticket extends Model
     public function store()
     {
         return $this->belongsTo(Stores::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
 

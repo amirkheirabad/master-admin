@@ -15,7 +15,7 @@
     <style>
         #fileList ul {
             list-style: none;
-            padding: 0;
+            padding: 0; 
             margin: 10px 0;
         }
 
@@ -98,19 +98,45 @@
                     <div class="form-group mt-8">
                         <div class="row">
 
-                            <div class="col-md-6 col-xs-12 mb-3">
-                                <label>نام فروشگاه</label>
-                                <select id="store_id"
-                                    class="form-control custom-radius custom-select-input input-border-focus">
-                                    @foreach ($stores as $store)
-                                        <option value="{{ $store->id }}"> {{ $store->store_name }} </option>
-                                    @endforeach
-                                </select>
-                                <div class="mt-1">
-                                    <span class="text-danger error-message" id="store_id"></span>
-                                </div>
-                            </div>
+                {{-- طرف حساب --}}
+                <div class="col-md-6 col-xs-12 mb-3">
+                    <label>طرف حساب <span class="text-danger">*</span></label>
+                    <select name="recipient_type" id="recipient_type"
+                        class="form-control custom-radius custom-select-input input-border-focus">
+                        <option value="store">فروشگاه</option>
+                        <option value="user">کاربر</option>
+                    </select>
+                </div>
 
+                {{-- فروشگاه --}}
+                <div class="col-md-6 col-xs-12 mb-3" id="store_wrapper">
+                    <label>نام فروشگاه <span class="text-danger">*</span></label>
+                    <select name="store_id" id="store_id"
+                        class="form-control custom-radius custom-select-input input-border-focus">
+                        <option value="">انتخاب کنید</option>
+                        @foreach ($stores as $store)
+                            <option value="{{ $store->id }}">{{ $store->store_name }}</option>
+                        @endforeach
+                    </select>
+                    <div class="mt-1">
+                        <span class="text-danger error-message" id="store_id_error"></span>
+                    </div>
+                </div>
+
+                {{-- کاربر --}}
+                <div class="col-md-6 col-xs-12 mb-3" id="user_wrapper" style="display:none;">
+                    <label>کاربر <span class="text-danger">*</span></label>
+                    <select name="user_id" id="user_id"
+                        class="form-control custom-radius custom-select-input input-border-focus">
+                        <option value="">انتخاب کنید</option>
+                        @foreach ($users as $user)
+                         <option value="{{ $user->id }}">{{ $user->name }} - {{ $user->mobile }}</option>
+                        @endforeach
+                    </select>
+                    <div class="mt-1">
+                        <span class="text-danger error-message" id="user_id_error"></span>
+                    </div>
+                </div>
 
                             <div class="col-md-6 col-xs-12 mb-3">
                                 <label>تیم ارسال کننده </label>
@@ -216,12 +242,20 @@
                                         <span class="text-danger error-message" id="priority_error"></span>
                                     </div>
                                 </div>
-                            <input type="hidden" name="store_id" id="store_id" value="{{ auth()->user()->stores()->first()->id ?? '' }}">
+                                @php $sellerStore = auth()->user()->stores()->first(); @endphp
+
+                                @if($sellerStore)
+                                    <input type="hidden" name="recipient_type" value="store">
+                                    <input type="hidden" name="store_id" value="{{ $sellerStore->id }}">
+                                @else
+                                    <input type="hidden" name="recipient_type" value="user">
+                                    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                                @endif
                             <div class="col-md-6 col-xs-12 mb-3">
                                 <label>تیم  گیرنده </label>
                                 <select id="contact_name"
                                         class="form-control custom-radius custom-select-input input-border-focus">
-                                    <option value="0">درخواست ماژول با فیچر جدید</option>
+                                    {{-- <option value="0">درخواست ماژول با فیچر جدید</option> --}}
                                     <option value="1">تیم فنی و عملیات</option>
                                     <option value="2">تیم پشتیبانی و سفارشات</option>
                                     <option value="3">گزارش خطا</option>

@@ -32,7 +32,11 @@ class TicketAdminRequest extends FormRequest
     public function rules()
     {
         return [
-            'store_id' => 'required|exists:stores,id',
+            'recipient_type'  => 'required|in:store,user',
+
+            'store_id' => 'required_if:recipient_type,store|nullable|exists:stores,id',
+            'user_id'  => 'required_if:recipient_type,user|nullable|exists:users,id',
+
             'contact_name' => 'required|string|max:50',
             'title' => 'required|string|max:255',
             'message' => 'required|string|min:3',
@@ -46,9 +50,13 @@ class TicketAdminRequest extends FormRequest
     public function messages()
     {
         return [
-            'store_id.required' => 'فیلد فروشگاه الزامی است',
-            'store_id.exists' => 'فروشگاه انتخاب شده معتبر نیست',
-            'contact_name.required' => 'فیلد نام تماس گیرنده الزامی است',
+            'recipient_type.required' => 'نوع گیرنده الزامی است',
+            'recipient_type.in'       => 'نوع گیرنده نامعتبر است',
+            'store_id.required_if'    => 'انتخاب فروشگاه الزامی است',
+            'store_id.exists'         => 'فروشگاه انتخاب شده معتبر نیست',
+            'user_id.required_if'     => 'انتخاب کاربر الزامی است',
+            'user_id.exists'          => 'کاربر انتخاب شده معتبر نیست',
+            'contact_name.required'   => 'فیلد نام تماس گیرنده الزامی است',
             'contact_name.string' => 'نام تماس گیرنده باید متن باشد',
             'contact_name.max' => 'نام تماس گیرنده نباید بیشتر از ۵۰ کاراکتر باشد',
             'title.required' => 'فیلد عنوان الزامی است',
