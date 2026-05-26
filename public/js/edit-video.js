@@ -1,3 +1,21 @@
+$(document).ready(function() {
+    $('.select2').select2();
+});
+$('.select2').select2({
+    placeholder: "انتخاب کنید",
+    allowClear: true,
+    width: '100%',
+    language: {
+        noResults: function () {
+            return "نتیجه‌ای یافت نشد";
+        }
+    }
+});
+$(document).ready(function() {
+    $('#category_id').select2();
+});
+
+
 
 const csrf = document.querySelector('meta[name="csrf-token"]').content;
 
