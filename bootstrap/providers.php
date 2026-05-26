@@ -8,4 +8,5 @@ return [
     Modules\Ticket\TicketServiceProvider::class,
     Modules\User\UserServiceProvider::class,
     Modules\Message\MessageServiceProvider::class,
+    Modules\Dashboard\DashboardServiceProvider::class,
 ];

@@ -2,7 +2,7 @@
     <div class="menu_section">
         <ul class="nav side-menu">
             <li>
-                <a href="/">
+                <a href="{{ route('dashboard') }}">
                     <i class="fa fa-tachometer text-beta"></i>
                     <span>داشبورد</span>
                 </a>
