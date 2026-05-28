@@ -25,7 +25,7 @@
     <div class="filter-group" data-type="priority" data-title="اولویت">
         <span data-value="">همه</span>
         <span data-value="1">کم</span>
-        <span data-value="2">معمولی</span>
+        <span data-value="2">متوسط</span>
         <span data-value="3">زیاد</span>
         <span data-value="4">فوری</span>
     </div>

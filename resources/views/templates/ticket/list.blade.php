@@ -59,14 +59,11 @@
                             </button>
                         </div>
 
-                        <div class="dropdown">
+                        <div class="dropdown custom-dropdown">
                             <button
                                 class="btn btn-white-new dropdown-toggle d-inline-flex align-items-center position-relative"
                                 type="button"
                                 id="filterDropdown"
-                                data-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
                                 style="gap: 8px;"
                             >
                                 <i class="fa fa-filter"></i>
@@ -74,9 +71,9 @@
                                 <span id="filterBadge" class="badge badge-danger bg-beta" style="color: white; border-radius: 50%; padding: 2px 6px; font-size: 11px; display: none; margin-left: 4px;">0</span>
                             </button>
 
-                            <!-- منوی دسکتاپ - همین که داری -->
-                            <div class="dropdown-menu rounded-5 desktop-filter-menu" aria-labelledby="filterDropdown" style="padding: 15px; min-width: 320px;">
-                                <!-- محتوای فیلترها همینطوری که هست -->
+                            <!-- منوی دسکتاپ - نسخه دستی -->
+                            <div class="dropdown-menu rounded-5 desktop-filter-menu" id="filterMenu" style="padding: 15px; min-width: 320px;">
+                                <!-- محتوای فیلترها -->
                                 <div class="mb-2">
                                     <select class="form-control custom-radius select2" name="store_id" data-title="نام فروشگاه:">
                                         <option value="">همه</option>
@@ -100,7 +97,7 @@
                                     <select name="priority" class="form-control custom-radius custom-select-input" data-title="اولویت:">
                                         <option value="">همه</option>
                                         <option value="1" {{ request('priority') == '1' ? 'selected' : '' }}>کم</option>
-                                        <option value="2" {{ request('priority') == '2' ? 'selected' : '' }}>معمولی</option>
+                                        <option value="2" {{ request('priority') == '2' ? 'selected' : '' }}>متوسط</option>
                                         <option value="3" {{ request('priority') == '3' ? 'selected' : '' }}>بالا</option>
                                         <option value="4" {{ request('priority') == '4' ? 'selected' : '' }}>فوری</option>
                                     </select>
@@ -121,9 +118,9 @@
                                     </select>
                                 </div>
                                 <div class="d-flex justify-content-between mt-3">
-                                    <p type="button" id="clearFiltersBtn" class="mt-3 text-default text-bold">حذف فیلترها</p>
+                                    <button type="button" id="clearFiltersBtn" class="btn btn-link text-default text-bold" style="padding: 0;">حذف فیلترها</button>
                                     <button type="submit" class="btn btn-beta-solid mr-6">اعمال</button>
-                                    <button class="btn btn-beta-outline">انصراف</button>
+                                    <button type="button" id="cancelFilterBtn" class="btn btn-beta-outline">انصراف</button>
                                 </div>
                             </div>
                         </div>
