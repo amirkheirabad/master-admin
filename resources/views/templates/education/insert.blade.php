@@ -125,7 +125,7 @@
 
                                     <div id="fileList"></div>
 
-                                    <input type="file" id="fileInput" style="display: none;" accept=".mp4,.mov,.avi,mkv." multiple>
+                                    <input type="file" id="fileInput" style="display: none;" accept=".mp4,.mov,.avi,.mkv" multiple>
                                     <div class="mt-2">
                                         <span class="text-danger error-message" id="file_path_error"></span>
                                     </div>
