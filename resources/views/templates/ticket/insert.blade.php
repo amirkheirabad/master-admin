@@ -15,7 +15,7 @@
     <style>
         #fileList ul {
             list-style: none;
-            padding: 0; 
+            padding: 0;
             margin: 10px 0;
         }
 
@@ -152,7 +152,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6 col-xs-12 mb-3 mt-2">
+                            <div class="col-md-6 col-xs-12 mb-3">
                                 <label>عنوان تیکت</label>
                                 <input type="text" name="title" id="title"
                                     class="form-control custom-radius input-border-focus" placeholder="عنوان تیکت">
@@ -206,7 +206,7 @@
 
                                 <div id="fileList"></div>
 
-                                <input type="file" id="fileInput" style="display: none;" multiple>
+                                <input type="file" id="fileInput" style="display: none;" accept=".jpg,.png,.pdf" multiple>
                                 <div class="mt-2">
                                     <span class="text-danger error-message" id="attachments_error"></span>
                                 </div>
@@ -307,7 +307,7 @@
 
                                     <div id="fileList"></div>
 
-                                    <input type="file" id="fileInput" style="display: none;" multiple>
+                                    <input type="file" id="fileInput" style="display: none;" accept=".jpg,.png,.pdf" multiple>
                                     <div class="mt-2">
                                         <span class="text-danger error-message" id="attachments_error"></span>
                                     </div>
