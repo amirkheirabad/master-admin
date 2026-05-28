@@ -341,6 +341,7 @@ document.addEventListener('DOMContentLoaded', function() {
             store: null,
             status: null,
             contact_name: null,
+            priority: null,
             sort: 'latest'
         };
 
@@ -348,15 +349,20 @@ document.addEventListener('DOMContentLoaded', function() {
         const selectedStatusSpan = selectedContainer.querySelector('[data-selected-status]');
         const selectedContactNameSpan = selectedContainer.querySelector('[data-selected-contact-name]');
         const selectedSortSpan = selectedContainer.querySelector('[data-selected-sort]');
+        const selectedPrioritySpan = selectedContainer.querySelector('[data-selected-priority]');
+
 
         let storeValue = selectedStoreSpan ? selectedStoreSpan.getAttribute('data-selected-store') || '' : '';
         let statusValue = selectedStatusSpan ? selectedStatusSpan.getAttribute('data-selected-status') || '' : '';
         let contactNameValue = selectedContactNameSpan ? selectedContactNameSpan.getAttribute('data-selected-contact-name') || '' : '';
+        let priorityValue = selectedPrioritySpan ? selectedPrioritySpan.getAttribute('data-selected-priority') || '' : '';
+
 
         return {
             store: storeValue === '' ? null : storeValue,
             status: statusValue === '' ? null : statusValue,
             contact_name: contactNameValue === '' ? null : contactNameValue,
+            priority: priorityValue === '' ? null : priorityValue,
             sort: selectedSortSpan ? selectedSortSpan.getAttribute('data-selected-sort') || 'latest' : 'latest'
         };
     }
@@ -403,6 +409,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (selectedFilters.store && selectedFilters.store !== null) count++;
         if (selectedFilters.status && selectedFilters.status !== null) count++;
         if (selectedFilters.contact_name && selectedFilters.contact_name !== null) count++;
+        if (selectedFilters.priority && selectedFilters.priority !== null) count++;
+        if (selectedFilters.sort && selectedFilters.sort !== 'latest') count++;
+    
         return count;
     }
 
@@ -492,6 +501,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 teamContainer.appendChild(defaultSpan);
             }
         }
+        //update priority
+            const priorityContainer = document.getElementById('selected-priority-value');
+            if (priorityContainer) {
+                priorityContainer.innerHTML = '';
+                if (selectedFilters.priority && selectedFilters.priority !== null) {
+                    const priorityText = getTextFromFilterGroup('priority', selectedFilters.priority);
+                    const badge = document.createElement('span');
+                    badge.className = 'filter-badge filter-badge-active';
+                    badge.textContent = priorityText;
+                    priorityContainer.appendChild(badge);
+                } else {
+                    const defaultSpan = document.createElement('span');
+                    defaultSpan.className = 'filter-default-text';
+                    defaultSpan.textContent = 'همه';
+                    priorityContainer.appendChild(defaultSpan);
+                }
+            }
 
         updateFilterBadge();
         updateClearButtonState();
@@ -539,6 +565,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (pageType === 'store') title = 'نام فروشگاه';
         else if (pageType === 'status') title = 'وضعیت';
         else if (pageType === 'team') title = 'تیم مخاطب';
+        else if (pageType === 'priority') title = 'اولویت';
 
         if (filterTitle) filterTitle.textContent = title;
 
@@ -566,6 +593,8 @@ document.addEventListener('DOMContentLoaded', function() {
             isAllActive = (!selectedFilters.status || selectedFilters.status === null);
         } else if (pageType === 'team') {
             isAllActive = (!selectedFilters.contact_name || selectedFilters.contact_name === null);
+        } else if (pageType === 'priority') {
+            isAllActive = (!selectedFilters.priority || selectedFilters.priority === null);
         }
 
         allOption.className = 'filter-sub-item' + (isAllActive ? ' active' : '');
@@ -586,6 +615,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 selectedFilters.status = null;
             } else if (pageType === 'team') {
                 selectedFilters.contact_name = null;
+            } else if (pageType === 'priority') {
+                selectedFilters.priority = null;
             }
 
             setTimeout(() => {
@@ -606,6 +637,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 isActive = (selectedFilters.status == opt.value);
             } else if (pageType === 'team') {
                 isActive = (selectedFilters.contact_name == opt.value);
+            } else if (pageType === 'priority') {
+                isActive = (selectedFilters.priority == opt.value);
             }
 
             const div = document.createElement('div');
@@ -630,6 +663,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     selectedFilters.status = selectedValue;
                 } else if (pageType === 'team') {
                     selectedFilters.contact_name = selectedValue;
+                }else if (pageType === 'priority') {
+                    selectedFilters.priority = selectedValue;
                 }
 
                 setTimeout(() => {
@@ -646,6 +681,7 @@ document.addEventListener('DOMContentLoaded', function() {
             store: null,
             status: null,
             contact_name: null,
+            priority: null,
             sort: selectedFilters.sort
         };
         updateSelectedValuesDisplay();
@@ -660,7 +696,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // ===== حذف همه hidden input های قبلی =====
-        const oldHidden = form.querySelectorAll('input[name="store_id"], input[name="status"], input[name="contact_name"], input[name="sort"]');
+        const oldHidden = form.querySelectorAll('input[name="store_id"], input[name="status"], input[name="contact_name"], input[name="sort"], input[name="priority"]');
         oldHidden.forEach(input => input.remove());
 
         // ===== هماهنگ کردن select های داخل فرم با مقادیر جدید =====
@@ -697,6 +733,17 @@ document.addEventListener('DOMContentLoaded', function() {
             input.type = 'hidden';
             input.name = 'contact_name';
             input.value = selectedFilters.contact_name;
+            form.appendChild(input);
+        }
+        //برای priority
+        const prioritySelect = form.querySelector('select[name="priority"]');
+        if (prioritySelect) {
+            prioritySelect.value = selectedFilters.priority || '';
+        } else if (selectedFilters.priority && selectedFilters.priority !== null) {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'priority';
+            input.value = selectedFilters.priority;
             form.appendChild(input);
         }
 
@@ -759,7 +806,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
 
                 // حذف hidden input ها
-                const paramsToRemove = ['store_id', 'status', 'contact_name', 'sort'];
+                const paramsToRemove = ['store_id', 'status', 'contact_name', 'sort', 'priority'];
                 paramsToRemove.forEach(param => {
                     const inputs = form.querySelectorAll(`input[name="${param}"]`);
                     inputs.forEach(input => input.remove());

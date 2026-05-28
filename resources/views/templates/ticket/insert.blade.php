@@ -109,7 +109,7 @@
                 </div>
 
                 {{-- فروشگاه --}}
-                <div class="col-md-6 col-xs-12 mb-3" id="store_wrapper">
+                <div class="col-md-6 col-xs-12 mb-1" id="store_wrapper">
                     <label>نام فروشگاه <span class="text-danger">*</span></label>
                     <select name="store_id" id="store_id"
                         class="form-control custom-radius custom-select-input input-border-focus">

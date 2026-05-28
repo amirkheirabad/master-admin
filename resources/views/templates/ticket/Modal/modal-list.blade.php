@@ -21,12 +21,25 @@
         <span data-value="2">تیم پشتیبانی و سفارشات</span>
         <span data-value="3">گزارش خطا</span>
     </div>
+
+    <div class="filter-group" data-type="priority" data-title="اولویت">
+        <span data-value="">همه</span>
+        <span data-value="1">کم</span>
+        <span data-value="2">معمولی</span>
+        <span data-value="3">زیاد</span>
+        <span data-value="4">فوری</span>
+    </div>
 </div>
+
+
+</div>
+
 
 <div class="selected-filters-data" style="display: none;">
     <span data-selected-store="{{ request('store_id', '') }}"></span>
     <span data-selected-status="{{ request('status', '') }}"></span>
     <span data-selected-contact-name="{{ request('contact_name', '') }}"></span>
+    <span data-selected-priority="{{ request('priority', '') }}"></span>  {{-- اضافه شد --}}
     <span data-selected-sort="{{ request('sort', 'latest') }}"></span>
 </div>
 
@@ -97,6 +110,13 @@
                         <i class="fa fa-chevron-left"></i>
                     </div>
                 </div>
+                <div class="filter-option-item" data-filter-type="priority">
+                    <span>اولویت</span>
+                    <div class="filter-option-right">
+                        <span class="filter-selected-value" id="selected-priority-value"></span>
+                        <i class="fa fa-chevron-left"></i>
+                    </div>
+                </div>
             </div>
 
             <div class="filter-sub-page" data-filter-page="store" style="display: none;">
@@ -108,6 +128,10 @@
                 <div class="filter-sub-content"></div>
             </div>
             <div class="filter-sub-page" data-filter-page="team" style="display: none;">
+
+                <div class="filter-sub-content"></div>
+            </div>
+            <div class="filter-sub-page" data-filter-page="priority" style="display: none;">
 
                 <div class="filter-sub-content"></div>
             </div>

@@ -155,7 +155,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($tickets as $ticket)
+                    @forelse($tickets as $ticket)
                         <tr class="responsive-table-row item-record{{$ticket->id}}">
                             <th scope="row" class="responsive-table-td">
                                 <input type="checkbox" class="form-check-input hide-on-mobile" data-id="{{$ticket->id}}">
@@ -238,7 +238,14 @@
                                 </a>
                             </td>
                         </tr>
-                    @endforeach
+                        @empty
+                                <tr>
+                                    <td colspan="10" class="text-center py-4 text-muted">
+                                        <i class="fa fa-search fa-2x mb-2 d-block"></i>
+                                        نتیجه‌ای برای جستجو یافت نشد
+                                    </td>
+                                </tr>
+                    @endforelse
                     </tbody>
                 </table>
             </div>
