@@ -78,7 +78,7 @@
                             <div class="dropdown-menu rounded-5 desktop-filter-menu" aria-labelledby="filterDropdown" style="padding: 15px; min-width: 320px;">
                                 <!-- محتوای فیلترها همینطوری که هست -->
                                 <div class="mb-2">
-                                    <select class="form-control custom-radius custom-select-input" name="store_id" data-title="نام فروشگاه:">
+                                    <select class="form-control custom-radius select2" name="store_id" data-title="نام فروشگاه:">
                                         <option value="">همه</option>
                                         @foreach($stores as $store)
                                             <option value="{{ $store->id }}" {{ request()->get('store_id') == $store->id ? 'selected' : '' }}>
