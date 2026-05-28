@@ -96,8 +96,7 @@
         if (field.startsWith('attachments.')) {
             const errorSpan = $('#attachments_error');
             const existingError = errorSpan.html();
-            const fileNumber = field.split('.')[1];
-            const formattedMessage = `فایل ${parseInt(fileNumber) + 1}: ${message}`;
+            const formattedMessage = `فایل : ${message}`;
 
             if (existingError) {
                 errorSpan.html(existingError + '<br>' + formattedMessage);

@@ -116,6 +116,10 @@ $('#replyForm').on('submit', function (e) {
     const id = document.getElementById('ticket_id').value;
     const messageInput = document.getElementById('messageInput');
     const message = messageInput ? messageInput.value.trim() : '';
+    const submitBtn = this.querySelector('button[type="submit"]');
+
+    submitBtn.classList.add('btn-loading');
+    submitBtn.disabled = true;
 
 
     let formData = new FormData()
@@ -151,11 +155,17 @@ $('#replyForm').on('submit', function (e) {
                 location.reload();
             } else if (status === 422 && body && body.errors) {
                 showBackendErrors(body.errors);
+                submitBtn.classList.remove('btn-loading');
+                submitBtn.disabled = false;
             } else {
+                submitBtn.classList.remove('btn-loading');
+                submitBtn.disabled = false;
             }
         })
         .catch(err => {
             console.log(err);
+            submitBtn.classList.remove('btn-loading');
+            submitBtn.disabled = false;
         });
 });
 
@@ -510,6 +520,10 @@ $('#replyFormUser').on('submit', function (e) {
     const id = document.getElementById('ticket_id').value;
     const messageInput = document.getElementById('messageInput');
     const message = messageInput ? messageInput.value.trim() : '';
+    const submitBtn = this.querySelector('button[type="submit"]');
+
+    submitBtn.classList.add('btn-loading');
+    submitBtn.disabled = true;
 
 
     let formData = new FormData()
@@ -545,10 +559,16 @@ $('#replyFormUser').on('submit', function (e) {
                 location.reload();
             } else if (status === 422 && body && body.errors) {
                 showBackendErrors(body.errors);
+                submitBtn.classList.remove('btn-loading');
+                submitBtn.disabled = false;
             } else {
+                submitBtn.classList.remove('btn-loading');
+                submitBtn.disabled = false;
             }
         })
         .catch(err => {
             console.log(err);
+            submitBtn.classList.remove('btn-loading');
+            submitBtn.disabled = false;
         });
 });

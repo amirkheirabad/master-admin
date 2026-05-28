@@ -164,7 +164,7 @@
                                     تیکت {{$ticket->id}} - {{ $ticket->recipient_type === 'store' ? $ticket->store?->store_name : $ticket->user?->name }}
                                     </div>
                                     <div>
-                                        <a href="{{ route('show_ticket', $ticket->id) }}" >
+                                        <a href="{{ route('show_ticket', $ticket->id) }}">
                                             <img src="{{ asset('/icons/Group.svg') }}" style="width: 30px">
                                         </a>
                                     </div>
@@ -233,7 +233,7 @@
                             </td>
                             <td data-title="تاریخ آخرین پاسخ:" class="hide-on-mobile">{{ Verta($ticket->updated_at)->format(' %d %B  %Y') }}</td>
                             <td data-title="نام فروشگاه:" class="hide-on-mobile">
-                                <a href="{{ route('show_ticket', $ticket->id) }}" >
+                                <a href="{{ route('show_ticket', $ticket->id) }}">
                                     <img src="{{ asset('/icons/Group.svg') }}" style="width: 30px">
                                 </a>
                             </td>

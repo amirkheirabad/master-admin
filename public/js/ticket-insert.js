@@ -40,18 +40,21 @@ function refreshCaptcha() {
 // تابع نمایش خطاهای بک‌اند
 function showBackendErrors(errors) {
     // پاک کردن خطاهای قبلی
-    $('.error-message').text('');
+    clearAllBackendErrors();
 
     // نمایش خطاهای جدید
-    for (let field in errors) {
-        let errorMessage = errors[field][0];
-        $(`#${field}_error`).text(errorMessage);
+    Object.keys(errors).forEach(field => {
+        const message = Array.isArray(errors[field])
+            ? errors[field][0]
+            : errors[field];
+
+        setError(field, message);
 
         // اگه خطای کپچا بود، رفرش کن
         if (field === 'captcha') {
             refreshCaptcha();
         }
-    }
+    });
 }
 
 // دکمه تغییر سوال کپچا
@@ -79,7 +82,7 @@ $('#ticketForm').on('submit', function (e) {
     formData.append('message', $('#message').val());
     formData.append('priority', $('select[name="priority"]').val());
     formData.append('captcha', $('#captcha').val());
-    
+
     if ($('#recipient_type').val() === 'store') {
         formData.append('store_id', $('#store_id').val());
     } else {
