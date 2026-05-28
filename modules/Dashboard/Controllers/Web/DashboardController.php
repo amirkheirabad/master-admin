@@ -31,8 +31,8 @@ class DashboardController
                 ['label' => 'تیکت باز', 'value' => Ticket::whereIn('status', [0, 1])->count(), 'icon' => 'fa-life-ring', 'color' => 'purple'],
                 ['label' => 'فاکتور پرداخت‌نشده', 'value' => Factor::where('price_status', 1)->count(), 'icon' => 'fa-exclamation-circle', 'color' => 'red'],
             ];
-            $recentTickets = Ticket::with('store')->orderByDesc('updated_at')->limit(5)->get();
-            $recentFactors = Factor::with('store')->orderByDesc('created_at')->limit(5)->get();
+            $recentTickets = Ticket::with('store')->orderByDesc('updated_at')->limit(4)->get();
+            $recentFactors = Factor::with('store')->orderByDesc('created_at')->limit(4)->get();
         } elseif ($isSeller) {
             $storeIds = $user->stores()->pluck('id')->filter();
 

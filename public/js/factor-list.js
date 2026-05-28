@@ -1,3 +1,65 @@
+// جدید
+function countActiveFilters() {
+    let count = 0;
+
+    document.querySelectorAll('#filterMenu select').forEach(select => {
+        const value = select.value;
+        const firstOptionValue = select.options[0]?.value || '';
+        if (value && value !== '' && value !== firstOptionValue) {
+            count++;
+        }
+    });
+
+    // اضافه کردن datepicker ها
+    ['factor_date', 'created_at', 'payed_factor_data'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.value.trim() !== '') count++;
+    });
+
+    // search input
+    // const searchInput = document.querySelector('.search-input');
+    // if (searchInput && searchInput.value.trim() !== '') count++;
+
+    // return count;
+}
+
+function updateFilterBadge() {
+    const count = countActiveFilters();
+    const badge = document.getElementById('filterBadge');
+    if (!badge) return;
+
+    if (count > 0) {
+        badge.textContent = count;
+        badge.style.display = 'inline-block';
+    } else {
+        badge.style.display = 'none';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    // اجرای اولیه (مثلاً وقتی فیلتر از URL لود میشه)
+    updateFilterBadge();
+
+    // گوش دادن به تغییر همه select های معمولی
+    document.querySelectorAll('#filterMenu select').forEach(select => {
+        select.addEventListener('change', updateFilterBadge);
+    });
+
+    // گوش دادن به select2
+    $('#filterMenu .select2').on('change', updateFilterBadge);
+
+    // گوش دادن به input های datepicker و search
+    document.querySelectorAll('#filterMenu input').forEach(input => {
+        input.addEventListener('change', updateFilterBadge);
+        input.addEventListener('input', updateFilterBadge);
+    });
+
+    // بعد از reset هم آپدیت بشه
+    document.getElementById('clearFiltersBtn')?.addEventListener('click', function () {
+        setTimeout(updateFilterBadge, 50); // کمی تأخیر چون reset async هست
+    });
+});
+
 function resetAllFilters() {
     document.getElementById('factor_date').value = '';
     document.getElementById('created_at').value = '';

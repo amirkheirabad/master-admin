@@ -2,6 +2,7 @@
 
 namespace Modules\User\Repositories;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Modules\User\Models\User;
 use Spatie\Permission\Models\Permission;
@@ -22,7 +23,27 @@ class UserRepo implements InterfaceUser
     public function getUsers()
     {
         return User::orderBy('created_at', 'desc')->paginate(10);
+    }
 
+    public function filterUsers(Request $request)
+    {
+        $searchQuery = $request->input('search_query');
+
+        return User::query()
+            ->when($request->filled('search_query'), function ($q) use ($searchQuery) {
+                $q->where(function ($query) use ($searchQuery) {
+                    $query->where('name', 'LIKE', '%'.$searchQuery.'%')
+                        ->orWhere('mobile', 'LIKE', '%'.$searchQuery.'%');
+                });
+            })
+            ->when($request->filled('role_id'), function ($q) use ($request) {
+                $role = \Spatie\Permission\Models\Role::find($request->role_id);
+                if ($role) {
+                    $q->role($role->name);
+                }
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
     }
 
     public function getPermissions()

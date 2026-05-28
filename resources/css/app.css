@@ -27,7 +27,11 @@
 
 /* Gentelella Vendors */
 /* Bootstrap */
-
+th {
+    font-weight: 500 !important;
+    color: #0e2d55;
+    font-size: 14px;
+}
 body {
     background: #f7f7f7;
     font-size: 14px;

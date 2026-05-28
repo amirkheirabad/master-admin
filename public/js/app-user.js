@@ -1,5 +1,59 @@
 const csrf = document.querySelector('meta[name="csrf-token"]').content;
 
+// جدید
+function countActiveFilters() {
+    let count = 0;
+
+    document.querySelectorAll('#filterMenu select').forEach(select => {
+        const value = select.value;
+        const firstOptionValue = select.options[0]?.value || '';
+
+        if (value && value !== '' && value !== firstOptionValue) {
+            count++;
+        }
+    });
+
+    // const searchInput = document.querySelector('.search-input');
+    // if (searchInput && searchInput.value.trim() !== '') {
+    //     count++;
+    // }
+
+    return count;
+}
+
+function updateFilterBadge() {
+    const badge = document.getElementById('filterBadge');
+    if (!badge) return;
+
+    const activeFiltersCount = countActiveFilters();
+
+    if (activeFiltersCount > 0) {
+        badge.textContent = activeFiltersCount;
+        badge.style.display = 'inline-block';
+    } else {
+        badge.style.display = 'none';
+    }
+}
+
+document.getElementById('clearFiltersBtn')?.addEventListener('click', function (e) {
+    e.preventDefault();
+
+    const roleSelect = document.querySelector('select[name="role_id"]');
+    if (roleSelect) {
+        roleSelect.value = '';
+        $(roleSelect).trigger('change');
+    }
+
+    const searchInput = document.querySelector('.search-input');
+    if (searchInput) {
+        searchInput.value = '';
+    }
+
+    window.location.href = window.location.pathname;
+});
+
+document.addEventListener('DOMContentLoaded', updateFilterBadge);
+
 $(document).on('click', '.delete-message', function () {
 
     let id = $(this).data('id');

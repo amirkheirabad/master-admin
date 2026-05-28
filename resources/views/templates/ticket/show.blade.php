@@ -33,13 +33,13 @@
                     <div class="dropdown-option pointer p-5 btn-green-light" data-ticket-id="{{ $ticket->id }}">
                         تغییر وضعیت
                     </div>
-                    <div class="dropdown-option pointer p-5 btn-green-light">
                     @if($ticket->recipient_type === 'store' && $ticket->store)
-                        <a href="{{ route('edit_store' , $ticket->store->id) }}" style="color: black">
-                        @endif
-                            <i class="fa fa-info-circle fa-x"></i> اطلاعات فروشگاه
-                        </a>
-                    </div>
+                        <div class="dropdown-option pointer p-5 btn-green-light">
+                            <a href="{{ route('edit_store' , $ticket->store->id) }}" style="color: black">
+                                <i class="fa fa-info-circle fa-x"></i> اطلاعات فروشگاه
+                            </a>
+                        </div>
+                    @endif
                 </div>
             </div>
             @endif

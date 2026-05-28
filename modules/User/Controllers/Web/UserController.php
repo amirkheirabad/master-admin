@@ -2,6 +2,7 @@
 
 namespace Modules\User\Controllers\Web;
 
+use Illuminate\Http\Request;
 use Modules\User\Repositories\InterfaceUser;
 use Modules\User\Requests\InsertRoleRequest;
 use Modules\User\Requests\InsertUserRequest;
@@ -15,11 +16,12 @@ class UserController
         $this->user = $user;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $users = $this->user->getUsers();
+        $users = $this->user->filterUsers($request);
+        $roles = $this->user->getRoles();
 
-        return view('templates.user.list', compact('users'));
+        return view('templates.user.list', compact('users', 'roles'));
     }
 
     public function insert()

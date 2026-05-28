@@ -174,7 +174,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($factors as $factor)
+                        @forelse ($factors as $factor)
                             <tr class="responsive-table-row item-record{{ $factor->id }}">
                                 <th scope="row" class="responsive-table-td">{{ $factor->id }}</th>
                                 <td data-title="نام فروشگاه" class="responsive-table-td">
@@ -259,7 +259,14 @@
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="11" class="text-center py-4 text-muted">
+                                    <i class="fa fa-search fa-2x mb-2 d-block"></i>
+                                    نتیجه‌ای برای جستجو یافت نشد
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
