@@ -8,7 +8,7 @@ class StoresRepo implements InterfaceStores
 {
     public function getAll()
     {
-        return Stores::all();
+        return Stores::orderBy('created_at', 'desc')->get();
     }
     public function getUsers(){
         return  User::orderBy('created_at', 'desc')->get();
