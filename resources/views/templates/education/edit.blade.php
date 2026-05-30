@@ -23,7 +23,7 @@
                 <div class="row">
                     <div class="col-md-12 d-flex justify-content-between">
                         <div>
-                            <h3>افزودن ویدئو</h3>
+                            <h3>ویرایش ویدئو</h3>
                         </div>
                     </div>
                 </div>
