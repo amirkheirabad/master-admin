@@ -24,7 +24,7 @@ class StoresController
 
     public function index()
     {
-        $users = $this->user->getUsers();
+        $users = $this->store->getUsers();
         return view('templates.stores.insert', compact('users'));
     }
 

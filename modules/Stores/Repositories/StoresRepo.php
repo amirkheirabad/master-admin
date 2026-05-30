@@ -2,12 +2,16 @@
 
 namespace Modules\Stores\Repositories;
 use Modules\Stores\Models\Stores;
+use Modules\User\Models\User;
 
 class StoresRepo implements InterfaceStores
 {
     public function getAll()
     {
         return Stores::all();
+    }
+    public function getUsers(){
+        return  User::orderBy('created_at', 'desc')->get();
     }
 
     public function index()
