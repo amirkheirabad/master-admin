@@ -411,7 +411,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (selectedFilters.contact_name && selectedFilters.contact_name !== null) count++;
         if (selectedFilters.priority && selectedFilters.priority !== null) count++;
         if (selectedFilters.sort && selectedFilters.sort !== 'latest') count++;
-    
+
         return count;
     }
 
@@ -937,4 +937,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ================ مقداردهی اولیه ================
     updateSelectedValuesDisplay();
+});
+
+
+$(document).ready(function() {
+    $('.select2').select2();
+});
+$('.select2').select2({
+    placeholder: "انتخاب کنید",
+    allowClear: true,
+    width: '100%',
+    language: {
+        noResults: function () {
+            return "نتیجه‌ای یافت نشد";
+        }
+    }
 });
