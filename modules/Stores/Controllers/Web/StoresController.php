@@ -16,10 +16,12 @@ class StoresController
         $this->user = $user;
     }
 
-    public function list()
+    public function list(Request $request)
     {
-        $stores = $this->store->index();
-        return view('templates.stores.list', compact('stores'));
+        $stores = $this->store->filterStores($request);
+        $users = $this->store->getUsers();
+
+        return view('templates.stores.list', compact('stores', 'users'));
     }
 
     public function index()

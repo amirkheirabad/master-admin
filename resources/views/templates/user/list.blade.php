@@ -90,7 +90,9 @@
                         <tbody>
                             @forelse($users as $user)
                                 <tr class="responsive-table-row item-record{{$user->id}}">
-                                    <th scope="row" class="responsive-table-td">{{ $loop->iteration }}</th>
+                                    <th scope="row" class="responsive-table-td">
+                                        {{ ($users->currentPage() - 1) * $users->perPage() + $loop->iteration }}
+                                    </th>
                                     <td data-title="نام و نام خانوادگی" class="responsive-table-td">{{ $user->name }}</td>
                                     <td data-title="شماره همراه" class="responsive-table-td">{{ $user->mobile }}</td>
                                     <td data-title="نقش" class="responsive-table-td">

@@ -163,6 +163,19 @@ class UserRepo implements InterfaceUser
         }
     }
 
+    public function updatePassword($id, string $password)
+    {
+        try {
+            User::findOrFail($id)->update([
+                'password' => bcrypt($password),
+            ]);
+
+            return true;
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
     public function role_delete($id)
     {
         Role::find($id)->delete();

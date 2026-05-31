@@ -1,6 +1,8 @@
 <?php
 
 namespace Modules\Stores\Repositories;
+
+use Illuminate\Http\Request;
 use Modules\Stores\Models\Stores;
 use Modules\User\Models\User;
 
@@ -16,7 +18,40 @@ class StoresRepo implements InterfaceStores
 
     public function index()
     {
-        return Stores::with('user')->paginate(10);
+        return Stores::with('user')->orderBy('created_at', 'desc')->paginate(10);
+    }
+
+    public function filterStores(Request $request)
+    {
+        $searchQuery = $request->input('search_query');
+
+        return Stores::query()
+            ->with('user')
+            ->when($request->filled('search_query'), function ($q) use ($searchQuery) {
+                $q->where(function ($query) use ($searchQuery) {
+                    $query->where('store_name', 'LIKE', '%'.$searchQuery.'%')
+                        ->orWhere('phone', 'LIKE', '%'.$searchQuery.'%')
+                        ->orWhere('link', 'LIKE', '%'.$searchQuery.'%')
+                        ->orWhere('province', 'LIKE', '%'.$searchQuery.'%')
+                        ->orWhere('city', 'LIKE', '%'.$searchQuery.'%')
+                        ->orWhere('slogan', 'LIKE', '%'.$searchQuery.'%')
+                        ->orWhereHas('user', function ($userQuery) use ($searchQuery) {
+                            $userQuery->where('name', 'LIKE', '%'.$searchQuery.'%')
+                                ->orWhere('mobile', 'LIKE', '%'.$searchQuery.'%');
+                        });
+                });
+            })
+            ->when($request->filled('user_id'), function ($q) use ($request) {
+                $q->where('user_id', $request->user_id);
+            })
+            ->when($request->filled('province'), function ($q) use ($request) {
+                $q->where('province', 'LIKE', '%'.$request->province.'%');
+            })
+            ->when($request->filled('city'), function ($q) use ($request) {
+                $q->where('city', 'LIKE', '%'.$request->city.'%');
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
     }
 
     public function create(array $data)

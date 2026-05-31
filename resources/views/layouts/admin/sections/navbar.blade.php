@@ -1,6 +1,6 @@
 <!-- top navigation -->
 <div class="top_nav hidden-print">
-    <div class="nav_menu bg-white">
+    <div class="nav_menu">
         <nav>
             <!-- تو بخش navbar، قبل از بقیه المان‌ها یا بعدش -->
             <button class="mobile-menu-toggle" id="mobile-menu-toggle" style="display: none;">
@@ -19,10 +19,10 @@
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right" style="border-radius: 12px; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); margin-top: 8px; min-width: 200px;">
                                 <li style="border-bottom: 1px solid #edf2f7;">
-                                    <a href="javascript:;" style="padding: 12px 16px; color: #4a5568; transition: all 0.2s;">
-                                        <i class="fa fa-user-circle-o" style="width: 20px; color: #133c6d;"></i> 
+                                        <a href="{{ route('profile') }}" style="padding: 12px 16px; color: #4a5568;">
+                                        <i class="fa fa-user-circle-o" style="width: 20px; color: #133c6d;"></i>
                                         <span style="margin-right: 10px;">پروفایل</span>
-                                    </a>
+                                        </a>
                                 </li>
                                 <li>
                                     <a href="javascript:;" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"

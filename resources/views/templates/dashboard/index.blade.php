@@ -147,10 +147,6 @@
                         <i class="fa fa-users"></i>
                         <span>افزودن کاربر</span>
                     </a>
-                    <a href="{{ route('role-insert') }}" class="dashboard-quick-link">
-                        <i class="fa fa-user-circle-o"></i>
-                        <span>افزودن نقش</span>
-                    </a>
                     <a href="{{ route('insert_store') }}" class="dashboard-quick-link">
                         <i class="fa fa-shopping-cart"></i>
                         <span>افزودن فروشگاه</span>

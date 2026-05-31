@@ -176,7 +176,9 @@
                     <tbody>
                         @forelse ($factors as $factor)
                             <tr class="responsive-table-row item-record{{ $factor->id }}">
-                                <th scope="row" class="responsive-table-td">{{ $factor->id }}</th>
+                            <th scope="row" class="responsive-table-td">
+                                        {{ ($factors->currentPage() - 1) * $factors->perPage() + $loop->iteration }}
+                                    </th>
                                 <td data-title="نام فروشگاه" class="responsive-table-td">
                                     {{ $factor->store->store_name ?? 'مشتری' }}</td>
                                 <td data-title="قیمت" class="responsive-table-td price-display-class">

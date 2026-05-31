@@ -155,6 +155,10 @@ body {
 .top_nav .navbar-right {
     width: auto;
 }
+.nav_menu{
+    background-color: #00000000;
+    border: 0px;
+}
 
 .btn {
     border-radius: 7px;

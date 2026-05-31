@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\User\Controllers\Web\UserController;
 use Modules\User\Controllers\Web\AuthController;
+use Modules\User\Controllers\Web\ProfileController;
 
 //user routes
 Route::middleware(['check.login', 'check.role:admin'])->group(function(){
@@ -18,6 +19,11 @@ Route::put('/role-update/{id}', [UserController::class, 'role_update'])->name('r
 Route::get('/role-list', [UserController::class, 'role_list'])->name('role-list');
 Route::post('/role-create', [UserController::class, 'role_create'])->name('role-create');
 Route::delete('/role-delete/{id}', [UserController::class, 'role_delete'])->name('role-delete');
+});
+
+Route::middleware('check.login')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
+    Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.update-password');
 });
 
 
