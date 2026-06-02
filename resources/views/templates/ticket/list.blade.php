@@ -17,16 +17,10 @@
     </script>
 @endsection
 
-@section('nav')
-    <div class="nav toggle hide-from-md">
-        <h4>تیکت ها </h4>
-    </div>
-@endsection
-
 @section('content')
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="row hide-on-mobile">
+            <div class="row">
                 <div class="col-md-12 d-flex justify-content-between">
                     <div>
                         <h3>تیکت ها</h3>
@@ -145,10 +139,10 @@
                         <th>عنوان تیکت</th>
                         <th>اولویت</th>
                         <th>تیم مخاطب</th>
-                        <th>تاریخ ثبت</th>
-                        <th>وضعیت</th>
-                        <th>تاریخ آخرین پاسخ</th>
-                        <th>مشاهده</th>
+                        <th class="hide-on-mobile">تاریخ ثبت</th>
+                        <th class="hide-on-mobile">وضعیت</th>
+                        <th class="hide-on-mobile">تاریخ آخرین پاسخ</th>
+                        <th class="hide-on-mobile">مشاهده</th>
                     </tr>
                     </thead>
                     <tbody>

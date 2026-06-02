@@ -353,6 +353,9 @@ label {
 .h-500 {
     height: 500px;
 }
+.h-600 {
+    height: 600px;
+}
 .min-h-500 {
     min-height: 500px;
 }
@@ -1127,6 +1130,20 @@ input:focus, textarea:focus, select:focus {
 .dropdown-menu {
     z-index: 100;
 }
+
+@media (min-width: 576px) {
+    .x_panel:has(table),
+    .x_panel > table,
+    div.x_panel:has(table.responsive-table) {
+        overflow-x: auto;
+        overflow: auto;
+    }
+
+    .x_panel table {
+        min-width: 800px;
+    }
+}
+
 
 
 @theme {

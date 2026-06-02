@@ -103,7 +103,6 @@
                                 <th>نام فروشگاه</th>
                                 <th>نام مدیر</th>
                                 <th>آدرس وبسایت</th>
-                                <th>شعار فروشگاه</th>
                                 <th>شماره تماس</th>
                                 <th>استان</th>
                                 <th>شهر</th>
@@ -122,7 +121,6 @@
                                 <td data-title="نام فروشگاه" class="responsive-table-td">{{ $store->store_name }}</td>
                                 <td data-title="نام مدیر" class="responsive-table-td">{{ $store->user->name }}</td>
                                 <td data-title="آدرس وبسایت" class="responsive-table-td">{{ $store->link }}</td>
-                                <td data-title="شعار فروشگاه" class="responsive-table-td">{{ $store->slogan }}</td>
                                 <td data-title="شماره تماس" class="responsive-table-td">{{ $store->phone }}</td>
                                 <td data-title="استان" class="responsive-table-td">{{ $store->province }}</td>
                                 <td data-title="شهر" class="responsive-table-td">{{ $store->city }}</td>

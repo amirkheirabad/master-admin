@@ -15,8 +15,8 @@
 @endsection
 
 @section('nav')
-    <a href="{{ route('list_tickets') }}" class="nav toggle">
-        <i class="fa fa-chevron-right mt-3 mr-1"></i>
+    <a href="{{ route('list_tickets') }}">
+        <i class="fa fa-chevron-right mt-8 mr-1 fa-x"></i>
     </a>
     <div class="nav toggle hide-from-md">
         <h4>تیکت شماره {{ $ticket->id }}</h4>
@@ -89,7 +89,7 @@
                     </div>
                 </div>
             </div>
-            <div class="x_panel h-500 mt-8 d-flex flex-column bg-chatbox rounded-3">
+            <div id="chatbox" class="x_panel h-500 mt-8 d-flex flex-column bg-chatbox rounded-3">
                 <div class="panel-content">
                     <div class="d-flex justify-content-between">
                         <div>
@@ -345,10 +345,10 @@
             </div>
         </div>
     </div>
+    @include('templates.ticket.Modal.modal-show')
 @endsection
 
 
 
 
-@include('templates.ticket.Modal.modal-show')
 
