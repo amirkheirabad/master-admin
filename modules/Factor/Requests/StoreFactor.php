@@ -58,6 +58,7 @@ class StoreFactor extends FormRequest
             'price' => 'required|integer|min:0',
             'show_status' => 'required|boolean',
             'description' => 'nullable|string|max:1000',
+            'send_sms' => 'nullable|boolean',
         ];
     }
 
