@@ -140,7 +140,20 @@
                                     <label>توضیحات</label>
                                     <textarea id="description" name="description" rows="5" class="form-control custom-radius input-border-focus"></textarea>
                                 </div>
-
+                                <div class="col-md-12 col-xs-12 mt-4">
+                                    <div class="form-check">
+                                        <input 
+                                            class="form-check-input" 
+                                            type="checkbox" 
+                                            id="send_sms" 
+                                            name="send_sms" 
+                                            value="1"
+                                        >
+                                        <label class="form-check-label me-2" for="send_sms">
+                                            ارسال پیامک اطلاع‌رسانی به طرف حساب
+                                        </label>
+                                    </div>
+                                </div>
                                 <div class="col-md-3 mt-8">
                                     <button type="submit" class="btn btn-beta-solid w-100">ذخیره</button>
                                 </div>

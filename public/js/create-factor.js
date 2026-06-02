@@ -58,6 +58,7 @@ $('#createFactor').on('submit', function (e) {
             phone: $('#phone').val(),
             national_kod: $('#national_kod').val(),
             user_id: $('#customer_id').val(), 
+            send_sms:     $('#send_sms').is(':checked') ? 1 : 0,
         }),
     })
         .then(res => res.json())

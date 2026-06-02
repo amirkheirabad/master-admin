@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Modules\Factor\Models\Category;
 use Modules\Factor\Models\Factor;
+use Modules\Stores\Models\Stores;
+use Modules\Factor\Services\SmsService;
 
 class FactorRepo implements InterfaceFactor
 {
@@ -107,19 +109,45 @@ class FactorRepo implements InterfaceFactor
 
     public function createFactor(array $data)
     {
-        return Factor::create([
-            'store_id' => $data['store_id'],
-            'user_id' => $data['user_id'] ?? null,
-            'factor_date' => Verta::parse($data['factor_date'])->toCarbon(),
-            'category_id' => $data['category_id'],
-            'show_status' => $data['show_status'],
-            'hash' => Str::uuid(),
-            'price' => $data['price'],
-            'name' => $data['name'],
-            'phone' => $data['phone'],
-            'national_kod' => $data['national_kod'],
-            'description' => $data['description'],
+        $factor = Factor::create([
+            'store_id'     => $data['store_id'] ?? null,
+            'user_id'      => $data['user_id'] ?? null,
+            'factor_date'  => Verta::parse($data['factor_date'])->toCarbon(),
+            'category_id'  => $data['category_id'],
+            'show_status'  => $data['show_status'],
+            'hash'         => Str::uuid(),
+            'price'        => $data['price'],
+            'name'         => $data['name'] ?? null,
+            'phone'        => $data['phone'] ?? null,
+            'national_kod' => $data['national_kod'] ?? null,
+            'description'  => $data['description'] ?? null,
         ]);
+    
+        \Log::info('SMS Data:', [
+            'send_sms' => $data['send_sms'] ?? 'not set',
+            'phone'    => $data['phone'] ?? null,
+            'name'     => $data['name'] ?? null,
+            'price'    => $data['price'],
+        ]);
+    
+        if (!empty($data['send_sms']) && $data['send_sms']) {
+            $phone = $data['phone'] ?? null;
+            $name  = $data['name'] ?? 'کاربر';
+    
+            if (empty($phone) && !empty($data['store_id'])) {
+                $store = Stores::find($data['store_id']);
+                if ($store) {
+                    $phone = $store->phone ?? $store->mobile ?? null;
+                    $name  = $store->store_name ?? 'فروشگاه';
+                }
+            }
+    
+            if ($phone) {
+                (new SmsService())->sendFactorNotification($phone, $name, $factor->id, (int)$data['price']);
+            }
+        }
+    
+        return $factor;
     }
 
     public function updateFactor($id, $request)
