@@ -157,9 +157,8 @@ function closeMobileMenu() {
         toggleMobileMenu();
     }
 }
-
 function setupMobileEvents() {
-    // دکمه منو - الان توی HTML هست
+    // دکمه منو
     $('.mobile-menu-toggle').off('click').on('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -177,10 +176,20 @@ function setupMobileEvents() {
         const $parentLi = $this.parent('li');
         const $childMenu = $parentLi.children('.child_menu');
 
+        // سناریو ۱: آیتم کلیک شده زیرمنو دارد
         if ($childMenu.length) {
             e.preventDefault();
-            $('.mobile-sidebar .child_menu').not($childMenu).slideUp('fast');
 
+            // بستن سایر منوهای اصلی (به جز منویی که کلیک شده یا فرزندانش جاری هستند)
+            $('.mobile-sidebar .nav.side-menu > li').not($parentLi).each(function() {
+                // اگر این منو حاوی صفحه فعلی نیست، کلاس active را بردار و ببندش
+                if (!$(this).find('li.current-page').length) {
+                    $(this).removeClass('active');
+                    $(this).children('.child_menu').slideUp('fast');
+                }
+            });
+
+            // باز و بسته کردن کشویی منوی فعلی
             if ($childMenu.is(':visible')) {
                 $childMenu.slideUp('fast');
                 $parentLi.removeClass('active');
@@ -188,20 +197,58 @@ function setupMobileEvents() {
                 $childMenu.slideDown('fast');
                 $parentLi.addClass('active');
             }
-        } else {
+        } 
+        // سناریو ۲: آیتم کلیک شده یک لینک مستقیم است (زیرمنو ندارد)
+        else {
+            // حذف کلاس active و current-page از تمام صفحات قبلی
+            $('.mobile-sidebar li').removeClass('active current-page');
+            
+            // فعال کردن آیتم فعلی و والد آن
+            $parentLi.addClass('active current-page');
+            $parentLi.parents('li').addClass('active');
+
             setTimeout(function() {
                 closeMobileMenu();
-            }, 200);
+            }, 150);
         }
     });
 
-    setTimeout(function() {
-        $('.mobile-sidebar .child_menu').hide();
-        $('.mobile-sidebar li.current-page').each(function() {
-            $(this).parents('.child_menu').show();
-            $(this).parents('li').addClass('active');
-        });
-    }, 100);
+    // روشن نگه داشتن آیتم فعال بر اساس آدرس URL فعلی در زمان لود صفحه
+    fixMobileActiveState();
+}
+
+// تابع کمکی برای پیدا کردن و فعال نگه داشتن صفحه فعلی در موبایل
+function fixMobileActiveState() {
+    var currentPath = window.location.pathname;
+    if (currentPath === '') currentPath = '/';
+
+    $('.mobile-sidebar .nav.side-menu a').each(function() {
+        var href = $(this).attr('href');
+        if (!href || href === '#' || href === 'javascript:;') return;
+
+        var linkPath = href.split('?')[0].split('#')[0];
+        if (linkPath.indexOf('http') === 0) {
+            var a = document.createElement('a');
+            a.href = href;
+            linkPath = a.pathname;
+        }
+
+        if (linkPath === currentPath) {
+            // پاک کردن حالت‌های قبلی موبایل
+            $('.mobile-sidebar li').removeClass('active current-page');
+            
+            var $parentLi = $(this).parent('li');
+            $parentLi.addClass('active current-page');
+            
+            // باز کردن و فعال کردن منوی مادر
+            var $parentUl = $parentLi.parents('ul.child_menu');
+            if ($parentUl.length) {
+                $parentUl.show();
+                $parentUl.parent('li').addClass('active');
+            }
+            return false;
+        }
+    });
 }
 
 function handleMobileMode() {
@@ -213,15 +260,11 @@ function handleMobileMode() {
         }
         $BODY.removeClass('nav-sm');
 
-        // حذف رویدادهای سایدبار اصلی برای جلوگیری از تداخل
         $SIDEBAR_MENU.find('a').off('click.sidebar');
 
         createMobileSidebar();
         setupMobileEvents();
 
-        if (isMobileMenuOpen) {
-            closeMobileMenu();
-        }
     } else {
         if (isMobileMenuOpen) {
             closeMobileMenu();
@@ -236,12 +279,10 @@ function handleMobileMode() {
         $BODY.removeClass('nav-sm');
         $('body').css('overflow', '');
 
-        // ریست و راه‌اندازی مجدد سایدبار دسکتاپ
         $SIDEBAR_MENU.find('a').off('click.sidebar');
         init_sidebar();
     }
 }
-
 // اجرا در زمان لود
 $(document).ready(function() {
     // چک کردن اندازه صفحه و اجرای مناسب
