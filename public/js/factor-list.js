@@ -102,6 +102,9 @@ function resetAllFilters() {
 document.getElementById('clearFiltersBtn')?.addEventListener('click', function(e) {
     e.preventDefault();
     resetAllFilters();
+    setTimeout(() => {
+        window.location.reload();
+    }, 100); // کمی تأخیر تا reset کامل بشه
 });
 
 function setPaymentData(id, title, amount) {

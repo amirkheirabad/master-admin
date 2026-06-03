@@ -28,7 +28,7 @@
 
     .mobile-sidebar.mobile-open {
         right: 0 !important;
-        box-shadow: -5px 0 25px rgba(0, 0, 0, 0.08) !important; /* سایه نرم‌تر و عمیق‌تر */
+        box-shadow: -5px 0 25px rgba(0, 0, 0, 0.08) !important;
     }
 
     .mobile-menu-overlay {
@@ -37,8 +37,8 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.4); /* بک‌گراند کمی ملایم‌تر */
-        backdrop-filter: blur(2px); /* افکت بلور مدرن */
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(2px);
         z-index: 9998;
         display: none;
         transition: all 0.3s ease;
@@ -62,7 +62,7 @@
         transition: color 0.3s ease;
     }
     .mobile-menu-toggle:hover i {
-        color: #133c6d; /* تغییر به رنگ اصلی شما */
+        color: #133c6d;
     }
 
     .mobile-sidebar .menu_section {
@@ -85,33 +85,33 @@
         content: none !important;
     }
 
-    /* آیتم‌های اصلی منو (موبایل) - حالت دکمه‌ای */
+    /* آیتم‌های اصلی منو (موبایل) */
     .mobile-sidebar .nav.side-menu > li > a {
-        color: #4a5568 !important; /* تیره کردن رنگ متن برای خوانایی بسیار بیشتر */
+        color: #2d3748 !important;
         font-weight: 500;
         display: flex !important;
         align-items: center !important;
         gap: 12px !important;
         padding: 12px 18px !important;
-        margin: 4px 15px !important; /* ایجاد فاصله از لبه‌ها برای حالت دکمه‌ای */
+        margin: 4px 15px !important;
         font-size: 14px !important;
         background: transparent !important;
-        border-radius: 10px !important; /* گوشه‌های گرد */
+        border-radius: 10px !important;
         transition: all 0.3s ease !important;
     }
     .mobile-sidebar .nav.side-menu > li > a:hover {
-        color: #133c6d !important; /* تغییر به رنگ اصلی در حالت هوور */
-        background: #f8f7fa !important;
-        transform: translateX(-4px) !important; /* حرکت ریز به سمت چپ در زمان هاور */
+        color: #133c6d !important;
+        background: #eef2f7 !important;
+        transform: translateX(-4px) !important;
     }
     .mobile-sidebar .nav.side-menu > li > a i {
         font-size: 18px !important;
         width: 25px !important;
-        color: #94a3b8 !important; /* تیره کردن آیکون‌های غیرفعال برای خوانایی بهتر */
+        color: #718096 !important;
         transition: all 0.3s ease;
     }
     .mobile-sidebar .nav.side-menu > li > a:hover i {
-        color: #133c6d !important; /* تغییر به رنگ اصلی */
+        color: #133c6d !important;
     }
     .mobile-sidebar .nav.side-menu > li > a .fa-chevron-down {
         margin-right: auto !important;
@@ -122,14 +122,14 @@
     /* آیتم فعال (موبایل) */
     .mobile-sidebar .nav.side-menu > li.active > a,
     .mobile-sidebar .nav li.current-page > a {
-        background: #f8f7fa !important;
-        color: #133c6d !important; /* تغییر به رنگ اصلی */
+        background: rgb(248, 247, 250) !important;
+        color: #133c6d !important;
         font-weight: 600 !important;
-        box-shadow: 0 4px 10px rgba(19, 60, 109, 0.05) !important; /* سایه ملایم با ته‌رنگ اصلی */
+        box-shadow: 0 4px 10px rgba(19, 60, 109, 0.05) !important;
     }
     .mobile-sidebar .nav.side-menu > li.active > a i,
     .mobile-sidebar .nav li.current-page > a i {
-        color: #133c6d !important; /* تغییر به رنگ اصلی */
+        color: #133c6d !important;
     }
 
     /* زیرمنوها (موبایل) */
@@ -141,7 +141,7 @@
     }
     .mobile-sidebar .child_menu li a {
         text-align: right !important;
-        color: #64748b !important; /* بهبود خوانایی زیرمنو در حالت عادی */
+        color: #4a5568 !important;
         font-size: 13px;
         padding: 10px 15px !important;
         margin: 2px 15px !important;
@@ -150,13 +150,13 @@
         transition: all 0.2s ease;
     }
     .mobile-sidebar .child_menu li a:hover {
-        color: #133c6d !important; /* تغییر به رنگ اصلی */
-        background: #f8f7fa !important;
+        color: #133c6d !important;
+        background: rgb(248, 247, 250) !important;
         transform: translateX(-3px);
     }
     .mobile-sidebar .child_menu li.active a {
-        color: #133c6d !important; /* تغییر به رنگ اصلی */
-        background: #f8f7fa !important;
+        color: #133c6d !important;
+        background: rgb(248, 247, 250) !important;
         font-weight: bold;
     }
 
@@ -170,7 +170,6 @@
        حذف نوار سبز رنگ پیش‌فرض قالب در زمان انتخاب آیتم
        ======================================================= */
 
-    /* حذف بوردرهای راست و چپ */
     .mobile-sidebar .nav.side-menu > li.active,
     .mobile-sidebar .nav.side-menu > li.active > a,
     .mobile-sidebar .nav li.current-page,
@@ -179,7 +178,6 @@
         border-right: none !important;
     }
 
-    /* حذف اِلمان‌های کاذبی که ممکن است خط سبز را ایجاد کنند */
     .mobile-sidebar .nav.side-menu > li.active > a::before,
     .mobile-sidebar .nav.side-menu > li.active > a::after,
     .mobile-sidebar .nav.side-menu > li.active::before,
@@ -227,9 +225,9 @@
         display: none !important;
     }
 
-    /* آیتم‌های اصلی منو (دسکتاپ) - حالت دکمه‌ای شناور */
+    /* آیتم‌های اصلی منو (دسکتاپ) */
     .nav.side-menu > li > a {
-        color: #4a5568 !important; /* تیره کردن رنگ متن برای وضوح بالاتر */
+        color: #2d3748 !important;
         background: transparent !important;
         transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
         border: none !important;
@@ -241,7 +239,7 @@
         font-weight: 400;
     }
     .nav.side-menu > li > a i {
-        color: #94a3b8 !important; /* تیره کردن آیکون‌ها در حالت عادی */
+        color: #718096 !important;
         margin-left: 10px;
         transition: all 0.3s ease;
     }
@@ -249,25 +247,25 @@
     /* افکت هاور دسکتاپ */
     .nav.side-menu > li > a:hover,
     .nav.side-menu > li > a:focus {
-        background: #f8f7fa !important;
-        color: #133c6d !important; /* تغییر به رنگ اصلی */
+        background: rgb(248, 247, 250) !important;
+        color: #133c6d !important;
         transform: translateX(-4px);
     }
     .nav.side-menu > li > a:hover i {
-        color: #133c6d !important; /* تغییر به رنگ اصلی */
+        color: #133c6d !important;
     }
 
     /* آیتم فعال دسکتاپ */
     .nav.side-menu > li.active > a,
     .nav li.current-page > a {
-        background: #f8f7fa !important;
-        color: #133c6d !important; /* تغییر به رنگ اصلی */
+        background: rgb(248, 247, 250) !important;
+        color: #133c6d !important;
         font-weight: 500 !important;
         box-shadow: 0 4px 10px rgba(19, 60, 109, 0.03) !important;
     }
     .nav.side-menu > li.active > a i,
     .nav li.current-page > a i {
-        color: #133c6d !important; /* تغییر به رنگ اصلی */
+        color: #133c6d !important;
     }
 
     /* زیرمنوها (دسکتاپ) */
@@ -276,7 +274,7 @@
         padding-right: 5px !important;
     }
     .child_menu li a {
-        color: #64748b !important; /* افزایش وضوح متن زیرمنو */
+        color: #4a5568 !important;
         background: transparent !important;
         border-radius: 8px !important;
         margin: 2px 15px !important;
@@ -285,44 +283,35 @@
     }
     .child_menu li a:hover,
     .child_menu li a:focus {
-        background: #f8f7fa !important;
-        color: #133c6d !important; /* تغییر به رنگ اصلی */
+        background: rgb(248, 247, 250) !important;
+        color: #133c6d !important;
         transform: translateX(-3px);
     }
     .child_menu li.active a {
-        background: #f8f7fa !important;
-        color: #133c6d !important; /* تغییر به رنگ اصلی */
+        background: rgb(248, 247, 250) !important;
+        color: #133c6d !important;
         font-weight: bold;
     }
 }
 
 /* =======================================================
-   تراز کردن فلش‌ها با Flexbox (تمیزترین و اصولی‌ترین روش)
+   تراز کردن فلش‌ها با Flexbox
    ======================================================= */
 
-/* ۱. تبدیل لینک‌ها به کانتینر فلکس */
 .nav.side-menu > li > a,
 .mobile-sidebar .nav.side-menu > li > a {
     display: flex !important;
     align-items: center !important;
-    width: auto !important; /* رفع مشکل بیرون‌زدگی منوها */
+    width: auto !important;
     box-sizing: border-box !important;
 }
 
-/* ۲. هل دادن فلش به انتهای سمت چپ */
 .nav.side-menu > li > a .fa-chevron-down,
 .mobile-sidebar .nav.side-menu > li > a .fa-chevron-down {
-    margin-right: auto !important; /* چسباندن کامل فلش به چپ بدون Absolute */
+    margin-right: auto !important;
     margin-left: 0 !important;
     font-size: 11px !important;
     opacity: 0.7 !important;
     display: inline-block !important;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
-
-/* ۳. انیمیشن چرخش درست و بدون پرش برای زمان باز شدن منو */
-/* .nav.side-menu > li.active > a .fa-chevron-down,
-.mobile-sidebar .nav.side-menu > li.active > a .fa-chevron-down {
-    transform: rotate(180deg) !important;
-    color: #133c6d !important;} */
-     /* تغییر رنگ فلش در حالت باز شده */
