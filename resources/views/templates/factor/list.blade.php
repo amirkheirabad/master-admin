@@ -167,7 +167,9 @@
                             <th>دسته بندی</th>
                             @endif
                             <th>توضیحات</th>
+                            @if (auth()->user()->hasRole('admin'))
                             <th>وضعیت نمایش</th>
+                            @endif
                             <th>وضعیت مالی</th>
                             <th>تاریخ پرداخت</th>
                             <th>عملیات</th>
@@ -175,9 +177,12 @@
                     </thead>
                     <tbody>
                         @forelse ($factors as $factor)
+                            @if (auth()->user()->hasRole('seller') && $factor->show_status == 0)
+                                @continue
+                            @endif
                             <tr class="responsive-table-row item-record{{ $factor->id }}">
                             <th scope="row" class="responsive-table-td">
-                                        {{ ($factors->currentPage() - 1) * $factors->perPage() + $loop->iteration }}
+                                        {{ $factor->id }}
                                     </th>
                                 <td data-title="نام فروشگاه" class="responsive-table-td">
                                     {{ $factor->store->store_name ?? 'مشتری' }}</td>
@@ -192,9 +197,10 @@
                                 @endif
 
                                 <td data-title="توضیحات" class="responsive-table-td">{{ $factor->description }}</td>
+                                @if (auth()->user()->hasRole('admin'))
                                 <td data-title="وضعیت نمایش" class="responsive-table-td">
                                     @if ($factor->show_status == 0)
-                                        <span class="bg-warning p-2 custom-radius">
+                                        <span class="bg-red-new p-2 custom-radius">
                                             غیرفعال
                                         </span>
                                     @elseif($factor->show_status == 1)
@@ -203,6 +209,7 @@
                                         </span>
                                     @endif
                                 </td>
+                                @endif
                                 <td data-title="وضعیت مالی" class="responsive-table-td">
                                     @if ($factor->price_status == 0)
                                         <span class="bg-warning p-2 custom-radius">

@@ -112,7 +112,7 @@
                 <div class="col-md-6 col-xs-12 mb-1" id="store_wrapper">
                     <label>نام فروشگاه <span class="text-danger">*</span></label>
                     <select name="store_id" id="store_id"
-                        class="form-control custom-radius custom-select-input input-border-focus">
+                        class="form-control custom-radius select2">
                         <option value="">انتخاب کنید</option>
                         @foreach ($stores as $store)
                             <option value="{{ $store->id }}">{{ $store->store_name }}</option>

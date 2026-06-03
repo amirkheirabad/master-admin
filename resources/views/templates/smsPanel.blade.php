@@ -152,25 +152,10 @@
                     </div>
                 </div>
 
-{{--                <h2>تست API ثبت پیام با توکن</h2>--}}
-
-{{--                <form id="apiTestForm">--}}
-{{--                    <label>توکن فروشگاه:</label>--}}
-{{--                    <input type="text" id="token" name="token" placeholder="توکن فروشگاه"><br><br>--}}
-
-{{--                    <label>پیام فروشگاه:</label>--}}
-{{--                    <textarea id="store_message" name="store_message" placeholder="پیام فروشگاه"></textarea><br><br>--}}
-
-{{--                    <button type="submit">ارسال</button>--}}
-{{--                </form>--}}
-
-{{--                <h3>نتیجه:</h3>--}}
-{{--                <pre id="result"></pre>--}}
-
                 <div class="d-flex justify-content-between">
                     <div></div>
                     <form method="get" action="">
-                        <div class="d-flex align-items-center" style="gap: 15px;">
+                        <div class="d-flex align-items-center">
                             <div class="search-container">
                                 <button class="search-button">
                                     <i class="fa fa-search"></i>
@@ -275,7 +260,7 @@
                                     @endif
                                 </td>
                                 <td data-title="عملیات" class="responsive-table-td">
-                                    <div class="">
+                                    <div class="gap">
                                         <a href="javascript:;" class="text-primary" data-toggle="modal" data-target="#myModal2" data-id="{{ $sms->id }}">
                                             <i class="fa fa-eye fa-x"></i>
                                         </a>

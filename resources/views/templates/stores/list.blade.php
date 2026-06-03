@@ -127,7 +127,7 @@
                                 <td data-title="آدرس فروشگاه" class="responsive-table-td">{{ $store->location }}</td>
                                 <td data-title="کد پستی" class="responsive-table-td">{{ $store->code_posty }}</td>
                                 <td data-title="عملیات" class="responsive-table-td">
-                                    <div class="action-buttons" style="display: flex; gap: 10px;">
+                                    <div class="action-buttons gap">
                                         <a href="{{ route('edit_store', $store->id) }}" class="text-success" title="ویرایش">
                                             <i class="fa fa-pencil fa-x"></i>
                                         </a>

@@ -1,3 +1,19 @@
+$(document).ready(function() {
+    $('.select2').select2();
+});
+$('.select2').select2({
+    placeholder: "انتخاب کنید",
+    allowClear: true,
+    width: '100%',
+    language: {
+        noResults: function () {
+            return "نتیجه‌ای یافت نشد";
+        }
+    }
+});
+
+
+
 // قرار بده توی فایل JS خودت
 const csrf = document.querySelector('meta[name="csrf-token"]').content;
 
