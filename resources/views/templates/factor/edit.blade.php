@@ -88,7 +88,6 @@
                     <div class="col-md-12">
                         <div>
                             <h3> ویرایش فاکتور<span class="text-danger"> {{ $factor->id }}</span></h3>
-                            <h4>{{ $factor->hash }}</h4>
                         </div>
                     </div>
                 </div>
@@ -168,9 +167,9 @@
                                 <div class="col-md-4 mt-4 col-xs-12">
                                     <label class="mt-">قیمت</label>
                                     <input type="text"  value="{{ $factor->price }}" name="price" id="price" class="form-control custom-radius price-input-class" placeholder="قیمت">
-                                    <div class="mt-1 error-space">
-                                        <span class="d-block text-left display-price" id="display_price_toman">{{ $factor->price/10 }} تومان</span>
-                                        <span class="text-danger" id="price_error"></span>
+                                    <div class="mt-1">
+                                        <span class="text-danger error-message" id="price_error"></span>
+                                        <div class="text-left display-price" id="display_price_toman">{{ $factor->price/10 }} تومان</div>
                                     </div>
                                 </div>
 

@@ -122,9 +122,9 @@
                                 <div class="col-md-4 col-xs-12 mt-4">
                                     <label class="mt-">قیمت</label> <span class="text-danger">*</span>
                                     <input type="text" name="price" id="price" class="form-control custom-radius input-border-focus" placeholder="قیمت">
-                                    <span class="d-block text-left display-price" id="display_price_toman"></span>
                                     <div class="mt-1">
                                         <span class="text-danger error-message" id="price_error"></span>
+                                        <div class=" text-left display-price" id="display_price_toman"></div>
                                     </div>
                                 </div>
 
@@ -142,11 +142,11 @@
                                 </div>
                                 <div class="col-md-12 col-xs-12 mt-4">
                                     <div class="form-check">
-                                        <input 
-                                            class="form-check-input" 
-                                            type="checkbox" 
-                                            id="send_sms" 
-                                            name="send_sms" 
+                                        <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            id="send_sms"
+                                            name="send_sms"
                                             value="1"
                                         >
                                         <label class="form-check-label me-2" for="send_sms">
