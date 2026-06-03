@@ -159,8 +159,8 @@
                                 <div class="col-md-4 mt-4 col-xs-12">
                                     <label>وضعیت نمایش</label>
                                     <select class="form-control custom-radius custom-select-input" name="show_status" id="show_status">
-                                        <option value="1">فعال</option>
-                                        <option value="0">غیر فعال</option>
+                                        <option value="1" {{ $factor->show_status == 1 ? 'selected' : '' }}>فعال</option>
+                                        <option value="0" {{ $factor->show_status == 0 ? 'selected' : '' }}>غیر فعال</option>
                                     </select>
                                 </div>
 

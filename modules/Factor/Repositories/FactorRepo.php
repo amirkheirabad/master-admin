@@ -122,31 +122,24 @@ class FactorRepo implements InterfaceFactor
             'national_kod' => $data['national_kod'] ?? null,
             'description'  => $data['description'] ?? null,
         ]);
-    
-        \Log::info('SMS Data:', [
-            'send_sms' => $data['send_sms'] ?? 'not set',
-            'phone'    => $data['phone'] ?? null,
-            'name'     => $data['name'] ?? null,
-            'price'    => $data['price'],
-        ]);
-    
+
         if (!empty($data['send_sms']) && $data['send_sms']) {
             $phone = $data['phone'] ?? null;
             $name  = $data['name'] ?? 'کاربر';
-    
+
             if (empty($phone) && !empty($data['store_id'])) {
-                $store = Stores::find($data['store_id']);
+                $store = Stores::with('user')->find($data['store_id']);
                 if ($store) {
-                    $phone = $store->phone ?? $store->mobile ?? null;
-                    $name  = $store->store_name ?? 'فروشگاه';
+                    $phone = $store->phone ?? null;
+                    $name  = $store->user->name ?? 'فروشگاه';
                 }
             }
-    
+
             if ($phone) {
                 (new SmsService())->sendFactorNotification($phone, $name, $factor->id, (int)$data['price']);
             }
         }
-    
+
         return $factor;
     }
 
