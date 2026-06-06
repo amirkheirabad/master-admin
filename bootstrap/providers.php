@@ -10,4 +10,5 @@ return [
     Modules\Education\EducationServiceProvider::class,
     Modules\Message\MessageServiceProvider::class,
     Modules\Dashboard\DashboardServiceProvider::class,
+    Modules\FAQ\FAQServiceProvider::class,
 ];
