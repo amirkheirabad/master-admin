@@ -108,6 +108,20 @@
                     @endif
                 </ul>
             </li>
+            <li>
+                <a>
+                    <i class="fa fa-play-circle text-beta"></i>
+                    <span>سوالات متداول </span>
+                    <span class="fa fa-chevron-down"></span>
+                </a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('faq_show') }}"> سوالات متداول</a></li>
+                    @if(auth()->user()->hasRole('admin'))
+                        <li><a href="{{ route('faq_insert') }}"> افزودن سوال</a></li>
+                        <li><a href="{{ route('faq_list') }}"> لیست سوالات</a></li>
+                    @endif
+                </ul>
+            </li>
         </ul>
     </div>
 </div>
