@@ -4,6 +4,19 @@ let lastPage = 1;
 let isLoading = false;
 let hasMoreData = true;
 
+function getSearchQuery() {
+    return new URLSearchParams(window.location.search).get('search_query') || '';
+}
+
+function buildVideosUrl(basePath, page) {
+    const search = getSearchQuery();
+    let url = `${basePath}?page=${page}`;
+    if (search) {
+        url += `&search_query=${encodeURIComponent(search)}`;
+    }
+    return url;
+}
+
 function escapeHtml(text) {
     if (!text) return '';
     const div = document.createElement('div');
@@ -29,10 +42,13 @@ function displayVideos(videos, isNewCategory = true) {
 
     if (!videos || videos.length === 0) {
         if (isNewCategory) {
+            const emptyMessage = getSearchQuery()
+                ? 'نتیجه‌ای برای جستجو یافت نشد'
+                : 'هیچ ویدئویی در این دسته بندی یافت نشد';
             videosGrid.innerHTML = `
                 <div class="empty-videos">
                     <i class="fa fa-video-slash"></i>
-                    <p>هیچ ویدئویی در این دسته بندی یافت نشد</p>
+                    <p>${emptyMessage}</p>
                 </div>
             `;
         }
@@ -162,7 +178,7 @@ function loadAllVideos() {
     currentCategoryId = null;
     showLoading(true);
 
-    loadVideos('/get-all-videos?page=1', true)
+    loadVideos(buildVideosUrl('/get-all-videos', 1), true)
         .catch(error => {
             const videosGrid = document.getElementById('videosGrid');
             if (videosGrid) {
@@ -182,7 +198,7 @@ function loadVideosByCategory(categoryId) {
     currentCategoryId = categoryId;
     showLoading(true);
 
-    loadVideos(`/get-videos/${categoryId}?page=1`, true)
+    loadVideos(buildVideosUrl(`/get-videos/${categoryId}`, 1), true)
         .catch(error => {
             const videosGrid = document.getElementById('videosGrid');
             if (videosGrid) {
@@ -200,12 +216,9 @@ function loadMoreVideos() {
     isLoading = true;
     const nextPage = currentPage + 1;
 
-    let url;
-    if (currentCategoryId) {
-        url = `/get-videos/${currentCategoryId}?page=${nextPage}`;
-    } else {
-        url = `/get-all-videos?page=${nextPage}`;
-    }
+    const url = currentCategoryId
+        ? buildVideosUrl(`/get-videos/${currentCategoryId}`, nextPage)
+        : buildVideosUrl('/get-all-videos', nextPage);
 
     showLoading(false);
 

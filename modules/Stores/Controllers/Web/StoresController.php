@@ -6,6 +6,8 @@ use Modules\Stores\Models\Stores;
 use Modules\Stores\Repositories\InterfaceStores;
 use Modules\User\Repositories\InterfaceUser;
 use Modules\Stores\Requests\IndexRequest;
+use Modules\Stores\Requests\QuickCreateSellerRequest;
+
 class StoresController
 {
     private InterfaceStores $store;
@@ -63,6 +65,20 @@ class StoresController
     public function store_info()
     {
         return view('templates.stores.store_info');
+    }
+
+
+    public function quickCreateSeller(QuickCreateSellerRequest $request)
+    {
+        $user = $this->user->quickCreateSeller($request->validated());
+ 
+        return response()->json([
+            'success' => true,
+            'user' => [
+                'id'   => $user->id,
+                'name' => $user->name,
+            ],
+        ]);
     }
 
 }

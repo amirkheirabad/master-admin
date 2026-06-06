@@ -7,6 +7,7 @@ use Modules\Factor\Repositories\InterfaceFactor;
 use Modules\Stores\Repositories\InterfaceStores;
 use Modules\Factor\Requests\StoreFactor;
 use Modules\Factor\Requests\UpdateFactorRequest;
+use Modules\Stores\Models\Stores;
 use Modules\User\Models\User;
 
 
@@ -35,6 +36,18 @@ class FactorController
             'name' => $user->name,
             'mobile' => $user->mobile,
             'national_kod' => $user->national_kod,
+        ]);
+    }
+
+    public function storeInfo($id)
+    {
+        $store = Stores::with('user')->findOrFail($id);
+
+        return response()->json([
+            'store_name' => $store->store_name,
+            'name' => $store->user?->name ?? $store->store_name,
+            'mobile' => $store->user?->mobile ?? $store->phone,
+            'national_kod' => $store->user?->national_kod,
         ]);
     }
 
