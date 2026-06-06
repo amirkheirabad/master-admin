@@ -28,7 +28,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="x_panel rounded-4">
+
+                <div class="d-flex justify-content-end mt-2">
+                    <form method="get" action="{{ route('education-list') }}">
+                        <div class="search-container">
+                            <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
+                            <input type="text" name="search_query" value="{{ request('search_query') }}"
+                                class="search-input" placeholder="جستجو در ویدئو...">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="x_panel rounded-4 mt-2">
                     <div class="panel-title">
                         <h4>دسته بندی ویدئوها</h4>
                     </div>

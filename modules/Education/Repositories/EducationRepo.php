@@ -2,6 +2,7 @@
 
 namespace Modules\Education\Repositories;
 
+use Illuminate\Http\Request;
 use Modules\Education\Models\Video;
 use Modules\Education\Models\Video_category;
 
@@ -38,6 +39,21 @@ class EducationRepo implements InterfaceEducation
             ->paginate(12);
     }
 
+    public function filterVideos(Request $request, $categoryId = null)
+    {
+        return Video::with('category')
+            ->when($categoryId, function ($q) use ($categoryId) {
+                $q->where('category_id', $categoryId);
+            })
+            ->when($request->filled('search_query'), function ($q) use ($request) {
+                $q->where(function ($query) use ($request) {
+                    $query->where('title', 'LIKE', '%' . $request->search_query . '%')
+                          ->orWhere('description', 'LIKE', '%' . $request->search_query . '%');
+                });
+            })
+            ->latest()
+            ->paginate(12);
+    }
     public function storeCategory(array $data)
     {
         return Video_category::create([

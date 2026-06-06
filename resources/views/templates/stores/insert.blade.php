@@ -10,6 +10,13 @@
     </script>
     <script src="{{ asset('/js/generate-token.js') }}"></script>
     <script src="{{ asset('/js/app-stores.js') }}"></script>
+    <script src="{{ asset('/js/quick_create_seller.js') }}"></script>
+    <script>
+    var quickCreateSellerConfig = {
+        route: '{{ route("quick_create_seller") }}',
+        token: '{{ csrf_token() }}'
+    };
+    </script>    
 @endsection
 
 @section('content')
@@ -39,12 +46,17 @@
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
                                 <label>نام مدیر <span class="text-danger">*</span></label>
-                                <select id="user_id" class="form-control custom-radius select2" name="user_id">
-                                    <option value="">همه</option>
-                                    @foreach($users as $user)
-                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                    @endforeach
-                                </select>
+                                <div class="d-flex align-items-center gap-2">
+                                    <select id="user_id" class="form-control custom-radius select2" name="user_id">
+                                        <option value="">همه</option>
+                                        @foreach($users as $user)
+                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <button type="button" class="btn btn-beta-solid btn-sm text-nowrap" id="btn-quick-create-user" title="ساخت کاربر جدید">
+                                        + کاربر جدید
+                                    </button>
+                                </div>
                                 <div class="mt-1">
                                     <span class="text-danger" id="user_id_error"></span>
                                 </div>
@@ -106,8 +118,6 @@
                                 </div>
                             </div>
 
-                            
-
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
                                 <label>توکن فروشگاه <span class="text-danger">*</span></label>
                                 <div class="search-container">
@@ -136,4 +146,44 @@
             </div>
         </div>
     </div>
+
+    {{-- مودال ساخت سریع کاربر --}}
+    <div class="modal fade" id="quickCreateUserModal" tabindex="-1" role="dialog" aria-labelledby="quickCreateUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="quickCreateUserModalLabel">ساخت کاربر جدید (فروشنده)</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="بستن">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>نام <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control custom-radius input-border-focus" id="quick_name" placeholder="نام کاربر">
+                        <span class="text-danger mt-1 d-block" id="quick_name_error"></span>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label>شماره موبایل <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control custom-radius input-border-focus" id="quick_mobile" placeholder="شماره موبایل">
+                        <span class="text-danger mt-1 d-block" id="quick_mobile_error"></span>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label>رمز عبور <span class="text-danger">*</span></label>
+                        <input type="password" class="form-control custom-radius input-border-focus" id="quick_password" placeholder="رمز عبور">
+                        <span class="text-danger mt-1 d-block" id="quick_password_error"></span>
+                    </div>
+                    <div id="quick_general_error" class="alert alert-danger mt-3 d-none"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-beta-outline" data-dismiss="modal">انصراف</button>
+                    <button type="button" class="btn btn-beta-solid" id="btn-submit-quick-user">
+                        <span id="quick-user-btn-text">ساخت کاربر</span>
+                        <span id="quick-user-spinner" class="spinner-border spinner-border-sm d-none" role="status"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection

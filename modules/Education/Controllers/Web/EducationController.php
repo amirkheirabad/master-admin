@@ -15,10 +15,11 @@ class EducationController
     {
         $this->education = $education;
     }
-    public function index()
+    public function index(Request $request)
     {
+        $videos = $this->education->filterVideos($request);
         $categories = $this->education->getAllCategories();
-        return view('templates.education.list', compact('categories'));
+        return view('templates.education.list', compact('categories', 'videos'));
     }
 
     public function videoList()
@@ -27,18 +28,18 @@ class EducationController
         return view('templates.education.video_list', compact('videos'));
     }
 
-    public function getVideos()
+    public function getVideos(Request $request)
     {
-        $videos = $this->education->getAllVideos();
+        $videos = $this->education->filterVideos($request);
         return response()->json([
             'success' => true,
             'videos' => $videos
         ]);
     }
 
-    public function getVideosByCategory($categoryId)
+    public function getVideosByCategory(Request $request, $categoryId)
     {
-        $videos = $this->education->getVideosByCategory($categoryId);
+        $videos = $this->education->filterVideos($request, $categoryId);
         return response()->json([
             'success' => true,
             'videos' => $videos

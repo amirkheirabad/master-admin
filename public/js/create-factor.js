@@ -270,14 +270,23 @@ document.addEventListener('DOMContentLoaded', function() {
 });
  
 
+function fillBuyerFields(data) {
+    $('#name').val(data.name ?? '');
+    $('#phone').val(data.mobile ?? data.phone ?? '');
+    $('#national_kod').val(data.national_kod ?? '');
+}
+
+function clearBuyerFields() {
+    $('#name').val('');
+    $('#phone').val('');
+    $('#national_kod').val('');
+}
+
 $('#customer_id').on('change', function () {
+    const userId = $(this).val();
 
-    let userId = $(this).val();
-
-    if (userId === '') {
-        $('#name').val('');
-        $('#phone').val('');
-        $('#national_kod').val('');
+    if (!userId) {
+        clearBuyerFields();
         return;
     }
 
@@ -289,15 +298,28 @@ $('#customer_id').on('change', function () {
         }
     })
         .then(res => res.json())
-        .then(data => {
+        .then(fillBuyerFields)
+        .catch(err => console.log(err));
+});
 
-            $('#name').val(data.name ?? '');
-            $('#phone').val(data.mobile ?? '');
-            $('#national_kod').val(data.national_kod ?? '');
+$('#store_id').on('change', function () {
+    const storeId = $(this).val();
 
-        })
-        .catch(err => {
-            console.log(err);
-        });
+    if (!storeId || $('#account_type').val() !== 'store') {
+        if ($('#account_type').val() === 'store') {
+            clearBuyerFields();
+        }
+        return;
+    }
 
+    fetch(`/store-info/${storeId}`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'X-CSRF-TOKEN': csrf
+        }
+    })
+        .then(res => res.json())
+        .then(fillBuyerFields)
+        .catch(err => console.log(err));
 });

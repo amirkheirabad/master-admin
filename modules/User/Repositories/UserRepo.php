@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Modules\User\Models\User;
 use Spatie\Permission\Models\Permission;
+
 use Spatie\Permission\Models\Role;
 
 class UserRepo implements InterfaceUser
@@ -179,5 +180,29 @@ class UserRepo implements InterfaceUser
     public function role_delete($id)
     {
         Role::find($id)->delete();
+    }
+            
+
+
+    
+    public function quickCreateSeller(array $data): User
+    {
+        DB::beginTransaction();
+        try {
+            $user = User::create([
+                'name'     => $data['name'],
+                'mobile'   => $data['mobile'],
+                'password' => bcrypt($data['password']),
+            ]);
+ 
+            $user->assignRole('seller');
+ 
+            DB::commit();
+ 
+            return $user;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
     }
 }

@@ -24,13 +24,32 @@
         </div>
     </div>
 
+    @php
+        $buyerStoreName = $factor->store?->store_name ?? '';
+        $buyerName = $factor->name
+            ?? $factor->store?->user?->name
+            ?? $factor->customer?->name
+            ?? '';
+        $buyerNationalKod = $factor->national_kod
+            ?? $factor->store?->user?->national_kod
+            ?? $factor->customer?->national_kod
+            ?? '';
+        $buyerPhone = $factor->phone
+            ?? $factor->store?->user?->mobile
+            ?? $factor->store?->phone
+            ?? $factor->customer?->mobile
+            ?? '';
+    @endphp
+
     <div class="box">
         <div class="box-title">مشخصات خریدار</div>
         <div class="box-body">
-            فروشگاه: {{ $factor->store->store_name ?? '' }}
-            به نمایندگی: {{ $factor->name ?? '' }}
-            به کد ملی: {{ $factor->national_kod ?? '' }}
-            به شماره موبایل: {{ $factor->phone ?? '' }}
+            @if($buyerStoreName)
+                فروشگاه: {{ $buyerStoreName }}
+            @endif
+            به نمایندگی: {{ $buyerName }}
+            به کد ملی: {{ $buyerNationalKod }}
+            به شماره موبایل: {{ $buyerPhone }}
         </div>
     </div>
 

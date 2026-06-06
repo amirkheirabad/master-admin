@@ -109,6 +109,8 @@ class FactorRepo implements InterfaceFactor
 
     public function createFactor(array $data)
     {
+        $data = $this->resolveBuyerFromStore($data);
+
         $factor = Factor::create([
             'store_id'     => $data['store_id'] ?? null,
             'user_id'      => $data['user_id'] ?? null,
@@ -166,7 +168,39 @@ class FactorRepo implements InterfaceFactor
 
     public function factorById($id)
     {
-        return Factor::with('store', 'category')->findOrFail($id);
+        return Factor::with(['store.user', 'category', 'customer'])->findOrFail($id);
+    }
+
+    private function resolveBuyerFromStore(array $data): array
+    {
+        if (empty($data['store_id'])) {
+            return $data;
+        }
+
+        $store = Stores::with('user')->find($data['store_id']);
+        if (!$store) {
+            return $data;
+        }
+
+        $manager = $store->user;
+
+        if (empty($data['name'])) {
+            $data['name'] = $manager?->name ?? $store->store_name;
+        }
+
+        if (empty($data['phone'])) {
+            $data['phone'] = $manager?->mobile ?? $store->phone ?? null;
+        }
+
+        if (empty($data['national_kod'])) {
+            $data['national_kod'] = $manager?->national_kod ?? null;
+        }
+
+        if (empty($data['user_id']) && $store->user_id) {
+            $data['user_id'] = $store->user_id;
+        }
+
+        return $data;
     }
 
     public function deleteFactor(int $id)
