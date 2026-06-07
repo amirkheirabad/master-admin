@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Ticket\Controllers\Web\TicketController;
+use Modules\Ticket\Controllers\Web\QuickReplyController;
+
 
 Route::middleware(['check.login', 'check.role:admin'])->group(function () {
     Route::get('/tickets', [TicketController::class, 'index'])->name('list_tickets');
@@ -22,5 +24,17 @@ Route::middleware(['check.login', 'check.role:admin,seller'])->group(function(){
     Route::middleware(['throttle:ticket_ratelimit'])->post('/tickets_store_admin', [TicketController::class, 'storeUser'])->name('tickets_store_admin');
     Route::middleware(['throttle:ticket_ratelimit'])->post('/{id}/reply_store', [TicketController::class, 'replyUser'])->name('ticket_store_reply');
     Route::post('/tickets/{id}/status', [TicketController::class, 'updateStatus'])->name('tickets_update_status');
+    Route::get('/quick-replies/api-list', [QuickReplyController::class, 'apiList'])->name('quick_replies_api');
 
+});
+
+
+// فقط admin دسترسی داره
+Route::middleware(['check.login', 'check.role:admin'])->group(function () {
+
+    // مدیریت جواب‌های آماده
+    Route::get('/quick-replies', [QuickReplyController::class, 'index'])->name('quick_replies_list');
+    Route::post('/quick-replies', [QuickReplyController::class, 'store'])->name('quick_replies_store');
+    Route::put('/quick-replies/{id}', [QuickReplyController::class, 'update'])->name('quick_replies_update');
+    Route::delete('/quick-replies/{id}', [QuickReplyController::class, 'destroy'])->name('quick_replies_destroy');
 });

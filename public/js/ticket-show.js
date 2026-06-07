@@ -572,3 +572,116 @@ $('#replyFormUser').on('submit', function (e) {
             submitBtn.disabled = false;
         });
 });
+
+
+
+//quick reply
+const quickReplyWrapper = document.getElementById('quickReplyWrapper');
+let allQuickReplies = [];
+
+if (quickReplyWrapper) {
+    fetch('/quick-replies/api-list', { headers: { 'Accept': 'application/json' } })
+        .then(r => r.json())
+        .then(items => {
+            allQuickReplies = items;
+            document.getElementById('quickReplyLoading')?.remove();
+            renderQuickReplies(items);
+        })
+        .catch(() => {
+            const el = document.getElementById('quickReplyLoading');
+            if (el) el.textContent = 'خطا در بارگذاری';
+        });
+}
+
+function renderQuickReplies(items) {
+    const list = document.getElementById('quickReplyList');
+    if (!list) return;
+    const loading = document.getElementById('quickReplyLoading');
+    if (loading) loading.remove();
+
+    if (!items.length) {
+        list.innerHTML = '<div style="padding:12px; text-align:center; font-size:12px; color:#aaa;">موردی یافت نشد</div>';
+        return;
+    }
+
+    list.innerHTML = '';
+    items.forEach((item, i) => {
+        const div = document.createElement('div');
+        div.style.cssText = 'padding:9px 13px; cursor:pointer; border-bottom:1px solid #f5f5f5; transition:background .1s;';
+        div.innerHTML = `
+            <div style="font-size:12.5px; font-weight:600; color:#222;">${escapeHtml(item.title)}</div>
+            <div style="font-size:11px; color:#888; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(item.body)}</div>`;
+        div.onmouseenter = () => div.style.background = '#f5f5f5';
+        div.onmouseleave = () => div.style.background = '';
+        div.addEventListener('click', () => {
+            const inp = document.getElementById('messageInput');
+            if (inp) { inp.value = item.body; inp.focus(); }
+            document.getElementById('quickReplyLabel').innerHTML =
+                `<i class="fa fa-check" style="color:#1D9E75; margin-left:4px;"></i>${escapeHtml(item.title)}`;
+            document.getElementById('qrChip').style.background = '#eaf8f3';
+            document.getElementById('qrChip').style.borderColor = '#99eae4';
+            closeQuickReply();
+        });
+        list.appendChild(div);
+    });
+}
+
+function filterQuickReplies(val) {
+    renderQuickReplies(allQuickReplies.filter(r =>
+        r.title.includes(val) || r.body.includes(val)
+    ));
+}
+
+function toggleQuickReply() {
+    const drop = document.getElementById('quickReplyDropdown');
+    const chev = document.getElementById('qrChevron');
+    const isOpen = drop.style.display !== 'none';
+    drop.style.display = isOpen ? 'none' : 'block';
+    chev.style.transform = isOpen ? '' : 'rotate(180deg)';
+    if (!isOpen) document.getElementById('qrSearchInput')?.focus();
+}
+
+function closeQuickReply() {
+    const drop = document.getElementById('quickReplyDropdown');
+    const chev = document.getElementById('qrChevron');
+    if (drop) drop.style.display = 'none';
+    if (chev) chev.style.transform = '';
+}
+
+document.addEventListener('click', e => {
+    if (!e.target.closest('#quickReplyWrapper')) closeQuickReply();
+});
+
+
+
+
+//تکست اریا
+document.addEventListener('DOMContentLoaded', function () {
+    const messageInput = document.getElementById('messageInput');
+    if (messageInput && messageInput.tagName === 'TEXTAREA') {
+        messageInput.addEventListener('input', function () {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+        });
+    }
+});
+document.addEventListener('DOMContentLoaded', function () {
+    const messageInput = document.getElementById('messageInput');
+    if (messageInput && messageInput.tagName === 'TEXTAREA') {
+        
+        // auto resize
+        messageInput.addEventListener('input', function () {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+        });
+
+        // enter = ارسال، shift+enter = خط جدید
+        messageInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                const form = this.closest('form');
+                if (form) form.requestSubmit();
+            }
+        });
+    }
+});
