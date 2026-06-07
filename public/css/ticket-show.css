@@ -1,3 +1,22 @@
+#messageInput.search-input {
+    resize: none;
+    overflow-y: hidden;
+    line-height: 1.5;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    min-height: 44px;
+    max-height: 120px;
+}
+.search-container {
+    align-items: flex-end !important;
+}
+
+.search-button {
+    padding-bottom: 11px !important;
+}
+
+
+
 /* استایل برای بخش preview فایل‌ها */
 .file-preview-wrapper {
     position: relative;

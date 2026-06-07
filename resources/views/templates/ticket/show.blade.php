@@ -294,10 +294,38 @@
                                     <!-- فایل‌های انتخاب شده اینجا نمایش داده می‌شه -->
                                 </div>
                             </div>
+                            {{-- جواب‌های آماده - فقط ادمین --}}
+                            @if(auth()->user()->hasRole('admin'))
+                            <div id="quickReplyWrapper">
 
+                                {{-- dropdown - بالای chip، داخل flow عادی --}}
+                                <div id="quickReplyDropdown" style="display:none; background:white; border:1px solid #ddd; border-radius:8px; margin-bottom:6px; overflow:hidden;">
+                                    <div style="padding:7px 10px; border-bottom:1px solid #f0f0f0; background:#fafafa;">
+                                        <input id="qrSearchInput" type="text" placeholder="جستجو..."
+                                            oninput="filterQuickReplies(this.value)"
+                                            style="width:100%; border:1px solid #e0e0e0; border-radius:6px; padding:5px 10px;
+                                                font-size:12px; outline:none; font-family:Tahoma,sans-serif; text-align:right; background:white;">
+                                    </div>
+                                    <div id="quickReplyList" style="max-height:180px; overflow-y:auto;">
+                                        <div id="quickReplyLoading" class="p-2 text-muted text-center">
+                                            <i class="fa fa-spinner fa-spin"></i> در حال بارگذاری...
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{-- chip کلیک‌پذیر --}}
+                                <div id="qrChip" onclick="toggleQuickReply()"
+                                    style="display:flex; align-items:center; gap:8px; background:#f8f9fa; border:1px solid #e0e0e0;
+                                        border-radius:8px; padding:7px 12px; cursor:pointer; margin-bottom:6px; transition:background .15s;">
+                                    <i class="fa fa-bolt" style="font-size:12px; color:#888;"></i>
+                                    <span id="quickReplyLabel" style="flex:1; font-size:12.5px; color:#666;">انتخاب جواب آماده...</span>
+                                    <i class="fa fa-chevron-down" id="qrChevron" style="font-size:11px; color:#aaa; transition:transform .2s;"></i>
+                                </div>
+
+                            </div>
+                            @endif
                             <div class="search-container custom-radius" id="searchContainer">
-                                <input type="text" name="message" id="messageInput" class="search-input " placeholder="پیام خود را وارد کنید...">
-                                <button type="button" class="search-button" id="attachButton">
+                            <textarea name="message" id="messageInput" class="search-input" placeholder="پیام خود را وارد کنید..." rows="1"></textarea>                                <button type="button" class="search-button" id="attachButton">
                                     <img src="{{ asset('/icons/Attachment.svg') }}" style="width: 22px">
                                 </button>
                                 <input type="file" name="attachments[]" id="fileInput" accept=".jpg,.png,.pdf" style="display: none;" multiple>

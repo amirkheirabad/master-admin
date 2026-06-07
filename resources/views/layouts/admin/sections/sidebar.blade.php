@@ -76,6 +76,10 @@
                 <ul class="nav child_menu">
                     <li><a href="{{ route('list_tickets') }}">همه تیکت ها</a></li>
                     <li><a href="{{ route('insert_ticket') }}">تیکت جدید</a></li>
+                    @if(auth()->user()->hasRole('admin'))
+                    <li><a href="{{ route('quick_replies_list') }}">جواب‌های آماده</a></li>
+                    </a>
+                    @endif
                 </ul>
             </li>
             @endif
