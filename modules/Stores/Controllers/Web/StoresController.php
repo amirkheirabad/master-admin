@@ -71,7 +71,7 @@ class StoresController
     public function quickCreateSeller(QuickCreateSellerRequest $request)
     {
         $user = $this->user->quickCreateSeller($request->validated());
- 
+
         return response()->json([
             'success' => true,
             'user' => [

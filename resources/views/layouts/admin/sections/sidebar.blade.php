@@ -114,7 +114,7 @@
             </li>
             <li>
                 <a>
-                    <i class="fa fa-play-circle text-beta"></i>
+                    <i class="fa fa-comments text-beta"></i>
                     <span>سوالات متداول </span>
                     <span class="fa fa-chevron-down"></span>
                 </a>

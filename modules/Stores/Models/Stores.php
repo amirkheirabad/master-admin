@@ -28,6 +28,7 @@ class Stores extends Model
         'longitude',
         'about',
         'token',
+        'logo_path',
     ];
 
     public function smsPanel()

@@ -10,7 +10,7 @@ Route::middleware(['check.login', 'check.role:admin'])->group(function () {
     Route::get('/store_info', [StoresController::class, 'store_info'])->name('store_info');
 
     Route::post('/create_store', [StoresController::class, 'store'])->name('create_store');
-    Route::put('/update/{id}', [StoresController::class, 'update'])->name('update_store');
+    Route::post('/update/{id}', [StoresController::class, 'update'])->name('update_store');
     Route::delete('delete/{id}', [StoresController::class, 'delete'])->name('delete_store');
     Route::post('stores/quick-create-seller', [StoresController::class, 'quickCreateSeller'])->name('quick_create_seller');
 });

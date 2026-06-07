@@ -27,7 +27,6 @@ showStatusRadios.forEach(radio => {
     }
 });
 
-console.log(document.getElementById('price').value);
 
 $('#editFactor').on('submit', function (e) {
     e.preventDefault()
@@ -54,7 +53,6 @@ $('#editFactor').on('submit', function (e) {
 
     const image = document.getElementById('imageInput').files[0];
 
-    console.log(image)
 
     fetch(`/factor-update/${id}`,{
         method: 'POST',
