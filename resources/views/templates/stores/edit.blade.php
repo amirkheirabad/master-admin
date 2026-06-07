@@ -107,7 +107,7 @@
                                 </div>
                             </div>
 
-                           
+
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
                                 <label>توکن فروشگاه<span class="text-danger">*</span></label>
@@ -125,6 +125,29 @@
                             <div class="col-md-12 col-sm-12 col-xs-12 mt-4">
                                 <label>درباره فروشگاه</label>
                                 <textarea id="about" name="about" rows="5" class="form-control custom-radius input-border-focus">{{ $store->about }}</textarea>
+                            </div>
+
+
+
+                            <div class="col-md-6 mt-4">
+                                <button type="button" id="attachButton" class="btn btn-beta-outline mb-2 mt-2 ml-1">افزودن
+                                    لوگو</button>
+                                <br>
+
+                                <div id="fileList"></div>
+                                @if($store->logo_path)
+                                    <div id="existingImage">
+                                        <img src="{{ Storage::url($store->logo_path) }}" width="100" height="100" style=" margin: 0 auto;">
+                                        <input type="hidden" name="existing_logo" value="{{ $store->logo_path }}">
+                                        <input type="hidden" name="remove_logo" id="remove_logo" value="0">
+                                    </div>
+                                @endif
+
+                                <input type="file" id="fileInput" style="display: none;" accept="" multiple>
+                                <div class="mt-2">
+                                    <span class="text-danger error-message" id="file_path_error"></span>
+                                </div>
+
                             </div>
 
                         </div>

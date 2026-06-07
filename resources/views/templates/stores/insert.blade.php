@@ -16,7 +16,7 @@
         route: '{{ route("quick_create_seller") }}',
         token: '{{ csrf_token() }}'
     };
-    </script>    
+    </script>
 @endsection
 
 @section('content')
@@ -134,6 +134,21 @@
                             <div class="col-md-12 col-sm-12 col-xs-12 mt-4">
                                 <label>درباره فروشگاه</label>
                                 <textarea id="about" name="about" rows="5" class="form-control custom-radius input-border-focus" placeholder="لطفا توضیحات خود را وارد کنید..."></textarea>
+                            </div>
+
+
+                            <div class="col-md-6 mt-4">
+                                <button type="button" id="attachButton" class="btn btn-beta-outline mb-2 mt-2 ml-1">افزودن
+                                    لوگو</button>
+                                <br>
+
+                                <div id="fileList"></div>
+
+                                <input type="file" id="fileInput" style="display: none;" multiple>
+                                <div class="mt-2">
+                                    <span class="text-danger error-message" id="file_path_error"></span>
+                                </div>
+
                             </div>
 
                         </div>

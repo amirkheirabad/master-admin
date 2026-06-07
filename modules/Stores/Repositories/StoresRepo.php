@@ -56,6 +56,8 @@ class StoresRepo implements InterfaceStores
 
     public function create(array $data)
     {
+        $logo_path = $data['logo_path']->store('logos', 'public');
+
         return Stores::create([
             'store_name' => $data['store_name'],
             'user_id' => $data['user_id'],
@@ -68,6 +70,7 @@ class StoresRepo implements InterfaceStores
             'code_posty' => $data['code_posty'],
             'about' => $data['about'] ?? null,
             'token' => $data['token'],
+            'logo_path' => $logo_path ?? null,
         ]);
     }
 
@@ -78,7 +81,7 @@ class StoresRepo implements InterfaceStores
 
     public function update($id, $request)
     {
-        Stores::find($id)->update([
+        $data = [
             'store_name' => $request->store_name,
             'user_id' => $request->user_id,
             'link' => $request->link,
@@ -89,8 +92,14 @@ class StoresRepo implements InterfaceStores
             'location' => $request->location,
             'code_posty' => $request->code_posty,
             'about' => $request->about,
-            'token' => $request->token
-        ]);
+            'token' => $request->token,
+        ];
+
+        if ($request->hasFile('logo_path')) {
+            $data['logo_path'] = $request->logo_path->store('logos', 'public');
+        }
+
+        return Stores::find($id)->update($data);
     }
 
     public function getById($id)
