@@ -111,6 +111,13 @@ class FactorRepo implements InterfaceFactor
     {
         $data = $this->resolveBuyerFromStore($data);
 
+        if (!empty($data['store_id'])) {
+            $data['name'] = null;
+            $data['phone'] = null;
+            $data['national_kod'] = null;
+            $data['user_id'] = null;
+        }
+
         $factor = Factor::create([
             'store_id'     => $data['store_id'] ?? null,
             'user_id'      => $data['user_id'] ?? null,
@@ -147,8 +154,14 @@ class FactorRepo implements InterfaceFactor
 
     public function updateFactor($id, $request)
     {
+        $dateFactor = null;
 
         $factor = Factor::find($id);
+
+        if ($request['price_status'] == 3)
+        {
+            $dateFactor =  Verta::parse($request['paid_factor_date'])->toCarbon();
+        }
 
         $data = [
             'show_status' => $request['show_status'],
@@ -156,7 +169,8 @@ class FactorRepo implements InterfaceFactor
             'category_id' => $request['category_id'],
             'price' => $request['price'],
             'description' => $request['description'],
-            'paid_factor_date' => ! empty($request['paid_factor_date']) ? Verta::parse($request['paid_factor_date'])->toCarbon() : null,            'factor_date' => Verta::parse($request['factor_date'])->toCarbon(),
+            'paid_factor_date' => $dateFactor,
+            'factor_date' => Verta::parse($request['factor_date'])->toCarbon(),
         ];
 
         if (isset($request['image']) && $request['image']) {

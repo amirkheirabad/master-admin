@@ -63,6 +63,7 @@ class DashboardController
             0 => ['text' => 'در حال بررسی', 'class' => 'open'],
             1 => ['text' => 'منتظر پاسخ', 'class' => 'waiting'],
             2 => ['text' => 'بسته شده', 'class' => 'closed'],
+            3 => ['text' => 'ارجاع به واحد فنی', 'class' => 'closed'],
         ];
 
         $priceStatusLabels = [

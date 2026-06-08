@@ -1,3 +1,6 @@
+CKEDITOR.disableAutoInline = true;
+CKEDITOR.config.versionCheck = false;
+
 CKEDITOR.replace('answer', {
     width: '100%',
     language: 'fa',

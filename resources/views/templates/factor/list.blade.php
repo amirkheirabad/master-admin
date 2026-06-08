@@ -228,7 +228,7 @@
                                             کارت به کارت
                                         </span>
                                     @elseif($factor->price_status == 4)
-                                        <span class="bg-green p-2 custom-radius">
+                                        <span class="bg-file p-2 custom-radius">
                                             معلق شده
                                         </span>
                                     @endif
