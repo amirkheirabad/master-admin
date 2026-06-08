@@ -1,3 +1,29 @@
+#messageInput {
+    scrollbar-width: none; /* Firefox */
+}
+
+#messageInput::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+
+#chatbox {
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+}
+
+#chatbox .chat-container {
+    flex: 1 1 0 !important;
+    min-height: 0 !important;
+    overflow-y: auto !important;
+}
+
+#chatbox .mt-auto {
+    flex-shrink: 0 !important;
+}
+
+
+
 #messageInput.search-input {
     resize: none;
     overflow-y: hidden;
@@ -9,6 +35,8 @@
 }
 .search-container {
     align-items: flex-end !important;
+    height: auto !important;
+
 }
 
 .search-button {
@@ -21,7 +49,7 @@
 .file-preview-wrapper {
     position: relative;
     background: #f8f9fa;
-    border: 2px solid #99eae4;
+    border: 2px solid rgb(153, 234, 228);
     border-bottom: none;
     border-radius: 7px 7px 0 0;
     padding: 8px 15px;
@@ -37,7 +65,7 @@
     left: 0;
     right: 0;
     height: 2px;
-    background: #99eae4;
+    background: rgb(153, 234, 228);
     opacity: 0.6;
 }
 
@@ -83,7 +111,7 @@
 
 /* وقتی فایل وجود داره */
 .file-preview-wrapper:has(.file-preview-item) {
-    border-color: #99eae4;
+    border-color: rgb(153, 234, 228);
     background: #ffffff;
 }
 
