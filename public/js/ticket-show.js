@@ -658,30 +658,20 @@ document.addEventListener('click', e => {
 //تکست اریا
 document.addEventListener('DOMContentLoaded', function () {
     const messageInput = document.getElementById('messageInput');
-    if (messageInput && messageInput.tagName === 'TEXTAREA') {
-        messageInput.addEventListener('input', function () {
-            this.style.height = 'auto';
-            this.style.height = Math.min(this.scrollHeight, 120) + 'px';
-        });
-    }
-});
-document.addEventListener('DOMContentLoaded', function () {
-    const messageInput = document.getElementById('messageInput');
-    if (messageInput && messageInput.tagName === 'TEXTAREA') {
-        
-        // auto resize
-        messageInput.addEventListener('input', function () {
-            this.style.height = 'auto';
-            this.style.height = Math.min(this.scrollHeight, 120) + 'px';
-        });
+    if (!messageInput || messageInput.tagName !== 'TEXTAREA') return;
 
-        // enter = ارسال، shift+enter = خط جدید
-        messageInput.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                const form = this.closest('form');
-                if (form) form.requestSubmit();
-            }
-        });
-    }
+    messageInput.addEventListener('input', function () {
+        this.style.height = '42px';
+        const newHeight = Math.min(this.scrollHeight, 100);
+        this.style.height = newHeight + 'px';
+        this.style.overflowY = this.scrollHeight >= 100 ? 'auto' : 'hidden';
+    });
+
+    messageInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            const form = this.closest('form');
+            if (form) form.requestSubmit();
+        }
+    });
 });
