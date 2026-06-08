@@ -671,7 +671,12 @@ document.addEventListener('DOMContentLoaded', function () {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
             const form = this.closest('form');
-            if (form) form.requestSubmit();
+            const submitBtn = form?.querySelector('button[type="submit"]');
+
+            if (!form || !submitBtn || submitBtn.disabled) {
+                return;
+            }
+            form.requestSubmit();
         }
     });
 });
