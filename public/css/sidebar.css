@@ -1,7 +1,7 @@
 /* =======================================================
-   استایل‌های سایدبار موبایل (Max Width: 767px)
+   استایل‌های سایدبار موبایل (Max Width: 990x)
    ======================================================= */
-   @media (max-width: 767px) {
+   @media (max-width: 990px) {
     body.nav-md .main_container .left_col {
         width: 0 !important;
         display: none !important;
@@ -101,7 +101,7 @@
     }
     .mobile-sidebar .nav.side-menu > li > a:hover {
         color: #133c6d !important;
-        background: #eef2f7 !important;
+        background: #F8F7FA !important;
         transform: translateX(-4px) !important;
     }
     .mobile-sidebar .nav.side-menu > li > a i {
@@ -192,9 +192,9 @@
 }
 
 /* =======================================================
-   استایل‌های سایدبار دسکتاپ (Min Width: 768px)
+   استایل‌های سایدبار دسکتاپ (Min Width: 990px)
    ======================================================= */
-@media (min-width: 768px) {
+@media (min-width: 990px) {
     .mobile-menu-toggle,
     .mobile-sidebar,
     .mobile-menu-overlay {

@@ -57,7 +57,7 @@ function openActiveMenuItem() {
 function init_sidebar() {
     setContentHeight();
 
-    if (window.innerWidth >= 768 && $BODY.hasClass('nav-md')) {
+    if (window.innerWidth >= 990 && $BODY.hasClass('nav-md')) {
         $SIDEBAR_MENU.find('li > a').on('click.sidebar', function(ev) {
             var $li = $(this).parent();
 
@@ -197,12 +197,12 @@ function setupMobileEvents() {
                 $childMenu.slideDown('fast');
                 $parentLi.addClass('active');
             }
-        } 
+        }
         // سناریو ۲: آیتم کلیک شده یک لینک مستقیم است (زیرمنو ندارد)
         else {
             // حذف کلاس active و current-page از تمام صفحات قبلی
             $('.mobile-sidebar li').removeClass('active current-page');
-            
+
             // فعال کردن آیتم فعلی و والد آن
             $parentLi.addClass('active current-page');
             $parentLi.parents('li').addClass('active');
@@ -236,10 +236,10 @@ function fixMobileActiveState() {
         if (linkPath === currentPath) {
             // پاک کردن حالت‌های قبلی موبایل
             $('.mobile-sidebar li').removeClass('active current-page');
-            
+
             var $parentLi = $(this).parent('li');
             $parentLi.addClass('active current-page');
-            
+
             // باز کردن و فعال کردن منوی مادر
             var $parentUl = $parentLi.parents('ul.child_menu');
             if ($parentUl.length) {
@@ -252,7 +252,7 @@ function fixMobileActiveState() {
 }
 
 function handleMobileMode() {
-    const isMobile = window.innerWidth < 768;
+    const isMobile = window.innerWidth < 990;
 
     if (isMobile) {
         if (!$BODY.hasClass('nav-md')) {
@@ -286,7 +286,7 @@ function handleMobileMode() {
 // اجرا در زمان لود
 $(document).ready(function() {
     // چک کردن اندازه صفحه و اجرای مناسب
-    if (window.innerWidth < 768) {
+    if (window.innerWidth < 990) {
         // توی موبایل فقط سیستم موبایل رو راه بنداز
         handleMobileMode();
     } else {
@@ -296,7 +296,7 @@ $(document).ready(function() {
 
     setTimeout(function() {
         openActiveMenuItem();
-        if (window.innerWidth < 768) {
+        if (window.innerWidth < 990) {
             $('.mobile-sidebar .child_menu').hide();
             $('.mobile-sidebar li.current-page').each(function() {
                 $(this).parents('.child_menu').show();
