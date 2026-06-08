@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use Modules\Stores\Models\Stores;
 use Modules\Ticket\Models\Ticket;
 use Modules\Ticket\Models\TicketMessage;
+use Modules\Ticket\Services\SmsService;
+use Modules\User\Models\User;
 use Illuminate\Http\Request;
 
 
@@ -164,6 +166,8 @@ class TicketRepo implements InterfaceTicket
 
         DB::commit();
 
+        $this->sendTicketSms($ticket);
+
         return $ticket->load('messages');
 
     } catch (\Exception $e) {
@@ -206,6 +210,8 @@ class TicketRepo implements InterfaceTicket
         $ticket = Ticket::find($id);
         $ticket->touch();
 
+        $this->sendTicketSms($ticket);
+
         return $message;
     }
 
@@ -215,6 +221,49 @@ class TicketRepo implements InterfaceTicket
         $ticket = Ticket::findOrFail($id);
         $ticket->update(['status' => $request->status]);
         return $ticket;
+    }
+
+    private function resolveRecipientContact(Ticket $ticket): ?array
+    {
+        if ($ticket->recipient_type === 'store' && $ticket->store_id) {
+            $store = Stores::with('user')->find($ticket->store_id);
+            if ($store) {
+                $phone = $store->phone ?? $store->user?->mobile;
+                if ($phone) {
+                    return [
+                        'phone' => $phone,
+                        'name'  => $store->store_name ?? $store->user?->name ?? 'فروشگاه',
+                    ];
+                }
+            }
+        }
+
+        if ($ticket->recipient_type === 'user' && $ticket->user_id) {
+            $user = User::find($ticket->user_id);
+            if ($user?->mobile) {
+                return [
+                    'phone' => $user->mobile,
+                    'name'  => $user->name ?? 'کاربر',
+                ];
+            }
+        }
+
+        return null;
+    }
+
+    private function sendTicketSms(Ticket $ticket): void
+    {
+        $contact = $this->resolveRecipientContact($ticket);
+
+        if (!$contact) {
+            return;
+        }
+
+        (new SmsService())->sendTicketNotification(
+            $contact['phone'],
+            $contact['name'],
+            $ticket->id
+        );
     }
 
 }
