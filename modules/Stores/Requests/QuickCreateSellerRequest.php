@@ -10,11 +10,12 @@ class QuickCreateSellerRequest extends FormRequest
     {
         return true;
     }
-    
+
     protected function prepareForValidation()
     {
         $this->merge([
             'mobile' => $this->convertToEnglishNumber($this->mobile),
+            'password' => $this->convertToEnglishNumber($this->password),
         ]);
     }
 

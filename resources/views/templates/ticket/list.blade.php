@@ -202,7 +202,7 @@
                                 </span>
                                 @endif
                             </td>
-                            <td data-title="تاریخ:" class="responsive-table-td">{{ Verta($ticket->created_at)->format(' %d %B  %Y') }}</td>
+                            <td data-title="تاریخ:" class="responsive-table-td fa-number">{{ Verta($ticket->created_at)->format(' %d %B  %Y') }}</td>
                             <td data-title="وضعیت:" class="responsive-table-td">
                                 @if($ticket->status == 0)
                                     <span class="bg-warning p-2 custom-radius">
@@ -222,7 +222,7 @@
                                 </span>
                                 @endif
                             </td>
-                            <td data-title="تاریخ آخرین پاسخ:" class="hide-on-mobile">{{ Verta($ticket->updated_at)->format(' %d %B  %Y') }}</td>
+                            <td data-title="تاریخ آخرین پاسخ:" class="hide-on-mobile fa-number">{{ Verta($ticket->updated_at)->format(' %d %B  %Y') }}</td>
                             <td data-title="نام فروشگاه:" class="hide-on-mobile">
                                 <a href="{{ route('show_ticket', $ticket->id) }}">
                                     <img src="{{ asset('/icons/Group.svg') }}" style="width: 30px">

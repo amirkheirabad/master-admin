@@ -14,13 +14,13 @@
     <div class="invoice-header">
         <div>iBrandshop</div>
         <div class="title">صورت حساب</div>
-        <div>تاریخ فاکتور: 1404/02/01</div>
+        <div class="fa-number">تاریخ فاکتور: {{ Verta($factor->factor_date)->format(' %d %B  %Y') }}</div>
     </div>
 
     <div class="box">
         <div class="box-title">مشخصات فروشنده</div>
         <div class="box-body">
-            فروشگاه: <span class="title"><span class="title">آی برند شاپ</span></span> به نمایندگی: <span class="title">مریم خیرآبادی</span> با کد مالیاتی: 3427813129  و کد ملی: 2110167637  به آدرس: گلستان,گرگان,بلوار کاشانی,25 به شماره تماس: 01732120151
+            فروشگاه: <span class="title"><span class="title">آی برند شاپ</span></span> به نمایندگی: <span class="title">مریم خیرآبادی</span> با کد مالیاتی: ۳۴۲۷۸۱۳۱۲۹  و کد ملی: ۲۱۱۰۱۶۷۶۳۷  به آدرس: گلستان,گرگان,بلوار کاشانی,۲۵ به شماره تماس: ۰۱۷۳۲۱۲۰۱۵۱
         </div>
     </div>
 
@@ -43,7 +43,7 @@
 
     <div class="box">
         <div class="box-title">مشخصات خریدار</div>
-        <div class="box-body">
+        <div class="box-body fa-number">
             @if($buyerStoreName)
                 فروشگاه: {{ $buyerStoreName }}
             @endif
@@ -69,19 +69,24 @@
         <tr>
             <td>1</td>
             <td>ساپورت</td>
-            <td id="price-display">{{ $factor->price }} ریال</td>
+            <td class="fa-number">{{ number_format($factor->price) }} ریال</td>
         </tr>
         </tbody>
         <tfoot>
         <tr>
             <td colspan="2">جمع کل</td>
-            <td class="total" id="price-display2">{{ $factor->price }} ریال</td>
+            <td class="total fa-number">{{ number_format($factor->price) }} ریال</td>
         </tr>
         </tfoot>
     </table>
 </div>
 
 </body>
+<script>
+    document.querySelectorAll('.fa-number').forEach(el => {
+        el.textContent = el.textContent.replace(/[0-9]/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+    });
+</script>
 <script>
     function formatPrice(price) {
         let numericPrice = String(price).replace(/[^0-9]/g, '');

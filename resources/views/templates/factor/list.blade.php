@@ -188,15 +188,15 @@
                                     </th>
                                 <td data-title="نام فروشگاه" class="responsive-table-td">
                                     {{ $factor->store->store_name ?? 'مشتری' }}</td>
-                                <td data-title="قیمت" class="responsive-table-td price-display-class">
-                                    {{ $factor->price }}</td>
-                                <td data-title="تاریخ فاکتور" class="responsive-table-td">
+                                <td data-title="قیمت" class="responsive-table-td fa-number">
+                                    {{ number_format($factor->price) }}</td>
+                                <td data-title="تاریخ فاکتور" class="responsive-table-td fa-number">
                                     {{ Verta($factor->factor_date)->format(' %d %B  %Y') }}</td>
                                 @if (auth()->user()->hasRole('admin'))
-                                <td data-title="تاریخ صدور" class="responsive-table-td">
+                                <td data-title="تاریخ صدور" class="responsive-table-td fa-number">
                                     {{ Verta($factor->created_at)->format(' %d %B  %Y') }}</td>
                                 @endif
-                                <td data-title="تاریخ پرداخت" class="responsive-table-td">
+                                <td data-title="تاریخ پرداخت" class="responsive-table-td fa-number">
                                     {{ $factor->paid_factor_date ? Verta($factor->paid_factor_date)->format(' %d %B  %Y') : '' }}
                                 </td>
                                 @if (auth()->user()->hasRole('admin'))

@@ -30,9 +30,9 @@
                 </div>
                 <div class="x_panel rounded-top mt-2 p-0">
                     <table class="table">
-                        <thead class="responsive-table-head">
+                        <thead class="">
                         <tr>
-                            <th>#</th>
+                            <th>همه</th>
                             <th>سوال</th>
                             <th>عملیات</th>
                         </tr>
@@ -40,7 +40,7 @@
                         <tbody>
                         @foreach($faqs as $faq)
                             <tr class="item-record{{$faq->id}}">
-                                <th scope="row">#</th>
+                                <th scope="row">{{$faq->id}}</th>
                                 <td>{{ $faq->question }}</td>
                                 <td class="">
                                     <a href="{{ route('faq_edit', $faq->id) }}" class="text-success">

@@ -117,7 +117,7 @@
                                 </span>
                                 @endif
                             </h5>
-                            <h5 class="text-left">{{ Verta($ticket->created_at)->format(' %d %B  %Y') }}</h5>
+                            <h5 class="text-left fa-number">{{ Verta($ticket->created_at)->format(' %d %B  %Y') }}</h5>
                         </div>
                     </div>
                 </div>
@@ -135,7 +135,7 @@
                                                 <img src="{{ asset('/images/men.png') }}" style="width: 22px">
                                                 <i class="fa fa-store"></i> {{ $ticket->store->store_name ?? 'فروشگاه' }}
                                             </p>
-                                            <small class="text-muted mr-2">
+                                            <small class="text-muted mr-2 fa-number">
                                                 {{ Verta($message->created_at)->format('H:i - Y/m/d') }}
                                             </small>
                                         </div>
@@ -210,7 +210,7 @@
                                                 <img src="{{ asset('/images/men.png') }}" style="width: 22px">
                                                 <i class="fa fa-headset"></i> پشتیبانی ایندکس
                                             </p>
-                                            <small class="text-muted mr-2">
+                                            <small class="text-muted mr-2 fa-number">
                                                 {{ Verta($message->created_at)->format('H:i - Y/m/d') }}
                                             </small>
                                         </div>

@@ -218,6 +218,11 @@
         });
     });
 </script>
+<script>
+    document.querySelectorAll('.fa-number').forEach(el => {
+        el.textContent = el.textContent.replace(/[0-9]/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+    });
+</script>
 
 
 @yield('js')

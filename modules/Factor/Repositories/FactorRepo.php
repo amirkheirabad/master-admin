@@ -109,6 +109,7 @@ class FactorRepo implements InterfaceFactor
 
     public function createFactor(array $data)
     {
+
         $data = $this->resolveBuyerFromStore($data);
 
         if (!empty($data['store_id'])) {

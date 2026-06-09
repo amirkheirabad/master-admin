@@ -9,7 +9,7 @@ class FAQRepo implements InterfaceFAQ
 {
     public function getAll()
     {
-        return FAQ::paginate(15);
+        return FAQ::latest()->paginate(15);
     }
     public function create(array $data)
     {

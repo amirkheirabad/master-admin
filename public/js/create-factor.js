@@ -57,7 +57,7 @@ $('#createFactor').on('submit', function (e) {
             name: $('#name').val(),
             phone: $('#phone').val(),
             national_kod: $('#national_kod').val(),
-            user_id: $('#customer_id').val(), 
+            user_id: $('#customer_id').val(),
             send_sms:     $('#send_sms').is(':checked') ? 1 : 0,
         }),
     })
@@ -268,7 +268,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     updatePriceDisplay();
 });
- 
+
 
 function fillBuyerFields(data) {
     $('#name').val(data.name ?? '');

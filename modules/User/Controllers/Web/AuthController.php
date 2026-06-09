@@ -5,6 +5,7 @@ namespace Modules\User\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Modules\User\Repositories\InterfaceAuth;
+use Modules\User\Requests\LoginRequest;
 
 class AuthController extends Controller
 {
@@ -20,11 +21,11 @@ class AuthController extends Controller
         if ($this->authRepo->getAuthenticatedUser()) {
             return redirect($this->authRepo->getRedirectUrlByRole());
         }
-        
+
         return view('templates.auth.login');
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
         $request->validate([
             'mobile' => 'required|string',
