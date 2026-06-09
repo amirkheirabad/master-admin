@@ -49,15 +49,15 @@
 
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title" id="myModalLabel"> تغییر وضعیت <span id="store_name"></span></h4>
+                <h5 class="modal-title" id="myModalLabel"> تغییر وضعیت <span id="store_name"></span></h5>
             </div>
 
             <div class="modal-body">
-                <h4>آیا از تغییر وضعیت تیکت شماره مطمئن هستید</h4>
+                <h4 class="d-flex justify-content-center mb-3">آیا از تغییر وضعیت تیکت شماره مطمئن هستید</h4>
                 <input type="hidden" id="ticket_id">
                 <input type="hidden" id="new_status">
                 <input type="hidden" id="status_text">
-                <div class="mt-8 d-flex justify-content-center">
+                <div class="mt-10 d-flex justify-content-center">
                     <button type="button" class="btn btn-beta-solid" onclick="confirmStatusChange()">تایید</button>
                     <button type="button" class="btn btn-beta-outline" data-dismiss="modal">انصراف</button>
                 </div>

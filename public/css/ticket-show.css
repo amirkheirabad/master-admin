@@ -83,7 +83,7 @@
     width: 22px;
     height: 22px;
     background: transparent;  /* حذف بک‌گراند سفید */
-    color: #dc3545;
+    color: blue;
     border: none;  /* حذف border */
     border-radius: 0;
     cursor: pointer;
@@ -98,12 +98,12 @@
 }
 
 /* فقط هاور تغییر کنه */
-.remove-all-files-btn:hover {
-    background: transparent;
-    color: #dc3545;
-    opacity: 1;
-    border-color: transparent;
-}
+/*.remove-all-files-btn:hover {*/
+/*    background: transparent;*/
+/*    color: #dc3545;*/
+/*    opacity: 1;*/
+/*    border-color: transparent;*/
+/*}*/
 
 .remove-all-files-btn i {
     font-size: 11px;

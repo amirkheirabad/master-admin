@@ -399,6 +399,22 @@ label {
 .mt-4 {
     margin-top: 20px;
 }
+.mt-5 {
+    margin-top: 25px;
+}
+.mt-6 {
+    margin-top: 30px;
+}
+.mt-10 {
+    margin-top: 50px;
+}
+.mt-15 {
+    margin-top: 75px;
+}
+.mt-20 {
+    margin-top: 100px;
+}
+
 .mr-6 {
     margin-right: 65px;
 }
@@ -419,6 +435,10 @@ label {
 }
 .ml-1 {
     margin-left: 10px;
+}
+.modal-body {
+    position: relative;
+    padding: 30px;
 }
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
 /*    padding: 10px;*/
@@ -766,9 +786,9 @@ a.bg-danger:hover {
 p {
     margin: 0px;
 }
-/*.x_panel {*/
-/*    padding: 0px;*/
-/*}*/
+.x_panel {
+    padding: 10px 10px;
+}
 
 @media screen and (max-width: 576px) {
     .responsive-table-row {

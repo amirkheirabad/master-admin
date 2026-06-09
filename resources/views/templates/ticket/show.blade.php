@@ -129,7 +129,7 @@
                             <div class="message-wrapper message-store mt-4 d-flex justify-content-start">
                                 <div style="max-width: 100%;">
                                     {{-- حباب پیام --}}
-                                    <div class="message-bubble bg-white border p-3 rounded shadow-sm custom-radius" style="display: flex; flex-direction: column; min-height: 100px; max-width: 550px; width: auto;">
+                                    <div class="message-bubble bg-white border p-3 shadow-sm custom-radius" style="display: flex; flex-direction: column; min-height: 80px; max-width: 550px; width: auto;">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <p class="">
                                                 <img src="{{ asset('/images/men.png') }}" style="width: 22px">
@@ -146,7 +146,7 @@
 
                                     {{-- بخش پیوست‌ها - جدا از حباب پیام --}}
                                     @if($message->attachments)
-                                        <div class="attachments-wrapper p-2 rounded custom-radius" style="max-width: 550px; margin-left: 0; margin-right: auto;">
+                                        <div class="attachments-wrapper p-2 custom-radius" style="max-width: 550px; margin-left: 0; margin-right: auto;">
                                             @php
                                                 $attachments = is_string($message->attachments) ? json_decode($message->attachments, true) : $message->attachments;
                                             @endphp
@@ -163,7 +163,7 @@
                                                             $fileSizeFormatted = number_format($fileSize / 1048576, 1) . ' MB';
                                                         }
                                                     @endphp
-                                                    <a href="{{ $url }}" download class="attachment-item bg-file mt-2 p-2 rounded custom-radius text-decoration-none" style="display: block; cursor: pointer;">
+                                                    <a href="{{ $url }}" download class="attachment-item bg-file mt-2 p-3 rounded custom-radius text-decoration-none" style="display: block; cursor: pointer;">
                                                         <div class="d-flex align-items-center" style="gap: 8px;">
                                                             {{-- آیکون --}}
                                                             <div class="file-icon d-flex justify-content-center align-items-center flex-shrink-0" style="width: 40px; height: 40px; background: white; border-radius: 6px;">
@@ -204,7 +204,7 @@
                             <div class="message-wrapper message-admin mt-4 d-flex justify-content-end">
                                 <div style="max-width: 100%;">
                                     {{-- حباب پیام --}}
-                                    <div class="message-bubble bg-white border p-3 rounded shadow-sm custom-radius" style="display: flex; flex-direction: column; min-height: 100px; max-width: 550px; width: auto;">
+                                    <div class="message-bubble bg-white border p-3 shadow-sm custom-radius" style="display: flex; flex-direction: column; min-height: 80px; max-width: 550px; width: auto;">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <p class="">
                                                 <img src="{{ asset('/images/men.png') }}" style="width: 22px">
@@ -221,7 +221,7 @@
 
                                     {{-- بخش پیوست‌ها - جدا از حباب پیام --}}
                                     @if($message->attachments)
-                                        <div class="attachments-wrapper p-2 rounded custom-radius" style="max-width: 550px; margin-left: 0; margin-right: auto;">
+                                        <div class="attachments-wrapper p-2 custom-radius" style="max-width: 550px; margin-left: 0; margin-right: auto;">
                                             @php
                                                 $attachments = is_string($message->attachments) ? json_decode($message->attachments, true) : $message->attachments;
                                             @endphp
@@ -238,7 +238,7 @@
                                                             $fileSizeFormatted = number_format($fileSize / 1048576, 1) . ' MB';
                                                         }
                                                     @endphp
-                                                    <a href="{{ $url }}" download class="attachment-item bg-file mt-2 p-2 rounded custom-radius text-decoration-none" style="display: block; cursor: pointer;">
+                                                    <a href="{{ $url }}" download class="attachment-item bg-file mt-2 p-3 rounded custom-radius text-decoration-none" style="display: block; cursor: pointer;">
                                                         <div class="d-flex align-items-center" style="gap: 8px;">
                                                             {{-- آیکون --}}
                                                             <div class="file-icon d-flex justify-content-center align-items-center flex-shrink-0" style="width: 40px; height: 40px; background: white; border-radius: 6px;">

@@ -19,7 +19,7 @@ class FactorRepo implements InterfaceFactor
 
     public function getCategory()
     {
-        return Category::paginate(15);
+        return Category::latest()->paginate(15);
     }
 
     public function createCategory(array $data)

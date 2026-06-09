@@ -39,7 +39,7 @@
                     <table class="table">
                         <thead class="responsive-table-head">
                         <tr>
-                            <th>#</th>
+                            <th>همه</th>
                             <th>نام</th>
                             <th>وضعیت نمایش</th>
                             <th>عملیات</th>
@@ -48,7 +48,7 @@
                         <tbody>
                         @foreach($categories as $category)
                             <tr class="item-record{{$category->id}}">
-                                <th scope="row">#</th>
+                                <th scope="row">{{ $category->id }}</th>
                                 <td>{{ $category->name }}</td>
                                 <td>
                                     @if($category->active == 0)

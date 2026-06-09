@@ -164,14 +164,16 @@
                             <th>تاریخ فاکتور</th>
                             @if (auth()->user()->hasRole('admin'))
                             <th>تاریخ صدور فاکتور</th>
+                            @endif
+                            <th>تاریخ پرداخت</th>
+                            @if (auth()->user()->hasRole('admin'))
                             <th>دسته بندی</th>
                             @endif
-                            <th>توضیحات</th>
                             @if (auth()->user()->hasRole('admin'))
                             <th>وضعیت نمایش</th>
                             @endif
                             <th>وضعیت مالی</th>
-                            <th>تاریخ پرداخت</th>
+                            <th>توضیحات</th>
                             <th>عملیات</th>
                         </tr>
                     </thead>
@@ -193,10 +195,14 @@
                                 @if (auth()->user()->hasRole('admin'))
                                 <td data-title="تاریخ صدور" class="responsive-table-td">
                                     {{ Verta($factor->created_at)->format(' %d %B  %Y') }}</td>
+                                @endif
+                                <td data-title="تاریخ پرداخت" class="responsive-table-td">
+                                    {{ $factor->paid_factor_date ? Verta($factor->paid_factor_date)->format(' %d %B  %Y') : '' }}
+                                </td>
+                                @if (auth()->user()->hasRole('admin'))
                                 <td data-title="دسته بندی" class="responsive-table-td">{{ $factor->category->name }}</td>
                                 @endif
 
-                                <td data-title="توضیحات" class="responsive-table-td">{{ $factor->description }}</td>
                                 @if (auth()->user()->hasRole('admin'))
                                 <td data-title="وضعیت نمایش" class="responsive-table-td">
                                     @if ($factor->show_status == 0)
@@ -233,9 +239,7 @@
                                         </span>
                                     @endif
                                 </td>
-                                <td data-title="تاریخ پرداخت" class="responsive-table-td">
-                                    {{ $factor->paid_factor_date ? Verta($factor->paid_factor_date)->format(' %d %B  %Y') : '' }}
-                                </td>
+                                <td data-title="توضیحات" class="responsive-table-td">{{ $factor->description }}</td>
                                 <td data-title="عملیات" class="responsive-table-td">
                                     <div class="gap">
                                         <a href="{{ route('factor-show', $factor->id) }}" target="_blank"
