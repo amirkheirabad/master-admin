@@ -53,7 +53,7 @@
                                             <option value="{{ $user->id }}">{{ $user->name }}</option>
                                         @endforeach
                                     </select>
-                                    <button type="button" class="btn btn-beta-solid btn-sm text-nowrap" id="btn-quick-create-user" title="ساخت کاربر جدید">
+                                    <button type="button" class="btn btn-beta-solidd btn-sm text-nowrap" id="btn-quick-create-user" title="ساخت کاربر جدید">
                                         + کاربر جدید
                                     </button>
                                 </div>

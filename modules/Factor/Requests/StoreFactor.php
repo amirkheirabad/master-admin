@@ -22,6 +22,8 @@ class StoreFactor extends FormRequest
         $this->merge([
             'phone' => $this->convertToEnglishNumber($this->phone),
             'national_kod' => $this->convertToEnglishNumber($this->national_kod),
+            'price' => $this->convertToEnglishNumber($this->price),
+
         ]);
     }
 

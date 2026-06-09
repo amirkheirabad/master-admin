@@ -19,7 +19,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="">
                 <div class="row">
-                    <div class="col-md-12 d-flex justify-content-start">
+                    <div class="col-md-12 d-flex justify-content-start ">
                         <div>
                             <h3>لیست فروشگاه ها</h3>
                         </div>
@@ -32,7 +32,7 @@
                     </div>
                 </div>
 
-                <div class="d-flex justify-content-between mt-2">
+                <div class="d-flex justify-content-between mt-2 mb-3">
                     <div class="hide-on-mobile">
                         <a href="{{ route('insert_store') }}" class="btn btn-beta-solid">
                             <i class="fa fa-plus"></i>
@@ -128,7 +128,7 @@
                                 <td data-title="کد پستی" class="responsive-table-td">{{ $store->code_posty }}</td>
                                 <td data-title="عملیات" class="responsive-table-td">
                                     <div class="action-buttons gap">
-                                        <a href="{{ route('edit_store', $store->id) }}" class="text-success" title="ویرایش">
+                                        <a href="{{ route('edit_store', $store->id) }}" class="text-beta" title="ویرایش">
                                             <i class="fa fa-pencil fa-x"></i>
                                         </a>
                                         <a href="javascript:;" class="text-danger delete-message" data-id="{{ $store->id }}" title="حذف">

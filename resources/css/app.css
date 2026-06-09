@@ -36,6 +36,7 @@ body {
     background: #f7f7f7;
     font-size: 14px;
     /*color: black;*/
+    color:#5a6d82;
 }
 
 .form-group {
@@ -250,6 +251,20 @@ label {
     color: #ffffff;
     border: 2px solid #133c6d;
     padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-beta-solidd {
+    background-color: #133c6d;
+    color: #ffffff;
+    border: 2px solid #133c6d;
+    padding: 7px 20px !important;
     border-radius: 8px;
     font-size: 14px;
     font-weight: 500;

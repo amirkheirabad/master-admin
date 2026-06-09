@@ -42,7 +42,7 @@
                                 <td data-title="ترتیب" class="responsive-table-td">{{ $message->order ?? '-' }}</td>
                                 <td data-title="عملیات" class="responsive-table-td">
                                     <div class="action-buttons gap">
-                                        <a href="{{ route('message.edit', $message->id) }}" class="text-success" title="ویرایش">
+                                        <a href="{{ route('message.edit', $message->id) }}" class="text-beta" title="ویرایش">
                                             <i class="fa fa-pencil fa-x"></i>
                                         </a>
                                         <a href="javascript:;" class="text-danger delete-message" data-id="{{ $message->id }}" title="حذف">
