@@ -60,6 +60,8 @@ class FactorRepo implements InterfaceFactor
                     ->orWhere('user_id', $user->id);
 
         })->with('store', 'category');
+
+            $factors = $factors->where('show_status', '!=',0);
         } else {
             return collect();
         }
