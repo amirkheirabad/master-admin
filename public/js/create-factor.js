@@ -207,11 +207,14 @@ if (accountType.value === 'agency') {
 
 
 function formatPrice(price) {
-    let numericPrice = String(price).replace(/[^0-9]/g, '');
+    // اول فارسی به انگلیسی تبدیل کن
+    let converted = String(price)
+        .replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
+        .replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d));
 
-    if (numericPrice === '') {
-        return '';
-    }
+    let numericPrice = converted.replace(/[^0-9]/g, '');
+
+    if (numericPrice === '') return '';
 
     return numericPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }

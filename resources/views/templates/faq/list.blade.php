@@ -43,7 +43,7 @@
                                 <th scope="row">{{$faq->id}}</th>
                                 <td>{{ $faq->question }}</td>
                                 <td class="">
-                                    <a href="{{ route('faq_edit', $faq->id) }}" class="text-success">
+                                    <a href="{{ route('faq_edit', $faq->id) }}" class="text-beta">
                                         <i class="fa fa-pencil fa-x"></i>
                                     </a>
                                     <a href="#" class="text-danger delete-message mr-1" data-id="{{ $faq->id }}">

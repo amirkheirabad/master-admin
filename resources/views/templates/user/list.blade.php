@@ -113,7 +113,7 @@
                                     </td class="responsive-table-td">
                                     <td data-title="عملیات" class="responsive-table-td">
                                         <div class="">
-                                            <a href="{{ route('user-edit', $user->id) }}" class="text-success"
+                                            <a href="{{ route('user-edit', $user->id) }}" class="text-beta"
                                                 data-id="{{ $user->id }}">
                                                 <i class="fa fa-pencil fa-x"></i>
                                             </a>

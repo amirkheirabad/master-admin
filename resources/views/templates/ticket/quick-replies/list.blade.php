@@ -58,13 +58,13 @@
                             {{ $qr->body }}
                         </td>
                         <td>
-                            <a href="javascript:;" class="text-success edit-qr mr-1"
+                            <a href="javascript:;" class="text-beta fa-x edit-qr mr-1"
                                data-id="{{ $qr->id }}"
                                data-title="{{ $qr->title }}"
                                data-body="{{ $qr->body }}">
                                 <i class="fa fa-pencil"></i>
                             </a>
-                            <a href="javascript:;" class="text-danger delete-qr mr-1"
+                            <a href="javascript:;" class="text-danger fa-x delete-qr mr-1"
                                data-id="{{ $qr->id }}">
                                 <i class="fa fa-trash"></i>
                             </a>

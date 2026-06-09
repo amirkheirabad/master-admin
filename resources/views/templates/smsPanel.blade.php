@@ -238,7 +238,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($smsPanels as $sms)
+                        @forelse($smsPanels as $sms)
                             <tr class="responsive-table-row">
                                 <th scope="row" class="responsive-table-td">{{ $sms->id }}</th>
                                 <td data-title="نام فروشگاه" class="responsive-table-td">{{ $sms->store->store_name }}</td>
@@ -270,7 +270,14 @@
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach
+                            @empty
+                            <tr>
+                                <td colspan="11" class="text-center py-4 text-muted">
+                                    <i class="fa fa-search fa-2x mb-2 d-block"></i>
+                                    نتیجه‌ای برای جستجو یافت نشد
+                                </td>
+                            </tr>
+                        @endforelse
                         </tbody>
                     </table>
                 </div>

@@ -28,7 +28,7 @@ class DashboardController
                 ['label' => 'کاربران', 'value' => User::count(), 'icon' => 'fa-users', 'color' => 'blue'],
                 ['label' => 'فروشگاه‌ها', 'value' => Stores::count(), 'icon' => 'fa-shopping-cart', 'color' => 'green'],
                 ['label' => 'فاکتورها', 'value' => Factor::count(), 'icon' => 'fa-file-text', 'color' => 'orange'],
-                ['label' => 'تیکت باز', 'value' => Ticket::whereIn('status', [0, 1])->count(), 'icon' => 'fa-life-ring', 'color' => 'purple'],
+                ['label' => 'تیکت باز', 'value' => Ticket::whereIn('status', [0, 1 ,3])->count(), 'icon' => 'fa-life-ring', 'color' => 'purple'],
                 ['label' => 'فاکتور پرداخت‌نشده', 'value' => Factor::where('price_status', 1)->count(), 'icon' => 'fa-exclamation-circle', 'color' => 'red'],
             ];
             $recentTickets = Ticket::with('store')->orderByDesc('updated_at')->limit(4)->get();
@@ -50,7 +50,7 @@ class DashboardController
             $stats = [
                 ['label' => 'فاکتورها', 'value' => (clone $factorQuery)->count(), 'icon' => 'fa-file-text', 'color' => 'blue'],
                 ['label' => 'تیکت‌ها', 'value' => (clone $ticketQuery)->count(), 'icon' => 'fa-life-ring', 'color' => 'green'],
-                ['label' => 'تیکت باز', 'value' => (clone $ticketQuery)->whereIn('status', [0, 1])->count(), 'icon' => 'fa-comments', 'color' => 'orange'],
+                ['label' => 'تیکت باز', 'value' => (clone $ticketQuery)->whereIn('status', [0, 1 , 3])->count(), 'icon' => 'fa-comments', 'color' => 'orange'],
                 ['label' => 'پرداخت‌نشده', 'value' => (clone $factorQuery)->where('price_status', 1)->count(), 'icon' => 'fa-credit-card', 'color' => 'red'],
             ];
 

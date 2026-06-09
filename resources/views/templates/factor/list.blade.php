@@ -243,16 +243,16 @@
                                 <td data-title="عملیات" class="responsive-table-td">
                                     <div class="gap">
                                         <a href="{{ route('factor-show', $factor->id) }}" target="_blank"
-                                            class="text-primary">
+                                            class="text-beta">
                                             <i class="fa fa-eye fa-x"></i>
                                         </a>
 
                                         @if (auth()->user()->hasRole('admin'))
-                                            <a href="{{ route('factor-edit', $factor->id) }}" class="text-success"
+                                            <a href="{{ route('factor-edit', $factor->id) }}" class="text-beta"
                                                 data-id="{{ $factor->id }}">
                                                 <i class="fa fa-pencil fa-x"></i>
                                             </a>
-                                            <a href="javascript:;" id="copyHash" class="text-secondary"
+                                            <a href="javascript:;" id="copyHash" class="text-beta"
                                                 data-id="{{ $factor->id }}">
                                                 <i class="fa fa-copy fa-x"></i>
                                             </a>

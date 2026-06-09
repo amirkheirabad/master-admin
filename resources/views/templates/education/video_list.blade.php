@@ -45,7 +45,7 @@
                                 <td>{{ $video->title }}</td>
                                 <td>{{ $video->category->name ?? 'بدون دسته بندی' }}</td>
                                 <td class="">
-                                    <a href="{{ route('video-edit', $video->id) }}" class="text-success editCategoryBtn" data-id="{{ $video->id }}">
+                                    <a href="{{ route('video-edit', $video->id) }}" class="text-beta editCategoryBtn" data-id="{{ $video->id }}">
                                         <i class="fa fa-pencil fa-x"></i>
                                     </a>
                                     <a href="#" class="text-danger delete-message mr-1" data-id="{{ $video->id }}">
