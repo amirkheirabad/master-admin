@@ -152,6 +152,7 @@ $('#ticketForm').on('submit', function (e) {
         })
         .catch(err => {
             console.log(err);
+            showServerConnectionError();
             setButtonLoading(submitBtn, false);
         });
 });
@@ -243,6 +244,7 @@ $('#ticketFormUser').on('submit', function (e) {
         })
         .catch(err => {
             console.log(err);
+            showServerConnectionError();
             setButtonLoading(submitBtn, false);
         });
 });

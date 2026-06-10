@@ -164,6 +164,7 @@ $('#replyForm').on('submit', function (e) {
         })
         .catch(err => {
             console.log(err);
+            showServerConnectionError();
             submitBtn.classList.remove('btn-loading');
             submitBtn.disabled = false;
         });
@@ -249,6 +250,7 @@ function confirmStatusChange() {
         })
         .catch(error => {
             console.error('Error:', error);
+            showServerConnectionError();
         });
 }
 
@@ -448,9 +450,7 @@ function applyStatusChange() {
         })
         .catch(error => {
             console.error('Error:', error);
-            if (typeof showNotification === 'function') {
-                showNotification('خطا در ارتباط با سرور', 'error');
-            }
+            showServerConnectionError();
         })
         .finally(() => {
             if (applyBtn) {
@@ -568,6 +568,7 @@ $('#replyFormUser').on('submit', function (e) {
         })
         .catch(err => {
             console.log(err);
+            showServerConnectionError();
             submitBtn.classList.remove('btn-loading');
             submitBtn.disabled = false;
         });

@@ -122,12 +122,7 @@ $('#videoForm').on('submit', function (e) {
             }
         })
         .catch(err => {
-            Swal.fire({
-                icon: 'error',
-                title: 'خطا در ارتباط با سرور',
-                text: 'لطفا دوباره تلاش کنید.',
-                confirmButtonText: 'باشه',
-            })
+            showServerConnectionError();
             submitBtn.classList.remove('btn-loading');
             submitBtn.disabled = false;
         });

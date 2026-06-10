@@ -127,6 +127,19 @@
         });
     }
 
+    function showServerConnectionError() {
+        if (typeof Swal !== 'undefined') {
+            Swal.fire({
+                icon: 'error',
+                title: 'خطا در ارتباط با سرور',
+                text: 'لطفا دوباره تلاش کنید.',
+                confirmButtonText: 'باشه',
+            });
+        } else {
+            alert('خطا در ارتباط با سرور');
+        }
+    }
+
     function clearAllBackendErrors() {
         const errorElements = document.querySelectorAll('[id$="_error"]');
 
