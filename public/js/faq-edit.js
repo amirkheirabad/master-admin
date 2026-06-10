@@ -42,7 +42,12 @@ $('#FAQForm').on('submit', function (e) {
 
         }),
     })
-        .then(res => res.json())
+        .then(res => {
+            if (res.status === 500) {
+                throw new Error(res.status);
+            }
+            return res.json();
+        })
         .then(data => {
             if (data.errors) {
                 showBackendErrors(data.errors);
@@ -56,6 +61,7 @@ $('#FAQForm').on('submit', function (e) {
         })
         .catch(err => {
             console.log(err);
+            showServerConnectionError();
             submitBtn.classList.remove('btn-loading');
             submitBtn.disabled = false;
         });
