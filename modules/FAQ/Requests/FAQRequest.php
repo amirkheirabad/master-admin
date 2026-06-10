@@ -15,7 +15,7 @@ class FAQRequest extends FormRequest
     {
         return [
             'question' => 'required|max:255',
-            'answer' => 'required|string',
+            'answer' => 'required',
         ];
     }
 

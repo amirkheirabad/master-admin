@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Modules\Stores\Models\Stores;
 use Modules\Ticket\Models\Ticket;
 use Modules\Ticket\Models\TicketMessage;
+use Modules\Ticket\Services\BotService;
 use Modules\Ticket\Services\SmsService;
 use Modules\User\Models\User;
 use Illuminate\Http\Request;
@@ -14,6 +15,11 @@ use Illuminate\Http\Request;
 
 class TicketRepo implements InterfaceTicket
 {
+    private BotService $botService;
+    public function __construct(BotService $botService)
+    {
+        $this->botService = $botService;
+    }
     public function findById($id)
     {
         return Ticket::with(['store', 'messages'])->findOrFail($id);
@@ -111,12 +117,21 @@ class TicketRepo implements InterfaceTicket
 
         $ticket = Ticket::create($ticketData);
 
-        TicketMessage::create([
+        $message = TicketMessage::create([
             'ticket_id'   => $ticket->id,
             'messages'    => $data['message'],
             'sender_type' => 0,
             'attachments' => !empty($attachmentPaths) ? json_encode($attachmentPaths) : null,
         ]);
+
+        $senderName = $ticket->store->store_name
+            ?? $ticket->user->name
+            ?? 'نامشخص';
+
+        $this->botService->sendTicketMessage(
+            $senderName,
+            $message->messages,
+        );
 
         DB::commit();
 
@@ -187,9 +202,18 @@ class TicketRepo implements InterfaceTicket
             'sender_type' => 0,
             'attachments' => !empty($attachmentPaths) ? json_encode($attachmentPaths) : null,
         ]);
+        $ticket = Ticket::with(['store', 'user'])->find($id);
 
 
-        $ticket = Ticket::find($id);
+        $senderName = $ticket->store?->store_name ?? $ticket->user?->name ?? 'نامشخص';
+
+
+        $this->botService->sendTicketMessage(
+            $senderName,
+            $message->messages,
+        );
+
+
         $ticket->touch();
 
         return $message;
