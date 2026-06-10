@@ -2,11 +2,13 @@
 @section('css')
     <link rel="stylesheet" href="{{ asset('/css/jalalidatepicker.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/select2.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/sweetalert2.css') }}">
 @endsection
 
 @section('js')
     <script src="{{ asset('/js/jalalidatepicker.min.js') }}"></script>
     <script src="{{ asset('/js/select2.js') }}"></script>
+    <script src="{{ asset('/js/sweetalert2.js') }}"></script>
     <script>
         jalaliDatepicker.startWatch();
     </script>
