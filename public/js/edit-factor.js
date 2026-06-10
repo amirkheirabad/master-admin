@@ -72,7 +72,10 @@ $('#editFactor').on('submit', function (e) {
                 window.location.href = data.redirect;
             }
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            console.log(err);
+            showServerConnectionError();
+        });
 })
 
 document.querySelectorAll('label.card-option').forEach(label => {

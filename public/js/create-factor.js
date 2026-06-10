@@ -77,8 +77,7 @@ $('#createFactor').on('submit', function (e) {
         })
         .catch(err => {
             console.log(err);
-            alert('خطا در ارتباط با سرور');
-            // برگردوندن دکمه به حالت عادی در صورت خطا
+            showServerConnectionError();
             submitBtn.classList.remove('btn-loading');
             submitBtn.disabled = false;
         });
@@ -131,6 +130,10 @@ $(document).on('click','.delete-factor', function (e) {
                             confirmButtonText: "بستن",
                         });
                     }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    showServerConnectionError();
                 })
         }
     })
