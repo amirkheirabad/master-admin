@@ -12,182 +12,22 @@
     <script>
         jalaliDatepicker.startWatch();
     </script>
-    <style>
-        /* فونت و تنظیمات پایه */
-        .faq-list {
-            max-width: 900px;
-            margin: 20px auto;
-            font-family: 'Vazir', 'IRANSans', 'Tahoma', sans-serif;
-        }
-
-        .faq-item {
-            background: #ffffff;
-            border-radius: 16px;
-            margin-bottom: 16px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-
-        .faq-question {
-            padding: 18px 24px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 16px;
-            background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
-            border-radius: 16px;
-            transition: all 0.3s ease;
-        }
-
-        .faq-question:hover {
-            background: linear-gradient(135deg, #f8f9fa 0%, #f5f6f8 100%);
-        }
-
-        .faq-question h4 {
-            margin: 0;
-            font-size: 17px;
-            font-weight: 600;
-            color: #1a1a2e;
-            line-height: 1.5;
-            flex: 1;
-            letter-spacing: -0.2px;
-        }
-
-        .faq-icon {
-            position: relative;
-            width: 28px;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            color: black;
-            font-size: 18px;
-            font-weight: bold;
-            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        .faq-question.active .faq-icon {
-            transform: rotate(45deg) scale(1.1);
-        }
-
-        /* بخش پاسخ با انیمیشن */
-        .faq-answer {
-            background: linear-gradient(135deg, #f8f9fe 0%, #ffffff 100%);
-            border-top: 1px solid rgba(102, 126, 234, 0.1);
-            border-radius: 0 0 16px 16px;
-            overflow: hidden;
-        }
-
-        .answer-content {
-            padding: 20px 24px;
-            line-height: 1.8;
-            color: #2d3436;
-            font-size: 15px;
-            text-align: justify;
-        }
-
-        /* استایل برای محتوای HTML داخل پاسخ */
-        .answer-content p {
-            margin-bottom: 12px;
-        }
-
-        .answer-content ul,
-        .answer-content ol {
-            margin: 12px 0;
-            padding-right: 24px;
-        }
-
-        .answer-content li {
-            margin-bottom: 8px;
-        }
-
-        .answer-content img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 12px;
-            margin: 16px 0;
-        }
-
-        .answer-content strong {
-            color: #667eea;
-        }
-
-        .answer-content a {
-            color: #667eea;
-            text-decoration: none;
-            border-bottom: 1px dashed #667eea;
-        }
-
-        .answer-content a:hover {
-            color: #764ba2;
-            border-bottom-color: #764ba2;
-        }
-
-        /* اسکرول بار */
-        .faq-answer {
-            max-height: 600px;
-            overflow-y: auto;
-        }
-
-        .faq-answer::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .faq-answer::-webkit-scrollbar-track {
-            background: #e9ecef;
-            border-radius: 10px;
-        }
-
-        .faq-answer::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 10px;
-        }
-
-        /* ریسپانسیو برای موبایل */
-        @media (max-width: 768px) {
-            .faq-list {
-                margin: 16px;
-            }
-
-            .faq-question {
-                padding: 14px 18px;
-            }
-
-            .faq-question h4 {
-                font-size: 15px;
-            }
-
-            .answer-content {
-                padding: 16px 20px;
-                font-size: 14px;
-            }
-        }
-
-        /* دکوراسیون اضافه */
-        .faq-item:first-child {
-            border-top: 1px solid rgba(102, 126, 234, 0.2);
-        }
-    </style>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const faqQuestions = document.querySelectorAll('.faq-question');
-
-            faqQuestions.forEach(function(question) {
-                question.addEventListener('click', function() {
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.faq-question').forEach(function (question) {
+                question.addEventListener('click', function () {
+                    const item = this.closest('.faq-item');
                     const answer = this.nextElementSibling;
+                    const isOpen = item.classList.contains('open');
 
-                    // تغییر کلاس active
-                    this.classList.toggle('active');
+                    document.querySelectorAll('.faq-item.open').forEach(function (openItem) {
+                        openItem.classList.remove('open');
+                        openItem.querySelector('.faq-answer').style.maxHeight = null;
+                    });
 
-                    // باز/بستن جواب
-                    if (answer.style.display === 'none' || answer.style.display === '') {
-                        answer.style.display = 'block';
-                    } else {
-                        answer.style.display = 'none';
+                    if (!isOpen) {
+                        item.classList.add('open');
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
                     }
                 });
             });
@@ -195,28 +35,195 @@
     </script>
 @endsection
 
-
 @section('content')
+    <style>
+        .faq-page-wrapper {
+            padding: 0 8px;
+        }
+
+        .faq-header h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1e293b;
+            margin: 0 0 24px 0;
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .faq-item {
+            background: #ffffff;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+            width: 75%;
+            margin: auto;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 2px 12px rgba(19, 60, 109, 0.08);
+        }
+
+        .faq-item.open {
+            border-color: #133c6d;
+            box-shadow: 0 2px 16px rgba(19, 60, 109, 0.13);
+        }
+
+        /* RTL: متن سمت راست، آیکون سمت چپ */
+        .faq-question {
+            padding: 18px 20px;
+            cursor: pointer;
+            display: flex;
+            
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            user-select: none;
+            transition: background 0.15s ease;
+        }
+
+        .faq-question:hover {
+            background: #f8fafc;
+        }
+
+        .faq-item.open .faq-question {
+            background: #edf2f9;
+        }
+
+        .faq-question h4 {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 600;
+            color: #1e293b;
+            line-height: 1.6;
+            flex: 1;
+            text-align: right;
+        }
+
+        .faq-item.open .faq-question h4 {
+            color: #133c6d;
+        }
+
+        .faq-toggle {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #e8eef6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 300;
+            color: #133c6d;
+            line-height: 1;
+            transition: background 0.2s ease, transform 0.25s ease, color 0.2s ease;
+        }
+
+        .faq-item.open .faq-toggle {
+            background: #133c6d;
+            color: #ffffff;
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: #f7fafd;
+            border-top: 1px solid transparent;
+        }
+
+        .faq-item.open .faq-answer {
+            border-top-color: #ccdaea;
+        }
+
+        .answer-content {
+            padding: 18px 20px 20px;
+            font-size: 14px;
+            line-height: 1.9;
+            color: #475569;
+            text-align: justify;
+            direction: rtl;
+        }
+
+        .answer-content p { margin-bottom: 10px; }
+        .answer-content p:last-child { margin-bottom: 0; }
+
+        .answer-content ul,
+        .answer-content ol {
+            margin: 10px 0;
+            padding-right: 22px;
+        }
+
+        .answer-content li { margin-bottom: 6px; }
+        .answer-content strong { color: #133c6d; }
+
+        .answer-content a {
+            color: #133c6d;
+            text-decoration: none;
+            border-bottom: 1px dashed #7ea8cc;
+        }
+
+        .answer-content a:hover {
+            color: #0d2a4d;
+        }
+
+        .answer-content img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 12px 0;
+        }
+
+        .faq-pagination {
+            margin-top: 24px;
+            display: flex;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .faq-question {
+                padding: 14px 16px;
+            }
+
+            .faq-question h4 {
+                font-size: 14px;
+            }
+
+            .answer-content {
+                padding: 14px 16px 16px;
+                font-size: 13px;
+            }
+
+            .faq-toggle {
+                width: 24px;
+                height: 24px;
+                font-size: 18px;
+            }
+        }
+    </style>
 
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="">
-                <div class="row">
-                    <div class="col-md-12 d-flex justify-content-between">
-                        <div>
-                            <h3>سوالات متداول</h3>
-                        </div>
-                    </div>
+            <div class="faq-page-wrapper">
+                <div class="faq-header">
+                    <h3>سوالات متداول</h3>
                 </div>
-                <div class="x_panel rounded-top">
+
+                <div class="x_panel rounded-top p-3">
                     <div class="faq-list">
                         @foreach($faqs as $index => $faq)
                             <div class="faq-item">
-                                <div class="faq-question" data-id="{{ $index }}">
+                                <div class="faq-question">
                                     <h4>{{ $faq->question }}</h4>
-                                    <span class="faq-icon">+</span>
+                                    <span class="faq-toggle">+</span>
                                 </div>
-                                <div class="faq-answer" id="answer-{{ $index }}" style="display: none;">
+                                <div class="faq-answer">
                                     <div class="answer-content">
                                         {!! $faq->answer !!}
                                     </div>
@@ -224,10 +231,10 @@
                             </div>
                         @endforeach
                     </div>
-                    <div class="d-flex justify-content-center">
-                        {{$faqs->withQueryString()->links('vendor.pagination.bootstrap-5')}}
-                    </div>
 
+                    <div class="faq-pagination">
+                        {{ $faqs->withQueryString()->links('vendor.pagination.bootstrap-5') }}
+                    </div>
                 </div>
             </div>
         </div>

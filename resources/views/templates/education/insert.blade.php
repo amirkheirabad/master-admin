@@ -63,6 +63,7 @@
         .video-remove:hover {
             background: #ff4444;
         }
+        
     </style>
 @endsection
 
