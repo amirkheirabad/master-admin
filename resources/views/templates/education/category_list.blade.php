@@ -38,7 +38,7 @@
                     <table class="table">
                         <thead class="responsive-table-head">
                         <tr>
-                            <th>#</th>
+                            <th>همه</th>
                             <th>نام</th>
                             <th>عملیات</th>
                         </tr>
@@ -46,7 +46,7 @@
                         <tbody>
                         @foreach($categories as $category)
                             <tr class="item-record{{$category->id}}">
-                                <th scope="row">#</th>
+                                <th scope="row"> {{$category->id}} </th>
                                 <td>{{ $category->name }}</td>
                                 <td class="">
                                     <a href="#" class="text-success editCategoryBtn" data-toggle="modal" data-target="#myModal2" data-id="{{ $category->id }}">

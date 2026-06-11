@@ -261,10 +261,10 @@
                                 </td>
                                 <td data-title="عملیات" class="responsive-table-td">
                                     <div class="gap">
-                                        <a href="javascript:;" class="text-primary" data-toggle="modal" data-target="#myModal2" data-id="{{ $sms->id }}">
+                                        <a href="javascript:;" class="text-beta" data-toggle="modal" data-target="#myModal2" data-id="{{ $sms->id }}">
                                             <i class="fa fa-eye fa-x"></i>
                                         </a>
-                                        <a href="javascript:;" class="text-success" data-toggle="modal" data-target="#myModal" data-id="{{ $sms->id }}">
+                                        <a href="javascript:;" class="text-beta" data-toggle="modal" data-target="#myModal" data-id="{{ $sms->id }}">
                                             <i class="fa fa-pencil fa-x"></i>
                                         </a>
                                     </div>
