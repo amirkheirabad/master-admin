@@ -51,17 +51,20 @@
         .faq-list {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 20px;
             width: 100%;
         }
 
+        .x_panel{
+            padding: 50px 0px 40px 0px;
+        }
         .faq-item {
             background: #ffffff;
             border-radius: 12px;
             border: 1px solid #e2e8f0;
             overflow: hidden;
             transition: box-shadow 0.2s ease, border-color 0.2s ease;
-            width: 75%;
+            width: 65%;
             margin: auto;
         }
 
