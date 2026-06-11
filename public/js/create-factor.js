@@ -59,6 +59,7 @@ $('#createFactor').on('submit', function (e) {
             national_kod: $('#national_kod').val(),
             user_id: $('#customer_id').val(),
             send_sms:     $('#send_sms').is(':checked') ? 1 : 0,
+            account_type: $('#account_type').val()
         }),
     })
         .then(res => res.json())

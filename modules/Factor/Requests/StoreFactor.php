@@ -50,31 +50,32 @@ class StoreFactor extends FormRequest
     public function rules(): array
     {
         return [
-            'store_id' => 'required_without_all:phone,name|nullable|exists:stores,id',
+            'store_id' => 'required_if:account_type,store|nullable|exists:stores,id',
             'user_id' => 'nullable|exists:users,id',
             'factor_date' => 'required|string',
-            'phone' => 'required_without:store_id|nullable|regex:/(09)[0-9]{9}/|digits:11',
-            'name' => 'required_without:store_id|nullable|string|max:255',
+            'phone' => 'required_if:account_type,agency|nullable|regex:/(09)[0-9]{9}/|digits:11',
+            'name' => 'required_if:account_type,agency|nullable|string|max:255',
             'category_id' => 'required|exists:categories,id',
             'national_kod' => 'nullable|string|digits:10|regex:/^[0-9]{10}$/',
             'price' => 'required|integer|min:0',
             'show_status' => 'required|boolean',
             'description' => 'nullable|string|max:1000',
             'send_sms' => 'nullable|boolean',
+            'account_type' => 'required'
         ];
     }
 
     public function messages(): array
     {
         return [
-            'store_id.required_without_all' => 'انتخاب فیلد فروشگاه الزامی است',
+            'store_id.required_if' => 'انتخاب فیلد فروشگاه الزامی است',
 
-            'phone.required_without'        => ' وارد کردن شماره تماس الزامی است.',
+            'phone.required_if'        => ' وارد کردن شماره تماس الزامی است.',
             'phone.string'                  => 'شماره تماس باید رشته باشد.',
             'phone.regex' => 'شماره تماس باید با 09 شروع شود و 11 رقم باشد .',
             'phone.digits' => 'شماره تماس باید دقیقاً 11 رقم باشد.',
 
-            'name.required_without'         => ' وارد کردن نام الزامی است.',
+            'name.required_if'         => ' وارد کردن نام الزامی است.',
             'name.string'                   => 'نام باید رشته باشد.',
             'name.max'                      => 'نام نباید بیش از 255 کاراکتر باشد.',
 

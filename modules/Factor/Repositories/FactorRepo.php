@@ -114,11 +114,15 @@ class FactorRepo implements InterfaceFactor
 
         $data = $this->resolveBuyerFromStore($data);
 
-        if (!empty($data['store_id'])) {
+        if ($data['account_type'] == 'store') {
             $data['name'] = null;
             $data['phone'] = null;
             $data['national_kod'] = null;
             $data['user_id'] = null;
+        }
+
+        if ($data['account_type'] == 'agency') {
+            $data['store_id'] = null;
         }
 
         $factor = Factor::create([
