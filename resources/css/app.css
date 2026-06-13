@@ -801,9 +801,6 @@ a.bg-danger:hover {
 p {
     margin: 0px;
 }
-.x_panel {
-    padding: 10px 10px;
-}
 
 @media screen and (max-width: 576px) {
     .responsive-table-row {
