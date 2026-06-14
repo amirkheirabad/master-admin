@@ -49,7 +49,7 @@
 
                             <div class="col-md-6 col-xs-12 mb-3">
                                 <label class="fw-bold">رمز عبور<span class="text-danger">*</span></label>
-                                <input type="password" name="password" id="password" 
+                                <input type="password" name="password" id="password"
                                     class="form-control custom-radius input-border-focus" style="background: #f9fafb;">
                                 <div class="mt-1">
                                     <span class="text-danger error-message mb-4" id="password_error"></span>
@@ -62,7 +62,7 @@
                                     class="form-control custom-radius custom-select-input input-border-focus"
                                     style="background: #f9fafb;">
                                     @foreach ($roles as $role)
-                                        <option {{ old('role') == $role->name ? 'selected' : '' }}
+                                        <option {{ old('role', 'seller') == $role->name ? 'selected' : '' }}
                                             value="{{ $role->name }}">
                                             {{ __($role->name) }}
                                         </option>
