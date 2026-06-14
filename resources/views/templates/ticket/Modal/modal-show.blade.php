@@ -67,3 +67,29 @@
         </div>
     </div>
 </div>
+
+
+<!-- مدال -->
+<div id="editModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">ویرایش پیام</h4>
+            </div>
+
+            <div class="modal-body">
+                <h4>متن پیام</h4>
+                <textarea id="adminMessage" class="form-control custom-radius input-border-focus" rows="4"></textarea>
+                <input type="hidden" id="editId" value="">
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-beta-solid" id="submitEdit">ویرایش</button>
+                <button type="button" class="btn-beta-outline" data-dismiss="modal">بستن</button>
+            </div>
+
+        </div>
+    </div>
+</div>

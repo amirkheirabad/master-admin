@@ -218,6 +218,9 @@
                                             {{ $message->messages }}
                                         </div>
                                     </div>
+                                    @if(auth()->user()->hasRole('admin'))
+                                    <button data-toggle="modal" data-target="#editModal" data-id="{{ $message->id }}" data-message="{{ $message->messages }}">ویرایش</button>
+                                    @endif
 
                                     {{-- بخش پیوست‌ها - جدا از حباب پیام --}}
                                     @if($message->attachments)

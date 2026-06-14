@@ -290,4 +290,10 @@ class TicketRepo implements InterfaceTicket
         );
     }
 
+    public function updateMessage($id, $request)
+    {
+        $message = TicketMessage::findOrFail($id);
+        $message->update(['messages' => $request->messages]);
+    }
+
 }

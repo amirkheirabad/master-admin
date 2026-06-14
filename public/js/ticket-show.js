@@ -681,3 +681,76 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+const csrf = document.querySelector('meta[name="csrf-token"]').content;
+
+
+$('button[data-target="#editModal"]').on('click', function () {
+    let id = $(this).data('id');
+    let message = $(this).data('message')
+
+    $('#adminMessage').val(message);
+    $('#editId').val(id);
+})
+
+
+$('#submitEdit').on('click', function (e) {
+    e.preventDefault()
+
+    let id = $('#editId').val();
+    const newMessage = $('#adminMessage').val();
+
+
+    const submitBtn = this;
+
+    submitBtn.classList.add('btn-loading');
+    submitBtn.disabled = true;
+
+    fetch(`/message_update/${id}`,{
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrf,
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            messages: newMessage,
+        }),
+    })
+        .then(res => {
+            if (res.status === 500) {
+                throw new Error(res.status);
+            }
+            return res.json();
+        })
+        .then(data => {
+            if (data.errors) {
+                showBackendErrors(data.errors);
+                submitBtn.classList.remove('btn-loading');
+                submitBtn.disabled = false;
+            }
+
+            if (data.success) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'موفق!',
+                    text: 'پیام با موفقیت ویرایش شد',
+                    confirmButtonText: 'باشه',
+                    timer: 2000,
+                    showConfirmButton: true
+                }).then(() => {
+                    location.reload();
+                });
+
+                submitBtn.classList.remove('btn-loading');
+                submitBtn.disabled = false;
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            showServerConnectionError();
+            submitBtn.classList.remove('btn-loading');
+            submitBtn.disabled = false;
+        });
+});
+

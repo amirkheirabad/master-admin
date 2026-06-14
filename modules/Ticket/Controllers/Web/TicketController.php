@@ -125,4 +125,12 @@ class TicketController
         ]);
     }
 
+    public function updateMessage(Request $request, $id)
+    {
+        $this->ticket->updateMessage($id, $request);
+        return response()->json([
+            'success' => true,
+        ]);
+    }
+
 }
