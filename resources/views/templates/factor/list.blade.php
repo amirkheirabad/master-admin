@@ -187,7 +187,7 @@
                                         {{ $factor->id }}
                                     </th>
                                 <td data-title="نام فروشگاه" class="responsive-table-td">
-                                    {{ $factor->store->store_name ?? 'مشتری' }}</td>
+                                    {{ $factor->store->store_name ?? $factor->name }}</td>
                                 <td data-title="قیمت" class="responsive-table-td fa-number">
                                     {{ number_format($factor->price) }}</td>
                                 <td data-title="تاریخ فاکتور" class="responsive-table-td fa-number">
