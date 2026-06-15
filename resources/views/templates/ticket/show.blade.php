@@ -83,6 +83,10 @@
                                 <div class="dropdown-option pointer p-5 btn-green-light" onclick="openModalAndClose(this, {{ $ticket->id }}, 'فروشگاه نمونه', 3, 'ارجاع به واحد فنی')" data-value="closed">
                                     ارجاع به واحد فنی
                                 </div>
+                                <div class="dropdown-option pointer p-5 btn-green-light" onclick="openModalAndClose(this, {{ $ticket->id }}, 'فروشگاه نمونه', 4, ' ارجاع به واحد گرافیک دیزاین')" data-value="closed">
+                                   ارجاع به واحد گرافیک دیزاین 
+                            </div>
+                                
                             </div>
                         </div>
                              @endif
@@ -114,6 +118,10 @@
                                 @elseif($ticket->status == 3)
                                     <span class="bg-new p-2 custom-radius mr-5">
                                     ارجاع به واحد فنی
+                                </span>
+                                @elseif($ticket->status == 4)
+                                    <span class="bg-new p-2 custom-radius mr-5">
+                                    ارجاع به واحد گرافیک دیزاین
                                 </span>
                                 @endif
                             </h5>
@@ -200,8 +208,21 @@
                                 </div>
                             </div>
                         @else
-                            {{-- پیام ادمین (پشتیبانی) - سمت چپ --}}
-                            <div class="message-wrapper message-admin mt-4 d-flex justify-content-end">
+                        {{-- پیام ادمین (پشتیبانی) - سمت چپ --}}
+                        <div class="message-wrapper message-admin mt-4 d-flex justify-content-end">
+                            <div style="display: flex; align-items: flex-end; gap: 6px;">
+
+                                @if(auth()->user()->hasRole('admin'))
+                                <button class="edit-msg-btn"
+                                    data-toggle="modal"
+                                    data-target="#editModal"
+                                    data-id="{{ $message->id }}"
+                                    data-message="{{ $message->messages }}"
+                                    aria-label="ویرایش پیام">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                                @endif
+
                                 <div style="max-width: 100%;">
                                     {{-- حباب پیام --}}
                                     <div class="message-bubble bg-white border p-3 shadow-sm custom-radius" style="display: flex; flex-direction: column; min-height: 80px; max-width: 550px; width: auto;">
@@ -218,9 +239,6 @@
                                             {{ $message->messages }}
                                         </div>
                                     </div>
-                                    @if(auth()->user()->hasRole('admin'))
-                                    <button data-toggle="modal" data-target="#editModal" data-id="{{ $message->id }}" data-message="{{ $message->messages }}">ویرایش</button>
-                                    @endif
 
                                     {{-- بخش پیوست‌ها - جدا از حباب پیام --}}
                                     @if($message->attachments)
@@ -243,7 +261,6 @@
                                                     @endphp
                                                     <a href="{{ $url }}" download class="attachment-item bg-file mt-2 p-3 rounded custom-radius text-decoration-none" style="display: block; cursor: pointer;">
                                                         <div class="d-flex align-items-center" style="gap: 8px;">
-                                                            {{-- آیکون --}}
                                                             <div class="file-icon d-flex justify-content-center align-items-center flex-shrink-0" style="width: 40px; height: 40px; background: white; border-radius: 6px;">
                                                                 @if(in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif', 'webp']))
                                                                     <i class="fa fa-image" style="font-size: 20px;"></i>
@@ -259,14 +276,12 @@
                                                                     <i class="fa fa-file-o" style="font-size: 20px;"></i>
                                                                 @endif
                                                             </div>
-
-                                                            {{-- اطلاعات فایل --}}
                                                             <div class="flex-grow-1" style="min-width: 0;">
                                                                 <div class="text-secondary" style="text-align: right; word-wrap: break-word; word-break: break-all; font-size: 10px; line-height: 1.3;">
                                                                     {{ $fileName }}
                                                                 </div>
                                                                 @if($fileSizeFormatted)
-                                                                    <div class="text-muted" style="font-size: 9px; margin-top: 2px; text-align: right;"> {{ $fileSizeFormatted }}</div>
+                                                                    <div class="text-muted" style="font-size: 9px; margin-top: 2px; text-align: right;">{{ $fileSizeFormatted }}</div>
                                                                 @endif
                                                             </div>
                                                         </div>
@@ -276,7 +291,9 @@
                                         </div>
                                     @endif
                                 </div>
+
                             </div>
+                        </div>
                         @endif
                     @empty
                     @endforelse

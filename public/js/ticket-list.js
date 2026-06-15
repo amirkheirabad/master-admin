@@ -766,20 +766,32 @@ document.addEventListener('DOMContentLoaded', function() {
     // ================ رویدادها ================
     if (filterBtn && desktopMenu) {
         filterBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+    
             if (isMobile()) {
-                e.preventDefault();
+                desktopMenu.classList.remove('is-open');
+                isDesktopMenuOpen = false;
                 openMobileModal();
             } else {
-                e.preventDefault();
-                e.stopPropagation();
                 isDesktopMenuOpen = !isDesktopMenuOpen;
-                desktopMenu.style.display = isDesktopMenuOpen ? 'block' : 'none';
+                desktopMenu.style.display = '';  // حذف inline style
+                desktopMenu.classList.toggle('is-open', isDesktopMenuOpen);
             }
         });
-
+    
+        window.addEventListener('resize', function() {
+            if (isMobile() && isDesktopMenuOpen) {
+                desktopMenu.classList.remove('is-open');
+                desktopMenu.style.display = '';
+                isDesktopMenuOpen = false;
+            }
+        });
+    
         document.addEventListener('click', function(e) {
             if (!isMobile() && isDesktopMenuOpen && !filterBtn.contains(e.target) && !desktopMenu.contains(e.target)) {
-                desktopMenu.style.display = 'none';
+                desktopMenu.classList.remove('is-open');
+                desktopMenu.style.display = '';
                 isDesktopMenuOpen = false;
             }
         });

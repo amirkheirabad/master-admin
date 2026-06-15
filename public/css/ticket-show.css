@@ -1,3 +1,24 @@
+.edit-msg-btn {
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 0.5px solid #d1d5db;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #9ca3af;
+    font-size: 12px;
+    flex-shrink: 0;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  
+  .edit-msg-btn:hover {
+    background: #eff6ff;
+    border-color: #93c5fd;
+    color: #185fa5;
+  }
 #messageInput {
     scrollbar-width: none; /* Firefox */
 }
