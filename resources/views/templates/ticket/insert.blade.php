@@ -99,17 +99,20 @@
                         <div class="row">
 
                 {{-- طرف حساب --}}
-                <div class="col-md-6 col-xs-12 mb-3">
+                <div class="col-md-6 col-xs-12 mb-3 mt-2">
                     <label>طرف حساب <span class="text-danger">*</span></label>
                     <select name="recipient_type" id="recipient_type"
                         class="form-control custom-radius custom-select-input input-border-focus">
                         <option value="store">فروشگاه</option>
                         <option value="user">کاربر</option>
                     </select>
+                    <div class="mt-1">
+                        <span class="text-danger error-message" id="recipient_type_error"></span>
+                    </div>
                 </div>
 
                 {{-- فروشگاه --}}
-                <div class="col-md-6 col-xs-12 mb-1" id="store_wrapper">
+                <div class="col-md-6 col-xs-12 mb-3 mt-2" id="store_wrapper">
                     <label>نام فروشگاه <span class="text-danger">*</span></label>
                     <select name="store_id" id="store_id"
                         class="form-control custom-radius select2">
@@ -138,8 +141,8 @@
                     </div>
                 </div>
 
-                            <div class="col-md-6 col-xs-12 mt-2">
-                                <label class="mt-2">تیم ارسال کننده </label>
+                            <div class="col-md-6 col-xs-12 mt-2 mb-3">
+                                <label>تیم ارسال کننده </label>
                                 <select id="contact_name"
                                     class="form-control custom-radius custom-select-input input-border-focus">
                                     <option value="0">درخواست ماژول با فیچر جدید</option>
@@ -153,7 +156,7 @@
                             </div>
 
                             <div class="col-md-6 col-xs-12 mb-3 mt-2">
-                                <label class="mt-2">عنوان تیکت</label>
+                                <label>عنوان تیکت</label>
                                 <input type="text" name="title" id="title"
                                     class="form-control custom-radius input-border-focus" placeholder="عنوان تیکت">
                                 <div class="mt-1">
