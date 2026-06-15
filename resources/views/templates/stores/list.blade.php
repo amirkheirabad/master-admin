@@ -127,11 +127,11 @@
                                 <td data-title="آدرس فروشگاه" class="responsive-table-td">{{ $store->location }}</td>
                                 <td data-title="کد پستی" class="responsive-table-td">{{ $store->code_posty }}</td>
                                 <td data-title="عملیات" class="responsive-table-td">
-                                    <div class="action-buttons gap">
+                                    <div class="action-buttons">
                                         <a href="{{ route('edit_store', $store->id) }}" class="text-beta" title="ویرایش">
                                             <i class="fa fa-pencil fa-x"></i>
                                         </a>
-                                        <a href="javascript:;" class="text-danger delete-message" data-id="{{ $store->id }}" title="حذف">
+                                        <a href="javascript:;" class="text-danger delete-message mr-1" data-id="{{ $store->id }}" title="حذف">
                                             <i class="fa fa-trash fa-x"></i>
                                         </a>
                                     </div>

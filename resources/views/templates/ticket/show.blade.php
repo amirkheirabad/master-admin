@@ -154,7 +154,7 @@
 
                                     {{-- بخش پیوست‌ها - جدا از حباب پیام --}}
                                     @if($message->attachments)
-                                        <div class="attachments-wrapper p-2 custom-radius" style="max-width: 550px; margin-left: 0; margin-right: auto;">
+                                        <div class="attachments-wrapper p-2 custom-radius" style="max-width: 550px; margin-left: 0">
                                             @php
                                                 $attachments = is_string($message->attachments) ? json_decode($message->attachments, true) : $message->attachments;
                                             @endphp
@@ -242,7 +242,7 @@
 
                                     {{-- بخش پیوست‌ها - جدا از حباب پیام --}}
                                     @if($message->attachments)
-                                        <div class="attachments-wrapper p-2 custom-radius" style="max-width: 550px; margin-left: 0; margin-right: auto;">
+                                        <div class="attachments-wrapper p-2 custom-radius" style="max-width: 550px; margin-left: 0;">
                                             @php
                                                 $attachments = is_string($message->attachments) ? json_decode($message->attachments, true) : $message->attachments;
                                             @endphp
