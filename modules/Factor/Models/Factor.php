@@ -7,11 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Modules\Stores\Models\Stores;
 use Modules\Factor\Models\Category;
 use Modules\User\Models\User;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Factor extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use LogsActivity;
 
     protected $table = 'factors';
 
@@ -19,7 +22,7 @@ class Factor extends Model
     protected $fillable = [
         'store_id',
         'category_id',
-        'user_id', 
+        'user_id',
         'price',
         'description',
         'show_status',
@@ -45,5 +48,23 @@ class Factor extends Model
     public function customer()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function getActivityLogOptions() : logOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly([
+                'show_status',
+                'price_status',
+                'category_id',
+                'price',
+                'description',
+                'factor_date',
+                'paid_factor_date',
+                'image',
+                'store_id',
+                'user_id',
+            ])
+            ->useLogName('factor');
     }
 }
