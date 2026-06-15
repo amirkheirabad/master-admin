@@ -19,6 +19,34 @@
     border-color: #93c5fd;
     color: #185fa5;
   }
+
+  .search-button.btn-loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.search-button.btn-loading img {
+    visibility: hidden;
+}
+
+.search-button.btn-loading::after {
+    content: '';
+    position: absolute;
+
+    width: 16px;
+    height: 16px;
+    /* margin: -8px 0 0 0px; */
+    border: 2px solid #ccc;
+    border-top-color: #333;
+    border-radius: 50%;
+    animation: btn-spin 0.6s linear infinite;
+}
+
+@keyframes btn-spin {
+    to { transform: rotate(360deg); }
+}
+
+
 #messageInput {
     scrollbar-width: none; /* Firefox */
 }
