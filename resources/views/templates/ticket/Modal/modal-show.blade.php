@@ -29,6 +29,10 @@
                 <span>ارجاع به واحد فنی</span>
                 <i class="fa fa-check check-icon"></i>
             </div>
+            <div class="status-option" data-status="4">
+                <span>ارجاع به واحد گرافیک دیزاین</span>
+                <i class="fa fa-check check-icon"></i>
+            </div>
             @endif
         </div>
 
