@@ -41,11 +41,11 @@
                                 </td>
                                 <td data-title="ترتیب" class="responsive-table-td">{{ $message->order ?? '-' }}</td>
                                 <td data-title="عملیات" class="responsive-table-td">
-                                    <div class="action-buttons gap">
+                                    <div class="action-buttons">
                                         <a href="{{ route('message.edit', $message->id) }}" class="text-beta" title="ویرایش">
                                             <i class="fa fa-pencil fa-x"></i>
                                         </a>
-                                        <a href="javascript:;" class="text-danger delete-message" data-id="{{ $message->id }}" title="حذف">
+                                        <a href="javascript:;" class="text-danger delete-message mr-1" data-id="{{ $message->id }}" title="حذف">
                                             <i class="fa fa-trash fa-x"></i>
                                         </a>
                                     </div>
