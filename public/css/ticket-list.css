@@ -11,6 +11,17 @@
     transition: visibility 0.3s, opacity 0.3s;
 }
 
+
+.desktop-filter-menu.is-open {
+    display: block !important;
+}
+
+@media (max-width: 767.98px) {
+    .desktop-filter-menu.is-open {
+        display: none !important;
+    }
+}
+
 .mobile-filter-modal.active {
     visibility: visible;
     opacity: 1;
@@ -370,7 +381,9 @@
 
 /* ====== Responsive ====== */
 @media (max-width: 767.98px) {
-    .desktop-filter-menu {
+    .desktop-filter-menu,
+    .desktop-filter-menu.is-open,
+    .desktop-filter-menu.show {
         display: none !important;
     }
 }

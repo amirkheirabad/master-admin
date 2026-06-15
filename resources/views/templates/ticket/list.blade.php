@@ -85,6 +85,7 @@
                                         <option value="1" {{ request()->get('status') == '1' ? 'selected' : ''}}>منتظر پاسخ فروشگاه</option>
                                         <option value="2" {{ request()->get('status') == '2' ? 'selected' : ''}}>بسته شده</option>
                                         <option value="3" {{ request()->get('status') == '3' ? 'selected' : ''}}>ارجاع به واحد فنی</option>
+                                        <option value="4" {{ request()->get('status') == '4' ? 'selected' : ''}}>ارجاع به واحد گرافیک دیزاین</option>
                                     </select>
                                 </div>
                                 <div class="mb-2">
@@ -175,7 +176,7 @@
                                 </span>
                                 @elseif($ticket->priority == 3)
                                     <span class="bg-warning p-2 custom-radius">
-                                   زیاد
+                                   بالا
                                 </span>
                                 @elseif($ticket->priority == 4)
                                     <span class="bg-red-new p-2 custom-radius">
@@ -219,6 +220,10 @@
                                 @elseif($ticket->status == 3)
                                     <span class="bg-new p-2 custom-radius">
                                     ارجاع به واحد فنی
+                                </span>
+                                @elseif($ticket->status == 4)
+                                    <span class="bg-new p-2 custom-radius">
+                                    ارجاع به واحد گرافیک دیزاین
                                 </span>
                                 @endif
                             </td>

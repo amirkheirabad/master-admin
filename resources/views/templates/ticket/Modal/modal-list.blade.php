@@ -12,6 +12,7 @@
         <span data-value="1">منتظر پاسخ فروشگاه</span>
         <span data-value="2">بسته شده</span>
         <span data-value="3">ارجاع به واحد فنی</span>
+        <span data-value="4">ارجاع به واحد گرافیک دیزاین</span>
     </div>
 
     <div class="filter-group" data-type="team" data-title="تیم مخاطب">
