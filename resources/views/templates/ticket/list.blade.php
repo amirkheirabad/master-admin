@@ -49,7 +49,7 @@
                         <div class="hide-from-md">
                             <button id="mobileSortBtn" class="btn btn-white-new">
                                 <span class="hide-on-mobile">مرتب سازی</span>
-                                <img src="{{ asset('/icons/sort.svg') }}" style="width: 11px">
+                                <img src="{{ asset('/icons/sort.svg') }}" style="width: 11px;height: 18px">
                             </button>
                         </div>
 
@@ -60,7 +60,7 @@
                                 id="filterDropdown"
                                 style="gap: 8px;"
                             >
-                                <i class="fa fa-filter"></i>
+                                <i class="fa fa-filter p-1"></i>
                                 <span class="hide-on-mobile">فیلتر ها</span>
                                 <span id="filterBadge" class="badge badge-danger bg-beta" style="color: white; border-radius: 50%; padding: 2px 6px; font-size: 11px; display: none; margin-left: 4px;">0</span>
                             </button>
