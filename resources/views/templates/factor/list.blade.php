@@ -241,7 +241,7 @@
                                 </td>
                                 <td data-title="توضیحات" class="responsive-table-td">{{ $factor->description }}</td>
                                 <td data-title="عملیات" class="responsive-table-td">
-                                    <div class="gap">
+                                    <div class="d-flex" style="gap: 5px">
                                         <a href="{{ route('factor-show', $factor->id) }}" target="_blank"
                                             class="text-beta">
                                             <i class="fa fa-eye fa-x"></i>
