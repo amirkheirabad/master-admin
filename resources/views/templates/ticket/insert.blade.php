@@ -138,8 +138,8 @@
                     </div>
                 </div>
 
-                            <div class="col-md-6 col-xs-12 mb-3">
-                                <label>تیم ارسال کننده </label>
+                            <div class="col-md-6 col-xs-12 mt-2">
+                                <label class="mt-2">تیم ارسال کننده </label>
                                 <select id="contact_name"
                                     class="form-control custom-radius custom-select-input input-border-focus">
                                     <option value="0">درخواست ماژول با فیچر جدید</option>
@@ -152,8 +152,8 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6 col-xs-12 mb-3">
-                                <label>عنوان تیکت</label>
+                            <div class="col-md-6 col-xs-12 mb-3 mt-2">
+                                <label class="mt-2">عنوان تیکت</label>
                                 <input type="text" name="title" id="title"
                                     class="form-control custom-radius input-border-focus" placeholder="عنوان تیکت">
                                 <div class="mt-1">
