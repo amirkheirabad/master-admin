@@ -308,25 +308,3 @@ $('#customer_id').on('change', function () {
         .then(fillBuyerFields)
         .catch(err => console.log(err));
 });
-
-$('#store_id').on('change', function () {
-    const storeId = $(this).val();
-
-    if (!storeId || $('#account_type').val() !== 'store') {
-        if ($('#account_type').val() === 'store') {
-            clearBuyerFields();
-        }
-        return;
-    }
-
-    fetch(`/store-info/${storeId}`, {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            'X-CSRF-TOKEN': csrf
-        }
-    })
-        .then(res => res.json())
-        .then(fillBuyerFields)
-        .catch(err => console.log(err));
-});
