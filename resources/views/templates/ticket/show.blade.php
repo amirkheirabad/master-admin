@@ -84,16 +84,16 @@
                                     ارجاع به واحد فنی
                                 </div>
                                 <div class="dropdown-option pointer p-5 btn-green-light" onclick="openModalAndClose(this, {{ $ticket->id }}, 'فروشگاه نمونه', 4, ' ارجاع به واحد گرافیک دیزاین')" data-value="closed">
-                                   ارجاع به واحد گرافیک دیزاین 
+                                   ارجاع به واحد گرافیک دیزاین
                             </div>
-                                
+
                             </div>
                         </div>
                              @endif
                     </div>
                 </div>
             </div>
-            <div id="chatbox" class="x_panel h-500 mt-8 d-flex flex-column bg-chatbox rounded-3 p-5">
+            <div id="chatbox" class="x_panel h-580 mt-8 d-flex flex-column bg-chatbox rounded-3 p-5">
                 <div class="panel-content">
                     <div class="d-flex justify-content-between">
                         <div>
