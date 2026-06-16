@@ -293,6 +293,11 @@ class TicketRepo implements InterfaceTicket
     public function updateMessage($id, $request)
     {
         $message = TicketMessage::findOrFail($id);
+    
+        // if ($message->created_at->diffInHours(now()) >= 48) {
+        //     throw new \Exception('امکان ویرایش پیام بعد از 48 ساعت وجود ندارد.');
+        // }
+    
         $message->update(['messages' => $request->messages]);
     }
 

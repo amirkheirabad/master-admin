@@ -148,7 +148,7 @@
                                             </small>
                                         </div>
                                         <div class="message-text" style="word-wrap: break-word; margin-top: auto;">
-                                            {{ $message->messages }}
+                                            {!! nl2br(e($message->messages)) !!}
                                         </div>
                                     </div>
 
@@ -213,12 +213,17 @@
                             <div style="display: flex; align-items: flex-end; gap: 6px;">
 
                                 @if(auth()->user()->hasRole('admin'))
+                                @php
+                                    $canEdit = $message->created_at->diffInHours(now()) < 48;
+                                @endphp
                                 <button class="edit-msg-btn"
                                     data-toggle="modal"
                                     data-target="#editModal"
                                     data-id="{{ $message->id }}"
                                     data-message="{{ $message->messages }}"
-                                    aria-label="ویرایش پیام">
+                                    aria-label="ویرایش پیام"
+                                    @if(!$canEdit) disabled title="بعد از 48 ساعت امکان ویرایش وجود ندارد" @endif
+                                    style="{{ !$canEdit ? 'opacity: 0.3; cursor: not-allowed;' : '' }}">
                                     <i class="fa fa-pencil"></i>
                                 </button>
                                 @endif
@@ -236,8 +241,13 @@
                                             </small>
                                         </div>
                                         <div class="message-text" style="word-wrap: break-word; margin-top: auto;">
-                                            {{ $message->messages }}
+                                            {!! nl2br(e($message->messages)) !!}
                                         </div>
+                                        @if($message->created_at != $message->updated_at)
+                                            <small class="text-muted" style="font-size: 10px; margin-top: 4px; display: block; text-align: left;">
+                                                ویرایش شده
+                                            </small>
+                                        @endif
                                     </div>
 
                                     {{-- بخش پیوست‌ها - جدا از حباب پیام --}}
