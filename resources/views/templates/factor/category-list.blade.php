@@ -63,7 +63,7 @@
                                 </td>
                                 <td class="">
                                     <a href="#" class="text-success editCategoryBtn" data-toggle="modal" data-target="#myModal2" data-id="{{ $category->id }}">
-                                        <i class="fa fa-pencil fa-x"></i>
+                                        <i class="fa fa-pencil text-beta fa-x"></i>
                                     </a>
                                     <a href="#" class="text-danger delete-category mr-1" data-id="{{ $category->id }}">
                                         <i class="fa fa-trash fa-x"></i>

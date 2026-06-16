@@ -260,7 +260,7 @@
                                     @endif
                                 </td>
                                 <td data-title="عملیات" class="responsive-table-td">
-                                    <div class="gap">
+                                    <div>
                                         <a href="javascript:;" class="text-beta" data-toggle="modal" data-target="#myModal2" data-id="{{ $sms->id }}">
                                             <i class="fa fa-eye fa-x"></i>
                                         </a>
