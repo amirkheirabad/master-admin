@@ -58,7 +58,7 @@
                             {{ $qr->body }}
                         </td>
                         <td>
-                            <a href="javascript:;" class="text-beta fa-x edit-qr mr-1"
+                            <a href="javascript:;" class="text-beta fa-x edit-qr"
                                data-id="{{ $qr->id }}"
                                data-title="{{ $qr->title }}"
                                data-body="{{ $qr->body }}">

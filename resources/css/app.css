@@ -661,6 +661,13 @@ a.bg-danger:hover {
     justify-content: center;
 }
 
+.gap-1 {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .border-1 { border-width: 1px; }
 .border-2 { border-width: 2px; }
 .border-3 { border-width: 3px; }
