@@ -127,10 +127,12 @@ class TicketController
 
     public function updateMessage(Request $request, $id)
     {
+        try {
         $this->ticket->updateMessage($id, $request);
-        return response()->json([
-            'success' => true,
-        ]);
+        return response()->json(['success' => true]);
+    } catch (\Exception $e) {
+        return response()->json(['success' => false, 'message' => $e->getMessage()], 403);
+    }
     }
 
 }
