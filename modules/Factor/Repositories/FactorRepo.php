@@ -155,8 +155,6 @@ class FactorRepo implements InterfaceFactor
                 (new SmsService())->sendFactorNotification($phone, $name, $factor->id, (int)$data['price']);
             }
         }
-
-        return $factor;
     }
 
     public function updateFactor($id, $request)
