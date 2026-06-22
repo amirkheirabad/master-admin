@@ -450,6 +450,9 @@ label {
 .mr-1 {
     margin-right: 10px;
 }
+.mr-0 {
+    margin-right: 0px;
+}
 .mr-auto {
     margin-right: auto;
 }
@@ -668,6 +671,7 @@ a.bg-danger:hover {
     justify-content: center;
 }
 
+.border-0 { border-width: 0px; }
 .border-1 { border-width: 1px; }
 .border-2 { border-width: 2px; }
 .border-3 { border-width: 3px; }

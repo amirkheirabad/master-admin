@@ -66,3 +66,17 @@ if (select2.length) {
         });
     });
 }
+
+const password = document.getElementById('password');
+const togglePassword = document.getElementById('togglePassword');
+const eyeIcon = document.getElementById('eyeIcon');
+
+togglePassword.addEventListener('click', function () {
+    const isHidden = password.type === 'password';
+
+    password.type = isHidden ? 'text' : 'password';
+
+    eyeIcon.classList.toggle('fa-eye');
+    eyeIcon.classList.toggle('fa-eye-slash');
+});
+

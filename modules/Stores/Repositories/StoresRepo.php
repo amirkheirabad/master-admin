@@ -56,7 +56,10 @@ class StoresRepo implements InterfaceStores
 
     public function create(array $data)
     {
-        $logo_path = $data['logo_path']->store('logos', 'public');
+        $logo_path = null;
+        if (isset($data['logo_path'])) {
+            $logo_path = $data['logo_path']->store('logos', 'public');
+        }
 
         return Stores::create([
             'store_name' => $data['store_name'],

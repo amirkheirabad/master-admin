@@ -53,7 +53,7 @@
                                             <option value="{{ $user->id }}">{{ $user->name }}</option>
                                         @endforeach
                                     </select>
-                                    <button type="button" class="btn btn-beta-solidd btn-sm text-nowrap" id="btn-quick-create-user" title="ساخت کاربر جدید">
+                                    <button type="button" class=" btn-beta-solid btn-sm text-nowrap" id="btn-quick-create-user" title="ساخت کاربر جدید">
                                         + کاربر جدید
                                     </button>
                                 </div>
@@ -185,7 +185,12 @@
                     </div>
                     <div class="form-group mt-3">
                         <label>رمز عبور <span class="text-danger">*</span></label>
-                        <input type="password" class="form-control custom-radius input-border-focus" id="quick_password" placeholder="رمز عبور">
+                        <div class="search-container">
+                            <input type="password" class="search-input" id="quick_password" placeholder="رمز عبور">
+                            <button type="button" id="togglePassword" class="search-button">
+                                <i class="fa fa-eye" id="eyeIcon"></i>
+                            </button>
+                        </div>
                         <span class="text-danger mt-1 d-block" id="quick_password_error"></span>
                     </div>
                     <div id="quick_general_error" class="alert alert-danger mt-3 d-none"></div>

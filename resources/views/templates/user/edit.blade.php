@@ -48,7 +48,12 @@
 
                             <div class="col-md-6 col-xs-12 mb-3">
                                 <label>رمز عبور جدید</label>
-                                <input type="password" name="password" id="password" class="form-control custom-radius input-border-focus" placeholder="برای عدم تغییر، خالی بگذارید">
+                                <div class="search-container">
+                                    <input type="password" name="password" id="password" class="search-input" placeholder="برای عدم تغییر، خالی بگذارید">
+                                    <button type="button" id="togglePassword" class="search-button">
+                                        <i class="fa fa-eye" id="eyeIcon"></i>
+                                    </button>
+                                </div>
                                 <div class="mt-1">
                                     <span class="text-danger error-message" id="password_error"></span>
                                 </div>

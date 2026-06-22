@@ -50,3 +50,31 @@ $('#profilePasswordForm').on('submit', function (e) {
             submitBtn.disabled = false;
         });
 });
+
+
+const password = document.getElementById('password');
+const togglePassword = document.getElementById('togglePassword');
+const eyeIcon = document.getElementById('eyeIcon');
+
+togglePassword.addEventListener('click', function () {
+    const isHidden = password.type === 'password';
+
+    password.type = isHidden ? 'text' : 'password';
+
+    eyeIcon.classList.toggle('fa-eye');
+    eyeIcon.classList.toggle('fa-eye-slash');
+});
+
+
+const password2 = document.getElementById('password_confirmation');
+const togglePassword2 = document.getElementById('togglePassword2');
+const eyeIcon2 = document.getElementById('eyeIcon2');
+
+togglePassword2.addEventListener('click', function () {
+    const isHidden = password2.type === 'password';
+
+    password2.type = isHidden ? 'text' : 'password';
+
+    eyeIcon2.classList.toggle('fa-eye');
+    eyeIcon2.classList.toggle('fa-eye-slash');
+});

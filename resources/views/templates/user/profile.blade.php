@@ -45,8 +45,13 @@
 
                             <div class="col-md-6 col-xs-12 mb-3">
                                 <label>رمز عبور جدید<span class="text-danger">*</span></label>
-                                <input type="password" name="password" id="password"
-                                    class="form-control custom-radius input-border-focus">
+                                <div class="search-container">
+                                    <input type="password" name="password" id="password"
+                                           class="search-input">
+                                    <button type="button" id="togglePassword" class="search-button">
+                                        <i class="fa fa-eye" id="eyeIcon"></i>
+                                    </button>
+                                </div>
                                 <div class="mt-1">
                                     <span class="text-danger error-message" id="password_error"></span>
                                 </div>
@@ -54,8 +59,13 @@
 
                             <div class="col-md-6 col-xs-12 mb-3">
                                 <label>تکرار رمز عبور<span class="text-danger">*</span></label>
-                                <input type="password" name="password_confirmation" id="password_confirmation"
-                                    class="form-control custom-radius input-border-focus">
+                                <div class="search-container">
+                                    <input type="password" name="password_confirmation" id="password_confirmation"
+                                           class="search-input">
+                                    <button type="button" id="togglePassword2" class="search-button">
+                                        <i class="fa fa-eye" id="eyeIcon2"></i>
+                                    </button>
+                                </div>
                             </div>
 
                             <div class="d-flex justify-content-end col-md-12 mt-4">

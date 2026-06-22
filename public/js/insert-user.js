@@ -5,7 +5,7 @@ const csrf = document.querySelector('meta[name="csrf-token"]').content;
 
 $('#userForm').on('submit', function (e) {
     e.preventDefault()
-    
+
 
     // گرفتن دکمه سابمیت
     const submitBtn = this.querySelector('button[type="submit"]');
@@ -63,3 +63,17 @@ if (select2.length) {
         });
     });
 }
+
+
+const password = document.getElementById('password');
+const togglePassword = document.getElementById('togglePassword');
+const eyeIcon = document.getElementById('eyeIcon');
+
+togglePassword.addEventListener('click', function () {
+    const isHidden = password.type === 'password';
+
+    password.type = isHidden ? 'text' : 'password';
+
+    eyeIcon.classList.toggle('fa-eye');
+    eyeIcon.classList.toggle('fa-eye-slash');
+});

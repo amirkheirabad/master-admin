@@ -49,8 +49,13 @@
 
                             <div class="col-md-6 col-xs-12 mb-3">
                                 <label class="fw-bold">رمز عبور<span class="text-danger">*</span></label>
-                                <input type="password" name="password" id="password"
-                                    class="form-control custom-radius input-border-focus" style="background: #f9fafb;">
+                                <div class="search-container">
+                                    <input type="password" name="password" id="password"
+                                           class="search-input">
+                                    <button type="button" id="togglePassword" class="search-button">
+                                        <i class="fa fa-eye" id="eyeIcon"></i>
+                                    </button>
+                                </div>
                                 <div class="mt-1">
                                     <span class="text-danger error-message mb-4" id="password_error"></span>
                                 </div>

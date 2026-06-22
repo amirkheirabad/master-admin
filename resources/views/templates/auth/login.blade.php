@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <title>ورود | پنل مدیریت</title>
     <style>
         * {
@@ -49,8 +50,6 @@
         .login-box input {
             width: 100%;
             padding: 12px 14px;
-            margin-bottom: 20px;
-            border: 1px solid #dce4e8;
             border-radius: 8px;
             font-size: 14px;
             font-family: inherit;
@@ -58,13 +57,7 @@
             background: #fff;
         }
 
-        .login-box input:focus {
-            outline: none;
-            border-color: #133c6d;
-            box-shadow: 0 0 0 3px rgba(19, 60, 109, 0.1);
-        }
-
-        .login-box button {
+        .login-btn {
             width: 100%;
             padding: 12px;
             background: #133c6d;
@@ -78,7 +71,7 @@
             margin-top: 5px;
         }
 
-        .login-box button:hover {
+        .login-btn:hover {
             background: #0e2d52;
         }
 
@@ -97,22 +90,41 @@
 <body>
     <div class="login-box">
         <h3>ورود به پنل مدیریت</h3>
-        
+
         @if($errors->any())
             <div class="error">{{ $errors->first() }}</div>
         @endif
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
-            
+
             <label>شماره موبایل</label>
-            <input type="text" name="mobile"  value="{{ old('mobile') }}" required autofocus>
-            
-            <label>رمز عبور</label> 
-            <input type="password" name="password"  required>
-            
-            <button type="submit">ورود</button>
+            <input type="text" name="mobile" class="input-border-focus" style="height: 43px" value="{{ old('mobile') }}" required autofocus>
+
+            <label class="mt-4">رمز عبور</label>
+            <div class="search-container mb-3">
+                <input type="password" class="search-input" name="password" id="password"  required>
+                <button type="button" id="togglePassword" class="search-button p-3">
+                    <i class="fa fa-eye" id="eyeIcon"></i>
+                </button>
+            </div>
+
+            <button type="submit" class="login-btn mr-0">ورود</button>
         </form>
     </div>
+<script>
+    const password = document.getElementById('password');
+    const togglePassword = document.getElementById('togglePassword');
+    const eyeIcon = document.getElementById('eyeIcon');
+
+    togglePassword.addEventListener('click', function () {
+        const isHidden = password.type === 'password';
+
+        password.type = isHidden ? 'text' : 'password';
+
+        eyeIcon.classList.toggle('fa-eye');
+        eyeIcon.classList.toggle('fa-eye-slash');
+    });
+</script>
 </body>
 </html>
