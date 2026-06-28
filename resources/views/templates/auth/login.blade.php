@@ -105,7 +105,7 @@
             <div class="search-container mb-3">
                 <input type="password" class="search-input" name="password" id="password"  required>
                 <button type="button" id="togglePassword" class="search-button p-3">
-                    <i class="fa fa-eye" id="eyeIcon"></i>
+                    <i class="fa fa-eye-slash" id="eyeIcon"></i>
                 </button>
             </div>
 

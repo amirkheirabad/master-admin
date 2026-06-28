@@ -49,7 +49,7 @@
                                     <input type="password" name="password" id="password"
                                            class="search-input">
                                     <button type="button" id="togglePassword" class="search-button">
-                                        <i class="fa fa-eye" id="eyeIcon"></i>
+                                        <i class="fa fa-eye-slash" id="eyeIcon"></i>
                                     </button>
                                 </div>
                                 <div class="mt-1">
@@ -63,7 +63,7 @@
                                     <input type="password" name="password_confirmation" id="password_confirmation"
                                            class="search-input">
                                     <button type="button" id="togglePassword2" class="search-button">
-                                        <i class="fa fa-eye" id="eyeIcon2"></i>
+                                        <i class="fa fa-eye-slash" id="eyeIcon2"></i>
                                     </button>
                                 </div>
                             </div>

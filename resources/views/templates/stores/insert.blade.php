@@ -188,7 +188,7 @@
                         <div class="search-container">
                             <input type="password" class="search-input" id="quick_password" placeholder="رمز عبور">
                             <button type="button" id="togglePassword" class="search-button">
-                                <i class="fa fa-eye" id="eyeIcon"></i>
+                                <i class="fa fa-eye-slash" id="eyeIcon"></i>
                             </button>
                         </div>
                         <span class="text-danger mt-1 d-block" id="quick_password_error"></span>

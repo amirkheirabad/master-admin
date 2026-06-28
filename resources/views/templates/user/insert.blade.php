@@ -53,7 +53,7 @@
                                     <input type="password" name="password" id="password"
                                            class="search-input">
                                     <button type="button" id="togglePassword" class="search-button">
-                                        <i class="fa fa-eye" id="eyeIcon"></i>
+                                        <i class="fa fa-eye-slash" id="eyeIcon"></i>
                                     </button>
                                 </div>
                                 <div class="mt-1">
