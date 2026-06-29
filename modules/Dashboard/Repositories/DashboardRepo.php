@@ -32,7 +32,7 @@ class DashboardRepo implements InterfaceDashboard
                 ['label' => 'تیکت باز', 'value' => Ticket::whereIn('status', [0, 1,3 ,4])->count(), 'icon' => 'fa-life-ring', 'color' => 'purple'],
                 ['label' => 'فاکتور پرداخت‌نشده', 'value' => Factor::where('price_status', 1)->count(), 'icon' => 'fa-exclamation-circle', 'color' => 'red'],
             ];
-            $recentTickets = Ticket::with('store')->orderByDesc('updated_at')->limit(5)->get();
+            $recentTickets = Ticket::with('store')->orderByDesc('created_at')->limit(5)->get();
             $recentFactors = Factor::with('store')->orderByDesc('created_at')->limit(5)->get();
         } elseif ($isSeller) {
             $storeIds = $user->stores()->pluck('id')->filter();
@@ -56,7 +56,7 @@ class DashboardRepo implements InterfaceDashboard
             ];
 
             $messages = Message::where('is_active', true)->orderBy('order')->get();
-            $recentTickets = (clone $ticketQuery)->with('store')->orderByDesc('updated_at')->limit(5)->get();
+            $recentTickets = (clone $ticketQuery)->with('store')->orderByDesc('created_at')->limit(5)->get();
             $recentFactors = (clone $factorQuery)->with('store')->orderByDesc('created_at')->limit(5)->get();
         }
         return [

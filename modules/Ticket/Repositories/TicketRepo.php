@@ -79,12 +79,12 @@ class TicketRepo implements InterfaceTicket
 
             ->when($request->filled('sort'), function ($q) use ($request) {
                 if ($request->sort === 'latest') {
-                    $q->orderBy('updated_at', 'desc');
+                    $q->orderBy('created_at', 'desc');
                 } elseif ($request->sort === 'oldest') {
-                    $q->orderBy('updated_at', 'asc');
+                    $q->orderBy('created_at', 'asc');
                 }
             }, function ($q) {
-                $q->orderBy('updated_at', 'desc');
+                $q->orderBy('created_at', 'desc');
             })
             ->paginate(10);
     }
@@ -130,6 +130,7 @@ class TicketRepo implements InterfaceTicket
 
         $this->botService->sendTicketMessage(
             $senderName,
+            $message->ticket_id,
             $message->messages,
         );
 
@@ -210,6 +211,7 @@ class TicketRepo implements InterfaceTicket
 
         $this->botService->sendTicketMessage(
             $senderName,
+            $message->ticket_id,
             $message->messages,
         );
 
@@ -293,11 +295,11 @@ class TicketRepo implements InterfaceTicket
     public function updateMessage($id, $request)
     {
         $message = TicketMessage::findOrFail($id);
-    
+
         // if ($message->created_at->diffInHours(now()) >= 48) {
         //     throw new \Exception('امکان ویرایش پیام بعد از 48 ساعت وجود ندارد.');
         // }
-    
+
         $message->update(['messages' => $request->messages]);
     }
 

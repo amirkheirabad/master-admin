@@ -26,11 +26,12 @@ class BotService
 
     }
 
-    public function sendTicketMessage($sender, $textMessage)
+    public function sendTicketMessage($sender, $ticket_id, $textMessage)
     {
         $message = "
         پیام جدید تیکت
         فرستنده: {$sender}
+        شماره تیکت: {$ticket_id}
         متن پیام: {$textMessage}
         ";
 
