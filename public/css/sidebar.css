@@ -195,6 +195,19 @@
    استایل‌های سایدبار دسکتاپ (Min Width: 990px)
    ======================================================= */
 @media (min-width: 990px) {
+    .left_col {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 230px;
+    }
+
+    .left_col .scroll-view {
+        height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
     .mobile-menu-toggle,
     .mobile-sidebar,
     .mobile-menu-overlay {
