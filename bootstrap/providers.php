@@ -11,4 +11,5 @@ return [
     Modules\Message\MessageServiceProvider::class,
     Modules\Dashboard\DashboardServiceProvider::class,
     Modules\FAQ\FAQServiceProvider::class,
+    Modules\Log\LogServiceProvider::class,
 ];
