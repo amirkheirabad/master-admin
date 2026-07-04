@@ -59,10 +59,25 @@
             @if(auth()->user()->hasRole('admin'))
 
             <li>
-                <a href="{{ route('list_stores') }}">
+                <a>
                     <i class="fa fa-shopping-cart text-beta"></i>
                     <span>فروشگاه ها</span>
+                    <span class="fa fa-chevron-down"></span>
                 </a>
+                <ul class="nav child_menu">
+                    <li>
+                        <a href="{{ route('list_stores') }}">
+                            <i class="text-beta"></i>
+                            <span> لیست فروشگاه ها</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('check_lists') }}">
+                            <i class="text-beta"></i>
+                            <span> چک لیست ها</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
             @endif
             @if(auth()->user()->hasanyRole('admin', 'seller'))

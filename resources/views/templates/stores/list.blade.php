@@ -128,7 +128,10 @@
                                 <td data-title="کد پستی" class="responsive-table-td">{{ $store->code_posty }}</td>
                                 <td data-title="عملیات" class="responsive-table-td">
                                     <div class="action-buttons">
-                                        <a href="{{ route('edit_store', $store->id) }}" class="text-beta" title="ویرایش">
+                                        <a href="#" class="text-beta open-checklist-modal" title="نمایش چک لیست ها" data-toggle="modal" data-target="#myModal" data-id="{{ $store->id }}" data-url="{{ route('get_check_lists_stores', $store->id) }}">
+                                            <i class="fa fa-eye fa-x"></i>
+                                        </a>
+                                        <a href="{{ route('edit_store', $store->id) }}" class="text-beta mr-1" title="ویرایش">
                                             <i class="fa fa-pencil fa-x"></i>
                                         </a>
                                         <a href="javascript:;" class="text-danger delete-message mr-1" data-id="{{ $store->id }}" title="حذف">
@@ -155,4 +158,5 @@
             </div>
         </div>
     </div>
+    @include('templates.stores.Modal.check_list_item-modal')
 @endsection

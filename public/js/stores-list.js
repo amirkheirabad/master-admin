@@ -61,3 +61,69 @@ document.getElementById('clearFiltersBtn')?.addEventListener('click', function (
 });
 
 document.addEventListener('DOMContentLoaded', updateFilterBadge);
+
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const buttons = document.querySelectorAll('.open-checklist-modal');
+
+    buttons.forEach(function (button) {
+
+        button.addEventListener('click', function () {
+
+            const storeId = this.dataset.id;
+
+            console.log(storeId);
+
+            document.getElementById('store_id').value = storeId;
+
+        });
+
+    });
+
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const buttons = document.querySelectorAll('.open-checklist-modal');
+
+    buttons.forEach(function (button) {
+
+        button.addEventListener('click', function () {
+
+            const storeId = this.dataset.id;
+            const url = this.dataset.url;
+
+            // ذخیره store_id داخل فرم
+            document.getElementById('store_id').value = storeId;
+
+            // پاک کردن همه تیک‌ها
+            document.querySelectorAll('input[name="check_lists[]"]').forEach(function (checkbox) {
+                checkbox.checked = false;
+            });
+
+            // دریافت چک‌لیست‌های فروشگاه
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+
+
+                    data.check_lists.forEach(function (id) {
+
+                        const checkbox = document.getElementById('checklist_' + id);
+
+                        if (checkbox) {
+                            checkbox.checked = true;
+                        }
+
+                    });
+
+                });
+
+        });
+
+    });
+
+});

@@ -3,6 +3,8 @@
 namespace Modules\Stores\Repositories;
 
 use Illuminate\Http\Request;
+use Illuminate\Session\Store;
+use Modules\Stores\Models\CheckList;
 use Modules\Stores\Models\Stores;
 use Modules\User\Models\User;
 
@@ -108,5 +110,42 @@ class StoresRepo implements InterfaceStores
     public function getById($id)
     {
        return Stores::with('user')->findOrfail($id);
+    }
+
+    public function getCheckLists()
+    {
+        return CheckList::latest()->paginate(10);
+    }
+
+    public function createCheckList(Request $request)
+    {
+        CheckList::create(['title' => $request->title]);
+    }
+
+    public function updateCheckList($id, $request)
+    {
+        CheckList::find($id)->update(['title' => $request->title]);
+    }
+
+    public function findCheckList($id)
+    {
+        return CheckList::findOrFail($id);
+    }
+
+    public function deleteCheckList($id)
+    {
+        CheckList::find($id)->delete();
+    }
+
+    public function updateCheckListsStore($request)
+    {
+        $store = Stores::findOrFail($request->store_id);
+        $store->checkLists()->sync($request->check_lists ?? []);
+    }
+
+    public function getCheckListsStores($id)
+    {
+        $store = Stores::with('checkLists')->findOrFail($id);
+        return $store->checkLists()->pluck('check_lists.id');
     }
 }

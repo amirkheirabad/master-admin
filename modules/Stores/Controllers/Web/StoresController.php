@@ -22,8 +22,9 @@ class StoresController
     {
         $stores = $this->store->filterStores($request);
         $users = $this->store->getUsers();
+        $checkLists = $this->store->getCheckLists();
 
-        return view('templates.stores.list', compact('stores', 'users'));
+        return view('templates.stores.list', compact('stores', 'users', 'checkLists'));
     }
 
     public function index()
@@ -62,11 +63,6 @@ class StoresController
             'redirect' => route('list_stores'),
         ]);
     }
-    public function store_info()
-    {
-        return view('templates.stores.store_info');
-    }
-
 
     public function quickCreateSeller(QuickCreateSellerRequest $request)
     {
@@ -81,4 +77,48 @@ class StoresController
         ]);
     }
 
+    public function checkLists()
+    {
+        $checkLists = $this->store->getCheckLists();
+        return view('templates.stores.check_lists', compact('checkLists'));
+    }
+
+    public function createCheckList(Request $request)
+    {
+        $this->store->createCheckList($request);
+        return redirect()->route('check_lists');
+    }
+
+    public function updateCheckList(int $id, Request $request)
+    {
+        $this->store->updateCheckList($id, $request);
+        return response()->json([
+            'success' => true,
+        ]);
+    }
+
+    public function show($id)
+    {
+        $checklist = $this->store->findCheckList($id);
+        return response()->json($checklist);
+    }
+
+    public function deleteCheckList(int $id)
+    {
+        $this->store->deleteCheckList($id);
+    }
+
+    public function updateCheckListsStore(Request $request)
+    {
+        $this->store->updateCheckListsStore($request);
+        return redirect()->route('list_stores');
+    }
+
+    public function getCheckListsStores($id)
+    {
+        $checkLists = $this->store->getCheckListsStores($id);
+        return response()->json([
+                'check_lists' => $checkLists,
+            ]);
+    }
 }

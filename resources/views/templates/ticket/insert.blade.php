@@ -127,10 +127,10 @@
                 </div>
 
                 {{-- کاربر --}}
-                <div class="col-md-6 col-xs-12 mb-3" id="user_wrapper" style="display:none;">
+                <div class="col-md-6 col-xs-12 mb-3 mt-2" id="user_wrapper" style="display:none;">
                     <label>کاربر <span class="text-danger">*</span></label>
                     <select name="user_id" id="user_id"
-                        class="form-control custom-radius custom-select-input input-border-focus">
+                        class="form-control custom-radius select2">
                         <option value="">انتخاب کنید</option>
                         @foreach ($users as $user)
                          <option value="{{ $user->id }}">{{ $user->name }} - {{ $user->mobile }}</option>
