@@ -93,10 +93,12 @@ document.addEventListener('DOMContentLoaded', function () {
         button.addEventListener('click', function () {
 
             const storeId = this.dataset.id;
+            const storeName = this.dataset.name
             const url = this.dataset.url;
 
             // ذخیره store_id داخل فرم
             document.getElementById('store_id').value = storeId;
+            document.getElementById('store_name').textContent = storeName
 
             // پاک کردن همه تیک‌ها
             document.querySelectorAll('input[name="check_lists[]"]').forEach(function (checkbox) {

@@ -86,7 +86,9 @@ class StoresController
     public function createCheckList(Request $request)
     {
         $this->store->createCheckList($request);
-        return redirect()->route('check_lists');
+        return response()->json([
+            'success' => true,
+        ]);
     }
 
     public function updateCheckList(int $id, Request $request)

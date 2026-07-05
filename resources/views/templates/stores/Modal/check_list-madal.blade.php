@@ -25,7 +25,7 @@
 
                 <div class="d-flex justify-content-center mt-8 mb-3 gap">
                     <button type="button" class="btn btn-beta-outline" data-dismiss="modal">بستن</button>
-                    <button type="button" class="btn btn-beta-solid" onclick="submitCategory()">ذخیره</button>
+                    <button type="button" class="btn btn-beta-solid submit" onclick="submitCategory()">ذخیره</button>
                 </div>
 
             </div>

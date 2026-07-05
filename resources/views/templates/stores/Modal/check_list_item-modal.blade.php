@@ -6,7 +6,7 @@
 
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h3 class="modal-title" id="myModalLabel"> چک لیست ها </h3>
+                    <h3 class="modal-title" id="myModalLabel"> چک لیست فروشگاه <span id="store_name"></span> </h3>
                 </div>
 
                 <div class="modal-body">

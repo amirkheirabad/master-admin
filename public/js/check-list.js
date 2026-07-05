@@ -12,7 +12,42 @@ function submitCategory() {
 
     errorBox.innerText = "";
 
-    document.getElementById('checkListForm').submit();
+    const submitBtn = document.querySelector('.submit');
+
+    submitBtn.classList.add('btn-loading');
+    submitBtn.disabled = true;
+
+    fetch(`/create_check_lists`,{
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrf,
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            title: $('#title').val(),
+
+        }),
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.errors) {
+                showBackendErrors(data.errors);
+                submitBtn.classList.remove('btn-loading');
+                submitBtn.disabled = false;
+            }
+
+            if (data.success)
+            {
+                location.reload();
+            }
+
+        })
+        .catch(err => {
+            console.log(err);
+            submitBtn.classList.remove('btn-loading');
+            submitBtn.disabled = false;
+        });
 }
 
 const csrf = document.querySelector('meta[name="csrf-token"]').content;
