@@ -1,5 +1,21 @@
 @extends('layouts.admin.master')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('/css/jalalidatepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/select2.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/sweetalert2.css') }}">
+@endsection
+
+@section('js')
+    <script src="{{ asset('/js/jalalidatepicker.min.js') }}"></script>
+    <script src="{{ asset('/js/select2.js') }}"></script>
+    <script src="{{ asset('/js/sweetalert2.js') }}"></script>
+    <script>
+        jalaliDatepicker.startWatch();
+    </script>
+    <script src="{{ asset('/js/messages-list.js') }}"></script>
+@endsection
+
 @section('content')
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -28,7 +44,7 @@
                     </thead>
                     <tbody>
                         @foreach($messages as $message)
-                            <tr class="responsive-table-row">
+                            <tr class="responsive-table-row item-record{{$message->id}}">
                                 <td data-title="#" class="responsive-table-td">{{ $loop->iteration }}</td>
                                 <td data-title="عنوان" class="responsive-table-td">{{ $message->title }}</td>
                                 <td data-title="متن" class="responsive-table-td">{{ Str::limit($message->content, 50) }}</td>
@@ -63,23 +79,4 @@
 @endsection
 
 @section('js')
-<script>
-$(document).ready(function() {
-    $('.delete-message').on('click', function() {
-        let id = $(this).data('id');
-        if(confirm('آیا مطمئن هستید؟')) {
-            $.ajax({
-                url: `/message-delete/${id}`,
-                method: 'DELETE',
-                data: {_token: '{{ csrf_token() }}'},
-                success: function(response) {
-                    if(response.success) {
-                        window.location.reload();
-                    }
-                }
-            });
-        }
-    });
-});
-</script>
 @endsection
