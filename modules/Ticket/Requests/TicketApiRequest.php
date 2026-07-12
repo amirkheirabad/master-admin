@@ -19,7 +19,7 @@ class TicketApiRequest extends FormRequest
             'title' => 'required|string|max:255',
             'message' => 'required|string|min:3',
             'attachments' => 'nullable|array|max:5',
-            'attachments.*' => 'file|mimes:jpg,png,pdf|max:2048',
+            'attachments.*' => 'file|mimes:jpg,jpeg,png,gif,webp,svg,ico,pdf,zip|max:2048',
             'priority' => 'required|in:1,2,3,4',
         ];
     }

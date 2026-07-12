@@ -79,6 +79,25 @@
             background: #f0f2f4;
             border-color: #b9c1ca;
         }
+
+        .file-item{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .file-name{
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .remove-btn{
+            flex-shrink: 0;
+        }
     </style>
 @endsection
 
@@ -205,11 +224,12 @@
                                 <button type="button" id="attachButton" class="btn btn-beta-outline mb-2 mt-2 ml-1">افزودن
                                     فایل</button>
                                     <br>
-                                <span >پسوند های مجاز : png / jpg / pdf</span>
+                                <span>پسوندهای مجاز: JPG / JPEG / PNG / PDF / ZIP / GIF / WEBP / SVG / ICO</span>
 
                                 <div id="fileList"></div>
 
-                                <input type="file" id="fileInput" style="display: none;" accept=".jpg,.png,.pdf" multiple>
+                                <input type="file" id="fileInput" style="display: none;"     accept=".jpg,.jpeg,.png,.pdf,.gif,.zip,.webp,.svg,.ico"
+                                       multiple>
                                 <div class="mt-2">
                                     <span class="text-danger error-message" id="attachments_error"></span>
                                 </div>
@@ -306,11 +326,12 @@
                                     <button type="button" id="attachButton" class="btn btn-beta-outline mb-2 mt-2 ml-1">افزودن
                                         فایل</button>
                                     <br>
-                                    <span >پسوند های مجاز : png / jpg / pdf</span>
+                                    <span>پسوندهای مجاز: JPG / JPEG / PNG / PDF / ZIP / GIF / WEBP / SVG / ICO</span>
 
                                     <div id="fileList"></div>
 
-                                    <input type="file" id="fileInput" style="display: none;" accept=".jpg,.png,.pdf" multiple>
+                                    <input type="file" id="fileInput" style="display: none;"     accept=".jpg,.jpeg,.png,.pdf,.gif,.zip,.webp,.svg,.ico"
+                                           multiple>
                                     <div class="mt-2">
                                         <span class="text-danger error-message" id="attachments_error"></span>
                                     </div>

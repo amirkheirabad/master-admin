@@ -24,7 +24,7 @@ class TicketReplyRequest extends FormRequest
         return [
             'message' => 'required|string',
             'attachments' => 'nullable|array|max:5',
-            'attachments.*' => 'nullable|file|mimes:jpg,png,pdf|max:2048',
+            'attachments.*' => 'file|mimes:jpg,jpeg,png,gif,webp,svg,ico,pdf,zip|max:2048',
         ];
     }
 

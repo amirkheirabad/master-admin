@@ -275,10 +275,18 @@ function displayFileNames() {
 
     let html = '<ul>';
     for(let i = 0; i < selectedFiles.length; i++) {
-        html += `<li>
-                    ${selectedFiles[i].name} - ${(selectedFiles[i].size / 1024).toFixed(2)} KB
-                    <button type="button" class="remove-btn" onclick="removeFile(${i})">✕</button>
-                 </li>`;
+        html += `
+<li class="file-item">
+    <span class="file-name">
+        ${selectedFiles[i].name} - ${(selectedFiles[i].size / 1024).toFixed(2)} KB
+    </span>
+
+    <button type="button"
+            class="remove-btn"
+            onclick="removeFile(${i})">
+        ✕
+    </button>
+</li>`;
     }
     html += '</ul>';
     fileListDiv.innerHTML = html;

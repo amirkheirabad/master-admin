@@ -358,7 +358,8 @@
                             <textarea name="message" id="messageInput" class="search-input" placeholder="پیام خود را وارد کنید..." rows="1"></textarea>                                <button type="button" class="search-button" id="attachButton">
                                     <img src="{{ asset('/icons/Attachment.svg') }}" style="width: 22px">
                                 </button>
-                                <input type="file" name="attachments[]" id="fileInput" accept=".jpg,.png,.pdf" style="display: none;" multiple>
+                                <input type="file" name="attachments[]" id="fileInput"     accept=".jpg,.jpeg,.png,.pdf,.gif,.zip,.webp,.svg,.ico"
+                                       style="display: none;" multiple>
                                 <button type="submit" class="search-button">
                                     <img src="{{ asset('/icons/send 1.svg') }}" style="width: 22px">
                                 </button>
@@ -389,7 +390,8 @@
                                 <button type="button" class="search-button" id="attachButton">
                                     <img src="{{ asset('/icons/Attachment.svg') }}" style="width: 22px">
                                 </button>
-                                <input type="file" name="attachments[]" id="fileInput" style="display: none;" accept=".jpg,.png,.pdf" multiple>
+                                <input type="file" name="attachments[]" id="fileInput" style="display: none;"     accept=".jpg,.jpeg,.png,.pdf,.gif,.zip,.webp,.svg,.ico"
+                                       multiple>
                                 <button type="submit" class="search-button">
                                     <img src="{{ asset('/icons/send 1.svg') }}" style="width: 22px">
                                 </button>
