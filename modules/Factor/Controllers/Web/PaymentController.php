@@ -18,9 +18,6 @@ class PaymentController extends Controller
         $factor->user_id === auth()->id() ||
         optional($factor->store)->user_id === auth()->id();
     abort_unless($hasAccess, 403);
-    if (!auth()->user()->hasRole('seller')) {
-        abort(403);
-    }
     $parsian = new Parsian($factor);
     return $parsian->pay();
 }
