@@ -13,22 +13,42 @@ class PaymentController extends Controller
     public function pay($id)
 {
     $factor = Factor::findOrFail($id);
+    $hasAccess =
+        $factor->user_id === auth()->id() ||
+        optional($factor->store)->user_id === auth()->id();
+    abort_unless($hasAccess, 403);
     if (!auth()->user()->hasRole('seller')) {
         abort(403);
     }
     $parsian = new Parsian($factor);
     return $parsian->pay();
 }
-    
+
     // برگشت از بانک
     public function verify(Request $request)
     {
-        $factor = Factor::where('id', $request->OrderId)->first();
+        $factor = Factor::where('hash', $request->OrderId)->first();
+
         if (!$factor) {
             return redirect('/')->with('error', 'فاکتور یافت نشد');
         }
-        
-        $parsian = new Parsian($factor);
-        return $parsian->verify($request);
+
+        return (new Parsian($factor))->verify($request);
+    }
+
+    public function payByHash($hash)
+    {
+        $factor = Factor::where('hash', $hash)->firstOrFail();
+        return (new Parsian($factor))->pay();
+    }
+
+    public function success()
+    {
+        return view('templates.factor.payment.success');
+    }
+
+    public function fail()
+    {
+        return view('templates.factor.payment.fail');
     }
 }

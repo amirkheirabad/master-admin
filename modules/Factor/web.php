@@ -31,10 +31,20 @@ Route::middleware(['check.login', 'check.role:admin'])->group(function(){
     Route::get('/factor/hash/{id}', [FactorController::class, 'getHash']);
 });
 
+Route::middleware(['check.login'])->group(function(){
+    // درخواست پرداخت
+    Route::get('/factor/pay/{id}', [PaymentController::class, 'pay'])->name('factor.pay');
+});
 
 
-// درخواست پرداخت
-Route::get('/factor/pay/{id}', [PaymentController::class, 'pay'])->name('factor.pay');
+
 
 // برگشت از بانک
 Route::get('/factor/payment/verify', [PaymentController::class, 'verify'])->name('factor.payment.verify');
+
+
+Route::get('/factor/payment/success', [paymentController::class, 'success'])->name('factor.payment.success');
+Route::get('/factor/payment/fail', [paymentController::class, 'fail'])->name('factor.payment.fail');
+
+Route::get('/factor/payment/{hash}', [PaymentController::class, 'payByHash'])->name('factor.payment');
+

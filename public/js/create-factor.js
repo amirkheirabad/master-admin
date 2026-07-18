@@ -159,7 +159,7 @@ document.querySelectorAll('#copyHash').forEach(item => {
                     Swal.fire({
                         icon: 'success',
                         title: 'کپی شد',
-                        text: 'هش فاکتور با موفقیت کپی شد',
+                        text: 'لینک فاکتور با موفقیت کپی شد',
                         timer: 1500,
                         showConfirmButton: false
                     });
@@ -175,7 +175,7 @@ document.querySelectorAll('#copyHash').forEach(item => {
                 Swal.fire({
                     icon: 'error',
                     title: 'خطا',
-                    text: 'مشکلی در کپی هش رخ داد'
+                    text: 'مشکلی در کپی لینک رخ داد'
                 });
 
             });

@@ -137,7 +137,7 @@ class FactorController
     public function getHash($id)
     {
         $hash = $this->factor->getHashById($id);
-        return response()->json(['hash' => $hash]);
+        return response()->json(['hash' => route('factor.payment', $hash)]);
     }
 
 }

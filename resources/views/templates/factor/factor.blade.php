@@ -54,7 +54,7 @@
     </div>
 
     <table class="invoice-table">
-        <div class="box">
+        <div class="box" style="border-bottom: 0px">
             <div class="box-title">مشخصات کالای مورد معامله</div>
         </div>
 

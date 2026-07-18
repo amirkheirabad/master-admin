@@ -5,23 +5,23 @@ use Modules\Factor\Models\Factor;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 
-require_once('nusoap.php');
+//require_once('nusoap.php');
 
 class Parsian
 {
     private $factor;
     private $pin;
-    
+
     public function __construct($factor)
     {
         $this->factor = $factor;
-        $this->pin = env('PARSIAN_PIN');
+        $this->pin = 'D3K3d1KF7NI6Ptln83g0';
     }
 
     public function pay()
     {
         if ($this->factor->price_status == 2) {
-            return Redirect::route('factor-list')->with('error', 'این فاکتور قبلاً پرداخت شده است');
+            return Redirect::route('factor.payment.fail')->with('error', 'این فاکتور قبلاً پرداخت شده است');
         }
 
         try {
@@ -34,7 +34,7 @@ class Parsian
             ]);
         } catch (\Exception $e) {
             Log::error('SOAP client error: ' . $e->getMessage());
-            return Redirect::route('factor-list')->with('error', 'خطا در اتصال به بانک: ' . $e->getMessage());
+            return Redirect::route('factor.payment.fail')->with('error', 'خطا در اتصال به بانک: ' . $e->getMessage());
         }
 
         $Amount = $this->factor->price;
@@ -52,7 +52,7 @@ class Parsian
             $result = $client->SalePaymentRequest(['requestData' => $params]);
         } catch (\Exception $e) {
             Log::error('SalePaymentRequest error: ' . $e->getMessage());
-            return Redirect::route('factor-list')->with('error', 'خطا در ارتباط با بانک: ' . $e->getMessage());
+            return Redirect::route('factor.payment.fail')->with('error', 'خطا در ارتباط با بانک: ' . $e->getMessage());
         }
 
         if (isset($result->SalePaymentRequestResult->Token) && $result->SalePaymentRequestResult->Status == 0) {
@@ -65,7 +65,7 @@ class Parsian
         } else {
             $message = $result->SalePaymentRequestResult->Message ?? 'خطای ناشناخته';
             Log::error('Payment request failed: ' . $message);
-            return Redirect::route('factor-list')->with('error', 'پرداخت ناموفق: ' . $message);
+            return Redirect::route('factor.payment.fail')->with('error', 'پرداخت ناموفق: ' . $message);
         }
     }
 
@@ -78,10 +78,10 @@ class Parsian
         $pin = $this->pin;
 
         // ← پیدا کزدن فاکتور با هش
-        $factor = Factor::where('hash', $orderHash)->first();
-        
+        $factor = $this->factor;
+
         if (!$factor) {
-            return Redirect::route('factor-list')->with('error', 'فاکتور یافت نشد');
+            return Redirect::route('factor.payment.fail')->with('error', 'فاکتور یافت نشد');
         }
 
         if ($RRN > 0 && $status == 0) {
@@ -97,7 +97,7 @@ class Parsian
                 $result = $client->ConfirmPayment(['requestData' => $params]);
             } catch (\Exception $e) {
                 Log::error('ConfirmPayment error: ' . $e->getMessage());
-                return Redirect::route('factor-list')->with('error', 'خطا در تأیید پرداخت');
+                return Redirect::route('factor.payment.fail')->with('error', 'خطا در تأیید پرداخت');
             }
 
             if ($result->ConfirmPaymentResult->Status == 0 && $result->ConfirmPaymentResult->RRN > 0) {
@@ -107,14 +107,14 @@ class Parsian
                     'payment_rrn' => $result->ConfirmPaymentResult->RRN,
                     'payment_card' => $result->ConfirmPaymentResult->CardNumberMasked ?? ''
                 ]);
-                return Redirect::route('factor-list')->with('success', 'پرداخت با موفقیت انجام شد');
+                return Redirect::route('factor.payment.success')->with('success', 'پرداخت با موفقیت انجام شد');
             } else {
                 $factor->update(['price_status' => 1]);
-                return Redirect::route('factor-list')->with('error', 'پرداخت ناموفق');
+                return Redirect::route('factor.payment.fail')->with('error', 'پرداخت ناموفق');
             }
         } else {
             $factor->update(['price_status' => 1]);
-            return Redirect::route('factor-list')->with('error', 'پرداخت توسط کاربر لغو شد');
+            return Redirect::route('factor.payment.fail')->with('error', 'پرداخت توسط کاربر لغو شد');
         }
     }
 }

@@ -95,6 +95,8 @@
                                         <div class="icon-box" onclick="document.getElementById('factor_date').focus()"><i class="fa fa-calendar"></i></div>
                                     </div>
                                 </div>
+                                @if (auth()->user()->hasRole('admin'))
+
 
                                 <div class="mb-2">
                                     <div class="input-wrapper has-icon">
@@ -102,6 +104,7 @@
                                         <div class="icon-box" onclick="document.getElementById('created_at').focus()"><i class="fa fa-calendar"></i></div>
                                     </div>
                                 </div>
+                                @endif
 
                                 <div class="mb-2">
                                     <div class="input-wrapper has-icon">
@@ -120,6 +123,8 @@
                                         <option value="4" {{ request()->get('price_status') == '4' ? 'selected' : '' }}>معلق شده</option>
                                     </select>
                                 </div>
+                                @if (auth()->user()->hasRole('admin'))
+
 
                                 <div class="mb-2">
                                     <select class="form-control custom-radius  select2" name="store_id" data-placeholder=" فروشگاه">
@@ -142,6 +147,7 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                @endif
 
                                 <div class="d-flex justify-content-between mt-3">
                                     <button type="button" id="clearFiltersBtn" class="btn btn-link text-default text-bold" style="padding: 0;">حذف فیلترها</button>
@@ -261,7 +267,7 @@
                                                 <i class="fa fa-trash fa-x"></i>
                                             </a>
 
-                                        @elseif(auth()->user()->hasRole('seller'))
+                                        @elseif(auth()->user()->hasRole('seller') && !in_array($factor->price_status, [2, 3]))
                                             <a href="#" class="text-success"
                                                 style="display: inline-block; padding: 6px 18px; background: #e8f5e9; border-radius: 8px; font-size: 14px;margin: 0px;"
                                                 data-toggle="modal" data-target="#paymentModal"

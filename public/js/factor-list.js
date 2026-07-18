@@ -15,12 +15,6 @@ function countActiveFilters() {
         const el = document.getElementById(id);
         if (el && el.value.trim() !== '') count++;
     });
-
-    // search input
-    // const searchInput = document.querySelector('.search-input');
-    // if (searchInput && searchInput.value.trim() !== '') count++;
-
-    // return count;
 }
 
 function updateFilterBadge() {
@@ -129,18 +123,10 @@ function setPaymentData(id, title, amount) {
 
             <p style="margin-bottom: 15px; color: #334155; font-weight: 500; font-size: 14px;">بانک خود را انتخاب کنید:</p>
             <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-<!--                <div class="bank-option" data-bank="mellat" style="cursor: pointer; text-align: center; width: 100px; padding: 12px 8px; background: white; border-radius: 12px; transition: all 0.2s; border: 2px solid #e2e8f0;">-->
-<!--                    <img src="/icons/mellat.svg" width="50" style="margin-bottom: 8px;">-->
-<!--                    <div style="font-size: 12px; color: #475569;">بانک ملت</div>-->
-<!--                </div>-->
                 <div class="bank-option" data-bank="saman" style="cursor: pointer; text-align: center; width: 100px; padding: 12px 8px; background: white; border-radius: 12px; transition: all 0.2s; border: 2px solid #e2e8f0;">
-                    <img src="/icons/saman.svg" width="50" style="margin-bottom: 8px;">
-                    <div style="font-size: 12px; color: #475569;">بانک سامان</div>
+                    <img src="/icons/Parsian.png" width="50" style="margin-bottom: 8px;">
+                    <div style="font-size: 12px; color: #475569;">بانک پارسیان</div>
                 </div>
-<!--                <div class="bank-option" data-bank="iranzamin" style="cursor: pointer; text-align: center; width: 100px; padding: 12px 8px; background: white; border-radius: 12px; transition: all 0.2s; border: 2px solid #e2e8f0;">-->
-<!--                    <img src="/icons/iran-zamin.svg" width="50" style="margin-bottom: 8px;">-->
-<!--                    <div style="font-size: 12px; color: #475569;">بانک ایران زمین</div>-->
-<!--                </div>-->
             </div>
             <input type="hidden" id="selectedBank" value="">
             <input type="hidden" id="factorId" value="${id}">
@@ -186,8 +172,8 @@ document.getElementById('confirmPaymentBtn')?.addEventListener('click', function
     }).then((result) => {
         if (result.isConfirmed) {
             $('#paymentModal').modal('hide');
+            window.location.href = `/factor/pay/${factorId}`;
         }
     });
-    window.location.href = `/factor/pay/${factorId}`;
 
 });
