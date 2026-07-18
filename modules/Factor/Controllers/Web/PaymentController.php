@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Modules\Factor\Models\Factor;
 use App\Utilities\Pay\Parsian;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
 
 
 class PaymentController extends Controller
@@ -30,7 +31,8 @@ class PaymentController extends Controller
         $factor = Factor::where('hash', $request->OrderId)->first();
 
         if (!$factor) {
-            return redirect('/')->with('error', 'فاکتور یافت نشد');
+            return Redirect::route('factor.payment.fail')
+                ->with('error', 'فاکتور یافت نشد');
         }
 
         return (new Parsian($factor))->verify($request);
