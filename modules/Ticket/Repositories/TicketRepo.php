@@ -79,12 +79,12 @@ class TicketRepo implements InterfaceTicket
 
             ->when($request->filled('sort'), function ($q) use ($request) {
                 if ($request->sort === 'latest') {
-                    $q->orderBy('created_at', 'desc');
+                    $q->orderBy('updated_at', 'desc');
                 } elseif ($request->sort === 'oldest') {
-                    $q->orderBy('created_at', 'asc');
+                    $q->orderBy('updated_at', 'asc');
                 }
             }, function ($q) {
-                $q->orderBy('created_at', 'desc');
+                $q->orderBy('updated_at', 'desc');
             })
             ->paginate(10);
     }
@@ -204,6 +204,7 @@ class TicketRepo implements InterfaceTicket
             'attachments' => !empty($attachmentPaths) ? json_encode($attachmentPaths) : null,
         ]);
         $ticket = Ticket::with(['store', 'user'])->find($id);
+        $ticket->update(['status' => 0]);
 
 
         $senderName = $ticket->store?->store_name ?? $ticket->user?->name ?? 'نامشخص';
@@ -234,7 +235,7 @@ class TicketRepo implements InterfaceTicket
         ]);
 
         $ticket = Ticket::find($id);
-        $ticket->touch();
+//        $ticket->touch();
 
         $this->sendTicketSms($ticket);
 
@@ -245,6 +246,7 @@ class TicketRepo implements InterfaceTicket
     public function updateTicketStatus($id, $request)
     {
         $ticket = Ticket::findOrFail($id);
+        $ticket->timestamps = false;
         $ticket->update(['status' => $request->status]);
         return $ticket;
     }
