@@ -29,14 +29,14 @@
                     <img src="{{asset('images/payment-success.png')}}" alt="" style="width:190px;height:190px;">
 
 
-                    <h2 class="fw-bold text-success">
+                    <h1 class="fw-bold text-success">
                         پرداخت با موفقیت انجام شد
-                    </h2>
+                    </h1>
 
-                    <p class="text-muted mt-3">
+                    <h4 class="text-muted mt-3">
                         از پرداخت شما سپاسگزاریم.
                         تراکنش با موفقیت ثبت گردید.
-                    </p>
+                    </h4>
 
                     <hr>
 

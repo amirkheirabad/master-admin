@@ -39,17 +39,19 @@
 
                     </div>
 
-                    <h2 class="fw-bold text-danger">
+                    <h1 class="fw-bold text-danger">
 
                         پرداخت ناموفق بود
 
-                    </h2>
+                    </h1>
 
-                    <p class="text-muted mt-3">
+                    <h4 class="text-muted mt-3">
 
-                        متأسفانه پرداخت شما انجام نشد.
+                        @if(session('error'))
+                           {{ session('error') }}
+                        @endif
 
-                    </p>
+                    </h4>
 
                     <div class="alert alert-danger mt-4">
 
