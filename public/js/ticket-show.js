@@ -754,3 +754,14 @@ $('#submitEdit').on('click', function (e) {
         });
 });
 
+
+document.addEventListener('keydown', function (e) {
+
+    const modal = document.getElementById('myModal');
+
+    if (modal.classList.contains('in') && e.key === 'Enter') {
+        e.preventDefault();
+        confirmStatusChange();
+    }
+
+});

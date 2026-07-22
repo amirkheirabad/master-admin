@@ -1,10 +1,12 @@
 @extends('layouts.admin.master')
 @section('css')
     <link rel="stylesheet" href="{{ asset('/css/select2.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/jalalidatepicker.min.css') }}">
 @endsection
 
 @section('js')
     <script src="{{ asset('/js/select2.js') }}"></script>
+    <script src="{{ asset('js/jalalidatepicker.min.js') }}"></script>
     <script>
         jalaliDatepicker.startWatch();
     </script>
@@ -128,6 +130,23 @@
                                 </div>
                                 <div class="mt-1">
                                     <span class="text-danger error-message" id="token_error"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
+                                <label>تاریخ انقضا اینماد </label>
+                                <div class="search-container">
+                                </div>
+                                <div class="mt-1">
+                                    <span class="text-danger" id="enamd_expiration_date_error"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
+                                <label>تاریخ انقضا دامنه </label>
+                                <input type="text" data-jdp class="form-control custom-radius input-border-focus" id="domain_expiration_date" name="domain_expiration_date">
+                                <div class="mt-1">
+                                    <span class="text-danger" id="domain_expiration_date_error"></span>
                                 </div>
                             </div>
 

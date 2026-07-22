@@ -29,6 +29,8 @@ class Stores extends Model
         'about',
         'token',
         'logo_path',
+        'enamd_expiration_date',
+        'domain_expiration_date',
     ];
 
     public function smsPanel()

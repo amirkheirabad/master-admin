@@ -4,6 +4,7 @@ namespace Modules\Stores\Controllers\Web;
 use Illuminate\Http\Request;
 use Modules\Stores\Models\Stores;
 use Modules\Stores\Repositories\InterfaceStores;
+use Modules\Stores\Services\EnamadService;
 use Modules\User\Repositories\InterfaceUser;
 use Modules\Stores\Requests\IndexRequest;
 use Modules\Stores\Requests\QuickCreateSellerRequest;
@@ -22,7 +23,7 @@ class StoresController
     {
         $stores = $this->store->filterStores($request);
         $users = $this->store->getUsers();
-        $checkLists = $this->store->getCheckLists();
+        $checkLists = $this->store->getAllCheckLists();
 
         return view('templates.stores.list', compact('stores', 'users', 'checkLists'));
     }

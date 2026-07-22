@@ -44,7 +44,9 @@ class IndexRequest extends FormRequest
             'code_posty' => 'required|numeric',
             'about' => 'nullable|string|max:1000',
             'token' => 'required',
-            'logo_path' => 'nullable|max:2048'
+            'logo_path' => 'nullable|max:2048',
+            'enamd_expiration_date' => 'nullable',
+            'domain_expiration_date' => 'nullable',
         ];
     }
 

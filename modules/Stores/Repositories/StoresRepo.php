@@ -2,6 +2,7 @@
 
 namespace Modules\Stores\Repositories;
 
+use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
 use Modules\Stores\Models\CheckList;
@@ -76,6 +77,8 @@ class StoresRepo implements InterfaceStores
             'about' => $data['about'] ?? null,
             'token' => $data['token'],
             'logo_path' => $logo_path ?? null,
+            'enamd_expiration_date' => $data['enamd_expiration_date'] ? Verta::parse($data['enamd_expiration_date'])->toCarbon() : null,
+            'domain_expiration_date' => $data['domain_expiration_date'] ? Verta::parse($data['domain_expiration_date'])->toCarbon() : null,
         ]);
     }
 
@@ -98,6 +101,8 @@ class StoresRepo implements InterfaceStores
             'code_posty' => $request->code_posty,
             'about' => $request->about,
             'token' => $request->token,
+            'enamd_expiration_date'=> $request->enamd_expiration_date ? Verta::parse($request->enamd_expiration_date)->toCarbon() : null,
+            'domain_expiration_date'=> $request->domain_expiration_date ? Verta::parse($request->domain_expiration_date)->toCarbon() : null,
         ];
 
         if ($request->hasFile('logo_path')) {
@@ -105,6 +110,30 @@ class StoresRepo implements InterfaceStores
         }
 
         return Stores::find($id)->update($data);
+    }
+
+    private function resolveRecipientContact(Ticket $ticket)
+    {
+        $store = Stores::with('user')->find($ticket->store_id);
+        if ($store) {
+            $phone = $store->phone ?? $store->user?->mobile;
+            if ($phone) {
+                return [
+                    'phone' => $phone,
+                    'name'  => $store->store_name ?? $store->user?->name ?? 'فروشگاه',
+                ];
+            }
+        }
+
+        $user = User::find($ticket->user_id);
+        if ($user?->mobile) {
+            return [
+                'phone' => $user->mobile,
+                'name'  => $user->name ?? 'کاربر',
+            ];
+        }
+
+        return null;
     }
 
     public function getById($id)
@@ -115,6 +144,11 @@ class StoresRepo implements InterfaceStores
     public function getCheckLists()
     {
         return CheckList::latest()->paginate(10);
+    }
+
+    public function getAllCheckLists()
+    {
+        return CheckList::all();
     }
 
     public function createCheckList(Request $request)

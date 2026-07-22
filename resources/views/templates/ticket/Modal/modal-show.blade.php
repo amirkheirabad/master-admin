@@ -62,7 +62,7 @@
                 <input type="hidden" id="new_status">
                 <input type="hidden" id="status_text">
                 <div class="mt-10 d-flex justify-content-center">
-                    <button type="button" class="btn btn-beta-solid" onclick="confirmStatusChange()">تایید</button>
+                    <button id="confirmStatusBtn" type="button" class="btn btn-beta-solid" onclick="confirmStatusChange()">تایید</button>
                     <button type="button" class="btn btn-beta-outline" data-dismiss="modal">انصراف</button>
                 </div>
 

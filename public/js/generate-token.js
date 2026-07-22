@@ -53,6 +53,8 @@ $('#storeForm').on('submit', function (e) {
     formData.append('code_posty', document.getElementById('code_posty').value);
     formData.append('about', document.getElementById('about').value);
     formData.append('token', document.getElementById('token').value);
+    formData.append('enamd_expiration_date', document.getElementById('enamd_expiration_date').value);
+    formData.append('domain_expiration_date', document.getElementById('domain_expiration_date').value);
 
     if (selectedFiles.length > 0) {
         formData.append('logo_path', selectedFiles[0]);
