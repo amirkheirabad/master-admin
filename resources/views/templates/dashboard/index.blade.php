@@ -2,6 +2,19 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('/css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/select2.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/sweetalert2.css') }}">
+@endsection
+
+@section('js')
+    <script src="{{ asset('/js/select2.js') }}"></script>
+    <script src="{{ asset('/js/sweetalert2.js') }}"></script>
+    <script>
+        jalaliDatepicker.startWatch();
+    </script>
+    @role('seller')
+    <script src="{{ asset('/js/alert.js') }}"></script>
+    @endrole
 @endsection
 
 @section('nav')
