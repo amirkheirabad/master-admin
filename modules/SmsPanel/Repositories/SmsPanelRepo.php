@@ -5,6 +5,7 @@ use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Modules\SmsPanel\Models\SmsPanel;
 use Modules\Stores\Models\Stores;
+use Modules\SmsPanel\Services\SendSms;
 
 
 class SmsPanelRepo implements InterfaceSmsPanel
@@ -54,12 +55,21 @@ class SmsPanelRepo implements InterfaceSmsPanel
     }
     public function createFromToken(array $data)
     {
-        SmsPanel::create([
+        $smsPanel = SmsPanel::create([
             'store_id' => $data['store_id'],
             'status' => 0,
             'campaign_name' => $data['campaign_name'],
             'store_message' => $data['store_message'] ?? null,
         ]);
+
+        $smsPanel->load('store');
+
+        (new SendSms())->sendSmsPanelCreatedNotification(
+            store_name: $smsPanel->store->store_name,
+            campaign_name: $smsPanel->campaign_name,
+        );
+
+        return $smsPanel;
     }
 
 
