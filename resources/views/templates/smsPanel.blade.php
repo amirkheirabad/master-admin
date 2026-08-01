@@ -93,7 +93,7 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title" id="myModalLabel"> پیام فروشگاه <span id="store_name"></span></h4>
-                        <h5>کمپین <span id="campein_name"></span></h5>
+                        <h5>کمپین <span id="campaign_name"></span></h5>
                     </div>
 
                     <div class="modal-body">
@@ -114,8 +114,14 @@
 
                     <div class="d-flex justify-content-center mb-3 mt-8 gap">
                         <button type="button" class="btn btn-beta-outline" data-dismiss="modal">بستن</button>
-                        <button type="button" class="btn btn-beta-solid" onclick="submitSmsPanel()">ذخیره</button>
+                        <button type="button" class="btn btn-beta-solid" id="submitSmsPanelButton" onclick="submitSmsPanel()">ذخیره</button>
                     </div>
+
+                    <div
+                        id="submitError"
+                        class="alert alert-danger mt-3"
+                        style="display: none;"
+                    ></div>
 
                 </div>
             </div>

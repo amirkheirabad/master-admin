@@ -27,7 +27,7 @@ class SmsPanelService
             'admin_message' => $sms->admin_message,
             'status' => $sms->status,
             'store_name' => $sms->store->store_name,
-            'campein_name' => $sms->store->campein_name,
+            'campaign_name' => $sms->campaign_name,
         ];
     }
 

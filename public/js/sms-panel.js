@@ -31,34 +31,78 @@ $(document).on('click', '[data-target="#myModal"]', function () {
 
 const csrf = document.querySelector('meta[name="csrf-token"]').content;
 
-function submitSmsPanel() {
+    async function submitSmsPanel() {
+        const errorBox = document.getElementById('submitError');
+        const submitButton = document.getElementById('submitSmsPanelButton');
 
+        const adminMessage = document.getElementById('adminMessage').value;
 
-    const adminMessage = document.getElementById('adminMessage').value;
+        const selectedStatus = document.querySelector(
+            'input[name="iCheck"]:checked'
+        )?.value;
 
-    const selectedStatus = document.querySelector('input[name="iCheck"]:checked')?.value;
+        errorBox.style.display = 'none';
+        errorBox.textContent = '';
 
-    fetch(`/sms-store/${currentId}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': csrf
-        },
-        body: JSON.stringify({
-            status: selectedStatus,
-            admin_message: adminMessage
-        })
-    })
-        .then(res => res.json())
-        .then(data => {
-            if (data.success) {
-                $('#myModal').modal('hide');
-                location.reload();
-            } else {
-                alert('خطا در ثبت');
+        if (!selectedStatus) {
+            showSubmitError('لطفاً وضعیت درخواست را انتخاب کنید.');
+            return;
+        }
+
+        submitButton.disabled = true;
+        submitButton.textContent = 'در حال ثبت...';
+
+        try {
+            const response = await fetch(`/sms-store/${currentId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': csrf,
+                },
+                body: JSON.stringify({
+                    status: selectedStatus,
+                    admin_message: adminMessage,
+                }),
+            });
+
+            const data = await parseJsonResponse(response);
+
+            if (!response.ok || data.success !== true) {
+                throw new Error(
+                    data.message || 'خطایی هنگام ثبت وضعیت رخ داد.'
+                );
             }
-        });
-}
+
+            $('#myModal').modal('hide');
+            location.reload();
+        } catch (error) {
+            showSubmitError(error.message);
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = 'ذخیره';
+        }
+    }
+
+    async function parseJsonResponse(response) {
+        try {
+            return await response.json();
+        } catch {
+            return {
+                success: false,
+                message: response.ok
+                    ? 'پاسخ نامعتبر از سرور دریافت شد.'
+                    : 'ارتباط با فروشگاه مقصد ناموفق بود.',
+            };
+        }
+    }
+
+    function showSubmitError(message) {
+        const errorBox = document.getElementById('submitError');
+
+        errorBox.textContent = message;
+        errorBox.style.display = 'block';
+    }
 
     $(document).on('click', '[data-target="#myModal"]', function () {
         currentId = $(this).data('id');
@@ -70,7 +114,7 @@ function submitSmsPanel() {
                 $('#storeMessage').val(data.store_message);
                 $('#adminMessage').val(data.admin_message);
                 $('#store_name').text(data.store_name);
-                $('#campein_name').text(data.campein_name);
+                $('#campaign_name').text(data.campaign_name);
                 $("input[name='iCheck'][value='" + data.status + "']").prop("checked", true);
                 $('#myModal').modal('show');
             },

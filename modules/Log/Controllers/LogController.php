@@ -24,4 +24,11 @@ class LogController
         return view('templates.log.ticket', compact('tickets'));
     }
 
+    public function indexSmsPanel()
+    {
+        $smsPanels = $this->log->getSmsPanels();
+        return view('templates.log.smsPanel', compact('smsPanels'));
+
+    }
+
 }

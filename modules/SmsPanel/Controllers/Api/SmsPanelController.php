@@ -1,6 +1,7 @@
 <?php
 
 namespace Modules\SmsPanel\Controllers\Api;
+use Modules\Education\Requests\UpdateRequest;
 use Modules\SmsPanel\Repositories\InterfaceSmsPanel;
 use Modules\SmsPanel\Requests\StoreRequest;
 
@@ -19,6 +20,19 @@ class SmsPanelController
         $validated['store_id'] = $store->id;
 
         $this->SmsPanel->createFromToken($validated);
+        return response()->json([
+            'success' => true,
+            'message' => 'درخواست با موفقیت ثبت شد'
+        ]);
+    }
+
+    public function updateFromToken(StoreRequest $request)
+    {
+        $store = $request->get('authenticated_store');
+        $validated = $request->validated();
+        $validated['store_id'] = $store->id;
+
+        $this->SmsPanel->updateFromToken($validated);
         return response()->json([
             'success' => true,
             'message' => 'درخواست با موفقیت ثبت شد'

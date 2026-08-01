@@ -234,7 +234,12 @@
                                         <div class="d-flex justify-content-between align-items-center">
                                             <p class="">
                                                 <img src="{{ asset('/images/men.png') }}" style="width: 22px">
-                                                <i class="fa fa-headset"></i> پشتیبانی ایندکس
+                                                <i class="fa fa-headset"></i>
+                                                @if(auth()->user()->hasRole('admin') && $message->sender)
+                                                    {{ $message->sender->name }}
+                                                @else
+                                                    پشتیبانی ایندکس
+                                                @endif
                                             </p>
                                             <small class="text-muted mr-2 fa-number">
                                                 {{ Verta($message->created_at)->format('H:i - Y/m/d') }}

@@ -8,6 +8,9 @@ use Modules\Ticket\Repositories\InterfaceTicket;
 use Modules\Ticket\Requests\TicketAdminRequest;
 use Modules\Ticket\Requests\TicketReplyRequest;
 use Modules\Ticket\Requests\TicketStoreRequest;
+use Modules\Ticket\Export\TicketExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
 
 class TicketController
 {
@@ -25,6 +28,15 @@ class TicketController
     {
         $stores = $this->store->getAll();
         $tickets = $this->ticket->searchTicket($request);
+
+        if ($request->submit == "export")
+        {
+            $tickets = $this->ticket->exportTickets($request);
+            return Excel::download(
+                new TicketExport($tickets),
+                'tickets_' . Carbon::now('Asia/Tehran')->format('Y-m-d_H-i-s') . '.xlsx'
+            );
+        }
 
         return view('templates.ticket.list', compact('tickets', 'stores'));
     }

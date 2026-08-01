@@ -2,6 +2,7 @@
 
 namespace Modules\Ticket\Repositories;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Modules\Stores\Models\Stores;
@@ -22,7 +23,7 @@ class TicketRepo implements InterfaceTicket
     }
     public function findById($id)
     {
-        return Ticket::with(['store', 'messages'])->findOrFail($id);
+        return Ticket::with(['store', 'messages.sender'])->findOrFail($id);
     }
 
     public function getAllTickets()
@@ -30,7 +31,7 @@ class TicketRepo implements InterfaceTicket
         return Ticket::paginate(10);
     }
 
-    public function searchTicket(Request $request)
+    public function ticketQuery(Request $request)
     {
         $user = auth()->user();
 
@@ -85,8 +86,17 @@ class TicketRepo implements InterfaceTicket
                 }
             }, function ($q) {
                 $q->orderBy('updated_at', 'desc');
-            })
-            ->paginate(10);
+            });
+    }
+
+    public  function exportTickets(Request $request)
+    {
+        return $this->ticketQuery($request)->get();
+    }
+
+    public function searchTicket(Request $request)
+    {
+        return $this->ticketQuery($request)->paginate(10);
     }
 
     public function createTicketStore(array $data)
@@ -177,6 +187,7 @@ class TicketRepo implements InterfaceTicket
             'ticket_id'   => $ticket->id,
             'messages'    => $data['message'],
             'sender_type' => 1,
+            'sender_id'   => Auth::id(),
             'attachments' => !empty($attachmentPaths) ? json_encode($attachmentPaths) : null,
         ]);
 
@@ -231,6 +242,7 @@ class TicketRepo implements InterfaceTicket
             'ticket_id' => $id,
             'messages' => $data['message'],
             'sender_type' => 1,
+            'sender_id'   => Auth::id(),
             'attachments' => !empty($attachmentPaths) ? json_encode($attachmentPaths) : null,
         ]);
 

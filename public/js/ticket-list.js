@@ -768,7 +768,7 @@ document.addEventListener('DOMContentLoaded', function() {
         filterBtn.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
-    
+
             if (isMobile()) {
                 desktopMenu.classList.remove('is-open');
                 isDesktopMenuOpen = false;
@@ -779,7 +779,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 desktopMenu.classList.toggle('is-open', isDesktopMenuOpen);
             }
         });
-    
+
         window.addEventListener('resize', function() {
             if (isMobile() && isDesktopMenuOpen) {
                 desktopMenu.classList.remove('is-open');
@@ -787,7 +787,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 isDesktopMenuOpen = false;
             }
         });
-    
+
         document.addEventListener('click', function(e) {
             if (!isMobile() && isDesktopMenuOpen && !filterBtn.contains(e.target) && !desktopMenu.contains(e.target)) {
                 desktopMenu.classList.remove('is-open');
@@ -964,4 +964,28 @@ $('.select2').select2({
             return "نتیجه‌ای یافت نشد";
         }
     }
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const exportButton = document.getElementById('exportExcelBtn');
+
+    if (!exportButton) {
+        return;
+    }
+
+    exportButton.addEventListener('click', function () {
+        const form = document.getElementById('filterForm');
+
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'submit';
+        input.value = 'export';
+
+        form.appendChild(input);
+
+        HTMLFormElement.prototype.submit.call(form);
+
+        input.remove();
+    });
 });

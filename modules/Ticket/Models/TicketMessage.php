@@ -4,7 +4,7 @@ namespace Modules\Ticket\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Stores\Models\Stores;
+use Modules\User\Models\User;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -20,6 +20,7 @@ class TicketMessage extends Model
         'messages',
         'sender_type',
         'attachments',
+        'sender_id',
     ];
 
     protected static $recordEvents = ['updated'];
@@ -31,12 +32,7 @@ class TicketMessage extends Model
 
     public function sender()
     {
-        if ($this->sender_type == 0) {
-            return $this->belongsTo(Stores::class, 'sender_id');
-        }
-
-    return null;
-
+        return $this->belongsTo(User::class, 'sender_id');
     }
 
     public function getActivityLogOptions() : LogOptions

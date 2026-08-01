@@ -25,6 +25,11 @@
                     <div>
                         <h3>تیکت ها</h3>
                     </div>
+                    @if(auth()->user()->hasRole('admin'))
+                        <div>
+                            <button type="button" id="exportExcelBtn" class="btn btn-white-new"> خروجی اکسل </button>
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="d-flex justify-content-between align-items-center mt-8 flex-wrap">

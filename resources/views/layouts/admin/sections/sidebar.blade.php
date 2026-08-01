@@ -151,6 +151,7 @@
                 <ul class="nav child_menu">
                     <li><a href="{{ route('log-factor') }}"> فاکتور</a></li>
                     <li><a href="{{ route('log-ticket') }}">پیام های تیکت</a></li>
+                    <li><a href="{{ route('log-smsPanel') }}">پنل پیامکی</a></li>
                 </ul>
             </li>
             @endif

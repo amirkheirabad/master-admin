@@ -5,6 +5,7 @@ namespace Modules\Log\Repositories;
 use Illuminate\Http\Request;
 use Modules\Log\Models\Log;
 use Hekmatinasser\Verta\Verta;
+use Modules\Stores\Models\Stores;
 
 class LogRepo implements InterfaceLog
 {
@@ -49,4 +50,64 @@ class LogRepo implements InterfaceLog
 
         return $logs;
     }
+    public function getSmsPanels()
+    {
+        $logs = Log::query()
+            ->with('user')
+            ->where('log_name', 'smsPanel')
+            ->latest()
+            ->paginate(10);
+
+        $logs->getCollection()->transform(function ($log) {
+            $log->decoded_properties = json_decode($log->properties, true);
+
+            return $log;
+        });
+
+        $storeIds = $logs->getCollection()
+            ->pluck('decoded_properties.old.store_id')
+            ->filter()
+            ->unique();
+
+        $stores = Stores::whereIn('id', $storeIds)
+            ->get()
+            ->keyBy('id');
+
+        $logs->getCollection()->transform(function ($log) use ($stores) {
+            $properties = $log->decoded_properties;
+
+            $oldStatus = $properties['old']['status'] ?? null;
+            $newStatus = $properties['attributes']['status'] ?? null;
+
+            $storeId = $properties['old']['store_id'] ?? null;
+            $campaignName = $properties['old']['campaign_name'] ?? null;
+
+            $storeName = $stores->get($storeId)?->store_name;
+
+            $statusLabels = [
+                0 => 'در حال برسی',
+                1 => 'رد شده',
+                2 => 'تایید شده',
+            ];
+
+            $log->description = "کمپین «{$campaignName}» از فروشگاه {$storeName} وضعیتش از «{$statusLabels[$oldStatus]}» به «{$statusLabels[$newStatus]}» تغییر کرد.";
+
+            $log->properties = [
+                'status' => [
+                    'old' => $oldStatus,
+                    'new' => $newStatus,
+                ],
+                'store_id' => $storeName,
+                'campaign_name' => $campaignName,
+            ];
+
+            unset($log->decoded_properties);
+
+            return $log;
+        });
+
+        return $logs;
+    }
+
+
 }

@@ -39,4 +39,26 @@ class SendSms
 
     }
 
+    public function sendSms($phone, $adminMessage) :bool
+    {
+        $template = 'send-sms-panel';
+        try {
+            $this->api->verifyLookup(
+                $phone,
+                $adminMessage,
+                null,
+                null,
+                $template,
+            );
+            return true;
+        } catch (ApiException | HttpException $e) {
+            Log::error('Send SMS panel notification failed', [
+                'error' => $e->getMessage(),
+            ]);
+
+            return false;
+        }
+
+    }
+
 }
