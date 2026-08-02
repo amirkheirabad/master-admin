@@ -55,6 +55,7 @@ class LogRepo implements InterfaceLog
         $logs = Log::query()
             ->with('user')
             ->where('log_name', 'smsPanel')
+            ->whereNotNull('causer_id')
             ->latest()
             ->paginate(10);
 
