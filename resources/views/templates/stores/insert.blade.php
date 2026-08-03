@@ -135,8 +135,7 @@
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
                                 <label>تاریخ انقضا اینماد </label>
-                                <div class="search-container">
-                                </div>
+                                <input type="text" data-jdp class="form-control custom-radius input-border-focus" id="enamd_expiration_date" name="enamd_expiration_date">
                                 <div class="mt-1">
                                     <span class="text-danger" id="enamd_expiration_date_error"></span>
                                 </div>
