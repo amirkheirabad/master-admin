@@ -235,7 +235,7 @@
                                             <p class="">
                                                 <img src="{{ asset('/images/men.png') }}" style="width: 22px">
                                                 <i class="fa fa-headset"></i>
-                                                @if(auth()->user()->hasRole('admin') && $message->sender)
+                                                @if($message->sender)
                                                     {{ $message->sender->name }}
                                                 @else
                                                     پشتیبانی ایندکس
