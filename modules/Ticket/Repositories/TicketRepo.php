@@ -78,6 +78,10 @@ class TicketRepo implements InterfaceTicket
                 $q->where('priority', $request->priority);
             })
 
+            ->when($request->filled('assigned_to'), function ($q) use ($request) {
+                $q->where('assigned_to', $request->assigned_to);
+            })
+
             ->when($request->filled('sort'), function ($q) use ($request) {
                 if ($request->sort === 'latest') {
                     $q->orderBy('updated_at', 'desc');
@@ -315,6 +319,21 @@ class TicketRepo implements InterfaceTicket
         // }
 
         $message->update(['messages' => $request->messages]);
+    }
+
+    public function assign(Request $request, $id)
+    {
+        $user = User::where('id', $request->assigned_to)
+            ->where('type', 1)
+            ->firstOrFail();
+
+        $ticket = Ticket::findOrFail($id);
+
+        $ticket->timestamps = false;
+
+        $ticket->update([
+            'assigned_to' => $user->id,
+        ]);
     }
 
 }

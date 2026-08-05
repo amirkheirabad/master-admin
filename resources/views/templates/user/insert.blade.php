@@ -78,6 +78,17 @@
                                 </div>
                             </div>
 
+                            <div class="col-md-6 col-xs-12 mb-3">
+                                <label class="fw-bold">نوع کاربر</label>
+                                <select name="type" id="type" class="form-control custom-radius custom-select-input input-border-focus" style="background: #f9fafb;">
+                                    <option value="0">عادی</option>
+                                    <option value="1">تیم فنی</option>
+                                </select>
+                                <div class="mt-1">
+                                    <span class="text-danger error-message" id="type_error"></span>
+                                </div>
+                            </div>
+
                             <div class="d-flex justify-content-end col-md-12 mt-8">
                                 <button type="submit" class="btn btn-beta-solid">تایید</button>
                                 <a href="{{ route('user-list') }}" class="btn btn-beta-outline">انصراف</a>

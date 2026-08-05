@@ -5,6 +5,7 @@ namespace Modules\Ticket\Controllers\Web;
 use Illuminate\Http\Request;
 use Modules\Stores\Repositories\InterfaceStores;
 use Modules\Ticket\Repositories\InterfaceTicket;
+use Modules\User\Repositories\InterfaceUser;
 use Modules\Ticket\Requests\TicketAdminRequest;
 use Modules\Ticket\Requests\TicketReplyRequest;
 use Modules\Ticket\Requests\TicketStoreRequest;
@@ -15,19 +16,22 @@ use Carbon\Carbon;
 class TicketController
 {
     private InterfaceTicket $ticket;
+    private InterfaceUser $user;
 
     private InterfaceStores $store;
 
-    public function __construct(InterfaceTicket $ticket, InterfaceStores $store)
+    public function __construct(InterfaceTicket $ticket, InterfaceStores $store, InterfaceUser $user)
     {
         $this->ticket = $ticket;
         $this->store = $store;
+        $this->user = $user;
     }
 
     public function index(Request $request)
     {
         $stores = $this->store->getAll();
         $tickets = $this->ticket->searchTicket($request);
+        $assignedUsers = $this->user->assignedUser();
 
         if ($request->submit == "export")
         {
@@ -38,14 +42,15 @@ class TicketController
             );
         }
 
-        return view('templates.ticket.list', compact('tickets', 'stores'));
+        return view('templates.ticket.list', compact('tickets', 'stores', 'assignedUsers'));
     }
 
     public function show($id)
     {
         $ticket = $this->ticket->findById($id);
+        $assignedUsers = $this->user->assignedUser();
 
-        return view('templates.ticket.show', compact('ticket'));
+        return view('templates.ticket.show', compact('ticket', 'assignedUsers'));
     }
 
     public function updateStatus(Request $request, $id)
@@ -145,6 +150,14 @@ class TicketController
     } catch (\Exception $e) {
         return response()->json(['success' => false, 'message' => $e->getMessage()], 403);
     }
+    }
+
+    public function assign($id, Request $request)
+    {
+        $this->ticket->assign($request, $id);
+        return response()->json([
+            'success' => true,
+        ]);
     }
 
 }

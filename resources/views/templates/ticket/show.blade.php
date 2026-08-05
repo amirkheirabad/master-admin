@@ -58,6 +58,18 @@
                     </div>
                     <div class="d-flex gap-2 hide-on-mobile" style="gap: 10px;">
                          @if(auth()->user()->hasanyRole('admin'))
+                            <div class="d-flex align-items-center" style="gap: 8px;">
+
+                            <select id="assignedUserSelect" data-ticket-id="{{ $ticket->id }}" class="form-control custom-radius custom-select-input col-md-3">
+                                @foreach($assignedUsers as $user)
+                                    <option value="{{ $user->id }}"
+                                         data-name="{{ $user->name }}"
+                                        {{ $ticket->assigned_to == $user->id ? 'selected' : '' }}>
+                                        {{ $user->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                          @if($ticket->recipient_type === 'store' && $ticket->store)
                         <a href="{{ route('edit_store' , $ticket->store->id) }}" class="btn btn-beta-outline hide-on-mobile">
                             <i class="fa fa-info-circle fa-x"></i> اطلاعات فروشگاه

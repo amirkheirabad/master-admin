@@ -93,6 +93,18 @@
                                         <option value="4" {{ request()->get('status') == '4' ? 'selected' : ''}}>ارجاع به واحد گرافیک دیزاین</option>
                                     </select>
                                 </div>
+                                @if(auth()->user()->hasRole('admin'))
+                                <div class="mb-2">
+                                    <select name="assigned_to" class="form-control custom-radius custom-select-input" data-title="مسئول تسک:">
+                                        <option value="">همه</option>
+                                        @foreach($assignedUsers as $assignedUser)
+                                            <option value="{{ $assignedUser->id }}" {{ request()->get('assigned_to') == $assignedUser->id ? 'selected' : '' }}>
+                                                {{ $assignedUser->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @endif
                                 <div class="mb-2">
                                     <select name="priority" class="form-control custom-radius custom-select-input" data-title="اولویت:">
                                         <option value="">همه</option>
@@ -145,6 +157,9 @@
                         <th>عنوان تیکت</th>
                         <th>اولویت</th>
                         <th>تیم مخاطب</th>
+                        @if(auth()->user()->hasRole('admin'))
+                        <th>مسئول تسک</th>
+                        @endif
                         <th class="hide-on-mobile">تاریخ ثبت</th>
                         <th class="hide-on-mobile">وضعیت</th>
                         <th class="hide-on-mobile">تاریخ آخرین پاسخ</th>
@@ -208,6 +223,9 @@
                                 </span>
                                 @endif
                             </td>
+                            @if(auth()->user()->hasRole('admin'))
+                            <td>{{ $ticket->assignedUser?->name ?? 'مشخص نشده' }}</td>
+                            @endif
                             <td data-title="تاریخ:" class="responsive-table-td fa-number">{{ Verta($ticket->created_at)->format(' %d %B  %Y') }}</td>
                             <td data-title="وضعیت:" class="responsive-table-td">
                                 @if($ticket->status == 0)

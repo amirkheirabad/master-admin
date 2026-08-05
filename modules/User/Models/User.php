@@ -24,6 +24,7 @@ class User extends Authenticatable
         'mobile',
         'password',
         'is_active',
+        'type'
     ];
 
     protected $hidden = [

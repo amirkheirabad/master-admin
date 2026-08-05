@@ -765,3 +765,119 @@ document.addEventListener('keydown', function (e) {
     }
 
 });
+
+
+let selectedAssignedUserId = null;
+let previousAssignedUserId = null;
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const select = document.getElementById('assignedUserSelect');
+    const confirmButton = document.getElementById('confirmAssignUser');
+    const assignUserName = document.getElementById('assignedUserName');
+    const assignUserError = document.getElementById('assignUserError');
+    const modal = document.getElementById('assignUserModal');
+
+    previousAssignedUserId = select.value;
+
+    // تغییر کاربر
+    select.addEventListener('change', function () {
+
+        const selectedOption = this.options[this.selectedIndex];
+
+        selectedAssignedUserId = selectedOption.value;
+
+        const selectedUserName = selectedOption.dataset.name;
+
+        if (!selectedAssignedUserId) {
+            return;
+        }
+
+        assignUserName.textContent = selectedUserName;
+        assignUserError.textContent = '';
+        assignUserError.style.display = 'none';
+
+        // باز کردن Modal
+        $('#assignUserModal').modal('show');
+    });
+
+
+    // تأیید انتخاب کاربر
+    confirmButton.addEventListener('click', function () {
+
+        confirmButton.disabled = true;
+        confirmButton.textContent = 'در حال ثبت...';
+
+        const select = document.getElementById('assignedUserSelect');
+
+        const ticketId = select.dataset.ticketId;
+
+        fetch(`/ticket/${ticketId}/assign`, {
+            method: 'POST',
+
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrf,
+                'Accept': 'application/json'
+            },
+
+            body: JSON.stringify({
+                assigned_to: selectedAssignedUserId
+            })
+        })
+            .then(async response => {
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(
+                         'خطایی در تغییر مسئول تیکت رخ داد.'
+                    );
+                }
+
+                return data;
+            })
+            .then(data => {
+
+                // بستن Modal
+                $('#assignUserModal').modal('hide');
+
+                // انتخاب جدید تبدیل به مقدار قبلی می‌شود
+                previousAssignedUserId = selectedAssignedUserId;
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'موفق',
+                    text: 'مسئول تیکت با موفقیت تغییر کرد.',
+                    timer: 1800,
+                    showConfirmButton: false
+                });
+            })
+            .catch(error => {
+
+                assignUserError.textContent = error.message;
+                assignUserError.style.display = 'block';
+
+                // برگرداندن Select به مقدار قبلی
+                select.value = previousAssignedUserId;
+
+            })
+            .finally(() => {
+
+                confirmButton.disabled = false;
+                confirmButton.textContent = 'تأیید';
+
+            });
+    });
+
+
+    // وقتی Modal بسته شد
+    $('#assignUserModal').on('hidden.bs.modal', function () {
+
+        if (previousAssignedUserId !== selectedAssignedUserId) {
+            select.value = previousAssignedUserId;
+        }
+
+    });
+
+});

@@ -84,6 +84,7 @@
                                 <th>نام و نام خانوادگی</th>
                                 <th>شماره همراه</th>
                                 <th>نقش</th>
+                                <th>نوع کاربر</th>
                                 <th>عملیات</th>
                             </tr>
                         </thead>
@@ -111,6 +112,19 @@
                                             </span>
                                         @endforeach
                                     </td class="responsive-table-td">
+                                    <td data-title="نوع کاربر" class="responsive-table-td">
+                                        @if($user->type === null)
+                                            {{-- خالی نمایش داده شود --}}
+                                        @elseif($user->type == 0)
+                                            <span class="bg-jade p-2 custom-radius">
+            معمولی
+        </span>
+                                        @elseif($user->type == 1)
+                                            <span class="bg-new p-2 custom-radius">
+            تیم فنی
+        </span>
+                                        @endif
+                                    </td>
                                     <td data-title="عملیات" class="responsive-table-td">
                                         <div class="">
                                             <a href="{{ route('user-edit', $user->id) }}" class="text-beta"

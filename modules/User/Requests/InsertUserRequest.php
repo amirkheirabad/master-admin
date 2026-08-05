@@ -43,7 +43,8 @@ class InsertUserRequest extends FormRequest
             'name' => 'required|string|max:255',
             'mobile' => ['required', 'regex:/^09[0-9]{9}$/', 'unique:users,mobile,' . ($userId ?? 'NULL')],
             'password' => $userId ? 'nullable|min:6' : 'required|min:6',
-            'role' => 'required|exists:roles,name'
+            'role' => 'required|exists:roles,name',
+            'type' => 'nullable'
         ];
     }
 

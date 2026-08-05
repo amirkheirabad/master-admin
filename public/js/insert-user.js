@@ -26,6 +26,7 @@ $('#userForm').on('submit', function (e) {
             mobile: $('#mobile').val(),
             password: $('#password').val(),
             role: $('#role').val(),
+            type: $('#type').val(),
 
         }),
     })

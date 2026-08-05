@@ -105,6 +105,7 @@ class UserRepo implements InterfaceUser
             $user = User::create([
                 'name' => $data['name'],
                 'mobile' => $data['mobile'],
+                'type' => $data['type'],
                 'password' => bcrypt($data['password']),
             ]);
 
@@ -132,6 +133,7 @@ class UserRepo implements InterfaceUser
             $updateData = [
                 'name' => $data['name'],
                 'mobile' => $data['mobile'],
+                'type' => $data['type'],
             ];
 
             // فقط اگه رمز عبور وارد شده بود، آپدیت کن
@@ -181,10 +183,10 @@ class UserRepo implements InterfaceUser
     {
         Role::find($id)->delete();
     }
-            
 
 
-    
+
+
     public function quickCreateSeller(array $data): User
     {
         DB::beginTransaction();
@@ -194,15 +196,21 @@ class UserRepo implements InterfaceUser
                 'mobile'   => $data['mobile'],
                 'password' => bcrypt($data['password']),
             ]);
- 
+
             $user->assignRole('seller');
- 
+
             DB::commit();
- 
+
             return $user;
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
         }
+    }
+
+
+    public function assignedUser()
+    {
+        return User::where('type', 1)->select('id', 'name')->get();
     }
 }

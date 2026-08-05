@@ -12,6 +12,7 @@ Route::middleware(['check.login', 'check.role:admin'])->group(function () {
     Route::middleware(['throttle:ticket_ratelimit'])->post('/{id}/ticket_reply', [TicketController::class, 'replyAsAdmin'])->name('ticket_reply');
     Route::middleware(['throttle:ticket_ratelimit'])->post('/ticket_store', [TicketController::class, 'store']);
     Route::post('/message_update/{id}', [TicketController::class, 'updateMessage'])->name('message_update');
+    Route::post('/ticket/{id}/assign', [TicketController::class, 'assign'])->name('ticket_assign');
 });
 
 Route::get('/refresh-captcha', [TicketController::class, 'refreshCaptcha'])->name('refresh.captcha');

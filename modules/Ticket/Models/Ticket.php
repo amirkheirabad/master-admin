@@ -24,6 +24,7 @@ class Ticket extends Model
         'contact_name',
         'is_seen',
         'store_id',
+        'assigned_to',
     ];
     protected $casts = [
     'priority' => 'integer',   // اضافه کن
@@ -41,6 +42,11 @@ class Ticket extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function assignedUser()
+    {
+        return $this->belongsTo(User::class, 'assigned_to');
     }
 
 

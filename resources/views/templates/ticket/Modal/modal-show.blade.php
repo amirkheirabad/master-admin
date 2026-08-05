@@ -97,3 +97,57 @@
         </div>
     </div>
 </div>
+
+
+<!-- مدال تغییر مسئول تیکت -->
+<div id="assignUserModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="assignUserModalLabel">
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button"
+                        class="close"
+                        data-dismiss="modal">
+                    &times;
+                </button>
+
+                <h5 class="modal-title" id="assignUserModalLabel">
+                    تغییر مسئول تیکت
+                </h5>
+            </div>
+
+            <div class="modal-body">
+
+                <h4 class="d-flex justify-content-center mb-3">
+                    آیا مطمئن هستید که
+                    <span id="assignedUserName" class="mr-1 ml-1"></span>
+                    مسئول انجام این تیکت شود؟
+                </h4>
+
+                <div id="assignUserError"
+                     class="text-danger text-center mb-3"
+                     style="display: none;">
+                </div>
+
+                <div class="mt-10 d-flex justify-content-center">
+
+                    <button id="confirmAssignUser"
+                            type="button"
+                            class="btn btn-beta-solid">
+                        تایید
+                    </button>
+
+                    <button type="button"
+                            class="btn btn-beta-outline"
+                            data-dismiss="modal">
+                        انصراف
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
