@@ -22,6 +22,7 @@ class ChangeStatusService
         try {
             $response = Http::asJson()
                 ->acceptJson()
+                ->withToken('ewW3stla6LVZWIDMU0L5')
                 ->post($url, [
                     'id' => $smsPanel->external_id,
                     'status' => $this->mapStatus($newStatus),
