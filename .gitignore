@@ -22,3 +22,15 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+
+# AI
+.claude
+.codegraph
+CLAUDE.md
+AGENTS.md
+docker-compose.yml
+/tmp/
+.reports/
+.playwright-mcp/
+

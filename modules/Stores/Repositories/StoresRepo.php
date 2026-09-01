@@ -5,6 +5,7 @@ namespace Modules\Stores\Repositories;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
+use Illuminate\Support\Facades\DB;
 use Modules\Stores\Models\CheckList;
 use Modules\Stores\Models\Stores;
 use Modules\User\Models\User;
@@ -174,12 +175,42 @@ class StoresRepo implements InterfaceStores
     public function updateCheckListsStore($request)
     {
         $store = Stores::findOrFail($request->store_id);
-        $store->checkLists()->sync($request->check_lists ?? []);
+
+        DB::transaction(function () use ($request, $store) {
+            $store->checkLists()->sync($request->check_lists ?? []);
+
+            $comments = collect($request->input('comments', []));
+            $validCheckListIds = CheckList::whereKey($comments->keys())->pluck('id')->flip();
+
+            $comments->each(function ($comment, $checkListId) use ($store, $validCheckListIds) {
+                $checkListId = (int) $checkListId;
+
+                if (!$validCheckListIds->has($checkListId)) {
+                    return;
+                }
+
+                $comment = trim((string) $comment);
+
+                if (!$comment) {
+                    $store->checkListComments()->where('check_list_id', $checkListId)->delete();
+                    return;
+                }
+
+                $store->checkListComments()->updateOrCreate(
+                    ['check_list_id' => $checkListId],
+                    ['comment' => $comment]
+                );
+            });
+        });
     }
 
     public function getCheckListsStores($id)
     {
-        $store = Stores::with('checkLists')->findOrFail($id);
-        return $store->checkLists()->pluck('check_lists.id');
+        $store = Stores::with(['checkLists', 'checkListComments'])->findOrFail($id);
+
+        return [
+            'check_lists' => $store->checkLists->pluck('id'),
+            'comments' => $store->checkListComments->pluck('comment', 'check_list_id'),
+        ];
     }
 }

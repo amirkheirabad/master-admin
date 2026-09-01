@@ -52,4 +52,9 @@ class Stores extends Model
     {
         return $this->belongsToMany(CheckList::class, 'store_check_lists', 'store_id', 'check_list_id');
     }
+
+    public function checkListComments()
+    {
+        return $this->hasMany(StoreCheckListComment::class, 'store_id');
+    }
 }

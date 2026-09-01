@@ -8,6 +8,7 @@ use Modules\Stores\Services\EnamadService;
 use Modules\User\Repositories\InterfaceUser;
 use Modules\Stores\Requests\IndexRequest;
 use Modules\Stores\Requests\QuickCreateSellerRequest;
+use Modules\Stores\Requests\UpdateCheckListsStoreRequest;
 
 class StoresController
 {
@@ -111,7 +112,7 @@ class StoresController
         $this->store->deleteCheckList($id);
     }
 
-    public function updateCheckListsStore(Request $request)
+    public function updateCheckListsStore(UpdateCheckListsStoreRequest $request)
     {
         $this->store->updateCheckListsStore($request);
         return redirect()->route('list_stores');
@@ -119,9 +120,6 @@ class StoresController
 
     public function getCheckListsStores($id)
     {
-        $checkLists = $this->store->getCheckListsStores($id);
-        return response()->json([
-                'check_lists' => $checkLists,
-            ]);
+        return response()->json($this->store->getCheckListsStores($id));
     }
 }

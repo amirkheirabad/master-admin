@@ -18,4 +18,9 @@ class CheckList extends Model
 
 
     protected $fillable = ['title'];
+
+    public function storeComments()
+    {
+        return $this->hasMany(StoreCheckListComment::class, 'check_list_id');
+    }
 }
