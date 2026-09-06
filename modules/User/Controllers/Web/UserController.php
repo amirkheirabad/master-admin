@@ -3,6 +3,7 @@
 namespace Modules\User\Controllers\Web;
 
 use Illuminate\Http\Request;
+use Modules\Team\Models\Team;
 use Modules\User\Repositories\InterfaceUser;
 use Modules\User\Requests\InsertRoleRequest;
 use Modules\User\Requests\InsertUserRequest;
@@ -20,23 +21,26 @@ class UserController
     {
         $users = $this->user->filterUsers($request);
         $roles = $this->user->getRoles();
+        $teams = Team::orderBy('name')->get();
 
-        return view('templates.user.list', compact('users', 'roles'));
+        return view('templates.user.list', compact('users', 'roles', 'teams'));
     }
 
     public function insert()
     {
         $roles = $this->user->getRoles();
+        $teams = Team::orderBy('name')->get();
 
-        return view('templates.user.insert', compact('roles'));
+        return view('templates.user.insert', compact('roles', 'teams'));
     }
 
     public function edit($id)
     {
         $user = $this->user->findUserById($id);
         $roles = $this->user->getRoles();
+        $teams = Team::orderBy('name')->get();
 
-        return view('templates.user.edit', compact('user', 'roles'));
+        return view('templates.user.edit', compact('user', 'roles', 'teams'));
     }
 
     // اپدیت

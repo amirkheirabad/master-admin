@@ -9,6 +9,8 @@ use Modules\Factor\Models\Factor as ModelsFactor;
 use Spatie\Permission\Traits\HasRoles;
 use Modules\Stores\Models\Stores;
 use Modules\Factor\Models\Factor;
+use Modules\Team\Models\Team;
+use Modules\Ticket\Models\Ticket;
 
 class User extends Authenticatable
 {
@@ -24,7 +26,8 @@ class User extends Authenticatable
         'mobile',
         'password',
         'is_active',
-        'type'
+        'type',
+        'team_id',
     ];
 
     protected $hidden = [
@@ -43,5 +46,15 @@ class User extends Authenticatable
     public function factors()
     {
         return $this->hasMany(Factor::class, 'user_id');
+    }
+
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
+    }
+
+    public function assignedTickets()
+    {
+        return $this->hasMany(Ticket::class, 'assigned_to');
     }
 }

@@ -6,6 +6,7 @@ return [
     Modules\Stores\StoresServiceProvider::class,
     Modules\Factor\FactorServiceProvider::class,
     Modules\Ticket\TicketServiceProvider::class,
+    Modules\Team\TeamServiceProvider::class,
     Modules\User\UserServiceProvider::class,
     Modules\Education\EducationServiceProvider::class,
     Modules\Message\MessageServiceProvider::class,

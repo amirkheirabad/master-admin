@@ -35,6 +35,7 @@ class TicketExport implements FromCollection, WithHeadings
                     2 => 'بسته شده',
                     3 => 'ارجاع به واحد فنی',
                     4 => 'ارجاع به واحد گرافیک دیزاین',
+                    5 => 'ارجاع به: '.($ticket->team?->name ?? 'بدون تیم'),
                     default => '-',
                 },
                 $ticket->updated_at,

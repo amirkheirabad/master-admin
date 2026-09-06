@@ -22,6 +22,8 @@
                     <li><a href="{{ route('user-insert') }}">افزودن کاربر</a></li>
                     <li><a href="{{ route('role-list') }}">لیست نقش ها</a></li>
                     <li><a href="{{ route('role-insert') }}">افزودن نقش</a></li>
+                    <li><a href="{{ route('team-list') }}">لیست تیم‌ها</a></li>
+                    <li><a href="{{ route('team-insert') }}">افزودن تیم</a></li>
                 </ul>
             </li>
             @endif
@@ -80,7 +82,7 @@
                 </ul>
             </li>
             @endif
-            @if(auth()->user()->hasanyRole('admin', 'seller'))
+            @if(auth()->user()->hasanyRole('admin', 'seller') || auth()->user()->team_id)
 
             <li>
                 <a>
@@ -90,7 +92,9 @@
                 </a>
                 <ul class="nav child_menu">
                     <li><a href="{{ route('list_tickets') }}">همه تیکت ها</a></li>
+                    @if(auth()->user()->hasanyRole('admin', 'seller'))
                     <li><a href="{{ route('insert_ticket') }}">تیکت جدید</a></li>
+                    @endif
                     @if(auth()->user()->hasRole('admin'))
                     <li><a href="{{ route('quick_replies_list') }}">جواب‌های آماده</a></li>
                     </a>

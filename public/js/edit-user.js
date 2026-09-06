@@ -30,6 +30,7 @@ $('#editUserForm').on('submit', function (e) {
             mobile: $('#mobile').val(),
             password: $('#password').val(),
             type: $('#type').val(),
+            team_id: $('#team_id').val() || null,
 
         }),
     })
@@ -80,4 +81,3 @@ togglePassword.addEventListener('click', function () {
     eyeIcon.classList.toggle('fa-eye');
     eyeIcon.classList.toggle('fa-eye-slash');
 });
-

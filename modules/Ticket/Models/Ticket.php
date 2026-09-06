@@ -2,12 +2,13 @@
 
 namespace Modules\Ticket\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Modules\SmsPanel\Models\SmsPanel;
 use Modules\Stores\Models\Stores;
-use Modules\Ticket\Models\TicketMessage;
+use Modules\Team\Models\Team;
 use Modules\User\Models\User;
+
 class Ticket extends Model
 {
     use HasFactory;
@@ -25,10 +26,35 @@ class Ticket extends Model
         'is_seen',
         'store_id',
         'assigned_to',
+        'team_id',
     ];
     protected $casts = [
     'priority' => 'integer',   // اضافه کن
     ];
+
+    public function scopeVisibleTo(Builder $query, User $user): Builder
+    {
+        if ($user->team_id) {
+            return $query->where('team_id', $user->team_id);
+        }
+
+        if ($user->hasRole('admin')) {
+            return $query;
+        }
+
+        if ($user->hasRole('seller')) {
+            $storeIds = $user->stores()->pluck('id');
+
+            return $query->where(function (Builder $query) use ($storeIds, $user) {
+                $query->whereIn('store_id', $storeIds)
+                    ->orWhere(function (Builder $query) use ($user) {
+                        $query->where('recipient_type', 'user')->where('user_id', $user->id);
+                    });
+            });
+        }
+
+        return $query->whereRaw('1 = 0');
+    }
 
 //    public function sender()
 //    {
@@ -47,6 +73,11 @@ class Ticket extends Model
     public function assignedUser()
     {
         return $this->belongsTo(User::class, 'assigned_to');
+    }
+
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
     }
 
 

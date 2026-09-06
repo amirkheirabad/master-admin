@@ -34,21 +34,7 @@ class TicketRepo implements InterfaceTicket
     public function ticketQuery(Request $request)
     {
         $user = auth()->user();
-
-        if ($user->hasRole('admin')) {
-            $tickets = Ticket::query()->with('store');
-        } elseif ($user->hasRole('seller')) {
-            $storeIds = $user->stores()->pluck('id');
-            $tickets = Ticket::where(function($q) use ($storeIds, $user) {
-                $q->whereIn('store_id', $storeIds)
-                  ->orWhere(function($q2) use ($user) {
-                      $q2->where('recipient_type', 'user')
-                         ->where('user_id', $user->id);
-                  });
-            })->with(['store', 'user']);
-        } else {
-            return collect();
-        }
+        $tickets = Ticket::query()->visibleTo($user)->with(['store', 'user', 'assignedUser', 'team']);
 
         $searchQuery = $request->input('search_query');
 
@@ -64,8 +50,12 @@ class TicketRepo implements InterfaceTicket
                 $q->where('status', $request->status);
             })
 
-            ->when($request->filled('store_id'), function ($q) use ($request) {
-                if (auth()->user()->hasRole('admin')) {
+            ->when($request->filled('team_id'), function ($q) use ($request) {
+                $q->where('team_id', $request->team_id);
+            })
+
+            ->when($request->filled('store_id'), function ($q) use ($request, $user) {
+                if ($user->hasRole('admin')) {
                     $q->where('store_id', $request->store_id);
                 }
             })
@@ -323,17 +313,9 @@ class TicketRepo implements InterfaceTicket
 
     public function assign(Request $request, $id)
     {
-        $user = User::where('id', $request->assigned_to)
-            ->where('type', 1)
-            ->firstOrFail();
-
         $ticket = Ticket::findOrFail($id);
-
         $ticket->timestamps = false;
-
-        $ticket->update([
-            'assigned_to' => $user->id,
-        ]);
+        $ticket->update($request->validated());
     }
 
 }

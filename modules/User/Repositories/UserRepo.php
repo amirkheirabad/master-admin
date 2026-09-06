@@ -31,6 +31,7 @@ class UserRepo implements InterfaceUser
         $searchQuery = $request->input('search_query');
 
         return User::query()
+            ->with('team')
             ->when($request->filled('search_query'), function ($q) use ($searchQuery) {
                 $q->where(function ($query) use ($searchQuery) {
                     $query->where('name', 'LIKE', '%'.$searchQuery.'%')
@@ -42,6 +43,9 @@ class UserRepo implements InterfaceUser
                 if ($role) {
                     $q->role($role->name);
                 }
+            })
+            ->when($request->filled('team_id'), function ($q) use ($request) {
+                $q->where('team_id', $request->team_id);
             })
             ->orderBy('created_at', 'desc')
             ->paginate(10);
@@ -106,6 +110,7 @@ class UserRepo implements InterfaceUser
                 'name' => $data['name'],
                 'mobile' => $data['mobile'],
                 'type' => $data['type'],
+                'team_id' => $data['team_id'] ?? null,
                 'password' => bcrypt($data['password']),
             ]);
 
@@ -134,6 +139,7 @@ class UserRepo implements InterfaceUser
                 'name' => $data['name'],
                 'mobile' => $data['mobile'],
                 'type' => $data['type'],
+                'team_id' => $data['team_id'] ?? null,
             ];
 
             // فقط اگه رمز عبور وارد شده بود، آپدیت کن

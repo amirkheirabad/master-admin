@@ -199,6 +199,11 @@ function openModalAndClose(element, ticketId, storeName, statusValue, statusText
         dropdown.style.display = 'none';
     });
 
+    if (Number(statusValue) === 5) {
+        $('#teamReferralModal').modal('show');
+        return;
+    }
+
     // ذخیره اطلاعات در مودال
     const ticketIdInput = document.getElementById('ticket_id');
     const newStatusInput = document.getElementById('new_status');
@@ -398,6 +403,12 @@ function applyStatusChange() {
         if (typeof showNotification === 'function') {
             showNotification('خطا: شناسه تیکت یافت نشد', 'error');
         }
+        return;
+    }
+
+    if (Number(selectedStatus) === 5) {
+        closeStatusModal();
+        $('#teamReferralModal').modal('show');
         return;
     }
 
@@ -767,49 +778,32 @@ document.addEventListener('keydown', function (e) {
 });
 
 
-let selectedAssignedUserId = null;
-let previousAssignedUserId = null;
-
 document.addEventListener('DOMContentLoaded', function () {
-
     const select = document.getElementById('assignedUserSelect');
     const confirmButton = document.getElementById('confirmAssignUser');
     const assignUserName = document.getElementById('assignedUserName');
     const assignUserError = document.getElementById('assignUserError');
-    const modal = document.getElementById('assignUserModal');
+    if (!select || !confirmButton || !assignUserName || !assignUserError) return;
 
-    previousAssignedUserId = select.value;
+    let selectedAssignedUserId = null;
+    let previousAssignedUserId = select.value;
 
-    // تغییر کاربر
     select.addEventListener('change', function () {
-
         const selectedOption = this.options[this.selectedIndex];
-
         selectedAssignedUserId = selectedOption.value;
 
-        const selectedUserName = selectedOption.dataset.name;
+        if (!selectedAssignedUserId) return;
 
-        if (!selectedAssignedUserId) {
-            return;
-        }
-
-        assignUserName.textContent = selectedUserName;
+        assignUserName.textContent = selectedOption.dataset.name;
         assignUserError.textContent = '';
         assignUserError.style.display = 'none';
-
-        // باز کردن Modal
         $('#assignUserModal').modal('show');
     });
 
-
-    // تأیید انتخاب کاربر
     confirmButton.addEventListener('click', function () {
 
         confirmButton.disabled = true;
         confirmButton.textContent = 'در حال ثبت...';
-
-        const select = document.getElementById('assignedUserSelect');
-
         const ticketId = select.dataset.ticketId;
 
         fetch(`/ticket/${ticketId}/assign`, {
@@ -839,10 +833,7 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .then(data => {
 
-                // بستن Modal
                 $('#assignUserModal').modal('hide');
-
-                // انتخاب جدید تبدیل به مقدار قبلی می‌شود
                 previousAssignedUserId = selectedAssignedUserId;
 
                 Swal.fire({
@@ -857,10 +848,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 assignUserError.textContent = error.message;
                 assignUserError.style.display = 'block';
-
-                // برگرداندن Select به مقدار قبلی
                 select.value = previousAssignedUserId;
-
             })
             .finally(() => {
 
@@ -870,14 +858,9 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     });
 
-
-    // وقتی Modal بسته شد
     $('#assignUserModal').on('hidden.bs.modal', function () {
-
         if (previousAssignedUserId !== selectedAssignedUserId) {
             select.value = previousAssignedUserId;
         }
-
     });
-
 });

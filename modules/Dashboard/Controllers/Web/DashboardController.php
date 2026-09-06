@@ -17,7 +17,7 @@ class DashboardController
         $isSeller = $user->hasRole('seller');
 
         $factorQuery = Factor::query();
-        $ticketQuery = Ticket::query();
+        $ticketQuery = Ticket::query()->visibleTo($user);
         $stats = [];
         $messages = collect();
         $recentTickets = collect();
@@ -28,10 +28,10 @@ class DashboardController
                 ['label' => 'کاربران', 'value' => User::count(), 'icon' => 'fa-users', 'color' => 'blue'],
                 ['label' => 'فروشگاه‌ها', 'value' => Stores::count(), 'icon' => 'fa-shopping-cart', 'color' => 'green'],
                 ['label' => 'فاکتورها', 'value' => Factor::count(), 'icon' => 'fa-file-text', 'color' => 'orange'],
-                ['label' => 'تیکت باز', 'value' => Ticket::whereIn('status', [0, 1 ,3 ,4])->count(), 'icon' => 'fa-life-ring', 'color' => 'purple'],
+                ['label' => 'تیکت باز', 'value' => (clone $ticketQuery)->whereIn('status', [0, 1, 3, 4, 5])->count(), 'icon' => 'fa-life-ring', 'color' => 'purple'],
                 ['label' => 'فاکتور پرداخت‌نشده', 'value' => Factor::where('price_status', 1)->count(), 'icon' => 'fa-exclamation-circle', 'color' => 'red'],
             ];
-            $recentTickets = Ticket::with('store')->orderByDesc('created_at')->limit(4)->get();
+            $recentTickets = (clone $ticketQuery)->with('store')->orderByDesc('created_at')->limit(4)->get();
             $recentFactors = Factor::with('store')->orderByDesc('created_at')->limit(4)->get();
         } elseif ($isSeller) {
             $storeIds = $user->stores()->pluck('id')->filter();
@@ -39,24 +39,32 @@ class DashboardController
             $factorQuery->where(function ($q) use ($storeIds, $user) {
                 $q->whereIn('store_id', $storeIds)->orWhere('user_id', $user->id);
             });
-            $ticketQuery->where(function ($q) use ($storeIds, $user) {
-                $q->whereIn('store_id', $storeIds)
-                    ->orWhere(function ($q2) use ($user) {
-                        $q2->where('recipient_type', 'user')
-                            ->where('user_id', $user->id);
-                    });
-            });
+            if (! $user->team_id) {
+                $ticketQuery->where(function ($q) use ($storeIds, $user) {
+                    $q->whereIn('store_id', $storeIds)
+                        ->orWhere(function ($q2) use ($user) {
+                            $q2->where('recipient_type', 'user')
+                                ->where('user_id', $user->id);
+                        });
+                });
+            }
 
             $stats = [
                 ['label' => 'فاکتورها', 'value' => (clone $factorQuery)->count(), 'icon' => 'fa-file-text', 'color' => 'blue'],
                 ['label' => 'تیکت‌ها', 'value' => (clone $ticketQuery)->count(), 'icon' => 'fa-life-ring', 'color' => 'green'],
-                ['label' => 'تیکت باز', 'value' => (clone $ticketQuery)->whereIn('status', [0, 1 , 3 ,4])->count(), 'icon' => 'fa-comments', 'color' => 'orange'],
+                ['label' => 'تیکت باز', 'value' => (clone $ticketQuery)->whereIn('status', [0, 1, 3, 4, 5])->count(), 'icon' => 'fa-comments', 'color' => 'orange'],
                 ['label' => 'پرداخت‌نشده', 'value' => (clone $factorQuery)->where('price_status', 1)->count(), 'icon' => 'fa-credit-card', 'color' => 'red'],
             ];
 
             $messages = Message::where('is_active', true)->orderBy('order')->get();
             $recentTickets = (clone $ticketQuery)->with('store')->orderByDesc('created_at')->limit(5)->get();
             $recentFactors = (clone $factorQuery)->with('store')->orderByDesc('created_at')->limit(5)->get();
+        } elseif ($user->team_id) {
+            $stats = [
+                ['label' => 'تیکت‌ها', 'value' => (clone $ticketQuery)->count(), 'icon' => 'fa-life-ring', 'color' => 'green'],
+                ['label' => 'تیکت باز', 'value' => (clone $ticketQuery)->whereIn('status', [0, 1, 3, 4, 5])->count(), 'icon' => 'fa-comments', 'color' => 'orange'],
+            ];
+            $recentTickets = (clone $ticketQuery)->with('store')->orderByDesc('created_at')->limit(5)->get();
         }
 
         $ticketStatusLabels = [
@@ -65,6 +73,7 @@ class DashboardController
             2 => ['text' => 'بسته شده', 'class' => 'closed'],
             3 => ['text' => 'ارجاع به واحد فنی', 'class' => 'closed'],
             4 => ['text' => 'ارجاع به واحد گرافیک دیزاین', 'class' => 'waiting'],
+            5 => ['text' => 'ارجاع به تیم', 'class' => 'waiting'],
         ];
 
         $priceStatusLabels = [

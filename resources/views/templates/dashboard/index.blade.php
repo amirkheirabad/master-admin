@@ -117,7 +117,7 @@
             <div class="dashboard-panel">
                 <h3 class="dashboard-panel-title">
                     <span><i class="fa fa-life-ring" style="margin-left: 8px;"></i> آخرین تیکت‌ها</span>
-                    @if($isAdmin || $isSeller)
+                    @if($isAdmin || $isSeller || $user->team_id)
                         <a href="{{ route('list_tickets') }}">مشاهده همه <i class="fa fa-angle-left"></i></a>
                     @endif
                 </h3>

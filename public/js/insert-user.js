@@ -27,6 +27,7 @@ $('#userForm').on('submit', function (e) {
             password: $('#password').val(),
             role: $('#role').val(),
             type: $('#type').val(),
+            team_id: $('#team_id').val() || null,
 
         }),
     })

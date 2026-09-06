@@ -33,6 +33,10 @@
                 <span>ارجاع به واحد گرافیک دیزاین</span>
                 <i class="fa fa-check check-icon"></i>
             </div>
+            <div class="status-option" data-status="5">
+                <span>ارجاع به تیم</span>
+                <i class="fa fa-check check-icon"></i>
+            </div>
             @endif
         </div>
 

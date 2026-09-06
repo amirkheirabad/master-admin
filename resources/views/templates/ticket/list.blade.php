@@ -91,6 +91,17 @@
                                         <option value="2" {{ request()->get('status') == '2' ? 'selected' : ''}}>بسته شده</option>
                                         <option value="3" {{ request()->get('status') == '3' ? 'selected' : ''}}>ارجاع به واحد فنی</option>
                                         <option value="4" {{ request()->get('status') == '4' ? 'selected' : ''}}>ارجاع به واحد گرافیک دیزاین</option>
+                                        <option value="5" {{ request()->get('status') == '5' ? 'selected' : ''}}>ارجاع به تیم</option>
+                                    </select>
+                                </div>
+                                <div class="mb-2">
+                                    <select name="team_id" class="form-control custom-radius custom-select-input" data-title="تیم:">
+                                        <option value="">همه</option>
+                                        @foreach($teams as $team)
+                                            <option value="{{ $team->id }}" {{ request()->get('team_id') == $team->id ? 'selected' : '' }}>
+                                                {{ $team->name }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 @if(auth()->user()->hasRole('admin'))
@@ -248,6 +259,10 @@
                                     <span class="bg-new p-2 custom-radius">
                                     ارجاع به واحد گرافیک دیزاین
                                 </span>
+                                @elseif($ticket->status == 5)
+                                    <span class="bg-new p-2 custom-radius">
+                                    ارجاع به: {{ $ticket->team?->name ?? 'بدون تیم' }}
+                                </span>
                                 @endif
                             </td>
                             <td data-title="تاریخ آخرین پاسخ:" class="hide-on-mobile fa-number">{{ Verta($ticket->updated_at)->format(' %d %B  %Y') }}</td>
@@ -275,4 +290,3 @@
     </div>
     @include('templates.ticket.Modal.modal-list')
 @endsection
-

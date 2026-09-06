@@ -9,9 +9,14 @@ use Modules\User\Repositories\InterfaceUser;
 use Modules\Ticket\Requests\TicketAdminRequest;
 use Modules\Ticket\Requests\TicketReplyRequest;
 use Modules\Ticket\Requests\TicketStoreRequest;
+use Modules\Ticket\Requests\TicketAssignmentRequest;
 use Modules\Ticket\Export\TicketExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Gate;
+use Modules\Ticket\Models\Ticket;
+use Modules\Ticket\Models\TicketMessage;
+use Modules\Team\Models\Team;
 
 class TicketController
 {
@@ -29,9 +34,12 @@ class TicketController
 
     public function index(Request $request)
     {
+        Gate::authorize('viewAny', Ticket::class);
+
         $stores = $this->store->getAll();
         $tickets = $this->ticket->searchTicket($request);
         $assignedUsers = $this->user->assignedUser();
+        $teams = Team::orderBy('name')->get();
 
         if ($request->submit == "export")
         {
@@ -42,19 +50,25 @@ class TicketController
             );
         }
 
-        return view('templates.ticket.list', compact('tickets', 'stores', 'assignedUsers'));
+        return view('templates.ticket.list', compact('tickets', 'stores', 'assignedUsers', 'teams'));
     }
 
     public function show($id)
     {
         $ticket = $this->ticket->findById($id);
+        Gate::authorize('view', $ticket);
         $assignedUsers = $this->user->assignedUser();
+        $teams = Team::orderBy('name')->get();
 
-        return view('templates.ticket.show', compact('ticket', 'assignedUsers'));
+        return view('templates.ticket.show', compact('ticket', 'assignedUsers', 'teams'));
     }
 
     public function updateStatus(Request $request, $id)
     {
+        Gate::authorize('view', Ticket::findOrFail($id));
+        $request->validate([
+            'status' => ['required', 'integer', 'in:0,1,2,3,4'],
+        ]);
         $this->ticket->updateTicketStatus($id, $request);
 
         return response()->json([
@@ -64,6 +78,7 @@ class TicketController
 
     public function replyAsAdmin(TicketReplyRequest $request, $id)
     {
+        Gate::authorize('view', Ticket::findOrFail($id));
         $this->ticket->replyAsAdmin($id, $request->validated());
         return response()->json([
             'success' => true,
@@ -136,6 +151,7 @@ class TicketController
 
     public function replyUser(TicketReplyRequest $request, $id)
     {
+        Gate::authorize('view', Ticket::findOrFail($id));
         $this->ticket->replyAsStore($id, $request->validated());
         return response()->json([
             'success' => true,
@@ -144,6 +160,8 @@ class TicketController
 
     public function updateMessage(Request $request, $id)
     {
+        Gate::authorize('view', TicketMessage::findOrFail($id)->ticket);
+
         try {
         $this->ticket->updateMessage($id, $request);
         return response()->json(['success' => true]);
@@ -152,9 +170,19 @@ class TicketController
     }
     }
 
-    public function assign($id, Request $request)
+    public function assign($id, TicketAssignmentRequest $request)
     {
+        Gate::authorize('view', Ticket::findOrFail($id));
         $this->ticket->assign($request, $id);
+
+        if (! $request->expectsJson()) {
+            if ($request->user()->team_id) {
+                return redirect()->route('list_tickets');
+            }
+
+            return redirect()->route('show_ticket', $id);
+        }
+
         return response()->json([
             'success' => true,
         ]);

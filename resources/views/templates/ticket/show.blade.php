@@ -59,7 +59,6 @@
                     <div class="d-flex gap-2 hide-on-mobile" style="gap: 10px;">
                          @if(auth()->user()->hasanyRole('admin'))
                             <div class="d-flex align-items-center" style="gap: 8px;">
-
                             <select id="assignedUserSelect" data-ticket-id="{{ $ticket->id }}" class="form-control custom-radius custom-select-input col-md-3">
                                 @foreach($assignedUsers as $user)
                                     <option value="{{ $user->id }}"
@@ -96,8 +95,11 @@
                                     ارجاع به واحد فنی
                                 </div>
                                 <div class="dropdown-option pointer p-5 btn-green-light" onclick="openModalAndClose(this, {{ $ticket->id }}, 'فروشگاه نمونه', 4, ' ارجاع به واحد گرافیک دیزاین')" data-value="closed">
-                                   ارجاع به واحد گرافیک دیزاین
-                            </div>
+                                    ارجاع به واحد گرافیک دیزاین
+                                </div>
+                                <div class="dropdown-option pointer p-5 btn-green-light" onclick="openModalAndClose(this, {{ $ticket->id }}, 'فروشگاه نمونه', 5, ' ارجاع به ')" data-value="closed">
+                                    ارجاع به
+                                </div>
 
                             </div>
                         </div>
@@ -134,6 +136,10 @@
                                 @elseif($ticket->status == 4)
                                     <span class="bg-new p-2 custom-radius mr-5">
                                     ارجاع به واحد گرافیک دیزاین
+                                </span>
+                                @elseif($ticket->status == 5)
+                                    <span class="bg-new p-2 custom-radius mr-5">
+                                    ارجاع به: {{ $ticket->team?->name ?? 'بدون تیم' }}
                                 </span>
                                 @endif
                             </h5>
@@ -422,10 +428,34 @@
             </div>
         </div>
     </div>
+    @if(auth()->user()->hasRole('admin'))
+        <div id="teamReferralModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="teamReferralModalLabel">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form method="post" action="{{ route('ticket_assign', $ticket) }}">
+                        @csrf
+                        <input type="hidden" name="status" value="5">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h5 class="modal-title" id="teamReferralModalLabel">ارجاع تیکت به تیم</h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>تیم فعلی: {{ $ticket->team?->name ?? 'بدون تیم' }}</p>
+                            <label for="referralTeamSelect">تیم</label>
+                            <select id="referralTeamSelect" name="team_id" class="form-control custom-radius custom-select-input" required>
+                                @foreach($teams as $team)
+                                    <option value="{{ $team->id }}" {{ $ticket->team_id == $team->id ? 'selected' : '' }}>{{ $team->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-beta-solid">تأیید</button>
+                            <button type="button" class="btn btn-beta-outline" data-dismiss="modal">انصراف</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endif
     @include('templates.ticket.Modal.modal-show')
 @endsection
-
-
-
-
-

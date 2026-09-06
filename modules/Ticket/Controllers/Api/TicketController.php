@@ -6,6 +6,7 @@ use Modules\Ticket\Requests\TicketApiRequest;
 use Modules\Ticket\Requests\TicketStoreRequest;
 use Modules\Ticket\Requests\TicketReplyRequest;
 use Modules\Ticket\Repositories\InterfaceTicket;
+use Modules\Ticket\Models\Ticket;
 
 class TicketController
 {
@@ -31,6 +32,10 @@ class TicketController
     public function reply(TicketReplyRequest $request, $id)
     {
         $store = $request->get('authenticated_store');
+        Ticket::whereKey($id)
+            ->where('recipient_type', 'store')
+            ->where('store_id', $store->id)
+            ->firstOrFail();
         $validated = $request->validated();
         $validated['store_id'] = $store->id;
 

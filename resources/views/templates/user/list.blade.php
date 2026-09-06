@@ -57,6 +57,17 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                    <div class="mb-2">
+                                        <select name="team_id" class="form-control custom-radius custom-select-input"
+                                            data-placeholder="تیم">
+                                            <option value="">تیم</option>
+                                            @foreach($teams as $team)
+                                                <option value="{{ $team->id }}" @selected(request('team_id') == $team->id)>
+                                                    {{ $team->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
 
                                     <div class="d-flex justify-content-between mt-3">
                                         <button type="button" id="clearFiltersBtn"
@@ -84,6 +95,7 @@
                                 <th>نام و نام خانوادگی</th>
                                 <th>شماره همراه</th>
                                 <th>نقش</th>
+                                <th>تیم</th>
                                 <th>نوع کاربر</th>
                                 <th>عملیات</th>
                             </tr>
@@ -111,7 +123,8 @@
                                                 {{ $roleName }}
                                             </span>
                                         @endforeach
-                                    </td class="responsive-table-td">
+                                    </td>
+                                    <td data-title="تیم" class="responsive-table-td">{{ $user->team?->name }}</td>
                                     <td data-title="نوع کاربر" class="responsive-table-td">
                                         @if($user->type === null)
                                             {{-- خالی نمایش داده شود --}}
@@ -140,7 +153,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="text-center py-4 text-muted">
+                                    <td colspan="7" class="text-center py-4 text-muted">
                                         <i class="fa fa-search fa-2x mb-2 d-block"></i>
                                         نتیجه‌ای برای جستجو یافت نشد
                                     </td>

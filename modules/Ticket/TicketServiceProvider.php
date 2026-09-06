@@ -4,6 +4,9 @@ namespace Modules\Ticket;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Gate;
+use Modules\Ticket\Models\Ticket;
+use Modules\Ticket\Policies\TicketPolicy;
 
 class TicketServiceProvider extends ServiceProvider
 {
@@ -19,6 +22,8 @@ class TicketServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        Gate::policy(Ticket::class, TicketPolicy::class);
+
         Route::prefix('api')
             ->middleware('api')
             ->namespace($this->namespace)
