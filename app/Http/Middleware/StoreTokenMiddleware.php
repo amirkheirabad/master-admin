@@ -52,6 +52,14 @@ class StoreTokenMiddleware
             ], 401);
         }
 
+        if (!Stores::whereKey($store->id)->where('is_active', true)->exists()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'دسترسی شما از بین رفته است',
+                'error_code' => 'STORE_INACTIVE'
+            ], 403);
+        }
+
         // 7. اضافه کردن فروشگاه به ریکوئست برای استفاده در کنترلرها
         $request->merge([
             'authenticated_store' => $store,

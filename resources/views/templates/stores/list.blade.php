@@ -2,6 +2,14 @@
 @section('css')
     <link rel="stylesheet" href="{{ asset('/css/select2.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/sweetalert2.css') }}">
+    <style>
+        .store-row-inactive > th,
+        .store-row-inactive > td {
+            background-color: #f2f3f5 !important;
+            color: #8a94a3 !important;
+            opacity: .7;
+        }
+    </style>
 @endsection
 
 @section('js')
@@ -114,7 +122,7 @@
                         </thead>
                         <tbody>
                         @forelse($stores as $store)
-                            <tr class="responsive-table-row item-record{{$store->id}}">
+                            <tr class="responsive-table-row item-record{{$store->id}} {{ !$store->is_active ? 'store-row-inactive' : '' }}">
                                 <th scope="row" class="responsive-table-td">
                                     {{ ($stores->currentPage() - 1) * $stores->perPage() + $loop->iteration }}
                                 </th>

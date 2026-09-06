@@ -31,6 +31,11 @@ class Stores extends Model
         'logo_path',
         'enamd_expiration_date',
         'domain_expiration_date',
+        'is_active',
+    ];
+
+    protected $casts = [
+        'is_active' => 'boolean',
     ];
 
     public function smsPanel()

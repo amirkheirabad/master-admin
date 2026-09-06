@@ -43,6 +43,12 @@ class User extends Authenticatable
     {
         return $this->hasOne(Stores::class);
     }
+
+    public function ownsInactiveStore(): bool
+    {
+        return $this->stores()->where('is_active', false)->exists();
+    }
+
     public function factors()
     {
         return $this->hasMany(Factor::class, 'user_id');

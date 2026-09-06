@@ -54,6 +54,17 @@
                             </div>
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
+                                <label>وضعیت فروشگاه <span class="text-danger">*</span></label>
+                                <select id="is_active" name="is_active" class="form-control custom-radius custom-select-input input-border-focus">
+                                    <option value="1" {{ $store->is_active ? 'selected' : '' }}>فعال</option>
+                                    <option value="0" {{ !$store->is_active ? 'selected' : '' }}>غیرفعال</option>
+                                </select>
+                                <div class="mt-1">
+                                    <span class="text-danger" id="is_active_error"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
                                 <label>آدرس وبسایت<span class="text-danger">*</span></label>
                                 <input type="text" value="{{ $store->link }}" class="form-control custom-radius input-border-focus" id="link" name="link" placeholder="آدرس وبسایت">
                                 <div class="mt-1">

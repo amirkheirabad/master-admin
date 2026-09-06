@@ -48,6 +48,7 @@ $('#editForm').on('submit', function (e) {
 
     formData.append('store_name', document.getElementById('store_name').value);
     formData.append('user_id', document.getElementById('user_id').value);
+    formData.append('is_active', document.getElementById('is_active').value);
     formData.append('link', document.getElementById('link').value);
     formData.append('phone', document.getElementById('phone').value);
     formData.append('province', document.getElementById('province').value);

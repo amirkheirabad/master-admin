@@ -21,6 +21,16 @@ class CheckLogin
             return redirect('/login');
         }
 
+        if (auth()->user()->ownsInactiveStore()) {
+            auth()->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return redirect('/login')->withErrors([
+                'mobile' => 'دسترسی شما به سایت دیگر برقرار نیست.',
+            ]);
+        }
+
         return $next($request);
     }
 }

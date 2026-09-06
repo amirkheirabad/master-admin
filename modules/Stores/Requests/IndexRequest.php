@@ -47,6 +47,7 @@ class IndexRequest extends FormRequest
             'logo_path' => 'nullable|max:2048',
             'enamd_expiration_date' => 'nullable',
             'domain_expiration_date' => 'nullable',
+            'is_active' => 'required|boolean',
         ];
     }
 

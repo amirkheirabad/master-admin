@@ -38,6 +38,14 @@ class AuthController extends Controller
         ];
 
         if ($this->authRepo->attemptLogin($credentials, $request->has('remember'))) {
+            if ($this->authRepo->getAuthenticatedUser()->ownsInactiveStore()) {
+                $this->authRepo->logout();
+
+                return back()->withErrors([
+                    'mobile' => 'دسترسی شما به سایت دیگر برقرار نیست.',
+                ])->onlyInput('mobile');
+            }
+
             $request->session()->regenerate();
             return redirect()->intended($this->authRepo->getRedirectUrlByRole());
         }

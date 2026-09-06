@@ -80,6 +80,7 @@ class StoresRepo implements InterfaceStores
             'logo_path' => $logo_path ?? null,
             'enamd_expiration_date' => $data['enamd_expiration_date'] ? Verta::parse($data['enamd_expiration_date'])->toCarbon() : null,
             'domain_expiration_date' => $data['domain_expiration_date'] ? Verta::parse($data['domain_expiration_date'])->toCarbon() : null,
+            'is_active' => $data['is_active'],
         ]);
     }
 
@@ -104,6 +105,7 @@ class StoresRepo implements InterfaceStores
             'token' => $request->token,
             'enamd_expiration_date'=> $request->enamd_expiration_date ? Verta::parse($request->enamd_expiration_date)->toCarbon() : null,
             'domain_expiration_date'=> $request->domain_expiration_date ? Verta::parse($request->domain_expiration_date)->toCarbon() : null,
+            'is_active' => $request->is_active,
         ];
 
         if ($request->hasFile('logo_path')) {
