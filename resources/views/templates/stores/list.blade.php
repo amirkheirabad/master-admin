@@ -29,7 +29,7 @@
                 <div class="row">
                     <div class="col-md-12 d-flex justify-content-start ">
                         <div>
-                            <h3>لیست فروشگاه ها</h3>
+                            <h3>{{ $siteType === 'wordpress' ? 'لیست فروشگاه های وردپرس' : 'لیست فروشگاه ها' }}</h3>
                         </div>
                         <div class="hide-from-md mr-auto">
                             <a href="{{ route('insert_store') }}" class="btn btn-beta-solid text-left">
@@ -116,6 +116,8 @@
                                 <th>شهر</th>
                                 <th>آدرس فروشگاه</th>
                                 <th>کد پستی</th>
+                                <th>تاریخ قرارداد</th>
+                                <th>تاریخ ثبت</th>
 
                                 <th>عملیات</th>
                             </tr>
@@ -134,6 +136,8 @@
                                 <td data-title="شهر" class="responsive-table-td">{{ $store->city }}</td>
                                 <td data-title="آدرس فروشگاه" class="responsive-table-td">{{ $store->location }}</td>
                                 <td data-title="کد پستی" class="responsive-table-td">{{ $store->code_posty }}</td>
+                                <td data-title="تاریخ قرارداد" class="responsive-table-td fa-number">{{ $store->contract_date ? verta($store->contract_date)->format('Y/m/d H:i') : '-' }}</td>
+                                <td data-title="تاریخ ثبت" class="responsive-table-td fa-number">{{ verta($store->created_at)->format('Y/m/d H:i') }}</td>
                                 <td data-title="عملیات" class="responsive-table-td">
                                     <div class="action-buttons">
                                         <a href="#" class="text-beta open-checklist-modal" title="نمایش چک لیست ها" data-toggle="modal" data-target="#myModal" data-id="{{ $store->id }}" data-name="{{ $store->store_name }}" data-url="{{ route('get_check_lists_stores', $store->id) }}">
@@ -150,7 +154,7 @@
                             </tr>
                             @empty
                                 <tr>
-                                    <td colspan="11" class="text-center py-4 text-muted">
+                                    <td colspan="12" class="text-center py-4 text-muted">
                                         <i class="fa fa-search fa-2x mb-2 d-block"></i>
                                         نتیجه‌ای برای جستجو یافت نشد
                                     </td>

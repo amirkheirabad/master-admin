@@ -6,6 +6,7 @@ use Modules\Ticket\Controllers\Web\QuickReplyController;
 
 Route::middleware('check.login')->group(function () {
     Route::get('/tickets', [TicketController::class, 'index'])->name('list_tickets');
+    Route::get('/wordpress-tickets', [TicketController::class, 'index'])->defaults('siteType', 'wordpress')->name('list_wordpress_tickets');
     Route::get('/ticket/{id}', [TicketController::class, 'show'])->name('show_ticket');
 });
 

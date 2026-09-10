@@ -32,25 +32,29 @@ class TicketController
         $this->user = $user;
     }
 
-    public function index(Request $request)
+    public function index(Request $request, ?string $siteType = 'index')
     {
         Gate::authorize('viewAny', Ticket::class);
 
-        $stores = $this->store->getAll();
-        $tickets = $this->ticket->searchTicket($request);
+        if (! $request->user()->hasRole('admin') && ! $request->user()->stores()->exists()) {
+            $siteType = null;
+        }
+
+        $stores = $this->store->getAll($siteType);
+        $tickets = $this->ticket->searchTicket($request, $siteType);
         $assignedUsers = $this->user->assignedUser();
         $teams = Team::orderBy('name')->get();
 
         if ($request->submit == "export")
         {
-            $tickets = $this->ticket->exportTickets($request);
+            $tickets = $this->ticket->exportTickets($request, $siteType);
             return Excel::download(
                 new TicketExport($tickets),
                 'tickets_' . Carbon::now('Asia/Tehran')->format('Y-m-d_H-i-s') . '.xlsx'
             );
         }
 
-        return view('templates.ticket.list', compact('tickets', 'stores', 'assignedUsers', 'teams'));
+        return view('templates.ticket.list', compact('tickets', 'stores', 'assignedUsers', 'teams', 'siteType'));
     }
 
     public function show($id)
@@ -100,11 +104,11 @@ class TicketController
 
     public function store(TicketAdminRequest $request)
     {
-        $this->ticket->createTicketAdmin($request->validated());
+        $ticket = $this->ticket->createTicketAdmin($request->validated());
 
         return response()->json([
             'success' => true,
-            'redirect' => route('list_tickets'),
+            'redirect' => route($ticket->store?->site_type === 'wordpress' ? 'list_wordpress_tickets' : 'list_tickets'),
             'message' => __('factor created successfully!'),
         ]);
     }
@@ -140,11 +144,11 @@ class TicketController
         ]);
     }
 
-    $this->ticket->createTicketStore($request->validated());
+    $ticket = $this->ticket->createTicketStore($request->validated());
 
     return response()->json([
         'success'  => true,
-        'redirect' => route('list_tickets'),
+        'redirect' => route($ticket->store?->site_type === 'wordpress' ? 'list_wordpress_tickets' : 'list_tickets'),
         'message'  => __('ticket created successfully!'),
     ]);
     }

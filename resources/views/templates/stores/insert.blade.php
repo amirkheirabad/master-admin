@@ -8,7 +8,7 @@
     <script src="{{ asset('/js/select2.js') }}"></script>
     <script src="{{ asset('js/jalalidatepicker.min.js') }}"></script>
     <script>
-        jalaliDatepicker.startWatch();
+        jalaliDatepicker.startWatch({ time: true, hasSecond: false });
     </script>
     <script src="{{ asset('/js/generate-token.js') }}"></script>
     <script src="{{ asset('/js/app-stores.js') }}"></script>
@@ -73,6 +73,15 @@
                                 <div class="mt-1">
                                     <span class="text-danger" id="is_active_error"></span>
                                 </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
+                                <label>نوع سایت <span class="text-danger">*</span></label>
+                                <select id="site_type" name="site_type" class="form-control custom-radius custom-select-input input-border-focus">
+                                    <option value="index">ایندکس</option>
+                                    <option value="wordpress">وردپرس</option>
+                                </select>
+                                <div class="mt-1"><span class="text-danger" id="site_type_error"></span></div>
                             </div>
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
@@ -146,7 +155,7 @@
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
                                 <label>تاریخ انقضا اینماد </label>
-                                <input type="text" data-jdp class="form-control custom-radius input-border-focus" id="enamd_expiration_date" name="enamd_expiration_date">
+                                <input type="text" data-jdp data-jdp-only-date class="form-control custom-radius input-border-focus" id="enamd_expiration_date" name="enamd_expiration_date">
                                 <div class="mt-1">
                                     <span class="text-danger" id="enamd_expiration_date_error"></span>
                                 </div>
@@ -154,9 +163,17 @@
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
                                 <label>تاریخ انقضا دامنه </label>
-                                <input type="text" data-jdp class="form-control custom-radius input-border-focus" id="domain_expiration_date" name="domain_expiration_date">
+                                <input type="text" data-jdp data-jdp-only-date class="form-control custom-radius input-border-focus" id="domain_expiration_date" name="domain_expiration_date">
                                 <div class="mt-1">
                                     <span class="text-danger" id="domain_expiration_date_error"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
+                                <label>تاریخ قرارداد</label>
+                                <input type="text" data-jdp class="form-control custom-radius input-border-focus" id="contract_date" name="contract_date" placeholder="1405/06/19 14:30">
+                                <div class="mt-1">
+                                    <span class="text-danger" id="contract_date_error"></span>
                                 </div>
                             </div>
 

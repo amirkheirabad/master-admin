@@ -47,6 +47,8 @@ class IndexRequest extends FormRequest
             'logo_path' => 'nullable|max:2048',
             'enamd_expiration_date' => 'nullable',
             'domain_expiration_date' => 'nullable',
+            'contract_date' => 'nullable|date_format:Y/m/d H:i',
+            'site_type' => 'required|in:index,wordpress',
             'is_active' => 'required|boolean',
         ];
     }

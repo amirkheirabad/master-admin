@@ -41,6 +41,7 @@
                         <tr>
                             <th>همه</th>
                             <th>نام چک لیست</th>
+                            <th>نوع سایت</th>
                             <th>عملیات</th>
                         </tr>
                         </thead>
@@ -49,6 +50,7 @@
                             <tr class="item-record{{$checkList->id}}">
                                 <th scope="row">{{ $checkList->id }}</th>
                                 <td>{{ $checkList->title }}</td>
+                                <td>{{ $checkList->site_type === 'wordpress' ? 'وردپرس' : 'ایندکس' }}</td>
                                 <td class="">
                                     <a href="#" class="text-success editCategoryBtn" data-toggle="modal" data-target="#myModal2" data-id="{{ $checkList->id }}">
                                         <i class="fa fa-pencil text-beta fa-x"></i>

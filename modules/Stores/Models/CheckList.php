@@ -17,7 +17,7 @@ class CheckList extends Model
 
 
 
-    protected $fillable = ['title'];
+    protected $fillable = ['title', 'site_type'];
 
     public function storeComments()
     {

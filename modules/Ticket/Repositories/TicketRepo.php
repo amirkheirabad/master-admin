@@ -31,7 +31,7 @@ class TicketRepo implements InterfaceTicket
         return Ticket::paginate(10);
     }
 
-    public function ticketQuery(Request $request)
+    public function ticketQuery(Request $request, $siteType = null)
     {
         $user = auth()->user();
         $tickets = Ticket::query()->visibleTo($user)->with(['store', 'user', 'assignedUser', 'team']);
@@ -39,6 +39,16 @@ class TicketRepo implements InterfaceTicket
         $searchQuery = $request->input('search_query');
 
         return $tickets
+            ->when($siteType, function ($q) use ($siteType, $user) {
+                if ($siteType === 'index' && $user->hasRole('admin')) {
+                    $q->where(fn ($query) => $query
+                        ->whereNull('store_id')
+                        ->orWhereHas('store', fn ($store) => $store->where('site_type', 'index')));
+                    return;
+                }
+
+                $q->whereHas('store', fn ($store) => $store->where('site_type', $siteType));
+            })
             ->when($request->filled('search_query'), function ($q) use ($searchQuery) {
                 $q->where(function ($query) use ($searchQuery) {
                     $query->where('id', 'LIKE', '%' . $searchQuery . '%')
@@ -83,14 +93,14 @@ class TicketRepo implements InterfaceTicket
             });
     }
 
-    public  function exportTickets(Request $request)
+    public  function exportTickets(Request $request, $siteType = null)
     {
-        return $this->ticketQuery($request)->get();
+        return $this->ticketQuery($request, $siteType)->get();
     }
 
-    public function searchTicket(Request $request)
+    public function searchTicket(Request $request, $siteType = null)
     {
-        return $this->ticketQuery($request)->paginate(10);
+        return $this->ticketQuery($request, $siteType)->paginate(10);
     }
 
     public function createTicketStore(array $data)

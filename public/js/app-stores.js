@@ -49,6 +49,7 @@ $('#editForm').on('submit', function (e) {
     formData.append('store_name', document.getElementById('store_name').value);
     formData.append('user_id', document.getElementById('user_id').value);
     formData.append('is_active', document.getElementById('is_active').value);
+    formData.append('site_type', document.getElementById('site_type').value);
     formData.append('link', document.getElementById('link').value);
     formData.append('phone', document.getElementById('phone').value);
     formData.append('province', document.getElementById('province').value);
@@ -59,6 +60,7 @@ $('#editForm').on('submit', function (e) {
     formData.append('token', document.getElementById('token').value);
     formData.append('enamd_expiration_date', document.getElementById('enamd_expiration_date').value);
     formData.append('domain_expiration_date', document.getElementById('domain_expiration_date').value);
+    formData.append('contract_date', document.getElementById('contract_date').value);
 
     if (selectedFiles.length > 0) {
         formData.append('logo_path', selectedFiles[0]);

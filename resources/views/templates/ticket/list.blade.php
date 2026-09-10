@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="col-md-12 d-flex justify-content-between">
                     <div>
-                        <h3>تیکت ها</h3>
+                        <h3>{{ $siteType === 'wordpress' ? 'لیست تیکت های وردپرس' : 'تیکت ها' }}</h3>
                     </div>
                     @if(auth()->user()->hasRole('admin'))
                         <div>
@@ -43,7 +43,7 @@
                 @endif
 
                 <div class="d-flex flex-wrap align-items-center" style="gap: 10px;">
-                    <form method="get" id="filterForm" action="{{ route('list_tickets') }}" class="d-flex flex-wrap align-items-center">
+                    <form method="get" id="filterForm" action="{{ route($siteType === 'wordpress' ? 'list_wordpress_tickets' : 'list_tickets') }}" class="d-flex flex-wrap align-items-center">
                         <div class="search-container">
                             <button class="search-button">
                                 <i class="fa fa-search"></i>

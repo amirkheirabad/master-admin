@@ -12,10 +12,12 @@ use Modules\User\Models\User;
 
 class StoresRepo implements InterfaceStores
 {
-    public function getAll()
+    public function getAll($siteType = null)
     {
-        return Stores::orderBy('created_at', 'desc')->get();
+        return Stores::when($siteType, fn ($query) => $query->where('site_type', $siteType))
+            ->orderBy('created_at', 'desc')->get();
     }
+
     public function getUsers(){
         return  User::orderBy('created_at', 'desc')->get();
     }
@@ -25,12 +27,13 @@ class StoresRepo implements InterfaceStores
         return Stores::with('user')->orderBy('created_at', 'desc')->paginate(10);
     }
 
-    public function filterStores(Request $request)
+    public function filterStores(Request $request, $siteType = 'index')
     {
         $searchQuery = $request->input('search_query');
 
         return Stores::query()
             ->with('user')
+            ->where('site_type', $siteType)
             ->when($request->filled('search_query'), function ($q) use ($searchQuery) {
                 $q->where(function ($query) use ($searchQuery) {
                     $query->where('store_name', 'LIKE', '%'.$searchQuery.'%')
@@ -80,6 +83,8 @@ class StoresRepo implements InterfaceStores
             'logo_path' => $logo_path ?? null,
             'enamd_expiration_date' => $data['enamd_expiration_date'] ? Verta::parse($data['enamd_expiration_date'])->toCarbon() : null,
             'domain_expiration_date' => $data['domain_expiration_date'] ? Verta::parse($data['domain_expiration_date'])->toCarbon() : null,
+            'contract_date' => ($data['contract_date'] ?? null) ? Verta::parse($data['contract_date'])->toCarbon() : null,
+            'site_type' => $data['site_type'],
             'is_active' => $data['is_active'],
         ]);
     }
@@ -105,6 +110,8 @@ class StoresRepo implements InterfaceStores
             'token' => $request->token,
             'enamd_expiration_date'=> $request->enamd_expiration_date ? Verta::parse($request->enamd_expiration_date)->toCarbon() : null,
             'domain_expiration_date'=> $request->domain_expiration_date ? Verta::parse($request->domain_expiration_date)->toCarbon() : null,
+            'contract_date' => $request->contract_date ? Verta::parse($request->contract_date)->toCarbon() : null,
+            'site_type' => $request->site_type,
             'is_active' => $request->is_active,
         ];
 
@@ -112,7 +119,14 @@ class StoresRepo implements InterfaceStores
             $data['logo_path'] = $request->logo_path->store('logos', 'public');
         }
 
-        return Stores::find($id)->update($data);
+        $store = Stores::find($id);
+        $store->update($data);
+        $incompatibleCheckLists = $store->checkLists()
+            ->where('check_lists.site_type', '!=', $store->site_type)
+            ->pluck('check_lists.id');
+        $store->checkLists()->detach($incompatibleCheckLists);
+
+        return $store->refresh();
     }
 
     private function resolveRecipientContact(Ticket $ticket)
@@ -149,19 +163,24 @@ class StoresRepo implements InterfaceStores
         return CheckList::latest()->paginate(10);
     }
 
-    public function getAllCheckLists()
+    public function getAllCheckLists($siteType)
     {
-        return CheckList::all();
+        return CheckList::where('site_type', $siteType)->get();
     }
 
     public function createCheckList(Request $request)
     {
-        CheckList::create(['title' => $request->title]);
+        CheckList::create($request->only('title', 'site_type'));
     }
 
     public function updateCheckList($id, $request)
     {
-        CheckList::find($id)->update(['title' => $request->title]);
+        $checkList = CheckList::find($id);
+        $checkList->update($request->only('title', 'site_type'));
+        DB::table('store_check_lists')
+            ->where('check_list_id', $checkList->id)
+            ->whereIn('store_id', Stores::where('site_type', '!=', $checkList->site_type)->select('id'))
+            ->delete();
     }
 
     public function findCheckList($id)
@@ -179,6 +198,7 @@ class StoresRepo implements InterfaceStores
         $store = Stores::findOrFail($request->store_id);
 
         DB::transaction(function () use ($request, $store) {
+            $store->update(['report' => $request->input('report')]);
             $store->checkLists()->sync($request->check_lists ?? []);
 
             $comments = collect($request->input('comments', []));
@@ -204,6 +224,8 @@ class StoresRepo implements InterfaceStores
                 );
             });
         });
+
+        return $store->refresh();
     }
 
     public function getCheckListsStores($id)
@@ -213,6 +235,7 @@ class StoresRepo implements InterfaceStores
         return [
             'check_lists' => $store->checkLists->pluck('id'),
             'comments' => $store->checkListComments->pluck('comment', 'check_list_id'),
+            'report' => $store->report,
         ];
     }
 }

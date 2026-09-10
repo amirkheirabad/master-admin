@@ -51,7 +51,7 @@
 
                 <div class="modal-body">
                     <form method="post" action="{{ route('update_check_list_store') }}" id="checkListForm"
-                          data-has-errors="{{ $errors->hasAny(['store_id', 'check_lists', 'check_lists.*', 'comments', 'comments.*']) ? 'true' : 'false' }}">
+                          data-has-errors="{{ $errors->hasAny(['store_id', 'check_lists', 'check_lists.*', 'comments', 'comments.*', 'report']) ? 'true' : 'false' }}">
                         @csrf
                         <input type="hidden" name="store_id" id="store_id" value="{{ old('store_id') }}">
 
@@ -90,6 +90,12 @@
                                     </div>
                                 </div>
                             @endforeach
+                        </div>
+
+                        <div class="mt-4">
+                            <label class="checklist-field-label" for="report">گزارش</label>
+                            <textarea class="form-control checklist-textarea" id="report" name="report" rows="4">{{ old('report') }}</textarea>
+                            @error('report')<span class="text-danger">{{ $message }}</span>@enderror
                         </div>
 
                         <div class="checklist-actions">

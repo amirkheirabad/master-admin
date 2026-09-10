@@ -15,7 +15,7 @@
 @endsection
 
 @section('nav')
-    <a href="{{ route('list_tickets') }}">
+    <a href="{{ route($ticket->store?->site_type === 'wordpress' ? 'list_wordpress_tickets' : 'list_tickets') }}">
         <i class="fa fa-chevron-right mt-8 mr-1 fa-x"></i>
     </a>
     <div class="nav toggle hide-from-md">

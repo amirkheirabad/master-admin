@@ -20,6 +20,11 @@
                             class="form-control custom-radius">
 
                         <small class="text-danger" id="error_name"></small>
+                        <label class="mt-3">نوع سایت</label>
+                        <select name="site_type" id="checklist_site_type" class="form-control custom-radius">
+                            <option value="index">ایندکس</option>
+                            <option value="wordpress">وردپرس</option>
+                        </select>
                     </form>
                 </div>
 
@@ -53,6 +58,11 @@
                             <label>نام چک لیست</label>
                             <input type="text" name="name" id="edit_category_name" class="form-control custom-radius">
                             <small class="text-danger" id="error_name2"></small>
+                            <label class="mt-3">نوع سایت</label>
+                            <select name="site_type" id="edit_site_type" class="form-control custom-radius">
+                                <option value="index">ایندکس</option>
+                                <option value="wordpress">وردپرس</option>
+                            </select>
                         </div>
                     </form>
                 </div>

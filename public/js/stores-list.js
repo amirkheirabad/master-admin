@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function resetModal() {
+        document.getElementById('report').value = '';
         rows.forEach(row => {
             row.querySelector('.checklist-checkbox').checked = false;
             const textarea = row.querySelector('[data-comment-id]');
@@ -131,6 +132,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 const data = await response.json();
                 const selected = new Set((data.check_lists || []).map(String));
+                document.getElementById('report').value = data.report || '';
 
                 rows.forEach(row => {
                     const checkbox = row.querySelector('.checklist-checkbox');

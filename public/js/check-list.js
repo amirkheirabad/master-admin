@@ -26,6 +26,7 @@ function submitCategory() {
         },
         body: JSON.stringify({
             title: $('#title').val(),
+            site_type: $('#checklist_site_type').val(),
 
         }),
     })
@@ -112,6 +113,7 @@ $(document).on('click', '.editCategoryBtn', function (e) {
         .then(data => {
             $('#edit_category_id').val(data.id);
             $('#edit_category_name').val(data.title);
+            $('#edit_site_type').val(data.site_type);
 
             // پاک کردن انتخاب قبلی
             $('#myModal2 input[name="active"]').prop('checked', false);
@@ -149,6 +151,7 @@ function submitCategory2() {
         },
         body: JSON.stringify({
             title: $('#edit_category_name').val(),
+            site_type: $('#edit_site_type').val(),
             active: parseInt(selectedActive)  // تبدیل به عدد
         })
     })

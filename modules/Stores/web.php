@@ -5,6 +5,7 @@ use Modules\Stores\Controllers\Web\StoresController;
 
 Route::middleware(['check.login', 'check.role:admin'])->group(function () {
     Route::get('/stores', [StoresController::class, 'list'])->name('list_stores');
+    Route::get('/wordpress-stores', [StoresController::class, 'list'])->defaults('siteType', 'wordpress')->name('list_wordpress_stores');
     Route::get('/insert', [StoresController::class, 'index'])->name('insert_store');
     Route::get('/edit/{id}', [StoresController::class, 'edit'])->name('edit_store');
     Route::get('/check_lists', [StoresController::class, 'checkLists'])->name('check_lists');

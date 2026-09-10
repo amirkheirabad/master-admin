@@ -73,6 +73,7 @@
                             <span> لیست فروشگاه ها</span>
                         </a>
                     </li>
+                    <li><a href="{{ route('list_wordpress_stores') }}"> لیست فروشگاه های وردپرس</a></li>
                     <li>
                         <a href="{{ route('check_lists') }}">
                             <i class="text-beta"></i>
@@ -91,7 +92,14 @@
                     <span class="fa fa-chevron-down"></span>
                 </a>
                 <ul class="nav child_menu">
-                    <li><a href="{{ route('list_tickets') }}">همه تیکت ها</a></li>
+                    @if(auth()->user()->hasRole('admin'))
+                        <li><a href="{{ route('list_tickets') }}">لیست تیکت ها</a></li>
+                        <li><a href="{{ route('list_wordpress_tickets') }}">لیست تیکت های وردپرس</a></li>
+                    @elseif(auth()->user()->stores?->site_type === 'wordpress')
+                        <li><a href="{{ route('list_wordpress_tickets') }}">لیست تیکت های وردپرس</a></li>
+                    @else
+                        <li><a href="{{ route('list_tickets') }}">لیست تیکت ها</a></li>
+                    @endif
                     @if(auth()->user()->hasanyRole('admin', 'seller'))
                     <li><a href="{{ route('insert_ticket') }}">تیکت جدید</a></li>
                     @endif

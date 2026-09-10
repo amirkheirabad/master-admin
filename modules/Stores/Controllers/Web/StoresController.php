@@ -20,13 +20,13 @@ class StoresController
         $this->user = $user;
     }
 
-    public function list(Request $request)
+    public function list(Request $request, string $siteType = 'index')
     {
-        $stores = $this->store->filterStores($request);
+        $stores = $this->store->filterStores($request, $siteType);
         $users = $this->store->getUsers();
-        $checkLists = $this->store->getAllCheckLists();
+        $checkLists = $this->store->getAllCheckLists($siteType);
 
-        return view('templates.stores.list', compact('stores', 'users', 'checkLists'));
+        return view('templates.stores.list', compact('stores', 'users', 'checkLists', 'siteType'));
     }
 
     public function index()
@@ -37,10 +37,10 @@ class StoresController
 
     public function store(IndexRequest $request)
     {
-        $this->store->create($request->validated());
+        $store = $this->store->create($request->validated());
         return response()->json([
             'success' => true,
-            'redirect' => route('list_stores'),
+            'redirect' => route($store->site_type === 'wordpress' ? 'list_wordpress_stores' : 'list_stores'),
             'message' => __('Store created successfully!')
         ]);
     }
@@ -59,10 +59,10 @@ class StoresController
 
     public function update($id, IndexRequest $request)
     {
-        $this->store->update($id, $request);
+        $store = $this->store->update($id, $request);
         return response()->json([
             'success' => true,
-            'redirect' => route('list_stores'),
+            'redirect' => route($store->site_type === 'wordpress' ? 'list_wordpress_stores' : 'list_stores'),
         ]);
     }
 
@@ -87,6 +87,7 @@ class StoresController
 
     public function createCheckList(Request $request)
     {
+        $request->validate(['title' => 'required|string|max:255', 'site_type' => 'required|in:index,wordpress']);
         $this->store->createCheckList($request);
         return response()->json([
             'success' => true,
@@ -95,6 +96,7 @@ class StoresController
 
     public function updateCheckList(int $id, Request $request)
     {
+        $request->validate(['title' => 'required|string|max:255', 'site_type' => 'required|in:index,wordpress']);
         $this->store->updateCheckList($id, $request);
         return response()->json([
             'success' => true,
@@ -114,8 +116,8 @@ class StoresController
 
     public function updateCheckListsStore(UpdateCheckListsStoreRequest $request)
     {
-        $this->store->updateCheckListsStore($request);
-        return redirect()->route('list_stores');
+        $store = $this->store->updateCheckListsStore($request);
+        return redirect()->route($store->site_type === 'wordpress' ? 'list_wordpress_stores' : 'list_stores');
     }
 
     public function getCheckListsStores($id)
