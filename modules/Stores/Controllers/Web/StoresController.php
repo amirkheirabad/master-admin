@@ -52,7 +52,7 @@ class StoresController
 
     public function edit($id)
     {
-        $users = $this->user->getUsers();
+        $users = $this->store->getUsers();
         $store = $this->store->getById($id);
         return view('templates.stores.edit', compact('store', 'users'));
     }

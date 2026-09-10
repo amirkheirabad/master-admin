@@ -24,7 +24,7 @@ class StoresRepo implements InterfaceStores
 
     public function index()
     {
-        return Stores::with('user')->orderBy('created_at', 'desc')->paginate(10);
+        return Stores::with(['user', 'projectManager'])->orderBy('created_at', 'desc')->paginate(10);
     }
 
     public function filterStores(Request $request, $siteType = 'index')
@@ -32,7 +32,7 @@ class StoresRepo implements InterfaceStores
         $searchQuery = $request->input('search_query');
 
         return Stores::query()
-            ->with('user')
+            ->with(['user', 'projectManager'])
             ->where('site_type', $siteType)
             ->when($request->filled('search_query'), function ($q) use ($searchQuery) {
                 $q->where(function ($query) use ($searchQuery) {
@@ -50,6 +50,9 @@ class StoresRepo implements InterfaceStores
             })
             ->when($request->filled('user_id'), function ($q) use ($request) {
                 $q->where('user_id', $request->user_id);
+            })
+            ->when($request->filled('project_manager_id'), function ($q) use ($request) {
+                $q->where('project_manager_id', $request->project_manager_id);
             })
             ->when($request->filled('province'), function ($q) use ($request) {
                 $q->where('province', 'LIKE', '%'.$request->province.'%');
@@ -71,6 +74,7 @@ class StoresRepo implements InterfaceStores
         return Stores::create([
             'store_name' => $data['store_name'],
             'user_id' => $data['user_id'],
+            'project_manager_id' => $data['project_manager_id'] ?? null,
             'link' => $data['link'],
             'slogan' => $data['slogan'] ?? null,
             'phone' => $data['phone'],
@@ -84,6 +88,7 @@ class StoresRepo implements InterfaceStores
             'enamd_expiration_date' => $data['enamd_expiration_date'] ? Verta::parse($data['enamd_expiration_date'])->toCarbon() : null,
             'domain_expiration_date' => $data['domain_expiration_date'] ? Verta::parse($data['domain_expiration_date'])->toCarbon() : null,
             'contract_date' => ($data['contract_date'] ?? null) ? Verta::parse($data['contract_date'])->toCarbon() : null,
+            'delivery_date' => ($data['delivery_date'] ?? null) ? Verta::parse($data['delivery_date'])->toCarbon() : null,
             'site_type' => $data['site_type'],
             'is_active' => $data['is_active'],
         ]);
@@ -99,6 +104,7 @@ class StoresRepo implements InterfaceStores
         $data = [
             'store_name' => $request->store_name,
             'user_id' => $request->user_id,
+            'project_manager_id' => $request->project_manager_id,
             'link' => $request->link,
             'slogan' => $request->slogan,
             'phone' => $request->phone,
@@ -111,6 +117,7 @@ class StoresRepo implements InterfaceStores
             'enamd_expiration_date'=> $request->enamd_expiration_date ? Verta::parse($request->enamd_expiration_date)->toCarbon() : null,
             'domain_expiration_date'=> $request->domain_expiration_date ? Verta::parse($request->domain_expiration_date)->toCarbon() : null,
             'contract_date' => $request->contract_date ? Verta::parse($request->contract_date)->toCarbon() : null,
+            'delivery_date' => $request->delivery_date ? Verta::parse($request->delivery_date)->toCarbon() : null,
             'site_type' => $request->site_type,
             'is_active' => $request->is_active,
         ];
@@ -155,7 +162,7 @@ class StoresRepo implements InterfaceStores
 
     public function getById($id)
     {
-       return Stores::with('user')->findOrfail($id);
+       return Stores::with(['user', 'projectManager'])->findOrfail($id);
     }
 
     public function getCheckLists()

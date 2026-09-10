@@ -18,6 +18,7 @@ class Stores extends Model
         'store_name',
         'link',
         'user_id',
+        'project_manager_id',
         'phone',
         'province',
         'city',
@@ -32,6 +33,7 @@ class Stores extends Model
         'enamd_expiration_date',
         'domain_expiration_date',
         'contract_date',
+        'delivery_date',
         'report',
         'site_type',
         'is_active',
@@ -40,6 +42,7 @@ class Stores extends Model
     protected $casts = [
         'is_active' => 'boolean',
         'contract_date' => 'datetime',
+        'delivery_date' => 'datetime',
     ];
 
     public function smsPanel()
@@ -50,6 +53,11 @@ class Stores extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function projectManager()
+    {
+        return $this->belongsTo(User::class, 'project_manager_id');
     }
 
     public function factors()

@@ -35,6 +35,7 @@ class IndexRequest extends FormRequest
         return [
             'store_name' => 'required|string|max:255',
             'user_id' => 'required',
+            'project_manager_id' => 'nullable|exists:users,id',
             'link' => 'required|string|max:255',
             'phone' => ['required', 'regex:/^09[0-9]{9}$/'],
             'province' => 'required|string|max:255',
@@ -48,6 +49,7 @@ class IndexRequest extends FormRequest
             'enamd_expiration_date' => 'nullable',
             'domain_expiration_date' => 'nullable',
             'contract_date' => 'nullable|date_format:Y/m/d H:i',
+            'delivery_date' => 'nullable|date_format:Y/m/d H:i',
             'site_type' => 'required|in:index,wordpress',
             'is_active' => 'required|boolean',
         ];

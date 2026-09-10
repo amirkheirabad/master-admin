@@ -33,6 +33,12 @@ document.getElementById('clearFiltersBtn')?.addEventListener('click', function (
         $(userSelect).trigger('change');
     }
 
+    const projectManagerSelect = document.querySelector('select[name="project_manager_id"]');
+    if (projectManagerSelect) {
+        projectManagerSelect.value = '';
+        $(projectManagerSelect).trigger('change');
+    }
+
     ['province', 'city'].forEach(name => {
         const input = document.querySelector(`input[name="${name}"]`);
         if (input) input.value = '';

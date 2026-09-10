@@ -54,6 +54,21 @@
                             </div>
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
+                                <label>مسئول پروژه</label>
+                                <select id="project_manager_id" class="form-control custom-radius select2" name="project_manager_id">
+                                    <option value="">انتخاب کنید</option>
+                                    @foreach($users as $user)
+                                        <option value="{{ $user->id }}" {{ $store->project_manager_id == $user->id ? 'selected' : '' }}>
+                                            {{ $user->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <div class="mt-1">
+                                    <span class="text-danger" id="project_manager_id_error"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
                                 <label>وضعیت فروشگاه <span class="text-danger">*</span></label>
                                 <select id="is_active" name="is_active" class="form-control custom-radius custom-select-input input-border-focus">
                                     <option value="1" {{ $store->is_active ? 'selected' : '' }}>فعال</option>
@@ -165,6 +180,14 @@
                                 <input type="text" value="{{ $store->contract_date ? verta($store->contract_date)->format('Y/m/d H:i') : '' }}" data-jdp class="form-control custom-radius input-border-focus" id="contract_date" name="contract_date" placeholder="1405/06/19 14:30">
                                 <div class="mt-1">
                                     <span class="text-danger" id="contract_date_error"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
+                                <label>تاریخ تحویل</label>
+                                <input type="text" value="{{ $store->delivery_date ? verta($store->delivery_date)->format('Y/m/d H:i') : '' }}" data-jdp class="form-control custom-radius input-border-focus" id="delivery_date" name="delivery_date" placeholder="1405/06/19 14:30">
+                                <div class="mt-1">
+                                    <span class="text-danger" id="delivery_date_error"></span>
                                 </div>
                             </div>
 
