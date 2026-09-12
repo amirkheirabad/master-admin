@@ -80,6 +80,12 @@
                             <span> چک لیست ها</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('store_statuses') }}">
+                            <i class="text-beta"></i>
+                            <span> وضعیت‌های فروشگاه</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
             @endif

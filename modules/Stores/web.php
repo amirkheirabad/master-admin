@@ -9,6 +9,10 @@ Route::middleware(['check.login', 'check.role:admin'])->group(function () {
     Route::get('/insert', [StoresController::class, 'index'])->name('insert_store');
     Route::get('/edit/{id}', [StoresController::class, 'edit'])->name('edit_store');
     Route::get('/check_lists', [StoresController::class, 'checkLists'])->name('check_lists');
+    Route::get('/store_statuses', [StoresController::class, 'storeStatuses'])->name('store_statuses');
+    Route::post('/store_statuses', [StoresController::class, 'createStoreStatus'])->name('create_store_status');
+    Route::put('/store_statuses/{id}', [StoresController::class, 'updateStoreStatus'])->name('update_store_status');
+    Route::delete('/store_statuses/{id}', [StoresController::class, 'deleteStoreStatus'])->name('delete_store_status');
     Route::post('/create_check_lists', [StoresController::class, 'createCheckList'])->name('create_check_lists');
     Route::put('/update_check_lists/{id}', [StoresController::class, 'updateCheckList'])->name('update_check_lists');
     Route::get('/show_check_list/{id}', [StoresController::class, 'show'])->name('show_check_list');

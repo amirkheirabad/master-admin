@@ -19,6 +19,7 @@ class Stores extends Model
         'link',
         'user_id',
         'project_manager_id',
+        'status_id',
         'phone',
         'province',
         'city',
@@ -58,6 +59,11 @@ class Stores extends Model
     public function projectManager()
     {
         return $this->belongsTo(User::class, 'project_manager_id');
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(StoreStatus::class, 'status_id');
     }
 
     public function factors()

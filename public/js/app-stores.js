@@ -49,6 +49,7 @@ $('#editForm').on('submit', function (e) {
     formData.append('store_name', document.getElementById('store_name').value);
     formData.append('user_id', document.getElementById('user_id').value);
     formData.append('project_manager_id', document.getElementById('project_manager_id').value);
+    formData.append('status_id', document.getElementById('status_id').value);
     formData.append('is_active', document.getElementById('is_active').value);
     formData.append('site_type', document.getElementById('site_type').value);
     formData.append('link', document.getElementById('link').value);

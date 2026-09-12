@@ -121,13 +121,13 @@
                             <tr>
                                 <th>#</th>
                                 <th>نام فروشگاه</th>
+                                <th>وضعیت</th>
                                 <th>نام مدیر</th>
                                 <th>مسئول پروژه</th>
                                 <th>آدرس وبسایت</th>
                                 <th>شماره تماس</th>
                                 <th>استان</th>
                                 <th>شهر</th>
-                                <th>آدرس فروشگاه</th>
                                 <th>تاریخ قرارداد</th>
                                 <th>تاریخ تحویل</th>
                                 <th>تاریخ ثبت</th>
@@ -142,13 +142,13 @@
                                     {{ ($stores->currentPage() - 1) * $stores->perPage() + $loop->iteration }}
                                 </th>
                                 <td data-title="نام فروشگاه" class="responsive-table-td">{{ $store->store_name }}</td>
+                                <td data-title="وضعیت" class="responsive-table-td">{{ $store->status?->name ?? '-' }}</td>
                                 <td data-title="نام مدیر" class="responsive-table-td">{{ $store->user->name }}</td>
                                 <td data-title="مسئول پروژه" class="responsive-table-td">{{ $store->projectManager?->name ?? '-' }}</td>
                                 <td data-title="آدرس وبسایت" class="responsive-table-td">{{ $store->link }}</td>
                                 <td data-title="شماره تماس" class="responsive-table-td">{{ $store->phone }}</td>
                                 <td data-title="استان" class="responsive-table-td">{{ $store->province }}</td>
                                 <td data-title="شهر" class="responsive-table-td">{{ $store->city }}</td>
-                                <td data-title="آدرس فروشگاه" class="responsive-table-td">{{ $store->location }}</td>
                                 <td data-title="تاریخ قرارداد" class="responsive-table-td fa-number">{{ $store->contract_date ? verta($store->contract_date)->format('Y/m/d H:i') : '-' }}</td>
                                 <td data-title="تاریخ تحویل" class="responsive-table-td fa-number">{{ $store->delivery_date ? verta($store->delivery_date)->format('Y/m/d H:i') : '-' }}</td>
                                 <td data-title="تاریخ ثبت" class="responsive-table-td fa-number">{{ verta($store->created_at)->format('Y/m/d H:i') }}</td>
@@ -168,7 +168,7 @@
                             </tr>
                             @empty
                                 <tr>
-                                    <td colspan="13" class="text-center py-4 text-muted">
+                                    <td colspan="14" class="text-center py-4 text-muted">
                                         <i class="fa fa-search fa-2x mb-2 d-block"></i>
                                         نتیجه‌ای برای جستجو یافت نشد
                                     </td>

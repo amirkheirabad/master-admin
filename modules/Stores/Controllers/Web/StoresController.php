@@ -32,7 +32,9 @@ class StoresController
     public function index()
     {
         $users = $this->store->getUsers();
-        return view('templates.stores.insert', compact('users'));
+        $storeStatuses = $this->store->getSelectableStoreStatuses();
+
+        return view('templates.stores.insert', compact('users', 'storeStatuses'));
     }
 
     public function store(IndexRequest $request)
@@ -54,7 +56,9 @@ class StoresController
     {
         $users = $this->store->getUsers();
         $store = $this->store->getById($id);
-        return view('templates.stores.edit', compact('store', 'users'));
+        $storeStatuses = $this->store->getSelectableStoreStatuses();
+
+        return view('templates.stores.edit', compact('store', 'users', 'storeStatuses'));
     }
 
     public function update($id, IndexRequest $request)
@@ -85,6 +89,13 @@ class StoresController
         return view('templates.stores.check_lists', compact('checkLists'));
     }
 
+    public function storeStatuses()
+    {
+        $storeStatuses = $this->store->getStoreStatuses();
+
+        return view('templates.stores.store_statuses', compact('storeStatuses'));
+    }
+
     public function createCheckList(Request $request)
     {
         $request->validate(['title' => 'required|string|max:255', 'site_type' => 'required|in:index,wordpress']);
@@ -92,6 +103,29 @@ class StoresController
         return response()->json([
             'success' => true,
         ]);
+    }
+
+    public function createStoreStatus(Request $request)
+    {
+        $request->validate(['name' => 'required|string|max:255']);
+        $this->store->createStoreStatus($request);
+
+        return response()->json(['success' => true]);
+    }
+
+    public function updateStoreStatus(int $id, Request $request)
+    {
+        $request->validate(['name' => 'required|string|max:255']);
+        $this->store->updateStoreStatus($id, $request);
+
+        return response()->json(['success' => true]);
+    }
+
+    public function deleteStoreStatus(int $id)
+    {
+        $this->store->deleteStoreStatus($id);
+
+        return response()->json(['success' => true]);
     }
 
     public function updateCheckList(int $id, Request $request)

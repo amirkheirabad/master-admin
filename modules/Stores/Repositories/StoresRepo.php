@@ -8,6 +8,7 @@ use Illuminate\Session\Store;
 use Illuminate\Support\Facades\DB;
 use Modules\Stores\Models\CheckList;
 use Modules\Stores\Models\Stores;
+use Modules\Stores\Models\StoreStatus;
 use Modules\User\Models\User;
 
 class StoresRepo implements InterfaceStores
@@ -32,7 +33,7 @@ class StoresRepo implements InterfaceStores
         $searchQuery = $request->input('search_query');
 
         return Stores::query()
-            ->with(['user', 'projectManager'])
+            ->with(['user', 'projectManager', 'status'])
             ->where('site_type', $siteType)
             ->when($request->filled('search_query'), function ($q) use ($searchQuery) {
                 $q->where(function ($query) use ($searchQuery) {
@@ -75,6 +76,7 @@ class StoresRepo implements InterfaceStores
             'store_name' => $data['store_name'],
             'user_id' => $data['user_id'],
             'project_manager_id' => $data['project_manager_id'] ?? null,
+            'status_id' => $data['status_id'] ?? null,
             'link' => $data['link'],
             'slogan' => $data['slogan'] ?? null,
             'phone' => $data['phone'],
@@ -101,10 +103,18 @@ class StoresRepo implements InterfaceStores
 
     public function update($id, $request)
     {
+        $store = Stores::find($id);
+        $statusId = $request->status_id;
+
+        if (!$statusId && $store->status_id && StoreStatus::onlyTrashed()->whereKey($store->status_id)->exists()) {
+            $statusId = $store->status_id;
+        }
+
         $data = [
             'store_name' => $request->store_name,
             'user_id' => $request->user_id,
             'project_manager_id' => $request->project_manager_id,
+            'status_id' => $statusId,
             'link' => $request->link,
             'slogan' => $request->slogan,
             'phone' => $request->phone,
@@ -126,7 +136,6 @@ class StoresRepo implements InterfaceStores
             $data['logo_path'] = $request->logo_path->store('logos', 'public');
         }
 
-        $store = Stores::find($id);
         $store->update($data);
         $incompatibleCheckLists = $store->checkLists()
             ->where('check_lists.site_type', '!=', $store->site_type)
@@ -162,12 +171,22 @@ class StoresRepo implements InterfaceStores
 
     public function getById($id)
     {
-       return Stores::with(['user', 'projectManager'])->findOrfail($id);
+       return Stores::with(['user', 'projectManager', 'status'])->findOrfail($id);
     }
 
     public function getCheckLists()
     {
         return CheckList::latest()->paginate(10);
+    }
+
+    public function getStoreStatuses()
+    {
+        return StoreStatus::latest()->paginate(10);
+    }
+
+    public function getSelectableStoreStatuses()
+    {
+        return StoreStatus::orderBy('name')->get();
     }
 
     public function getAllCheckLists($siteType)
@@ -178,6 +197,21 @@ class StoresRepo implements InterfaceStores
     public function createCheckList(Request $request)
     {
         CheckList::create($request->only('title', 'site_type'));
+    }
+
+    public function createStoreStatus(Request $request)
+    {
+        StoreStatus::create($request->only('name'));
+    }
+
+    public function updateStoreStatus(int $id, Request $request)
+    {
+        StoreStatus::findOrFail($id)->update($request->only('name'));
+    }
+
+    public function deleteStoreStatus(int $id)
+    {
+        StoreStatus::findOrFail($id)->delete();
     }
 
     public function updateCheckList($id, $request)

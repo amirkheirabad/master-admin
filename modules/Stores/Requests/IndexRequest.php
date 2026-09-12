@@ -3,6 +3,7 @@
 namespace Modules\Stores\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class IndexRequest extends FormRequest
 {
@@ -36,6 +37,7 @@ class IndexRequest extends FormRequest
             'store_name' => 'required|string|max:255',
             'user_id' => 'required',
             'project_manager_id' => 'nullable|exists:users,id',
+            'status_id' => ['nullable', Rule::exists('store_statuses', 'id')->whereNull('deleted_at')],
             'link' => 'required|string|max:255',
             'phone' => ['required', 'regex:/^09[0-9]{9}$/'],
             'province' => 'required|string|max:255',

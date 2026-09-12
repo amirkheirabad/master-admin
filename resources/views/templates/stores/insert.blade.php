@@ -89,6 +89,17 @@
                             </div>
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
+                                <label>وضعیت جاری فروشگاه</label>
+                                <select id="status_id" name="status_id" class="form-control select2">
+                                    <option value="">انتخاب کنید</option>
+                                    @foreach($storeStatuses as $status)
+                                        <option value="{{ $status->id }}">{{ $status->name }}</option>
+                                    @endforeach
+                                </select>
+                                <div class="mt-1"><span class="text-danger" id="status_id_error"></span></div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
                                 <label>نوع سایت <span class="text-danger">*</span></label>
                                 <select id="site_type" name="site_type" class="form-control custom-radius custom-select-input input-border-focus">
                                     <option value="index">ایندکس</option>
