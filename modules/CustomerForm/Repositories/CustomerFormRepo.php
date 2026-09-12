@@ -270,7 +270,8 @@ class CustomerFormRepo implements InterfaceCustomerForm
 
     private function assertQuestionBelongsToForm(Form $form, FormQuestion $question): void
     {
-        if ($question->formVersion()->value('form_id') !== $form->id) {
+        $version = $question->formVersion;
+        if ($version->form_id !== $form->id || ! in_array($version->id, array_filter([$form->published_version_id, $form->draft_version_id]), true)) {
             abort(404);
         }
     }
