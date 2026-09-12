@@ -16,6 +16,7 @@ class TicketPolicy
 
     public function view(User $user, Ticket $ticket): bool
     {
-        return Ticket::query()->visibleTo($user)->whereKey($ticket)->exists();
+        return ($user->hasRole('admin') && $ticket->store?->site_type === 'wordpress')
+            || Ticket::query()->visibleTo($user)->whereKey($ticket)->exists();
     }
 }

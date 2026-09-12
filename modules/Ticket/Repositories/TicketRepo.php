@@ -34,7 +34,9 @@ class TicketRepo implements InterfaceTicket
     public function ticketQuery(Request $request, $siteType = null)
     {
         $user = auth()->user();
-        $tickets = Ticket::query()->visibleTo($user)->with(['store', 'user', 'assignedUser', 'team']);
+        $tickets = Ticket::query()
+            ->when($siteType !== 'wordpress' || ! $user->hasRole('admin'), fn ($query) => $query->visibleTo($user))
+            ->with(['store', 'user', 'assignedUser', 'team']);
 
         $searchQuery = $request->input('search_query');
 
