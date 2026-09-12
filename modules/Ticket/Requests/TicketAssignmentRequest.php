@@ -17,7 +17,7 @@ class TicketAssignmentRequest extends FormRequest
         return [
             'team_id' => [
                 'required_if:status,5',
-                'prohibited_without:status',
+                'prohibited_unless:status,5',
                 Rule::exists('teams', 'id'),
             ],
             'status' => ['sometimes', 'integer', Rule::in([5])],
