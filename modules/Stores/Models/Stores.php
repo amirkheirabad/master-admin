@@ -4,6 +4,7 @@ namespace Modules\Stores\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Modules\CustomerForm\Models\FormAssignment;
 use Modules\SmsPanel\Models\SmsPanel;
 use Modules\Factor\Models\Factor;
 use Modules\User\Models\User;
@@ -79,5 +80,10 @@ class Stores extends Model
     public function checkListComments()
     {
         return $this->hasMany(StoreCheckListComment::class, 'store_id');
+    }
+
+    public function formAssignments()
+    {
+        return $this->hasMany(FormAssignment::class, 'store_id');
     }
 }
