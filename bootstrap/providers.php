@@ -13,4 +13,5 @@ return [
     Modules\Dashboard\DashboardServiceProvider::class,
     Modules\FAQ\FAQServiceProvider::class,
     Modules\Log\LogServiceProvider::class,
+    Modules\CustomerForm\CustomerFormServiceProvider::class,
 ];
