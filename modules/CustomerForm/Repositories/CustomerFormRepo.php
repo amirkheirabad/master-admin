@@ -7,7 +7,9 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Modules\CustomerForm\Models\Form;
 use Modules\CustomerForm\Models\FormAssignment;
+use Modules\CustomerForm\Models\FormAnswer;
 use Modules\CustomerForm\Models\FormQuestion;
+use Modules\CustomerForm\Models\FormSubmission;
 use Modules\CustomerForm\Models\FormVersion;
 use Modules\Stores\Models\Stores;
 
@@ -204,6 +206,65 @@ class CustomerFormRepo implements InterfaceCustomerForm
             ]);
 
             return $assignment->fresh();
+        });
+    }
+
+    public function resolveAssignment(string $token): FormAssignment
+    {
+        return FormAssignment::query()
+            ->with([
+                'form',
+                'store.user',
+                'formVersion.questions.options',
+                'currentSubmission.answers',
+            ])
+            ->where('token_hash', hash('sha256', $token))
+            ->where('is_active', true)
+            ->whereHas('form', fn ($query) => $query->where('is_active', true))
+            ->firstOrFail();
+    }
+
+    public function submit(FormAssignment $assignment, array $answers): FormSubmission
+    {
+        return DB::transaction(function () use ($assignment, $answers) {
+            $assignment = FormAssignment::lockForUpdate()
+                ->with(['form', 'formVersion.questions.options', 'currentSubmission'])
+                ->findOrFail($assignment->id);
+
+            abort_unless($assignment->is_active && $assignment->form->is_active, 404);
+
+            $submission = $assignment->currentSubmission;
+            if ($submission) {
+                abort_unless($submission->form_version_id === $assignment->form_version_id, 409);
+            } else {
+                $submission = FormSubmission::create([
+                    'form_assignment_id' => $assignment->id,
+                    'form_version_id' => $assignment->form_version_id,
+                    'submitted_at' => now(),
+                ]);
+                $assignment->update(['current_submission_id' => $submission->id]);
+            }
+
+            foreach ($assignment->formVersion->questions as $question) {
+                $value = $answers[$question->id] ?? null;
+                $empty = $value === null || $value === '' || $value === [];
+
+                if ($empty) {
+                    FormAnswer::where('form_submission_id', $submission->id)
+                        ->where('form_question_id', $question->id)
+                        ->delete();
+                    continue;
+                }
+
+                FormAnswer::updateOrCreate(
+                    ['form_submission_id' => $submission->id, 'form_question_id' => $question->id],
+                    ['value' => $value]
+                );
+            }
+
+            $submission->update(['submitted_at' => now()]);
+
+            return $submission->fresh('answers');
         });
     }
 
