@@ -8,7 +8,7 @@ The first release includes two seeded forms: «فرم اطلاعات اولیه 
 
 ## Existing Project Conventions
 
-- Laravel 12 and PHP 8.2.
+- Laravel 12 and PHP 8.3.16.
 - Feature code lives under `modules/<Feature>` and is registered in `bootstrap/providers.php`.
 - Web routes are loaded by each module service provider.
 - Admin access is enforced with `check.login` and `check.role:admin`.
@@ -31,7 +31,7 @@ The system includes:
 - Explicit assignment version upgrades that preserve the previous submission as history.
 - Initial published versions for the two approved Persian forms.
 
-The first release excludes conditional questions, file uploads, automatic link expiry, drag-and-drop ordering, and polymorphic customer ownership. These are not required by the current forms and can be added without replacing the data model.
+The first release excludes conditional questions, file uploads, automatic link expiry, drag-and-drop ordering, and polymorphic customer ownership. Conditional-looking prompts such as «اگر سایت دارید...» remain ordinary optional questions in this release. These excluded features are not required by the current forms and can be added without replacing the data model.
 
 ## Module Structure
 
@@ -222,7 +222,7 @@ Previously published versions remain immutable historical rows.
 
 ### Assign
 
-An admin selects one active published form and one store. The existing `(form_id, store_id)` assignment is reused if present; otherwise it is created with the published version and a new token. Assigning does not remove submissions or answers.
+An admin selects one active published form and one store. The existing `(form_id, store_id)` assignment is reused if present; otherwise it is created with the published version and a new token. Reusing an assignment does not implicitly reactivate it; activation and deactivation remain explicit admin actions. Assigning does not remove submissions or answers.
 
 ### Submit and Resubmit
 
