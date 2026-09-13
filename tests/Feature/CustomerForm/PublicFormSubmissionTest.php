@@ -4,7 +4,6 @@ namespace Tests\Feature\CustomerForm;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Modules\CustomerForm\Models\FormAnswer;
-use Modules\CustomerForm\Models\FormQuestion;
 use Modules\CustomerForm\Models\FormSubmission;
 use Modules\CustomerForm\Repositories\InterfaceCustomerForm;
 use Modules\Stores\Models\Stores;

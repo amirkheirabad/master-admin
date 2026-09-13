@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Modules\CustomerForm\Models\Form;
-use Modules\CustomerForm\Models\FormAssignment;
 use Modules\CustomerForm\Models\FormAnswer;
+use Modules\CustomerForm\Models\FormAssignment;
 use Modules\CustomerForm\Models\FormQuestion;
 use Modules\CustomerForm\Models\FormSubmission;
 use Modules\CustomerForm\Models\FormVersion;
@@ -253,6 +253,7 @@ class CustomerFormRepo implements InterfaceCustomerForm
                     FormAnswer::where('form_submission_id', $submission->id)
                         ->where('form_question_id', $question->id)
                         ->delete();
+
                     continue;
                 }
 
