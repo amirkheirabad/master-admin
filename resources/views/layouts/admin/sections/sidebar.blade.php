@@ -31,6 +31,21 @@
 
             <li>
                 <a>
+                    <i class="fa fa-list-alt text-beta"></i>
+                    <span>فرم‌های مشتری</span>
+                    <span class="fa fa-chevron-down"></span>
+                </a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('customer-forms.index') }}">فرم‌ها</a></li>
+                    <li><a href="{{ route('customer-forms.assignments.index') }}">تخصیص‌ها</a></li>
+                    <li><a href="{{ route('customer-forms.submissions.index') }}">پاسخ‌ها</a></li>
+                </ul>
+            </li>
+            @endif
+            @if(auth()->user()->hasRole('admin'))
+
+            <li>
+                <a>
                     <i class="fa fa-diamond text-beta"></i>
                     <span>باشگاه مشتریان</span>
                     <span class="fa fa-chevron-down"></span>
