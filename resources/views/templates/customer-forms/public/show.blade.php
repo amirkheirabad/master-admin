@@ -51,7 +51,7 @@
             gap: 7px;
             margin-bottom: 10px;
             color: rgba(255, 255, 255, .78);
-            font-size: .94rem;
+            font-size: 1.4rem;
             font-weight: 700;
             letter-spacing: .02em;
         }
@@ -79,7 +79,7 @@
             max-width: 620px;
             margin: 10px 0 0;
             color: rgba(255, 255, 255, .82);
-            font-size: 1.06rem;
+            font-size: 1.5rem;
             line-height: 2;
         }
 
