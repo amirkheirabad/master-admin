@@ -26,6 +26,11 @@ return Application::configure(basePath: dirname(__DIR__))
             }
 
             $token = (string) $request->route('token');
+
+            if ($request->isMethod('post')) {
+                return redirect()->route('customer-forms.public.show', $token, status: 303);
+            }
+
             $assignment = app(InterfaceCustomerForm::class)->resolveAssignment($token);
             $answers = $assignment->currentSubmission?->answers->pluck('value', 'form_question_id') ?? collect();
 
