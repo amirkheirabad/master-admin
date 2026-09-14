@@ -332,7 +332,16 @@
     </header>
 
     <div class="form-feedback">
-        @include('templates.customer-forms.public.success')
+        @if($rateLimited ?? false)
+            <div class="alert alert-danger" role="alert">
+                درخواست‌های زیادی ارسال شده است. لطفاً کمی صبر کنید و دوباره تلاش کنید.
+            </div>
+        @else
+            @include('templates.customer-forms.public.success')
+            @if($errors->any())
+                <div class="alert alert-danger" role="alert">لطفاً خطاهای مشخص‌شده را بررسی کنید.</div>
+            @endif
+        @endif
     </div>
 
     <form method="post" action="{{ route('customer-forms.public.submit', $token) }}">
