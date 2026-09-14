@@ -20,6 +20,8 @@ Route::middleware(['check.login', 'check.role:admin'])->group(function () {
     Route::put('/customer-forms/{form}', [FormController::class, 'update'])->name('customer-forms.update');
     Route::get('/customer-forms/{form}/builder', [FormController::class, 'builder'])->name('customer-forms.builder');
     Route::post('/customer-forms/{form}/publish', [FormController::class, 'publish'])->name('customer-forms.publish');
+    Route::get('/customer-form-questions/create', [QuestionController::class, 'create'])->name('customer-forms.questions.create');
+    Route::get('/customer-form-questions/{question}/edit', [QuestionController::class, 'edit'])->name('customer-forms.questions.edit');
     Route::post('/customer-forms/{form}/questions', [QuestionController::class, 'store'])->name('customer-forms.questions.store');
     Route::put('/customer-form-questions/{question}', [QuestionController::class, 'update'])->name('customer-forms.questions.update');
     Route::delete('/customer-form-questions/{question}', [QuestionController::class, 'destroy'])->name('customer-forms.questions.destroy');

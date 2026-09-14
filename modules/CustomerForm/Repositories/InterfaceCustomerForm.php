@@ -2,6 +2,7 @@
 
 namespace Modules\CustomerForm\Repositories;
 
+use Illuminate\Http\Request;
 use Modules\CustomerForm\Models\Form;
 use Modules\CustomerForm\Models\FormAssignment;
 use Modules\CustomerForm\Models\FormQuestion;
@@ -11,6 +12,10 @@ use Modules\Stores\Models\Stores;
 
 interface InterfaceCustomerForm
 {
+    public function filterAssignments(Request $request);
+
+    public function filterSubmissions(Request $request);
+
     public function createForm(array $data): Form;
 
     public function draft(Form $form): FormVersion;

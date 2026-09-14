@@ -2,15 +2,23 @@
 
 namespace Modules\CustomerForm\Controllers\Web;
 
+use Illuminate\Http\Request;
+use Modules\CustomerForm\Models\Form;
 use Modules\CustomerForm\Models\FormSubmission;
+use Modules\CustomerForm\Repositories\InterfaceCustomerForm;
+use Modules\Stores\Models\Stores;
 
 class SubmissionController
 {
-    public function index()
-    {
-        $submissions = FormSubmission::with(['assignment.form', 'assignment.store.user', 'formVersion'])->latest('submitted_at')->paginate(15);
+    public function __construct(private InterfaceCustomerForm $forms) {}
 
-        return view('templates.customer-forms.submissions.index', compact('submissions'));
+    public function index(Request $request)
+    {
+        $submissions = $this->forms->filterSubmissions($request);
+        $forms = Form::orderBy('title')->get();
+        $stores = Stores::orderBy('store_name')->get();
+
+        return view('templates.customer-forms.submissions.index', compact('submissions', 'forms', 'stores'));
     }
 
     public function show(FormSubmission $submission)

@@ -2,6 +2,7 @@
 
 namespace Modules\CustomerForm\Repositories;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -16,6 +17,63 @@ use Modules\Stores\Models\Stores;
 class CustomerFormRepo implements InterfaceCustomerForm
 {
     private const OPTION_TYPES = ['select', 'radio', 'checkbox'];
+
+    public function filterAssignments(Request $request)
+    {
+        $searchQuery = $request->input('search_query');
+
+        return FormAssignment::query()
+            ->with(['form', 'formVersion', 'store.user', 'currentSubmission'])
+            ->when($request->filled('search_query'), function ($query) use ($searchQuery) {
+                $query->where(function ($query) use ($searchQuery) {
+                    $query->whereHas('form', fn ($form) => $form->where('title', 'LIKE', '%'.$searchQuery.'%'))
+                        ->orWhereHas('store', fn ($store) => $store
+                            ->where('store_name', 'LIKE', '%'.$searchQuery.'%')
+                            ->orWhere('phone', 'LIKE', '%'.$searchQuery.'%'))
+                        ->orWhereHas('store.user', fn ($user) => $user
+                            ->where('name', 'LIKE', '%'.$searchQuery.'%')
+                            ->orWhere('mobile', 'LIKE', '%'.$searchQuery.'%'));
+                });
+            })
+            ->when($request->filled('form_id'), fn ($query) => $query->where('form_id', $request->input('form_id')))
+            ->when($request->filled('store_id'), fn ($query) => $query->where('store_id', $request->input('store_id')))
+            ->latest()
+            ->paginate(15);
+    }
+
+    public function filterSubmissions(Request $request)
+    {
+        $searchQuery = $request->input('search_query');
+
+        return FormSubmission::query()
+            ->with(['assignment.form', 'assignment.store.user', 'formVersion'])
+            ->when($request->filled('search_query'), function ($query) use ($searchQuery) {
+                $query->where(function ($query) use ($searchQuery) {
+                    $query->whereHas('assignment.form', fn ($form) => $form->where('title', 'LIKE', '%'.$searchQuery.'%'))
+                        ->orWhereHas('assignment.store', fn ($store) => $store
+                            ->where('store_name', 'LIKE', '%'.$searchQuery.'%')
+                            ->orWhere('phone', 'LIKE', '%'.$searchQuery.'%'))
+                        ->orWhereHas('assignment.store.user', fn ($user) => $user
+                            ->where('name', 'LIKE', '%'.$searchQuery.'%')
+                            ->orWhere('mobile', 'LIKE', '%'.$searchQuery.'%'));
+                });
+            })
+            ->when($request->filled('form_id'), fn ($query) => $query
+                ->whereHas('assignment', fn ($assignment) => $assignment->where('form_id', $request->input('form_id'))))
+            ->when($request->filled('store_id'), fn ($query) => $query
+                ->whereHas('assignment', fn ($assignment) => $assignment->where('store_id', $request->input('store_id'))))
+            ->when($request->input('status') === 'current', fn ($query) => $query
+                ->whereHas('assignment', fn ($assignment) => $assignment
+                    ->whereColumn('form_assignments.current_submission_id', 'form_submissions.id')))
+            ->when($request->input('status') === 'old', fn ($query) => $query
+                ->whereHas('assignment', fn ($assignment) => $assignment
+                    ->where(function ($assignment) {
+                        $assignment->whereNull('current_submission_id')
+                            ->orWhereColumn('form_assignments.current_submission_id', '!=', 'form_submissions.id');
+                    })))
+            ->latest('submitted_at')
+            ->paginate(15);
+    }
 
     public function createForm(array $data): Form
     {
@@ -113,11 +171,22 @@ class CustomerFormRepo implements InterfaceCustomerForm
     public function reorderQuestions(Form $form, array $questionIds): void
     {
         DB::transaction(function () use ($form, $questionIds) {
-            $draft = $this->draft($form);
-            $actual = $draft->questions()->pluck('id')->sort()->values();
+            $source = $form->draft_version_id
+                ? $form->draftVersion()->with('questions')->firstOrFail()
+                : $form->publishedVersion()->with('questions')->firstOrFail();
+            $actual = $source->questions->pluck('id')->sort()->values();
 
             if ($actual->all() !== collect($questionIds)->map(fn ($id) => (int) $id)->sort()->values()->all()) {
                 throw ValidationException::withMessages(['questions' => 'ترتیب سؤال‌ها معتبر نیست.']);
+            }
+
+            $draft = $this->draft($form);
+            if (! $source->is($draft)) {
+                $sourceOrders = $source->questions->pluck('sort_order', 'id');
+                $draftIds = $draft->questions->pluck('id', 'sort_order');
+                $questionIds = collect($questionIds)
+                    ->map(fn ($id) => $draftIds[$sourceOrders[(int) $id]])
+                    ->all();
             }
 
             $this->writeOrder($draft, $questionIds);

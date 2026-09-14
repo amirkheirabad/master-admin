@@ -8,12 +8,12 @@
         @isset($form) @method('PUT') @endisset
         <div class="form-group">
             <label for="title">عنوان فرم</label>
-            <input id="title" name="title" class="form-control" value="{{ old('title', $form->title ?? '') }}" required>
+            <input id="title" name="title" class="form-control custom-radius input-border-focus" value="{{ old('title', $form->title ?? '') }}" required>
             @error('title')<div class="text-danger">{{ $message }}</div>@enderror
         </div>
         <div class="form-group mt-3">
             <label for="description">توضیح کوتاه</label>
-            <textarea id="description" name="description" class="form-control" rows="3">{{ old('description', $form->description ?? '') }}</textarea>
+            <textarea id="description" name="description" class="form-control custom-radius input-border-focus" rows="3">{{ old('description', $form->description ?? '') }}</textarea>
         </div>
         <label class="mt-3"><input type="checkbox" name="is_active" value="1" @checked(old('is_active', $form->is_active ?? true))> فرم فعال باشد</label>
         <div class="mt-4">

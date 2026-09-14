@@ -2,6 +2,7 @@
 
 namespace Modules\CustomerForm\Controllers\Web;
 
+use Illuminate\Http\Request;
 use Modules\CustomerForm\Models\Form;
 use Modules\CustomerForm\Models\FormAssignment;
 use Modules\CustomerForm\Repositories\InterfaceCustomerForm;
@@ -12,13 +13,14 @@ class AssignmentController
 {
     public function __construct(private InterfaceCustomerForm $forms) {}
 
-    public function index()
+    public function index(Request $request)
     {
-        $assignments = FormAssignment::with(['form', 'formVersion', 'store.user', 'currentSubmission'])->latest()->paginate(15);
+        $assignments = $this->forms->filterAssignments($request);
         $forms = Form::where('is_active', true)->whereNotNull('published_version_id')->orderBy('title')->get();
+        $filterForms = Form::orderBy('title')->get();
         $stores = Stores::with('user')->orderBy('store_name')->get();
 
-        return view('templates.customer-forms.assignments.index', compact('assignments', 'forms', 'stores'));
+        return view('templates.customer-forms.assignments.index', compact('assignments', 'forms', 'filterForms', 'stores'));
     }
 
     public function store(AssignmentRequest $request)
