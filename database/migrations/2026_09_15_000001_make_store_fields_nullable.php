@@ -19,12 +19,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::table('stores', function (Blueprint $table) {
-            $table->string('link')->nullable(false)->change();
-            $table->string('province')->nullable(false)->change();
-            $table->string('city')->nullable(false)->change();
-            $table->string('location')->nullable(false)->change();
-            $table->string('code_posty')->nullable(false)->change();
-        });
+        // Intentionally left empty.
+        // The nullable change is not safely reversible without modifying
+        // existing NULL data.
     }
 };
