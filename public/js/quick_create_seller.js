@@ -5,6 +5,10 @@ $(document).on('click', '#btn-quick-create-user', function () {
     $('#quickCreateUserModal').modal('show');
 });
 
+$(document).on('change', '#user_id', function () {
+    $('#phone').val($(this).find(':selected').data('mobile') || '');
+});
+
 $(document).on('click', '#btn-submit-quick-user', function () {
     const name     = $('#quick_name').val().trim();
     const mobile   = $('#quick_mobile').val().trim();
@@ -43,8 +47,18 @@ $(document).on('click', '#btn-submit-quick-user', function () {
         },
         success: function (response) {
             if (response.success) {
-                const newOption = new Option(response.user.name, response.user.id, true, true);
-                $('#user_id').append(newOption).trigger('change');
+                const isInsert = $('#storeForm').length > 0;
+                const newOption = new Option(response.user.name, response.user.id, false, false);
+                newOption.dataset.mobile = response.user.mobile;
+                $('#user_id').append(newOption);
+                if (isInsert) {
+                    newOption.selected = true;
+                    $('#user_id').trigger('change');
+                    $('#phone').val(response.user.mobile);
+                }
+                $('#project_manager_id')
+                    .append(new Option(response.user.name, response.user.id, false, false))
+                    .trigger('change');
                 $('#quickCreateUserModal').modal('hide');
             }
         },

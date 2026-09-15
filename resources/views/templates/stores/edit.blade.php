@@ -11,6 +11,13 @@
         jalaliDatepicker.startWatch({ time: true, hasSecond: false });
     </script>
     <script src="{{ asset('/js/app-stores.js') }}"></script>
+    <script src="{{ asset('/js/quick_create_seller.js') }}"></script>
+    <script>
+    var quickCreateSellerConfig = {
+        route: '{{ route("quick_create_seller") }}',
+        token: '{{ csrf_token() }}'
+    };
+    </script>
 @endsection
 
 @section('content')
@@ -40,14 +47,19 @@
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
                                 <label>نام مدیر<span class="text-danger">*</span></label>
-                                <select id="user_id" class="form-control custom-radius select2" name="user_id">
-                                    <option value="">همه</option>
-                                    @foreach($users as $user)
-                                        <option value="{{ $user->id }}"
-                                            {{ $store->user_id == $user->id ? 'selected' : '' }}>
-                                            {{ $user->name }}</option>
-                                    @endforeach
-                                </select>
+                                <div class="d-flex align-items-center gap-2">
+                                    <select id="user_id" class="form-control custom-radius select2" name="user_id">
+                                        <option value="">همه</option>
+                                        @foreach($users as $user)
+                                            <option value="{{ $user->id }}" data-mobile="{{ $user->mobile }}"
+                                                {{ $store->user_id == $user->id ? 'selected' : '' }}>
+                                                {{ $user->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <button type="button" class=" btn-beta-solid btn-sm text-nowrap" id="btn-quick-create-user" title="ساخت کاربر جدید">
+                                        + کاربر جدید
+                                    </button>
+                                </div>
                                 <div class="mt-1">
                                     <span class="text-danger" id="user_id_error"></span>
                                 </div>
@@ -102,7 +114,7 @@
                             </div>
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                <label>آدرس وبسایت<span class="text-danger">*</span></label>
+                                <label>آدرس وبسایت</label>
                                 <input type="text" value="{{ $store->link }}" class="form-control custom-radius input-border-focus" id="link" name="link" placeholder="آدرس وبسایت">
                                 <div class="mt-1">
                                     <span class="text-danger" id="link_error"></span>
@@ -126,7 +138,7 @@
                             </div>
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                <label>استان<span class="text-danger">*</span></label>
+                                <label>استان</label>
                                 <input type="text" value="{{ $store->province }}" class="form-control custom-radius input-border-focus" id="province" name="province" placeholder="استان">
                                 <div class="mt-1">
                                     <span class="text-danger" id="province_error"></span>
@@ -134,7 +146,7 @@
                             </div>
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                <label>شهر<span class="text-danger">*</span></label>
+                                <label>شهر</label>
                                 <input type="text" value="{{ $store->city }}" class="form-control custom-radius input-border-focus" id="city" name="city" placeholder="شهر">
                                 <div class="mt-1">
                                     <span class="text-danger" id="city_error"></span>
@@ -142,7 +154,7 @@
                             </div>
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                <label>آدرس فروشگاه<span class="text-danger">*</span></label>
+                                <label>آدرس فروشگاه</label>
                                 <input type="text" value="{{ $store->location }}" class="form-control custom-radius input-border-focus" id="location" name="location" placeholder="آدرس فروشگاه">
                                 <div class="mt-1">
                                     <span class="text-danger" id="location_error"></span>
@@ -150,7 +162,7 @@
                             </div>
 
                             <div class="col-md-4 col-sm-4 col-xs-12 mt-4">
-                                <label>کد پستی<span class="text-danger">*</span></label>
+                                <label>کد پستی</label>
                                 <input type="text" value="{{ $store->code_posty }}" class="form-control custom-radius input-border-focus" id="code_posty" name="code_posty" placeholder="کد پستی">
                                 <div class="mt-1">
                                     <span class="text-danger" id="code_posty_error"></span>
@@ -242,4 +254,5 @@
             </div>
         </div>
     </div>
+    @include('templates.stores.Modal.quick_create_user-modal')
 @endsection

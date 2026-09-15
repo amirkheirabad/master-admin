@@ -13,6 +13,10 @@ if ($('#token').length > 0) {
         }
         return result;
     }
+
+    if ($('#storeForm').length > 0) {
+        $('#token').val(randomAlphaNumeric10());
+    }
 }
 
 const csrf = document.querySelector('meta[name="csrf-token"]').content;

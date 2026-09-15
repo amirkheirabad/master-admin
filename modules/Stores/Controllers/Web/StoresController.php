@@ -79,6 +79,7 @@ class StoresController
             'user' => [
                 'id'   => $user->id,
                 'name' => $user->name,
+                'mobile' => $user->mobile,
             ],
         ]);
     }
