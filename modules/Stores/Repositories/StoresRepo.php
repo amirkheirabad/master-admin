@@ -236,11 +236,36 @@ class StoresRepo implements InterfaceStores
 
     public function updateCheckListsStore($request)
     {
-        $store = Stores::findOrFail($request->store_id);
+        $store = DB::transaction(function () use ($request) {
+            $store = Stores::whereKey($request->store_id)->lockForUpdate()->firstOrFail();
+            $previous = $store->checkLists()->pluck('check_lists.id')->map(fn ($id) => (int) $id);
+            $current = collect($request->check_lists ?? [])->map(fn ($id) => (int) $id)->unique();
+            $changed = $previous->diff($current)->merge($current->diff($previous));
 
-        DB::transaction(function () use ($request, $store) {
             $store->update(['report' => $request->input('report')]);
-            $store->checkLists()->sync($request->check_lists ?? []);
+            $store->checkLists()->sync($current);
+
+            $names = CheckList::withTrashed()->whereKey($changed)->pluck('title', 'id');
+            foreach ($changed as $checkListId) {
+                $wasChecked = $previous->contains($checkListId);
+                $isChecked = $current->contains($checkListId);
+
+                activity('store_check_lists')
+                    ->performedOn($store)
+                    ->causedBy($request->user())
+                    ->event($isChecked ? 'checked' : 'unchecked')
+                    ->withProperties([
+                        'store_id' => $store->id,
+                        'store_name' => $store->store_name,
+                        'checklist_id' => $checkListId,
+                        'checklist_name' => $names[$checkListId],
+                        'previous_checked' => $wasChecked,
+                        'new_checked' => $isChecked,
+                        'user_id' => $request->user()->id,
+                        'user_name' => $request->user()->name,
+                    ])
+                    ->log($isChecked ? 'checked' : 'unchecked');
+            }
 
             $comments = collect($request->input('comments', []));
             $validCheckListIds = CheckList::whereKey($comments->keys())->pluck('id')->flip();
@@ -264,6 +289,8 @@ class StoresRepo implements InterfaceStores
                     ['comment' => $comment]
                 );
             });
+
+            return $store;
         });
 
         return $store->refresh();
